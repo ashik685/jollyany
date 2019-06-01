@@ -9,7 +9,14 @@ jimport('astroid.framework.astroid');
 jimport('jollyany.framework.template');
 
 abstract class JollyanyFramework extends AstroidFramework {
-   public static function createTemplate() {
-      return new JollyanyFrameworkTemplate(JFactory::getApplication()->getTemplate(true));
-   }
+	public static $template = null;
+	public static function getTemplate() {
+		if (!self::$template) {
+			self::$template = self::createTemplate();
+		}
+		return self::$template;
+	}
+	public static function createTemplate() {
+		return new JollyanyFrameworkTemplate(JFactory::getApplication()->getTemplate(true));
+	}
 }
