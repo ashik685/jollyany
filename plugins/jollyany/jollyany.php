@@ -482,7 +482,7 @@ class plgSystemJollyany extends JPlugin {
 //		AstroidFramework::addStyleSheet(); // to add css link
 //		AstroidFramework::addStyleDeclaration(); // to add css script
 //		AstroidFramework::addScript(); // to add js file in head
-		AstroidFramework::addScript(JUri::root().'media/jollyany/assets/js/jollyany.js', "body"); // to add js file in body
+		AstroidFramework::addScript(JUri::root().'media/jollyany/assets/js/jollyany.min.js', "body"); // to add js file in body
 //		AstroidFramework::addScriptDeclaration(); // to add js script in head
 //		AstroidFramework::addScriptDeclaration($js, "body"); // to add js script in body
 	}
