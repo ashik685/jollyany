@@ -6,6 +6,11 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+Version 1.0.3
+
+    Update language.
+    Update new style Lawyer Justice
+
 Version 1.0.2
 
     New Feature: 1-click install package system
