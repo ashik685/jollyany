@@ -57,6 +57,59 @@ class JollyanyFrameworkDataImport {
 				),
 			),
 		),
+		'tz_lawyer'    =>  array(
+			// Pack Info
+			'name'        => 'Lawyer Justice',
+			'desc'        => 'Lawyers Attorneys and Law Firm',
+
+			// Pack Data
+			'thumb'       => '/media/tz_portfolio/article/cache/lawyer-justice-law-firm-joomla-template-713_S.jpg',
+			'category'    => 'joomla',
+
+			'demo_url'    => 'http://joomla.templaza.net/lawyer/',
+			'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/lawyer-justice',
+
+			'extensions'  => array(
+				array(
+					'name'      =>  'Lawyer Justice Template',
+					'type'      =>  'included',
+					'code'      =>  'tz_lawyer',
+					'ext_code'  =>  'tz-lawyer-api',
+				),
+				array(
+					'name'      =>  'SP Page Builder Pro',
+					'type'      =>  'included',
+					'code'      =>  'tz_extensions',
+					'ext_code'  =>  'sp-page-builder',
+				),
+				array(
+					'name'      =>  'TZ Portfolio',
+					'type'      =>  'url',
+					'url'       =>  'https://github.com/templaza/tz_portfolio_plus/archive/master.zip',
+				),
+				array(
+					'name'      =>  'Hikashop',
+					'type'      =>  'url',
+					'url'       =>  'https://www.hikashop.com/component/updateme/downloadxml/component-hikashop/level-starter/download.zip',
+				),
+				array(
+					'name'      =>  'Unite Slider',
+					'type'      =>  'included',
+					'code'      =>  'tz_extensions',
+					'ext_code'  =>  'unite-slider',
+				),
+				array(
+					'name'      =>  'Acymailing',
+					'type'      =>  'url',
+					'url'       =>  'http://www.acyba.com/component/updateme/downloadxml/component-acymailing/level-starter/version-5/download.zip',
+				),
+				array(
+					'name'      =>  'Kunena',
+					'type'      =>  'url',
+					'url'       =>  'https://update.kunena.org/updater/pkg_kunena_v5.1.12.1_2019-04-22.zip',
+				),
+			),
+		),
 		'tz_charity_joomla'    =>  array(
 			// Pack Info
 			'name'        => 'Charity',
