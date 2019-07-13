@@ -6,6 +6,11 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+Version 1.0.4
+
+    Update language.
+    Update style for coming soon project
+
 Version 1.0.3
 
     Update language.
