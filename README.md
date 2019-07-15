@@ -6,6 +6,12 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+Version 1.0.5
+
+    Update language.
+    Add reactivation button on dashboard
+    Import data of Dino, St. Christ, Oraz, Kavin II, Construction
+
 Version 1.0.4
 
     Update language.
