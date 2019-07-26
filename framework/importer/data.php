@@ -12,7 +12,7 @@ class JollyanyFrameworkDataImport {
 	protected static $data = array(
 		'tz_jollyany'   =>  array(
 			// Pack Info
-			'name'        => 'Main Demo',
+			'name'        => 'Jollyany Classic',
 			'desc'        => 'Multi-purpose, Business & Corporation',
 
 			// Pack Data
@@ -21,6 +21,13 @@ class JollyanyFrameworkDataImport {
 
 			'demo_url'    => 'https://jollyany.co/',
 			'doc_url'     => 'https://jollyany.co/support/documentation',
+
+			'template'    => array(
+				'name'      =>  'Jollyany Template',
+				'type'      =>  'included',
+				'code'      =>  'tz_jollyany',
+				'ext_code'  =>  'tz-jollyany-api',
+			),
 
 			'extensions'  => array(
 				array(
@@ -53,7 +60,61 @@ class JollyanyFrameworkDataImport {
 				array(
 					'name'      =>  'Kunena',
 					'type'      =>  'url',
-					'url'       =>  'https://update.kunena.org/updater/pkg_kunena_v5.1.12.1_2019-04-22.zip',
+					'url'       =>  'https://update.kunena.org/updater/pkg_kunena_v5.1.13.1_2019-07-22.zip',
+				),
+			),
+		),
+		'tz_fashion_semona_joomla'      =>  array(
+			// Pack Info
+			'name'        => 'Fashion',
+			'desc'        => 'Model Agency, Photography',
+
+			// Pack Data
+			'thumb'       => '/media/tz_portfolio/article/cache/fashion-semona-creative-joomla-template-630_S.jpg',
+			'category'    => 'joomla',
+
+			'demo_url'    => 'http://joomla.templaza.net/semona-fashion/',
+			'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/fashion',
+
+			'template'      => array(
+				'name'      =>  'Fashion Template',
+				'type'      =>  'included',
+				'code'      =>  'tz_fashion_semona_joomla',
+				'ext_code'  =>  'tz-fashion-api',
+			),
+
+			'extensions'  => array(
+				array(
+					'name'      =>  'SP Page Builder Pro',
+					'type'      =>  'included',
+					'code'      =>  'tz_extensions',
+					'ext_code'  =>  'sp-page-builder',
+				),
+				array(
+					'name'      =>  'TZ Portfolio',
+					'type'      =>  'url',
+					'url'       =>  'https://github.com/templaza/tz_portfolio_plus/archive/master.zip',
+				),
+				array(
+					'name'      =>  'Hikashop',
+					'type'      =>  'url',
+					'url'       =>  'https://www.hikashop.com/component/updateme/downloadxml/component-hikashop/level-starter/download.zip',
+				),
+				array(
+					'name'      =>  'Unite Slider',
+					'type'      =>  'included',
+					'code'      =>  'tz_extensions',
+					'ext_code'  =>  'unite-slider',
+				),
+				array(
+					'name'      =>  'Acymailing',
+					'type'      =>  'url',
+					'url'       =>  'http://www.acyba.com/component/updateme/downloadxml/component-acymailing/level-starter/version-5/download.zip',
+				),
+				array(
+					'name'      =>  'Kunena',
+					'type'      =>  'url',
+					'url'       =>  'https://update.kunena.org/updater/pkg_kunena_v5.1.13.1_2019-07-22.zip',
 				),
 			),
 		),
@@ -69,13 +130,14 @@ class JollyanyFrameworkDataImport {
 			'demo_url'    => 'http://joomla.templaza.net/lawyer/',
 			'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/lawyer-justice',
 
+			'template'    => array(
+				'name'      =>  'Lawyer Justice Template',
+				'type'      =>  'included',
+				'code'      =>  'tz_lawyer',
+				'ext_code'  =>  'tz-lawyer-api',
+			),
+
 			'extensions'  => array(
-				array(
-					'name'      =>  'Lawyer Justice Template',
-					'type'      =>  'included',
-					'code'      =>  'tz_lawyer',
-					'ext_code'  =>  'tz-lawyer-api',
-				),
 				array(
 					'name'      =>  'SP Page Builder Pro',
 					'type'      =>  'included',
@@ -106,7 +168,7 @@ class JollyanyFrameworkDataImport {
 				array(
 					'name'      =>  'Kunena',
 					'type'      =>  'url',
-					'url'       =>  'https://update.kunena.org/updater/pkg_kunena_v5.1.12.1_2019-04-22.zip',
+					'url'       =>  'https://update.kunena.org/updater/pkg_kunena_v5.1.13.1_2019-07-22.zip',
 				),
 			),
 		),
@@ -122,13 +184,14 @@ class JollyanyFrameworkDataImport {
 			'demo_url'    => 'http://joomla.templaza.net/charity/',
 			'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/charity',
 
+			'template'      => array(
+				'name'      =>  'Charity Template',
+				'type'      =>  'included',
+				'code'      =>  'tz_charity_joomla',
+				'ext_code'  =>  'tz-charity-api',
+			),
+
 			'extensions'  => array(
-				array(
-					'name'      =>  'Charity Template',
-					'type'      =>  'included',
-					'code'      =>  'tz_charity_joomla',
-					'ext_code'  =>  'tz-charity-api',
-				),
 				array(
 					'name'      =>  'SP Page Builder Pro',
 					'type'      =>  'included',
@@ -159,7 +222,7 @@ class JollyanyFrameworkDataImport {
 				array(
 					'name'      =>  'Kunena',
 					'type'      =>  'url',
-					'url'       =>  'https://update.kunena.org/updater/pkg_kunena_v5.1.12.1_2019-04-22.zip',
+					'url'       =>  'https://update.kunena.org/updater/pkg_kunena_v5.1.13.1_2019-07-22.zip',
 				),
 			),
 		),
@@ -175,13 +238,14 @@ class JollyanyFrameworkDataImport {
 			'demo_url'    => 'http://joomla.templaza.net/foodz/',
 			'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/foodz',
 
+			'template'      => array(
+				'name'      =>  'Foodz Template',
+				'type'      =>  'included',
+				'code'      =>  'tz_foodz_joomla',
+				'ext_code'  =>  'tz-foodz-api',
+			),
+
 			'extensions'  => array(
-				array(
-					'name'      =>  'Foodz Template',
-					'type'      =>  'included',
-					'code'      =>  'tz_foodz_joomla',
-					'ext_code'  =>  'tz-foodz-api',
-				),
 				array(
 					'name'      =>  'SP Page Builder Pro',
 					'type'      =>  'included',
@@ -212,7 +276,7 @@ class JollyanyFrameworkDataImport {
 				array(
 					'name'      =>  'Kunena',
 					'type'      =>  'url',
-					'url'       =>  'https://update.kunena.org/updater/pkg_kunena_v5.1.12.1_2019-04-22.zip',
+					'url'       =>  'https://update.kunena.org/updater/pkg_kunena_v5.1.13.1_2019-07-22.zip',
 				),
 			),
 		),
@@ -228,13 +292,14 @@ class JollyanyFrameworkDataImport {
 			'demo_url'    => 'http://joomla.templaza.net/oraz/',
 			'doc_url'     => 'https://www.templaza.com/docs/oraz/',
 
+			'template'      => array(
+				'name'      =>  'Oraz Template',
+				'type'      =>  'included',
+				'code'      =>  'tz_oraz',
+				'ext_code'  =>  'tz-oraz-api',
+			),
+
 			'extensions'  => array(
-				array(
-					'name'      =>  'Oraz Template',
-					'type'      =>  'included',
-					'code'      =>  'tz_oraz',
-					'ext_code'  =>  'tz-oraz-api',
-				),
 				array(
 					'name'      =>  'SP Page Builder Pro',
 					'type'      =>  'included',
@@ -276,13 +341,14 @@ class JollyanyFrameworkDataImport {
 			'demo_url'    => 'http://joomla.templaza.net/kavin_ii/',
 			'doc_url'     => 'https://www.templaza.com/docs/kavin_ii/',
 
+			'template'      => array(
+				'name'      =>  'Kavin II Template',
+				'type'      =>  'included',
+				'code'      =>  'tz_kavin_ii',
+				'ext_code'  =>  'tz-kavin-ii-api',
+			),
+
 			'extensions'  => array(
-				array(
-					'name'      =>  'Kavin II Template',
-					'type'      =>  'included',
-					'code'      =>  'tz_kavin_ii',
-					'ext_code'  =>  'tz-kavin-ii-api',
-				),
 				array(
 					'name'      =>  'SP Page Builder Pro',
 					'type'      =>  'included',
@@ -324,13 +390,14 @@ class JollyanyFrameworkDataImport {
 			'demo_url'    => 'http://joomla.templaza.net/dino/',
 			'doc_url'     => 'https://www.templaza.com/docs/dino/',
 
+			'template'      => array(
+				'name'      =>  'Dino Template',
+				'type'      =>  'included',
+				'code'      =>  'tz_dino',
+				'ext_code'  =>  'tz-dino-api',
+			),
+
 			'extensions'  => array(
-				array(
-					'name'      =>  'Dino Template',
-					'type'      =>  'included',
-					'code'      =>  'tz_dino',
-					'ext_code'  =>  'tz-dino-api',
-				),
 				array(
 					'name'      =>  'TZ Portfolio',
 					'type'      =>  'url',
@@ -360,13 +427,14 @@ class JollyanyFrameworkDataImport {
 			'demo_url'    => 'http://joomla.templaza.net/stchrist/',
 			'doc_url'     => 'https://www.templaza.com/docs/stchrist/',
 
+			'template'      => array(
+				'name'      =>  'St. Christ Template',
+				'type'      =>  'included',
+				'code'      =>  'tz_stchrist',
+				'ext_code'  =>  'tz-stchrist-api',
+			),
+
 			'extensions'  => array(
-				array(
-					'name'      =>  'St. Christ Template',
-					'type'      =>  'included',
-					'code'      =>  'tz_stchrist',
-					'ext_code'  =>  'tz-stchrist-api',
-				),
 				array(
 					'name'      =>  'SP Page Builder Pro',
 					'type'      =>  'included',
@@ -408,56 +476,14 @@ class JollyanyFrameworkDataImport {
 			'demo_url'    => 'http://joomla.templaza.net/construction/',
 			'doc_url'     => 'https://www.templaza.com/docs/construction/',
 
-			'extensions'  => array(
-				array(
-					'name'      =>  'Construction Template',
-					'type'      =>  'included',
-					'code'      =>  'tz_construction',
-					'ext_code'  =>  'tz-construction-api',
-				),
-				array(
-					'name'      =>  'SP Page Builder Pro',
-					'type'      =>  'included',
-					'code'      =>  'tz_extensions',
-					'ext_code'  =>  'sp-page-builder',
-				),
-				array(
-					'name'      =>  'TZ Portfolio',
-					'type'      =>  'url',
-					'url'       =>  'https://github.com/templaza/tz_portfolio_plus/archive/master.zip',
-				),
-				array(
-					'name'      =>  'Hikashop',
-					'type'      =>  'url',
-					'url'       =>  'https://www.hikashop.com/component/updateme/downloadxml/component-hikashop/level-starter/download.zip',
-				),
-				array(
-					'name'      =>  'Unite Slider',
-					'type'      =>  'included',
-					'code'      =>  'tz_extensions',
-					'ext_code'  =>  'unite-slider',
-				),
+			'template'      => array(
+				'name'      =>  'Construction Template',
+				'type'      =>  'included',
+				'code'      =>  'tz_construction',
+				'ext_code'  =>  'tz-construction-api',
 			),
-		),
-		'tz_fashion'      =>  array(
-			// Pack Info
-			'name'        => 'Fashion',
-			'desc'        => 'Model Agency, Photography',
-
-			// Pack Data
-			'thumb'       => '/media/tz_portfolio/article/cache/fashion-semona-creative-joomla-template-630_S.jpg',
-			'category'    => 'comingsoon',
-
-			'demo_url'    => 'http://joomla.templaza.net/semona-fashion/',
-			'doc_url'     => '#',
 
 			'extensions'  => array(
-				array(
-					'name'      =>  'Fashion Template',
-					'type'      =>  'included',
-					'code'      =>  'tz_fashion',
-					'ext_code'  =>  'tz-fashion-api',
-				),
 				array(
 					'name'      =>  'SP Page Builder Pro',
 					'type'      =>  'included',
@@ -479,16 +505,6 @@ class JollyanyFrameworkDataImport {
 					'type'      =>  'included',
 					'code'      =>  'tz_extensions',
 					'ext_code'  =>  'unite-slider',
-				),
-				array(
-					'name'      =>  'Acymailing',
-					'type'      =>  'url',
-					'url'       =>  'http://www.acyba.com/component/updateme/downloadxml/component-acymailing/level-starter/version-5/download.zip',
-				),
-				array(
-					'name'      =>  'Kunena',
-					'type'      =>  'url',
-					'url'       =>  'https://update.kunena.org/updater/pkg_kunena_v5.1.12.1_2019-04-22.zip',
 				),
 			),
 		),

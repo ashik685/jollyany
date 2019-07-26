@@ -53,8 +53,8 @@ class JFormFieldJollyanyImport extends JFormFieldList {
 			$html[] =   $data;
 		}
 		$html[]     .=  '</div>';
-		$html[]     .=  '<div class="modal fade" id="install-package-dialog" tabindex="-1" role="dialog" aria-labelledby="Demo Content Package" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
+		$html[]     .=  '<div class="modal fade" id="install-package-dialog" tabindex="-1" role="dialog" aria-labelledby="Demo Content Package" aria-hidden="true"></div>';
+		$html[]     .=  '<script id="jollyany-dialog-template" type="text/template"><div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="install-package-title">'.JText::_('JOLLYANY_ACTION_DIALOG_TITLE').' <strong class="package-name">Package</strong></h5>
@@ -65,7 +65,11 @@ class JFormFieldJollyanyImport extends JFormFieldList {
       <div class="modal-body">
         <p class="text-muted">'.JText::_('JOLLYANY_ACTION_DIALOG_TITLE_DESC').'</p>
         <div class="custom-control custom-checkbox mt-3">
-		  <input type="checkbox" class="custom-control-input" id="extension-package" disabled checked>
+		  <input type="checkbox" class="custom-control-input" id="template-package" checked>
+		  <label class="custom-control-label" for="template-package"><h5>'.JText::_('JOLLYANY_ACTION_DIALOG_TEMPLATE_INSTALL').'</h5><small class="text-muted">'.JText::_('JOLLYANY_ACTION_DIALOG_TEMPLATE_INSTALL_DESC').'</small></label>
+		</div>
+		<div class="custom-control custom-checkbox mt-3">
+		  <input type="checkbox" class="custom-control-input" id="extension-package" checked>
 		  <label class="custom-control-label" for="extension-package"><h5>'.JText::_('JOLLYANY_ACTION_DIALOG_EXTENSION_INSTALL').'</h5><small class="text-muted">'.JText::_('JOLLYANY_ACTION_DIALOG_EXTENSION_INSTALL_DESC').'</small></label>
 		</div>
 		<div class="custom-control custom-checkbox mt-3">
@@ -79,8 +83,7 @@ class JFormFieldJollyanyImport extends JFormFieldList {
         <button type="button" class="btn btn-primary install-action" data-token="'.JSession::getFormToken().'" data-file="">'.JText::_('JOLLYANY_ACTION_INSTALL_PACKAGE').'</button>
       </div>
     </div>
-  </div>
-</div>';
+  </div></script>';
 		return implode($html);
 	}
 }

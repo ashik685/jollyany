@@ -6,6 +6,12 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+Version 1.0.6
+
+    Update language.
+    Separate install template and extensions
+    Import data of Fashion template
+
 Version 1.0.5
 
     Update language.

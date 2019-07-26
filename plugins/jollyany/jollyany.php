@@ -121,38 +121,25 @@ class plgSystemJollyany extends JPlugin {
 						jimport('jollyany.framework.importer.data');
 						$license    =   JollyanyFrameworkHelper::maybe_unserialize($this->params->get('jollyany_license'));
 						if ( is_object( $license ) && isset( $license->purchase_code ) ) {
-							$extension_package     =   $this->app->input->post->get('extension-package', 1);
 							$demo_data_package     =   $this->app->input->post->get('demo-data-package', 0);
 							$install_code          =   $this->app->input->post->get('install_code', '', 'RAW');
 							$step                  =   $this->app->input->post->get('step', 1);
 							$file_name             =   $this->app->input->post->get('file_name', '', 'RAW');
 
-							if (!$extension_package) throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR_NO_FILE_INSTALL'));
+							if (!$demo_data_package) throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR_NO_FILE_INSTALL'));
 							$config         =   \JFactory::getConfig();
 							$tmp_part       =   $config->get('tmp_path') ;
 							jimport('joomla.filesystem.file');
 							$url        = JollyanyFrameworkDataImport::getApiUrl().'/index.php?option=com_tz_membership';
-							if ($demo_data_package) {
-								//install quickstart package
-								/* Get package zip file from server */
-								$data = array(
-									'task'          => 'download.package',
-									'produce'       => $install_code,
-									'purchase_code' => $license->purchase_code,
-									'step'          => $step,
-									'type'          => 'quickstart-api'
-								);
-							} else {
-								//install extensions in package.
-								/* Get package zip file from server */
-								$data = array(
-									'task'          => 'download.package',
-									'produce'       => $install_code,
-									'purchase_code' => $license->purchase_code,
-									'step'          => $step,
-									'type'          => 'extensions-api'
-								);
-							}
+							//install quickstart package
+							/* Get package zip file from server */
+							$data = array(
+								'task'          => 'download.package',
+								'produce'       => $install_code,
+								'purchase_code' => $license->purchase_code,
+								'step'          => $step,
+								'type'          => 'quickstart-api'
+							);
 							$http       =   JHttpFactory::getHttp();
 							$response   =   $http -> post ($url, $data, array(
 								'Content-type' => 'application/x-www-form-urlencoded'
@@ -208,56 +195,39 @@ class plgSystemJollyany extends JPlugin {
 						jimport('jollyany.framework.importer.data');
 						$license    =   JollyanyFrameworkHelper::maybe_unserialize($this->params->get('jollyany_license'));
 						if ( is_object( $license ) && isset( $license->purchase_code ) ) {
-							$extension_package     =   $this->app->input->post->get('extension-package', 1);
 							$demo_data_package     =   $this->app->input->post->get('demo-data-package', 0);
-							$install_code          =   $this->app->input->post->get('install_code', '', 'RAW');
 							$p_filename            =   $this->app->input->post->get('archive', '', 'RAW');
 
-							if (!$extension_package) throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR_NO_FILE_INSTALL'));
+							if (!$demo_data_package) throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR_NO_FILE_INSTALL'));
 							$config         =   \JFactory::getConfig();
 							jimport('joomla.filesystem.file');
-							if ($demo_data_package) {
-								//unzip quickstart package
-								@chmod(JPATH_ROOT.DIRECTORY_SEPARATOR.'configuration.php', 0644);
-								$package    =   JollyanyFrameworkHelper::unpack($p_filename, true);
-								if ($package['extractdir']== null){
-									throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR_PACKAGE_NOT_FOUND'));
-								} else {
-									if (!$raw_data       = JFile::read(JPATH_ROOT.DIRECTORY_SEPARATOR.'installation'.DIRECTORY_SEPARATOR.'sql'.DIRECTORY_SEPARATOR.'databases.json')) {
-										throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR_QUICKSTART_CAN_NOT_FOUND'));
-									}
-									$packagedb          = json_decode($raw_data, true);
-									$packagedbdetail    = $packagedb['site.sql'];
-									$sqldb      =   array (
-										'site.sql'   =>  array(
-											'dbtype'        => $config->get('dbtype'),
-											'dbtech'        => 'mysql',
-											'dbname'        => $config->get('db'),
-											'sqlfile'       => 'site.sql',
-											'dbhost'        => $config->get('host'),
-											'dbuser'        => $config->get('user'),
-											'dbpass'        => $config->get('password'),
-											'prefix'        => $config->get('dbprefix'),
-											'parts'         => $packagedbdetail['parts']
-										)
-									);
-									JFile::write(JPATH_ROOT.DIRECTORY_SEPARATOR.'installation'.DIRECTORY_SEPARATOR.'sql'.DIRECTORY_SEPARATOR.'databases.json', json_encode($sqldb), true);
-									$return["package"]  = json_encode($package);
-									$return["url_root"] = JUri::root();
-								}
+							//unzip quickstart package
+							@chmod(JPATH_ROOT.DIRECTORY_SEPARATOR.'configuration.php', 0644);
+							$package    =   JollyanyFrameworkHelper::unpack($p_filename, true);
+							if ($package['extractdir']== null){
+								throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR_PACKAGE_NOT_FOUND'));
 							} else {
-								//unzip extensions in package.
-								$package    =   JollyanyFrameworkHelper::unpack($p_filename);
-								if ($package['extractdir']== null){
-									throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR_PACKAGE_NOT_FOUND'));
+								if (!$raw_data       = JFile::read(JPATH_ROOT.DIRECTORY_SEPARATOR.'installation'.DIRECTORY_SEPARATOR.'sql'.DIRECTORY_SEPARATOR.'databases.json')) {
+									throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR_QUICKSTART_CAN_NOT_FOUND'));
 								}
-								$templates             =   JollyanyFrameworkDataImport::getData();
-								if (is_array($templates) && isset($templates[$install_code])) {
-									$return['data'] =   json_encode($templates[$install_code]);
-								} else {
-									throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR_INVALID_CODE'));
-								}
+								$packagedb          = json_decode($raw_data, true);
+								$packagedbdetail    = $packagedb['site.sql'];
+								$sqldb      =   array (
+									'site.sql'   =>  array(
+										'dbtype'        => $config->get('dbtype'),
+										'dbtech'        => 'mysql',
+										'dbname'        => $config->get('db'),
+										'sqlfile'       => 'site.sql',
+										'dbhost'        => $config->get('host'),
+										'dbuser'        => $config->get('user'),
+										'dbpass'        => $config->get('password'),
+										'prefix'        => $config->get('dbprefix'),
+										'parts'         => $packagedbdetail['parts']
+									)
+								);
+								JFile::write(JPATH_ROOT.DIRECTORY_SEPARATOR.'installation'.DIRECTORY_SEPARATOR.'sql'.DIRECTORY_SEPARATOR.'databases.json', json_encode($sqldb), true);
 								$return["package"]  = json_encode($package);
+								$return["url_root"] = JUri::root();
 							}
 							$return["status"] = "success";
 							$return["code"] = 200;
@@ -286,12 +256,21 @@ class plgSystemJollyany extends JPlugin {
 						$license    =   JollyanyFrameworkHelper::maybe_unserialize($this->params->get('jollyany_license'));
 						if ( is_object( $license ) && isset( $license->purchase_code ) ) {
 							$extension_package     =   $this->app->input->post->get('extension-package', 1);
+							$template_package      =   $this->app->input->post->get('template-package', 1);
 							$install_code          =   $this->app->input->post->get('install_code', '', 'RAW');
 
-							if (!$extension_package) throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR_NO_FILE_INSTALL'));
+							if (!$extension_package && !$template_package) throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR_NO_FILE_INSTALL'));
 							$templates             =   JollyanyFrameworkDataImport::getData();
 							if (is_array($templates) && isset($templates[$install_code])) {
-								$return['data']    =   json_encode($templates[$install_code]);
+								$template          =   $templates[$install_code];
+								$arr_extensions    =   array();
+								if ($template_package) {
+									$arr_extensions[]   =   $template['template'];
+								}
+								if ($extension_package) {
+									$arr_extensions     =   array_merge($arr_extensions, $template['extensions']);
+								}
+								$return['data']    =   json_encode($arr_extensions);
 							} else {
 								throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR_INVALID_CODE'));
 							}
@@ -321,10 +300,11 @@ class plgSystemJollyany extends JPlugin {
 						$license    =   JollyanyFrameworkHelper::maybe_unserialize($this->params->get('jollyany_license'));
 						if ( is_object( $license ) && isset( $license->purchase_code ) ) {
 							$extension_package     =   $this->app->input->post->get('extension-package', 1);
+							$template_package      =   $this->app->input->post->get('template-package', 1);
 							$extension             =   json_decode($this->app->input->post->get('extension', '', 'RAW'));
 							jimport('joomla.filesystem.file');
 							jimport('joomla.filesystem.folder');
-							if (!$extension_package) throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR_NO_FILE_INSTALL'));
+							if (!$extension_package && !$template_package) throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR_NO_FILE_INSTALL'));
 							if (is_object($extension) && isset($extension->name)) {
 								$config   = JFactory::getConfig();
 								$tmp_dest = $config->get('tmp_path');
