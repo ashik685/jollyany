@@ -6,6 +6,10 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.0.8**
+
+    Fix issue for validate key when active license
+
 **Version 1.0.7**
 
     Update language for sidebar collapse
