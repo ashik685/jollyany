@@ -257,4 +257,42 @@ class JollyanyFrameworkHelper {
 			'message'   => \JText::_('JOLLYANY_AJAX_INSTALL_EXTENSION_SUCCESSFUL')
 		);
 	}
+
+	/**
+	 * Get Preset data
+	 * @return array
+	 */
+	public static function getPresets() {
+		jimport('astroid.framework.astroid');
+		$template   =   AstroidFramework::getTemplate();
+		$presets_path = JPATH_SITE . "/templates/{$template->template}/astroid/presets/";
+
+		if (!file_exists($presets_path)) {
+			return [];
+		}
+		$files = array_filter(glob($presets_path . '*.json'), 'is_file');
+		$presets    =   [];
+		foreach ($files as $file) {
+			$json = file_get_contents($file);
+			$data = \json_decode($json, true);
+			$preset = ['title' => pathinfo($file)['filename'], 'desc' => '', 'thumbnail' => '', 'demo' => '', 'preset' => [], 'name' => pathinfo($file)['filename']];
+			if (isset($data['title']) && !empty($data['title'])) {
+				$preset['title'] = \JText::_($data['title']);
+			}
+			if (isset($data['desc'])) {
+				$preset['desc'] = \JText::_($data['desc']);
+			}
+			if (isset($data['thumbnail']) && !empty($data['thumbnail'])) {
+				$preset['thumbnail'] = \JURI::root() . 'templates/' . $template->template . '/' . $data['thumbnail'];
+			}
+			if (isset($data['demo'])) {
+				$preset['demo'] = $data['demo'];
+			}
+			if (isset($data['preset'])) {
+				$preset['preset'] = $data['preset'];
+			}
+			$presets[] = $preset;
+		}
+		return $presets;
+	}
 }

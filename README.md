@@ -6,6 +6,14 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.1.0**
+
+    Move all basic scss and layout to library
+    Add Dashboard form in all child template
+    Add Preset feature support for template
+    Improve language
+    Improve style for Dashboard
+
 **Version 1.0.8**
 
     Fix issue for validate key when active license

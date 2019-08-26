@@ -21,6 +21,7 @@ class plgSystemJollyany extends JPlugin {
 		$lang->load("jollyany", JPATH_SITE);
         $option     = $this->app->input->get('option', '');
         $jollyany   = $this->app->input->get('jollyany', '');
+        $astroid    = $this->app->input->get('astroid', '');
 		if(!$this->app->isAdmin() && $jollyany!='activation') return false;
 
 		if ($option == 'com_ajax') {
@@ -45,34 +46,7 @@ class plgSystemJollyany extends JPlugin {
 						$table          = JTable::getInstance('extension');
 						$table->load($jollyany->id);
 						$table->save(array('params' => $this->params->toString()));
-						echo '<html><head><title>Product Activated!</title><style>.product-activated-window {
-  background: url(media/jollyany/assets/images/success.png) no-repeat center top;
-  background-size: auto;
-  background-size: 40px;
-  padding-top: 50px;
-  margin-top: 30px;
-  text-align: center; }
-  .product-activated-window .about-description {
-    max-width: 400px;
-    margin: 0 auto;
-    margin-bottom: 0px;
-    margin-bottom: 40px; }
-  .product-activated-window .start-using-product {
-    display: block;
-    text-decoration: none;
-    background: #72bf40;
-    color: #fff;
-    font-size: 25px;
-    text-align: center;
-    padding: 20px 10px; }</style></head><body><div class="product-activated-window">
-        <h1>Product Activated!</h1>
-        <div class="about-description">
-            Congratulations! <strong>'.$license->buyer.'</strong> has been successfully activated and now you can get latest updates of the template.
-        </div>
-        <a href="#" class="start-using-product close-this-window" onclick="window.close();">Start using Jollyany!</a>
-        <br>
-        <p>You can <a href="#" class="close-this-window" onclick="window.close();">close this window</a> now.</p>
-    </div></body></html>';
+						echo '<html><head><title>Product Activated!</title><style>.product-activated-window {background: url(media/jollyany/assets/images/success.png) no-repeat center top;background-size: auto;background-size: 40px;padding-top: 50px;margin-top: 30px;text-align: center; }.product-activated-window .about-description {max-width: 400px;margin: 0 auto;margin-bottom: 0px;margin-bottom: 40px; }.product-activated-window .start-using-product {display: block;text-decoration: none;background: #72bf40;color: #fff;font-size: 25px;text-align: center;padding: 20px 10px; }</style></head><body><div class="product-activated-window"><h1>Product Activated!</h1><div class="about-description">Congratulations! <strong>'.$license->buyer.'</strong> has been successfully activated and now you can get latest updates of the template.</div><a href="#" class="start-using-product close-this-window" onclick="window.close();">Start using Jollyany!</a><br><p>You can <a href="#" class="close-this-window" onclick="window.close();">close this window</a> now.</p></div></body></html>';
 					} catch (\Exception $e) {
 					    header('Content-Type: application/json');
                         $return["status"] = "error";
@@ -410,7 +384,98 @@ class plgSystemJollyany extends JPlugin {
 					echo \json_encode($return);
 					die();
 					break;
+                case 'loadpreset':
+                    header('Content-Type: application/json');
+                    header('Access-Control-Allow-Origin: *');
+                    $return = array();
+                    try {
+                        // Check for request forgeries.
+                        if (!JSession::checkToken()) {
+                            throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR'));
+                        }
+                        $template_name  = $this->app->input->get('template', NULL, 'RAW');
+                        $presets_path   = JPATH_SITE . "/templates/$template_name/astroid/presets/";
+                        $file           = $this->app->input->post->get('name', '', 'RAW');
+                        $json           = file_get_contents($presets_path.$file.'.json');
+                        if (!$json) {
+                            throw new \Exception(\JText::_('JOLLYANY_LOAD_PRESET_FILE_ERROR'));
+                        }
+                        $data = \json_decode($json, true);
+                        if (!isset($data['preset']) || empty($data['preset'])) {
+                            throw new \Exception(\JText::_('JOLLYANY_PRESET_EMPTY_ERROR'));
+                        }
+                        $return["status"]   =   'success';
+                        $return["data"]     =   $data['preset'];
+                        $return["code"]     =   200;
+
+                    } catch (\Exception $e) {
+                        $return["status"] = "error";
+                        $return["code"] = $e->getCode();
+                        $return["message"] = $e->getMessage();
+                    }
+                    echo \json_encode($return);
+                    die();
+                    break;
+				case 'removepreset':
+					header('Content-Type: application/json');
+					header('Access-Control-Allow-Origin: *');
+					$return = array();
+					try {
+						// Check for request forgeries.
+						if (!JSession::checkToken()) {
+							throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR'));
+						}
+						$template_name  = $this->app->input->get('template', NULL, 'RAW');
+						$presets_path   = JPATH_SITE . "/templates/$template_name/astroid/presets/";
+						$file           = $this->app->input->post->get('name', '', 'RAW');
+						$file_name      = $presets_path.$file.'.json';
+						jimport('joomla.filesystem.file');
+						if (\JFile::exists($file_name)) {
+							\JFile::delete($file_name);
+						}
+						$return["status"]   =   'success';
+						$return["code"]     =   200;
+
+					} catch (\Exception $e) {
+						$return["status"] = "error";
+						$return["code"] = $e->getCode();
+						$return["message"] = $e->getMessage();
+					}
+					echo \json_encode($return);
+					die();
+					break;
 			}
+            switch ($astroid) {
+                case "save":
+                    header('Content-Type: application/json');
+                    header('Access-Control-Allow-Origin: *');
+                    $return = array();
+                    try {
+                        if (!JSession::checkToken()) {
+                            throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR'));
+                        }
+
+                        $jollyany_preset = $this->app->input->post->get('jollyany-preset', 0, 'INT');
+                        if ($jollyany_preset) {
+                            $params = $this->app->input->post->get('params', array(), 'RAW');
+                            $template_name = $this->app->input->get('template', NULL, 'RAW');
+                            $preset = [
+                                'title' => $this->app->input->post->get('jollyany-preset-name', '', 'RAW'),
+                                'desc' => $this->app->input->post->get('jollyany-preset-desc', '', 'RAW'),
+                                'thumbnail' => '', 'demo' => '',
+                                'preset' => \json_encode($params)
+                            ];
+                            file_put_contents(JPATH_SITE . "/templates/{$template_name}/astroid/presets/" . uniqid(JFilterOutput::stringURLSafe($preset['title']).'-') . '.json', \json_encode($preset));
+                        }
+                    } catch (\Exception $e) {
+                        $return["status"] = "error";
+                        $return["code"] = $e->getCode();
+                        $return["message"] = $e->getMessage();
+                        echo \json_encode($return);
+                        die();
+                    }
+                    break;
+            }
 		}
 	}
 
@@ -460,10 +525,54 @@ class plgSystemJollyany extends JPlugin {
 	// Astroid Admin Events
 	public function onBeforeAstroidAdminRender(&$template) {
 //		AstroidFramework::addStyleSheet(); // to add css link
-//		AstroidFramework::addStyleDeclaration(); // to add css script
+		AstroidFramework::addStyleDeclaration('
+		.jollyany_placeholder {
+			width: 100%;
+			min-height: 200px;
+			display: flex;
+			align-items: center;
+		    justify-content: center;
+		    font-size: 5rem;
+		    text-transform: uppercase;
+		    color: #ffffff;
+		    background-size: cover;
+            background-position: top;
+		}
+		.jollyany-preset .close {position: absolute;top: 5px;right: 8px;}
+		#astroid-content-wrapper .jollyany-create-preset .form-control {max-width:100%;}
+		#astroid-content-wrapper .jollyany-create-preset textarea {min-height:auto;}
+		.card-highlight {
+			box-shadow: 7px 7px 7px rgba(0,0,0,0.2);
+		}
+		@media (min-width: 1500px) {
+	    .col-xxl-7 {
+	        flex: 0 0 58.3333333333% !important;
+            max-width: 58.3333333333% !important;
+	    }
+	    .col-xxl-5 {
+	        flex: 0 0 41.6666666667% !important;
+            max-width: 41.6666666667% !important;
+	    }
+	    .col-xxl-3 {
+	        flex: 0 0 25% !important;
+            max-width: 25% !important;
+	    }
+	    }
+		'); // to add css script
 //		AstroidFramework::addScript(); // to add js file in head
 		AstroidFramework::addScript(JUri::root().'media/jollyany/assets/js/jollyany.min.js', "body"); // to add js file in body
 //		AstroidFramework::addScriptDeclaration(); // to add js script in head
 //		AstroidFramework::addScriptDeclaration($js, "body"); // to add js script in body
+	}
+
+	// Astroid Admin Events
+	public function onBeforeAstroidFormLoad(&$template, &$form) {
+		$form_dir = JPATH_LIBRARIES . '/' . 'jollyany' . '/' . 'framework' . '/' . 'options';
+		$forms = array_filter(glob($form_dir . '/' . '*.xml'), 'is_file');
+		JForm::addFormPath($form_dir);
+		foreach ($forms as $fname) {
+			$fname = pathinfo($fname)['filename'];
+			$form->loadFile($fname, false);
+		}
 	}
 }
