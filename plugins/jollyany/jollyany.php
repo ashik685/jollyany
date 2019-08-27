@@ -465,7 +465,8 @@ class plgSystemJollyany extends JPlugin {
                                 'thumbnail' => '', 'demo' => '',
                                 'preset' => \json_encode($params)
                             ];
-                            file_put_contents(JPATH_SITE . "/templates/{$template_name}/astroid/presets/" . uniqid(JFilterOutput::stringURLSafe($preset['title']).'-') . '.json', \json_encode($preset));
+	                        jimport('joomla.filesystem.file');
+	                        \JFile::write(JPATH_SITE . "/templates/{$template_name}/astroid/presets/" . uniqid(JFilterOutput::stringURLSafe($preset['title']).'-') . '.json', \json_encode($preset));
                         }
                     } catch (\Exception $e) {
                         $return["status"] = "error";
