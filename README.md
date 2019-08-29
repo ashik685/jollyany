@@ -1,3 +1,6 @@
+[![Github All Releases](https://img.shields.io/github/downloads/templaza/jollyany/total.svg)](https://github.com/templaza/jollyany/releases)
+[![GitHub release](https://img.shields.io/github/release/templaza/jollyany.svg)](https://github.com/templaza/jollyany/releases)
+
 # Jollyany Framework
 
 It's extended version of Astroid Framework
