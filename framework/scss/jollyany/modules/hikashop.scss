@@ -100,7 +100,7 @@ a.hikacart {
   }
 }
 .hikashop_product_price_main {
-  padding: 1.5rem 0;
+  margin: 1.5rem 0;
   display: block;
   &:after, &:before {
     content: '';
@@ -171,6 +171,30 @@ a.hikacart {
       background-color: $colorBlack;
       border-color: $colorBlack;
     }
+  }
+}
+.ui-slider-horizontal{
+  background: $light;
+  border: none;
+  height: .4em;
+  max-width: 100%;
+  .ui-slider-handle {
+    margin: 0;
+    +.ui-slider-handle {
+      transform: translateX(-100%);
+    }
+  }
+  .ui-slider-range{
+    background: $colorMain;
+  }
+}
+.ui-widget-content{
+  .ui-state-default{
+    border: 2px solid $colorMain;
+    background: #fff;
+    border-radius: 0;
+    height: 1em;
+    width: 1em;
   }
 }
 .jollyany-hikacart {

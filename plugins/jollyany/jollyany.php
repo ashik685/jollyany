@@ -15,7 +15,8 @@ defined('_JEXEC') or die;
 
 class plgSystemJollyany extends JPlugin {
 	protected $app;
-	public function onAfterRoute() {
+
+	public function onAfterInitialise() {
 		// load jollyany language
 		$lang = JFactory::getLanguage();
 		$lang->load("jollyany", JPATH_SITE);

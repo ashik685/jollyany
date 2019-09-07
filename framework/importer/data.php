@@ -64,6 +64,38 @@ class JollyanyFrameworkDataImport {
 				),
 			),
 		),
+		'tz_nish_ii'   =>  array(
+			// Pack Info
+			'name'        => 'Nish II',
+			'desc'        => 'Portfolio, Agency & Photography',
+
+			// Pack Data
+			'thumb'       => '/media/tz_portfolio/article/cache/nish-ii-free-creative-joomla-template-762_S.jpg',
+			'category'    => 'joomla',
+
+			'demo_url'    => 'https://joomla.templaza.net/nish_ii/',
+			'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/nish_ii',
+
+			'template'    => array(
+				'name'      =>  'Nish II Template',
+				'type'      =>  'included',
+				'code'      =>  'tz_nish_ii',
+				'ext_code'  =>  'tz-nish-ii-api',
+			),
+
+			'extensions'  => array(
+				array(
+					'name'      =>  'TZ Portfolio',
+					'type'      =>  'url',
+					'url'       =>  'https://github.com/templaza/tz_portfolio_plus/archive/master.zip',
+				),
+				array(
+					'name'      =>  'Hikashop',
+					'type'      =>  'url',
+					'url'       =>  'https://www.hikashop.com/component/updateme/downloadxml/component-hikashop/level-starter/download.zip',
+				),
+			),
+		),
 		'tz_fashion_semona_joomla'      =>  array(
 			// Pack Info
 			'name'        => 'Fashion',

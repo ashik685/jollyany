@@ -22,8 +22,8 @@ $socials = $params->get('astroid_author_social', []);
 $hash_email = md5(strtolower(trim($user->email)));
 ?>
 
-<div class="author-wrap bg-light border p-2 mt-5">
-   <div class="author-body d-flex">
+<div class="author-wrap card mt-5">
+   <div class="author-body card-body d-flex">
       <div class="author-thumb mr-4">
          <?php if (!empty($params->get('astroid_author_picture', 0))) { ?>
             <div class="author-thumb mr-4">
@@ -48,7 +48,7 @@ $hash_email = md5(strtolower(trim($user->email)));
       </div>
    </div>
    <?php if (!empty($socials)) { ?>
-      <ul class="list-inline border-top author-social-links m-0 pt-2">
+      <ul class="card-footer text-center list-inline border-top author-social-links m-0">
          <?php foreach ($socials as $social) { ?>
             <li class="list-inline-item">
                <a target="_blank" rel="noopener" href="<?php echo $social->link; ?>"><i class="<?php echo $social->icon; ?> fa-lg"></i></a>

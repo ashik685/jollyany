@@ -9,6 +9,12 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.1.1**
+
+    Nish II - Creative Joomla Template integrated
+    Move Jollyany to onAfterInitialise event
+    Improve Based Style
+
 **Version 1.1.0**
 
     Move all basic scss and layout to library

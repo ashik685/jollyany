@@ -17,6 +17,9 @@
   .es-stream-title {
     font-weight: bolder;
   }
+  .es-profile-header, .es-profile-header__ft, .es-stream-embed, .es-card, .es-card--border, .mod-card {
+    border-color: $border-color;
+  }
 }
 .sppb-addon-content{
   #es {

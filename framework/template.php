@@ -24,9 +24,6 @@ class JollyanyFrameworkTemplate extends AstroidFrameworkTemplate{
 		} else {
 			$layout = new JLayoutFile($partial, JPATH_SITE . '/libraries/jollyany/framework/frontend');
 		}
-//		if ($partial=='header.horizontal') {
-//			var_dump($layout); die();
-//		}
 		$data = [];
 		$data['template'] = $this;
 		if (!empty($params)) {

@@ -4,8 +4,10 @@
     padding: 4.5rem 0;
   }
 }
-.top-bar {
-  line-height: 42px;
+.top-bar .astroid-module-position {
+  height: 42px;
+  display: flex;
+  align-items: center;
 }
 .jollyany-bottom-section {
   h1,h2,h3,h4,h5,h6 {

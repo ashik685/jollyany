@@ -63,3 +63,13 @@
   width: 100%;
   background-color: transparent !important;
 }
+.author-wrap {
+  .author-social-links {
+    a {
+      color: inherit;
+      &:hover {
+        color: $colorMain;
+      }
+    }
+  }
+}

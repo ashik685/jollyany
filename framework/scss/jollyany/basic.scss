@@ -28,6 +28,18 @@ blockquote {
 .fa-ul {
   margin-left: 1.5em;
 }
+.pull-left {
+  float: left;
+}
+.pull-right {
+  float: right;
+}
+img.pull-left {
+  margin: .5em 2em .5em 0;
+}
+img.pull-right {
+  margin: .5em 0 1.5em 2em;
+}
 
 // Start frontending css
 
