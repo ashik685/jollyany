@@ -64,6 +64,50 @@ class JollyanyFrameworkDataImport {
 				),
 			),
 		),
+		'tz_new_age'      =>  array(
+			// Pack Info
+			'name'        => 'New Age',
+			'desc'        => 'Creative Agency, Business, Company',
+
+			// Pack Data
+			'thumb'       => '/images/stories/new_age/new_age_590.jpg',
+			'category'    => 'joomla',
+
+			'demo_url'    => 'http://joomla.templaza.net/new-age/',
+			'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/new-age',
+
+			'template'      => array(
+				'name'      =>  'New Age Template',
+				'type'      =>  'included',
+				'code'      =>  'tz_new_age',
+				'ext_code'  =>  'tz-new-age-api',
+			),
+
+			'extensions'  => array(
+				array(
+					'name'      =>  'SP Page Builder Pro',
+					'type'      =>  'included',
+					'code'      =>  'tz_extensions',
+					'ext_code'  =>  'sp-page-builder',
+				),
+				array(
+					'name'      =>  'TZ Portfolio',
+					'type'      =>  'url',
+					'url'       =>  'https://github.com/templaza/tz_portfolio_plus/archive/master.zip',
+				),
+				array(
+					'name'      =>  'Hikashop',
+					'type'      =>  'url',
+					'url'       =>  'https://www.hikashop.com/component/updateme/downloadxml/component-hikashop/level-starter/download.zip',
+				),
+				array(
+					'name'      =>  'Unite Slider',
+					'type'      =>  'included',
+					'code'      =>  'tz_extensions',
+					'ext_code'  =>  'unite-slider',
+				),
+			),
+		),
 		'tz_nish_ii'   =>  array(
 			// Pack Info
 			'name'        => 'Nish II',

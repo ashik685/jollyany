@@ -9,6 +9,10 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.1.2**
+
+    New Age - Creative Agency Joomla Template integrated
+
 **Version 1.1.1**
 
     Nish II - Creative Joomla Template integrated
