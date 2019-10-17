@@ -17,6 +17,6 @@ if (!$language || !$language_module) {
 	return;
 }
 ?>
-	<div class="jollyany-language mr-3">
+	<div class="jollyany-language">
 		<?php echo $template->_loadid($language_module); ?>
 	</div>

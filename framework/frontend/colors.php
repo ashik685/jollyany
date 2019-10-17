@@ -67,6 +67,7 @@ $social_icon_color = $template->params->get('social_icon_color', '');
 //Extensions
 $hikacart_icon_color = $template->params->get('hikacart_icon_color', '');
 $login_icon_color = $template->params->get('login_icon_color', '');
+$menu_icon_color = $template->params->get('dropdownmenu_icon_color', '');
 ?>
 
 <?php
@@ -235,6 +236,9 @@ if (!empty($hikacart_icon_color)) {
 }
 if (!empty($login_icon_color)) {
 	$extensions[]       = 'a.jollyany-login-icon i[class*="fa-"]{color:' . $login_icon_color . ' !important;}';
+}
+if (!empty($menu_icon_color)) {
+	$extensions[]       = 'a#jollyany-dropdownmenu i[class*="fa-"]{color:' . $menu_icon_color . ' !important;}';
 }
 ?>
 

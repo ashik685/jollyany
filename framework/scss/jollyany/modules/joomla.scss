@@ -33,10 +33,6 @@
     }
   }
 }
-.jollyany-login {
-  border-left: 1px solid $border-color;
-  padding-left: 15px;
-}
 a.jollyany-login-icon {
   color: inherit;
 }
@@ -53,7 +49,11 @@ a.jollyany-login-icon {
     }
   }
 }
-
+.jollyany-login {
+  label {
+    color: $dark;
+  }
+}
 .blog, .item-page {
   .card-body {
     padding: 1.8rem;

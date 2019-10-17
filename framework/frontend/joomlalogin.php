@@ -13,12 +13,22 @@ defined('_JEXEC') or die;
 extract($displayData);
 $joomlalogin               = $template->params->get('joomlalogin', 0);
 $joomlalogin_module        = $template->params->get('joomlalogin_module', 0);
+$whendisplay               = $template->params->get('when_login_module_display', '');
+
+if ($whendisplay) {
+    $user       =   \JFactory::getUser();
+	if ((isset($user->id) && $user->id && $whendisplay == 'logged-out') || ($whendisplay == 'logged-in' && (!isset($user->id) || !$user->id))) {
+		return;
+	}
+}
 if (!$joomlalogin || !$joomlalogin_module) {
 	return;
 }
+$module = JModuleHelper::getModuleById($joomlalogin_module);
+$title  =   $module && isset($module->title) && $module->title ? $module->title : JText::_('TPL_JOLLYANY_LOGIN');
 ?>
-	<div class="jollyany-login mr-3">
-		<a href="#" class="jollyany-login-icon" data-toggle="modal" data-target="#jollyany-login-content"><i class="fas fa-user mr-1"></i> <?php echo JText::_('TPL_JOLLYANY_LOGIN'); ?></a>
+	<div class="jollyany-login">
+		<a href="#" class="jollyany-login-icon" data-toggle="modal" data-target="#jollyany-login-content"><i class="fas fa-user mr-1"></i> <?php echo $title; ?></a>
 		<!-- Modal -->
 		<div class="modal fade" id="jollyany-login-content" tabindex="-1" role="dialog" aria-labelledby="jollyany-login-title" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered" role="document">

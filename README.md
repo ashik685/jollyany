@@ -9,6 +9,11 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.1.3**
+
+    Add Menu & Menu Drop-down Extension to Astroid
+    Improve style for Topbar and Extension
+
 **Version 1.1.2**
 
     New Age - Creative Agency Joomla Template integrated

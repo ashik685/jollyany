@@ -17,7 +17,7 @@ if (!$hikacart || !$hikacart_module) {
 	return;
 }
 ?>
-<div class="jollyany-hikacart mr-3">
+<div class="jollyany-hikacart">
     <a href="#" class="jollyany-hikacart-icon" data-toggle="modal" data-target="#jollyany-hikacart-content"><i class="fas fa-shopping-cart mr-1"></i> <?php echo JText::_('TPL_JOLLYANY_YOUR_CART'); ?></a>
     <!-- Modal -->
     <div class="modal fade" id="jollyany-hikacart-content" tabindex="-1" role="dialog" aria-labelledby="jollyany-hikacart-title" aria-hidden="true">
