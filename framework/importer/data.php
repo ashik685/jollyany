@@ -77,7 +77,7 @@ class JollyanyFrameworkDataImport {
 			'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/meetup',
 
 			'template'      => array(
-				'name'      =>  'New Age Template',
+				'name'      =>  'Meetup Template',
 				'type'      =>  'included',
 				'code'      =>  'tz_meetup',
 				'ext_code'  =>  'tz-meetup-api',
