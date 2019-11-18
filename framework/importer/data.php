@@ -60,7 +60,7 @@ class JollyanyFrameworkDataImport {
 				array(
 					'name'      =>  'Kunena',
 					'type'      =>  'url',
-					'url'       =>  'https://update.kunena.org/updater/pkg_kunena_v5.1.13.1_2019-07-22.zip',
+					'url'       =>  'https://update.kunena.org/updater/pkg_kunena_v5.1.15_2019-10-27.zip',
 				),
 			),
 		),
@@ -234,7 +234,7 @@ class JollyanyFrameworkDataImport {
 				array(
 					'name'      =>  'Kunena',
 					'type'      =>  'url',
-					'url'       =>  'https://update.kunena.org/updater/pkg_kunena_v5.1.13.1_2019-07-22.zip',
+					'url'       =>  'https://update.kunena.org/updater/pkg_kunena_v5.1.15_2019-10-27.zip',
 				),
 			),
 		),
@@ -288,7 +288,7 @@ class JollyanyFrameworkDataImport {
 				array(
 					'name'      =>  'Kunena',
 					'type'      =>  'url',
-					'url'       =>  'https://update.kunena.org/updater/pkg_kunena_v5.1.13.1_2019-07-22.zip',
+					'url'       =>  'https://update.kunena.org/updater/pkg_kunena_v5.1.15_2019-10-27.zip',
 				),
 			),
 		),
@@ -342,7 +342,7 @@ class JollyanyFrameworkDataImport {
 				array(
 					'name'      =>  'Kunena',
 					'type'      =>  'url',
-					'url'       =>  'https://update.kunena.org/updater/pkg_kunena_v5.1.13.1_2019-07-22.zip',
+					'url'       =>  'https://update.kunena.org/updater/pkg_kunena_v5.1.15_2019-10-27.zip',
 				),
 			),
 		),
@@ -396,7 +396,7 @@ class JollyanyFrameworkDataImport {
 				array(
 					'name'      =>  'Kunena',
 					'type'      =>  'url',
-					'url'       =>  'https://update.kunena.org/updater/pkg_kunena_v5.1.13.1_2019-07-22.zip',
+					'url'       =>  'https://update.kunena.org/updater/pkg_kunena_v5.1.15_2019-10-27.zip',
 				),
 			),
 		),

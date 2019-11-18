@@ -1,4 +1,3 @@
-[![Github All Releases](https://img.shields.io/github/downloads/templaza/jollyany/total.svg)](https://github.com/templaza/jollyany/releases)
 [![GitHub release](https://img.shields.io/github/release/templaza/jollyany.svg)](https://github.com/templaza/jollyany/releases)
 
 # Jollyany Framework
@@ -8,6 +7,11 @@ It's extended version of Astroid Framework
 Astroid Framework: https://astroidframework.com/
 
 # Changelogs
+**Version 1.1.5**
+
+    Move astroid js to framework
+    MeetUp Conference Event Joomla Template included
+    Update Kunena to latest version.
 
 **Version 1.1.3**
 
