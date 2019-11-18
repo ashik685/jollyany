@@ -7,6 +7,13 @@ It's extended version of Astroid Framework
 Astroid Framework: https://astroidframework.com/
 
 # Changelogs
+**Version 1.1.6**
+
+    Add option color for Social Icon
+    Improve collapsed logo style
+    Improve style for topbar
+    Upload language for v1.1.6
+
 **Version 1.1.5**
 
     Move astroid js to framework

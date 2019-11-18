@@ -25,7 +25,7 @@ $contact_display = $template->params->get('contact_display', 'icons');
 
 <div class="astroid-contact-info">
    <?php if (!empty($address)) { ?>
-      <span class="mr-3 d-inline-block">
+      <span class="d-inline-block">
          <?php if ($contact_display == "icons") : ?>
             <i class="fas fa-map-marker-alt mr-1"></i>
          <?php endif; ?>
@@ -37,7 +37,7 @@ $contact_display = $template->params->get('contact_display', 'icons');
    <?php } ?>
 
    <?php if (!empty($phone)) { ?>
-      <span class="mr-3 d-inline-block">
+      <span class="d-inline-block">
          <?php if ($contact_display == "icons") : ?>
             <i class="fas fa-phone fa-rotate-90 mr-1"></i>
          <?php endif; ?>
@@ -49,7 +49,7 @@ $contact_display = $template->params->get('contact_display', 'icons');
    <?php } ?>
 
    <?php if (!empty($mobile)) { ?>
-      <span class="mr-3 d-inline-block">
+      <span class="d-inline-block">
          <?php if ($contact_display == "icons") : ?>
             <i class="fas fa-mobile-alt mr-1"></i>
          <?php endif; ?>
@@ -61,7 +61,7 @@ $contact_display = $template->params->get('contact_display', 'icons');
    <?php } ?>
 
    <?php if (!empty($email)) { ?>
-      <span class="mr-3 d-inline-block">
+      <span class="d-inline-block">
          <?php if ($contact_display == "icons") : ?>
             <i class="far fa-envelope mr-1"></i>
          <?php endif; ?>
@@ -73,7 +73,7 @@ $contact_display = $template->params->get('contact_display', 'icons');
    <?php } ?>
 
    <?php if (!empty($openhours)) { ?>
-      <span class="mr-3 d-inline-block">
+      <span class="d-inline-block">
          <?php if ($contact_display == "icons") : ?>
             <i class="far fa-clock mr-1"></i>
          <?php endif; ?>
