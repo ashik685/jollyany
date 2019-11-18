@@ -63,6 +63,7 @@ $mobile_active_background_color = $template->params->get('mobile_menu_active_bg_
 //Miscellaneous -> Contact Us
 $icon_color = $template->params->get('icon_color', '');
 $social_icon_color = $template->params->get('social_icon_color', '');
+$social_icon_color_hover = $template->params->get('social_icon_color_hover', '');
 
 //Extensions
 $hikacart_icon_color = $template->params->get('hikacart_icon_color', '');
@@ -225,6 +226,9 @@ if (!empty($icon_color)) {
 }
 if (!empty($social_icon_color)) {
 	$miscellaneous[]    = '.astroid-social-icons > li a{color:'.$social_icon_color.' !important;}';
+}
+if (!empty($social_icon_color_hover)) {
+	$miscellaneous[]    = '.astroid-social-icons > li a:hover{color:'.$social_icon_color_hover.' !important;}';
 }
 ?>
 

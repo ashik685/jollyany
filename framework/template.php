@@ -84,4 +84,20 @@ class JollyanyFrameworkTemplate extends AstroidFrameworkTemplate{
 		}
 		return $presets;
 	}
+
+	/**
+	 * @param string $components
+	 */
+	public function loadFrameworkJS($components = '') {
+		$this->setLog("Loading Javascripts");
+		$components = explode(',', $components);
+		$template_directory = JPATH_LIBRARIES . "/jollyany/framework/assets/js/";
+		$document = JFactory::getDocument();
+		foreach ($components as $component) {
+			if (file_exists($template_directory . $component)) {
+				JHtml::_('script', JURI::root() . 'libraries/jollyany/framework/assets/js/' . $component, array('version' => $document->getMediaVersion(), 'relative' => true));
+			}
+		}
+		$this->setLog("Javascripts Loaded!", "success");
+	}
 }

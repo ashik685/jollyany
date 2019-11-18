@@ -64,6 +64,50 @@ class JollyanyFrameworkDataImport {
 				),
 			),
 		),
+		'tz_meetup'      =>  array(
+			// Pack Info
+			'name'        => 'Meetup',
+			'desc'        => 'Conference Event Joomla Template',
+
+			// Pack Data
+			'thumb'       => '/images/stories/meetup/meetup.jpg',
+			'category'    => 'joomla',
+
+			'demo_url'    => 'http://joomla.templaza.net/meetup/',
+			'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/meetup',
+
+			'template'      => array(
+				'name'      =>  'New Age Template',
+				'type'      =>  'included',
+				'code'      =>  'tz_meetup',
+				'ext_code'  =>  'tz-meetup-api',
+			),
+
+			'extensions'  => array(
+				array(
+					'name'      =>  'SP Page Builder Pro',
+					'type'      =>  'included',
+					'code'      =>  'tz_extensions',
+					'ext_code'  =>  'sp-page-builder',
+				),
+				array(
+					'name'      =>  'TZ Portfolio',
+					'type'      =>  'url',
+					'url'       =>  'https://github.com/templaza/tz_portfolio_plus/archive/master.zip',
+				),
+				array(
+					'name'      =>  'Hikashop',
+					'type'      =>  'url',
+					'url'       =>  'https://www.hikashop.com/component/updateme/downloadxml/component-hikashop/level-starter/download.zip',
+				),
+				array(
+					'name'      =>  'Unite Slider',
+					'type'      =>  'included',
+					'code'      =>  'tz_extensions',
+					'ext_code'  =>  'unite-slider',
+				),
+			),
+		),
 		'tz_new_age'      =>  array(
 			// Pack Info
 			'name'        => 'New Age',
