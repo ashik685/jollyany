@@ -47,7 +47,7 @@ class JFormFieldJollyanyImport extends JFormFieldList {
 			$data   =  '<div class="col-12 col-md-6 col-lg-6 col-xl-4 mb-5">';
 			$data   .=  '<div class="card">';
 			$data   .=  '<img src="'.$api_url.$value['thumb'].'" class="card-img-top" alt="'.$value['name'].'" />';
-			$data   .=  '<div class="card-body"><h5 class="card-title">'.$value['name'].'</h5><p class="card-text">'.$value['desc'].'</p><div class="btn-group" role="group" aria-label="Install Action"><a href="#" class="btn btn-primary intall-package btn-sm'.$clsstatus.'" data-name="'.$value['name'].'" data-file="'.$index.'" data-status="'.$activated.'"'.$status.'>'.JText::_('JOLLYANY_ACTION_INSTALL_PACKAGE'.$comingsoon).'</a><a href="'.$value['demo_url'].'" class="btn btn-outline-primary btn-sm'.$clsstatus.'" target="_blank"'.$status.'>'.JText::_('JOLLYANY_ACTION_DEMO_URL').'</a><a href="'.$value['doc_url'].'" class="btn btn-outline-primary btn-sm'.$clsstatus.'" target="_blank"'.$status.'>'.JText::_('JOLLYANY_ACTION_DOC_URL').'</a></div></div>';
+			$data   .=  '<div class="card-body"><h5 class="card-title">'.$value['name'].'</h5><p class="card-text">'.$value['desc'].'</p><div class="btn-group" role="group" aria-label="Install Action"><a href="#" class="btn btn-primary intall-package btn-sm'.$clsstatus.'"  data-token="'.JSession::getFormToken().'" data-name="'.$value['name'].'" data-file="'.$index.'" data-status="'.$activated.'"'.$status.'>'.JText::_('JOLLYANY_ACTION_INSTALL_PACKAGE'.$comingsoon).'</a><a href="'.$value['demo_url'].'" class="btn btn-outline-primary btn-sm'.$clsstatus.'" target="_blank"'.$status.'>'.JText::_('JOLLYANY_ACTION_DEMO_URL').'</a><a href="'.$value['doc_url'].'" class="btn btn-outline-primary btn-sm'.$clsstatus.'" target="_blank"'.$status.'>'.JText::_('JOLLYANY_ACTION_DOC_URL').'</a></div></div>';
 			$data   .=  '</div>';
 			$data   .=  '</div>';
 			$html[] =   $data;
@@ -68,10 +68,10 @@ class JFormFieldJollyanyImport extends JFormFieldList {
 		  <input type="checkbox" class="custom-control-input" id="template-package" checked>
 		  <label class="custom-control-label" for="template-package"><h5>'.JText::_('JOLLYANY_ACTION_DIALOG_TEMPLATE_INSTALL').'</h5><small class="text-muted">'.JText::_('JOLLYANY_ACTION_DIALOG_TEMPLATE_INSTALL_DESC').'</small></label>
 		</div>
-		<div class="custom-control custom-checkbox mt-3">
-		  <input type="checkbox" class="custom-control-input" id="extension-package" checked>
-		  <label class="custom-control-label" for="extension-package"><h5>'.JText::_('JOLLYANY_ACTION_DIALOG_EXTENSION_INSTALL').'</h5><small class="text-muted">'.JText::_('JOLLYANY_ACTION_DIALOG_EXTENSION_INSTALL_DESC').'</small></label>
-		</div>
+		<hr />
+		<h5>'.JText::_('JOLLYANY_ACTION_DIALOG_EXTENSION_INSTALL').'</h5><small class="text-muted">'.JText::_('JOLLYANY_ACTION_DIALOG_EXTENSION_INSTALL_DESC').'</small>
+		<div class="extensions-container"></div>
+		<hr />
 		<div class="custom-control custom-checkbox mt-3">
 		  <input type="checkbox" class="custom-control-input" id="demo-data-package">
 		  <label class="custom-control-label" for="demo-data-package"><h5>'.JText::_('JOLLYANY_ACTION_DIALOG_DATA_INSTALL').'</h5><small class="text-muted">'.JText::_('JOLLYANY_ACTION_DIALOG_DATA_INSTALL_DESC').'</small></label>

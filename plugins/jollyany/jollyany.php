@@ -217,6 +217,40 @@ class plgSystemJollyany extends JPlugin {
 					echo \json_encode($return);
 					die();
 					break;
+				case 'get_extensions_data':
+					header('Content-Type: application/json');
+					header('Access-Control-Allow-Origin: *');
+					$return = array();
+					try {
+						// Check for request forgeries.
+						if (!JSession::checkToken()) {
+							throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR'));
+						}
+						jimport('jollyany.framework.helper');
+						jimport('jollyany.framework.importer.data');
+						$license    =   JollyanyFrameworkHelper::maybe_unserialize($this->params->get('jollyany_license'));
+						if ( is_object( $license ) && isset( $license->purchase_code ) ) {
+							$install_code          =   $this->app->input->post->get('install_code', '', 'RAW');
+							$templates             =   JollyanyFrameworkDataImport::getData();
+							if (is_array($templates) && isset($templates[$install_code])) {
+								$template          =   $templates[$install_code];
+								$return['data']    =   json_encode($template['extensions']);
+							} else {
+								throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR_INVALID_CODE'));
+							}
+							$return["status"] = "success";
+							$return["code"] = 200;
+						} else {
+							throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR_NO_LICENSE'));
+						}
+					} catch (\Exception $e) {
+						$return["status"] = "error";
+						$return["code"] = $e->getCode();
+						$return["message"] = $e->getMessage();
+					}
+					echo \json_encode($return);
+					die();
+					break;
 				case 'get_package_data':
 					header('Content-Type: application/json');
 					header('Access-Control-Allow-Origin: *');
@@ -230,11 +264,11 @@ class plgSystemJollyany extends JPlugin {
 						jimport('jollyany.framework.importer.data');
 						$license    =   JollyanyFrameworkHelper::maybe_unserialize($this->params->get('jollyany_license'));
 						if ( is_object( $license ) && isset( $license->purchase_code ) ) {
-							$extension_package     =   $this->app->input->post->get('extension-package', 1);
+							$extension_package     =   $this->app->input->post->get('extension-package', array(), 'RAW');
 							$template_package      =   $this->app->input->post->get('template-package', 1);
 							$install_code          =   $this->app->input->post->get('install_code', '', 'RAW');
 
-							if (!$extension_package && !$template_package) throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR_NO_FILE_INSTALL'));
+							if (empty($extension_package) && !$template_package) throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR_NO_FILE_INSTALL'));
 							$templates             =   JollyanyFrameworkDataImport::getData();
 							if (is_array($templates) && isset($templates[$install_code])) {
 								$template          =   $templates[$install_code];
@@ -242,8 +276,12 @@ class plgSystemJollyany extends JPlugin {
 								if ($template_package) {
 									$arr_extensions[]   =   $template['template'];
 								}
-								if ($extension_package) {
-									$arr_extensions     =   array_merge($arr_extensions, $template['extensions']);
+								if (!empty($extension_package)) {
+									$extension  =   array();
+									foreach ($extension_package as $i) {
+										$extension[]    =   $template['extensions'][$i];
+									}
+									$arr_extensions     =   array_merge($arr_extensions, $extension);
 								}
 								$return['data']    =   json_encode($arr_extensions);
 							} else {
