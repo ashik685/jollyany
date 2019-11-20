@@ -10,9 +10,6 @@ Astroid Framework: https://astroidframework.com/
 **Version 1.1.7**
 
     Add option allows admin specify extention update
-    Improve collapsed logo style
-    Improve style for topbar
-    Upload language for v1.1.6
     
 **Version 1.1.6**
 
