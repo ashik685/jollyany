@@ -186,21 +186,13 @@ class plgSystemJollyany extends JPlugin {
 									throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR_QUICKSTART_CAN_NOT_FOUND'));
 								}
 								$packagedb          = json_decode($raw_data, true);
-								$packagedbdetail    = $packagedb['site.sql'];
-								$sqldb      =   array (
-									'site.sql'   =>  array(
-										'dbtype'        => $config->get('dbtype'),
-										'dbtech'        => 'mysql',
-										'dbname'        => $config->get('db'),
-										'sqlfile'       => 'site.sql',
-										'dbhost'        => $config->get('host'),
-										'dbuser'        => $config->get('user'),
-										'dbpass'        => $config->get('password'),
-										'prefix'        => $config->get('dbprefix'),
-										'parts'         => $packagedbdetail['parts']
-									)
-								);
-								JFile::write(JPATH_ROOT.DIRECTORY_SEPARATOR.'installation'.DIRECTORY_SEPARATOR.'sql'.DIRECTORY_SEPARATOR.'databases.json', json_encode($sqldb), true);
+								$packagedb['site.sql']['dbname'] = $config->get('db');
+								$packagedb['site.sql']['dbhost'] = $config->get('host');
+								$packagedb['site.sql']['dbuser'] = $config->get('user');
+								$packagedb['site.sql']['dbpass'] = $config->get('password');
+								$packagedb['site.sql']['prefix'] = $config->get('dbprefix');
+
+								JFile::write(JPATH_ROOT.DIRECTORY_SEPARATOR.'installation'.DIRECTORY_SEPARATOR.'sql'.DIRECTORY_SEPARATOR.'databases.json', json_encode($packagedb), true);
 								$return["package"]  = json_encode($package);
 								$return["url_root"] = JUri::root();
 							}

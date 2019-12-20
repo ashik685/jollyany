@@ -7,6 +7,11 @@ It's extended version of Astroid Framework
 Astroid Framework: https://astroidframework.com/
 
 # Changelogs
+
+**Version 1.1.8**
+
+    Fix error with quickstart install
+
 **Version 1.1.7**
 
     Add option allows admin specify extention update
