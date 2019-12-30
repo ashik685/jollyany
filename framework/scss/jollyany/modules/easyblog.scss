@@ -150,6 +150,12 @@
   .eb-post-meta>div {
     align-items: center;
   }
+  .eb-entry-nav-next {
+    border-color: $border-color;
+  }
+  .eb-section-heading {
+    border-color: $border-color;
+  }
 }
 #eb.eb-nocover {
   margin-top: 1.5rem;

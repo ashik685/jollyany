@@ -64,6 +64,50 @@ class JollyanyFrameworkDataImport {
 				),
 			),
 		),
+		'tz_eventory'      =>  array(
+			// Pack Info
+			'name'        => 'Eventory',
+			'desc'        => 'Festival, Event Joomla Template',
+
+			// Pack Data
+			'thumb'       => '/images/stories/eventory/eventory_590.jpg',
+			'category'    => 'joomla',
+
+			'demo_url'    => 'https://eventory.jollyany.co/',
+			'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/eventory',
+
+			'template'      => array(
+				'name'      =>  'Eventory Template',
+				'type'      =>  'included',
+				'code'      =>  'tz_eventory_joomla',
+				'ext_code'  =>  'tz-eventory-api',
+			),
+
+			'extensions'  => array(
+				array(
+					'name'      =>  'SP Page Builder Pro',
+					'type'      =>  'included',
+					'code'      =>  'tz_extensions',
+					'ext_code'  =>  'sp-page-builder',
+				),
+				array(
+					'name'      =>  'TZ Portfolio',
+					'type'      =>  'url',
+					'url'       =>  'https://github.com/templaza/tz_portfolio_plus/archive/master.zip',
+				),
+				array(
+					'name'      =>  'Hikashop',
+					'type'      =>  'url',
+					'url'       =>  'https://www.hikashop.com/component/updateme/downloadxml/component-hikashop/level-starter/download.zip',
+				),
+				array(
+					'name'      =>  'Unite Slider',
+					'type'      =>  'included',
+					'code'      =>  'tz_extensions',
+					'ext_code'  =>  'unite-slider',
+				),
+			),
+		),
 		'tz_meetup'      =>  array(
 			// Pack Info
 			'name'        => 'Meetup',
@@ -73,7 +117,7 @@ class JollyanyFrameworkDataImport {
 			'thumb'       => '/images/stories/meetup/meetup.jpg',
 			'category'    => 'joomla',
 
-			'demo_url'    => 'http://joomla.templaza.net/meetup/',
+			'demo_url'    => 'https://meetup.jollyany.co/',
 			'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/meetup',
 
 			'template'      => array(
@@ -117,7 +161,7 @@ class JollyanyFrameworkDataImport {
 			'thumb'       => '/images/stories/new_age/new_age_590.jpg',
 			'category'    => 'joomla',
 
-			'demo_url'    => 'http://joomla.templaza.net/new-age/',
+			'demo_url'    => 'https://newage.jollyany.co/',
 			'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/new-age',
 
 			'template'      => array(
@@ -161,7 +205,7 @@ class JollyanyFrameworkDataImport {
 			'thumb'       => '/media/tz_portfolio/article/cache/nish-ii-free-creative-joomla-template-762_S.jpg',
 			'category'    => 'joomla',
 
-			'demo_url'    => 'https://joomla.templaza.net/nish_ii/',
+			'demo_url'    => 'https://nish2.jollyany.co/',
 			'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/nish_ii',
 
 			'template'    => array(
@@ -193,7 +237,7 @@ class JollyanyFrameworkDataImport {
 			'thumb'       => '/media/tz_portfolio/article/cache/fashion-semona-creative-joomla-template-630_S.jpg',
 			'category'    => 'joomla',
 
-			'demo_url'    => 'http://joomla.templaza.net/semona-fashion/',
+			'demo_url'    => 'https://fashion.jollyany.co/',
 			'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/fashion',
 
 			'template'      => array(
@@ -247,7 +291,7 @@ class JollyanyFrameworkDataImport {
 			'thumb'       => '/media/tz_portfolio/article/cache/lawyer-justice-law-firm-joomla-template-713_S.jpg',
 			'category'    => 'joomla',
 
-			'demo_url'    => 'http://joomla.templaza.net/lawyer/',
+			'demo_url'    => 'https://justice.jollyany.co/',
 			'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/lawyer-justice',
 
 			'template'    => array(
@@ -301,7 +345,7 @@ class JollyanyFrameworkDataImport {
 			'thumb'       => '/media/tz_portfolio/article/cache/charity-nonprofit-joomla-template-659_S.jpg',
 			'category'    => 'joomla',
 
-			'demo_url'    => 'http://joomla.templaza.net/charity/',
+			'demo_url'    => 'https://charity.jollyany.co/',
 			'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/charity',
 
 			'template'      => array(
@@ -355,7 +399,7 @@ class JollyanyFrameworkDataImport {
 			'thumb'       => '/media/tz_portfolio/article/cache/foodz-restaurant-joomla-template-577_S.jpg',
 			'category'    => 'joomla',
 
-			'demo_url'    => 'http://joomla.templaza.net/foodz/',
+			'demo_url'    => 'https://foodz.jollyany.co/',
 			'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/foodz',
 
 			'template'      => array(
@@ -409,7 +453,7 @@ class JollyanyFrameworkDataImport {
 			'thumb'       => '/media/tz_portfolio/article/cache/oraz-music-band-joomla-template-769_S.jpg',
 			'category'    => 'joomla',
 
-			'demo_url'    => 'http://joomla.templaza.net/oraz/',
+			'demo_url'    => 'https://oraz.jollyany.co/',
 			'doc_url'     => 'https://www.templaza.com/docs/oraz/',
 
 			'template'      => array(
@@ -458,7 +502,7 @@ class JollyanyFrameworkDataImport {
 			'thumb'       => '/media/tz_portfolio/article/cache/kavin-ii-business-joomla-template-768_S.jpg',
 			'category'    => 'joomla',
 
-			'demo_url'    => 'http://joomla.templaza.net/kavin_ii/',
+			'demo_url'    => 'https://kavin2.jollyany.co/',
 			'doc_url'     => 'https://www.templaza.com/docs/kavin_ii/',
 
 			'template'      => array(
@@ -507,7 +551,7 @@ class JollyanyFrameworkDataImport {
 			'thumb'       => '/media/tz_portfolio/article/cache/dino-creative-joomla-template-770_S.jpg',
 			'category'    => 'joomla',
 
-			'demo_url'    => 'http://joomla.templaza.net/dino/',
+			'demo_url'    => 'https://dino.jollyany.co/',
 			'doc_url'     => 'https://www.templaza.com/docs/dino/',
 
 			'template'      => array(
@@ -544,7 +588,7 @@ class JollyanyFrameworkDataImport {
 			'thumb'       => '/media/tz_portfolio/article/cache/stchrist-church-charity-joomla-template-764_S.jpg',
 			'category'    => 'joomla',
 
-			'demo_url'    => 'http://joomla.templaza.net/stchrist/',
+			'demo_url'    => 'https://stchrist.jollyany.co/',
 			'doc_url'     => 'https://www.templaza.com/docs/stchrist/',
 
 			'template'      => array(
@@ -593,7 +637,7 @@ class JollyanyFrameworkDataImport {
 			'thumb'       => '/media/tz_portfolio/article/cache/construction-building-architect-joomla-template-756_S.jpg',
 			'category'    => 'joomla',
 
-			'demo_url'    => 'http://joomla.templaza.net/construction/',
+			'demo_url'    => 'https://construction.jollyany.co/',
 			'doc_url'     => 'https://www.templaza.com/docs/construction/',
 
 			'template'      => array(

@@ -35,7 +35,12 @@
 }
 .astroid-sidebar-menu {
   li {
-    a {
+    display: flex;
+    flex-wrap: wrap;
+    > ul {
+      width: 100%;
+    }
+    > .nav-item-caret, a {
       padding-left: 0;
       padding-right: 0;
     }

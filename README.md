@@ -8,6 +8,11 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.2.0**
+
+    [fixed bug] Compatible with Astroid 2.3.0 https://github.com/joomdev/Astroid-Framework/releases
+    [new topic] Eventory - Festival, Event Joomla Template
+
 **Version 1.1.8**
 
     Fix error with quickstart install
