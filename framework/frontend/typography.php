@@ -376,7 +376,7 @@ if (trim($topbarType) == 'custom') {
 
 // Footer Font Styles
 $footerType = $template->params->get('footer_typography');
-if (trim($topbarType) == 'custom') {
+if (trim($footerType) == 'custom') {
 	$footer_font = $template->params->get('footer_typography_options');
 	$footer_fontface = str_replace('+', ' ', explode(":", $footer_font->font_face));
 	$footer_style = '#astroid-footer {';

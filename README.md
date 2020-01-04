@@ -8,6 +8,10 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.2.1**
+
+    [fixed bug] Fix issue display footer typography
+
 **Version 1.2.0**
 
     [fixed bug] Compatible with Astroid 2.3.0 https://github.com/joomdev/Astroid-Framework/releases
