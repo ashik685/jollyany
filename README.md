@@ -8,6 +8,10 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.2.2**
+
+    [fixed bug] Fix issue can not download package with Eventory template
+
 **Version 1.2.1**
 
     [fixed bug] Fix issue display footer typography

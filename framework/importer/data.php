@@ -64,7 +64,7 @@ class JollyanyFrameworkDataImport {
 				),
 			),
 		),
-		'tz_eventory'      =>  array(
+		'tz_eventory_joomla'      =>  array(
 			// Pack Info
 			'name'        => 'Eventory',
 			'desc'        => 'Festival, Event Joomla Template',
