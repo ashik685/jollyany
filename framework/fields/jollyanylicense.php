@@ -37,9 +37,10 @@ class JFormFieldJollyanyLicense extends JFormFieldList {
 
     protected function getInput() {
         $html       =   array();
-        $jollyany   =   \JPluginHelper::getPlugin('system', 'jollyany');
-        $params     =   new \JRegistry($jollyany->params);
-        $license    =   JollyanyFrameworkHelper::maybe_unserialize($params->get('jollyany_license'));
+	    $jollyany   =   \JPluginHelper::getPlugin('system', 'jollyany');
+	    $params     =   new \JRegistry($jollyany->params);
+	    $lictext    =   JollyanyFrameworkHelper::getLicense();
+	    $license    =   JollyanyFrameworkHelper::maybe_unserialize($lictext);
         $template   =   $this->getTemplateInfo();
 	    $filePath   =   JPath::clean(JPATH_ROOT.'/templates/'.$template->template.'/templateDetails.xml');
 	    $tmpXml     =   JFactory::getXML($filePath);

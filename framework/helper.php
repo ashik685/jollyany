@@ -259,6 +259,28 @@ class JollyanyFrameworkHelper {
 	}
 
 	/**
+	 * Get license activation
+	 * @return string
+	 */
+	public static function getLicense() {
+		$lictext    =   '';
+		jimport('joomla.filesystem.file');
+		jimport('joomla.filesystem.folder');
+		if (JFolder::exists(JPATH_ROOT.DIRECTORY_SEPARATOR.'media'.DIRECTORY_SEPARATOR.'jollyany'.DIRECTORY_SEPARATOR.'key')) {
+			$key    =   JFolder::files(JPATH_ROOT.DIRECTORY_SEPARATOR.'media'.DIRECTORY_SEPARATOR.'jollyany'.DIRECTORY_SEPARATOR.'key', '.txt', false, true);
+			if (count($key)) {
+				$lictext    =   JFile::read($key[0]);
+			}
+		}
+		if (!$lictext) {
+			$jollyany   =   \JPluginHelper::getPlugin('system', 'jollyany');
+			$params     =   new \JRegistry($jollyany->params);
+			$lictext    =   $params->get('jollyany_license','');
+		}
+		return $lictext;
+	}
+
+	/**
 	 * Get Preset data
 	 * @return array
 	 */

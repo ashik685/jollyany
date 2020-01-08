@@ -42,11 +42,13 @@ class plgSystemJollyany extends JPlugin {
 						$license->supported_until   =   $this->app->input->get('supported_until', '', 'RAW');
 						$license->buyer             =   $this->app->input->get('buyer', '', 'RAW');
 						$license->domain            =   $this->app->input->get('domain', '', 'RAW');
-						$this->params->set('jollyany_license', JollyanyFrameworkHelper::maybe_serialize($license));
-						$jollyany       =   \JPluginHelper::getPlugin('system', 'jollyany');
-						$table          = JTable::getInstance('extension');
-						$table->load($jollyany->id);
-						$table->save(array('params' => $this->params->toString()));
+						jimport('joomla.filesystem.file');
+						jimport('joomla.filesystem.folder');
+						if (JFolder::exists(JPATH_ROOT.DIRECTORY_SEPARATOR.'media'.DIRECTORY_SEPARATOR.'jollyany'.DIRECTORY_SEPARATOR.'key')) {
+							JFolder::delete(JPATH_ROOT.DIRECTORY_SEPARATOR.'media'.DIRECTORY_SEPARATOR.'jollyany'.DIRECTORY_SEPARATOR.'key');
+						}
+						JFile::write(JPATH_ROOT.DIRECTORY_SEPARATOR.'media'.DIRECTORY_SEPARATOR.'jollyany'.DIRECTORY_SEPARATOR.'key'.DIRECTORY_SEPARATOR.'index.html','<!DOCTYPE html><title></title>');
+						JFile::write(JPATH_ROOT.DIRECTORY_SEPARATOR.'media'.DIRECTORY_SEPARATOR.'jollyany'.DIRECTORY_SEPARATOR.'key'.DIRECTORY_SEPARATOR.uniqid('key_').'.txt', JollyanyFrameworkHelper::maybe_serialize($license));
 						echo '<html><head><title>Product Activated!</title><style>.product-activated-window {background: url(media/jollyany/assets/images/success.png) no-repeat center top;background-size: auto;background-size: 40px;padding-top: 50px;margin-top: 30px;text-align: center; }.product-activated-window .about-description {max-width: 400px;margin: 0 auto;margin-bottom: 0px;margin-bottom: 40px; }.product-activated-window .start-using-product {display: block;text-decoration: none;background: #72bf40;color: #fff;font-size: 25px;text-align: center;padding: 20px 10px; }</style></head><body><div class="product-activated-window"><h1>Product Activated!</h1><div class="about-description">Congratulations! <strong>'.$license->buyer.'</strong> has been successfully activated and now you can get latest updates of the template.</div><a href="#" class="start-using-product close-this-window" onclick="window.close();">Start using Jollyany!</a><br><p>You can <a href="#" class="close-this-window" onclick="window.close();">close this window</a> now.</p></div></body></html>';
 					} catch (\Exception $e) {
 					    header('Content-Type: application/json');
@@ -67,11 +69,17 @@ class plgSystemJollyany extends JPlugin {
 							throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR'));
 						}
 						jimport('jollyany.framework.helper');
-						$this->params->set('jollyany_license', '');
-						$jollyany       =   \JPluginHelper::getPlugin('system', 'jollyany');
-						$table          = JTable::getInstance('extension');
-						$table->load($jollyany->id);
-						$table->save(array('params' => $this->params->toString()));
+						if ($this->params->get('jollyany_license')) {
+							$this->params->set('jollyany_license', '');
+							$jollyany       =   \JPluginHelper::getPlugin('system', 'jollyany');
+							$table          = JTable::getInstance('extension');
+							$table->load($jollyany->id);
+							$table->save(array('params' => $this->params->toString()));
+						}
+						jimport('joomla.filesystem.folder');
+						if (JFolder::exists(JPATH_ROOT.DIRECTORY_SEPARATOR.'media'.DIRECTORY_SEPARATOR.'jollyany'.DIRECTORY_SEPARATOR.'key')) {
+							JFolder::delete(JPATH_ROOT.DIRECTORY_SEPARATOR.'media'.DIRECTORY_SEPARATOR.'jollyany'.DIRECTORY_SEPARATOR.'key');
+						}
 						$return["status"] = "success";
 						$return["code"] = 200;
 						$return["data"] = $this->params->get('jollyany_license');
@@ -94,7 +102,8 @@ class plgSystemJollyany extends JPlugin {
 						}
 						jimport('jollyany.framework.helper');
 						jimport('jollyany.framework.importer.data');
-						$license    =   JollyanyFrameworkHelper::maybe_unserialize($this->params->get('jollyany_license'));
+						$lictext    =   JollyanyFrameworkHelper::getLicense();
+						$license    =   JollyanyFrameworkHelper::maybe_unserialize($lictext);
 						if ( is_object( $license ) && isset( $license->purchase_code ) ) {
 							$demo_data_package     =   $this->app->input->post->get('demo-data-package', 0);
 							$install_code          =   $this->app->input->post->get('install_code', '', 'RAW');
@@ -168,7 +177,8 @@ class plgSystemJollyany extends JPlugin {
 						}
 						jimport('jollyany.framework.helper');
 						jimport('jollyany.framework.importer.data');
-						$license    =   JollyanyFrameworkHelper::maybe_unserialize($this->params->get('jollyany_license'));
+						$lictext    =   JollyanyFrameworkHelper::getLicense();
+						$license    =   JollyanyFrameworkHelper::maybe_unserialize($lictext);
 						if ( is_object( $license ) && isset( $license->purchase_code ) ) {
 							$demo_data_package     =   $this->app->input->post->get('demo-data-package', 0);
 							$p_filename            =   $this->app->input->post->get('archive', '', 'RAW');
@@ -220,7 +230,8 @@ class plgSystemJollyany extends JPlugin {
 						}
 						jimport('jollyany.framework.helper');
 						jimport('jollyany.framework.importer.data');
-						$license    =   JollyanyFrameworkHelper::maybe_unserialize($this->params->get('jollyany_license'));
+						$lictext    =   JollyanyFrameworkHelper::getLicense();
+						$license    =   JollyanyFrameworkHelper::maybe_unserialize($lictext);
 						if ( is_object( $license ) && isset( $license->purchase_code ) ) {
 							$install_code          =   $this->app->input->post->get('install_code', '', 'RAW');
 							$templates             =   JollyanyFrameworkDataImport::getData();
@@ -254,7 +265,8 @@ class plgSystemJollyany extends JPlugin {
 						}
 						jimport('jollyany.framework.helper');
 						jimport('jollyany.framework.importer.data');
-						$license    =   JollyanyFrameworkHelper::maybe_unserialize($this->params->get('jollyany_license'));
+						$lictext    =   JollyanyFrameworkHelper::getLicense();
+						$license    =   JollyanyFrameworkHelper::maybe_unserialize($lictext);
 						if ( is_object( $license ) && isset( $license->purchase_code ) ) {
 							$extension_package     =   $this->app->input->post->get('extension-package', array(), 'RAW');
 							$template_package      =   $this->app->input->post->get('template-package', 1);
@@ -302,7 +314,8 @@ class plgSystemJollyany extends JPlugin {
 							throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR'));
 						}
 						jimport('jollyany.framework.helper');
-						$license    =   JollyanyFrameworkHelper::maybe_unserialize($this->params->get('jollyany_license'));
+						$lictext    =   JollyanyFrameworkHelper::getLicense();
+						$license    =   JollyanyFrameworkHelper::maybe_unserialize($lictext);
 						if ( is_object( $license ) && isset( $license->purchase_code ) ) {
 							$extension_package     =   $this->app->input->post->get('extension-package', 1);
 							$template_package      =   $this->app->input->post->get('template-package', 1);
@@ -391,7 +404,8 @@ class plgSystemJollyany extends JPlugin {
 							throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR'));
 						}
 						jimport('jollyany.framework.helper');
-						$license    =   JollyanyFrameworkHelper::maybe_unserialize($this->params->get('jollyany_license'));
+						$lictext    =   JollyanyFrameworkHelper::getLicense();
+						$license    =   JollyanyFrameworkHelper::maybe_unserialize($lictext);
 						if ( is_object( $license ) && isset( $license->purchase_code ) ) {
 							$package               =   json_decode($this->app->input->post->get('package', '', 'RAW'));
 							// Cleanup the install files.

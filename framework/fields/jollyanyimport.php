@@ -29,9 +29,8 @@ class JFormFieldJollyanyImport extends JFormFieldList {
 
 	protected function getInput() {
 		$html       =   array();
-		$jollyany   =   \JPluginHelper::getPlugin('system', 'jollyany');
-		$params     =   new \JRegistry($jollyany->params);
-		$license    =   JollyanyFrameworkHelper::maybe_unserialize($params->get('jollyany_license'));
+		$lictext    =   JollyanyFrameworkHelper::getLicense();
+		$license    =   JollyanyFrameworkHelper::maybe_unserialize($lictext);
 		$activated  =   0;
 		if ( is_object( $license ) && isset( $license->purchase_code ) && isset( $license->supported_until ) && (strtotime( $license->supported_until ) >= time()) ) {
 			$activated  =   1;
