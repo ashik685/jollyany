@@ -8,6 +8,11 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.2.3**
+
+    [fixed bug] Fix issue with padding in sidebar view.
+    [improved] Improve license activation UX.
+
 **Version 1.2.2**
 
     [fixed bug] Fix issue can not download package with Eventory template
