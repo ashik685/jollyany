@@ -8,6 +8,10 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.2.4**
+
+    [fixed bug] Fix issue with active license
+
 **Version 1.2.3**
 
     [fixed bug] Fix issue with padding in sidebar view.
