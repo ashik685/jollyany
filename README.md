@@ -8,6 +8,11 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.2.5**
+
+    [fixed bug] Fix css issue with Joomla Cache
+    [new feature] Post format support in Joomla Blog category
+
 **Version 1.2.4**
 
     [fixed bug] Fix issue with active license
