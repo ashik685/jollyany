@@ -64,6 +64,55 @@ class JollyanyFrameworkDataImport {
 				),
 			),
 		),
+        'tz_everline_joomla'      =>  array(
+            // Pack Info
+            'name'        => 'Everline',
+            'desc'        => 'Wedding Joomla Template',
+
+            // Pack Data
+            'thumb'       => '/images/stories/everline/thumbnail.jpg',
+            'category'    => 'joomla',
+
+            'demo_url'    => 'https://everline.jollyany.co/',
+            'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/everline',
+
+            'template'      => array(
+                'name'      =>  'Everline Template',
+                'type'      =>  'included',
+                'code'      =>  'tz_everline_joomla',
+                'ext_code'  =>  'tz-everline-api',
+            ),
+
+            'extensions'  => array(
+                array(
+                    'name'      =>  'SP Page Builder Pro',
+                    'type'      =>  'included',
+                    'code'      =>  'tz_extensions',
+                    'ext_code'  =>  'sp-page-builder',
+                ),
+                array(
+                    'name'      =>  'TZ Portfolio',
+                    'type'      =>  'url',
+                    'url'       =>  'https://github.com/templaza/tz_portfolio_plus/archive/master.zip',
+                ),
+                array(
+                    'name'      =>  'Hikashop',
+                    'type'      =>  'url',
+                    'url'       =>  'https://www.hikashop.com/component/updateme/downloadxml/component-hikashop/level-starter/download.zip',
+                ),
+                array(
+                    'name'      =>  'Unite Slider',
+                    'type'      =>  'included',
+                    'code'      =>  'tz_extensions',
+                    'ext_code'  =>  'unite-slider',
+                ),
+                array(
+                    'name'      =>  'Acymailing',
+                    'type'      =>  'url',
+                    'url'       =>  'http://www.acyba.com/component/updateme/downloadxml/component-acymailing/level-starter/version-5/download.zip',
+                ),
+            ),
+        ),
 		'tz_eventory_joomla'      =>  array(
 			// Pack Info
 			'name'        => 'Eventory',

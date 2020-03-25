@@ -87,7 +87,7 @@ class JFormFieldJollyanyLicense extends JFormFieldList {
 	        $html[]     =   '<h6 class="card-subtitle mb-2 text-muted">Paid only once</h6>';
 	        $html[]     =   '<h3><small class="text-muted"><del>$826</del></small> <strong>$59</strong></h3>';
 
-	        $html[]     =   '<p class="card-text">If you haven\'t purchased Jollyany, <a href="https://1.envato.market/zODvW" target="_blank"><strong>click here to buy a license</strong></a> and activate template.</p>';
+	        $html[]     =   '<p class="card-text">If you haven\'t purchased Jollyany, <a href="https://1.envato.market/jollyany-multipurpose-joomla-template" target="_blank"><strong>click here to buy a license</strong></a> and activate template.</p>';
 	        $html[]     =   '</div>';
 	        $html[]     =   '<ul class="list-group list-group-flush">';
 	        $html[]     =   '<li class="list-group-item"><i class="fas fa-check"></i>&nbsp;&nbsp;All Jollyany templates</li>';
@@ -100,7 +100,7 @@ class JFormFieldJollyanyLicense extends JFormFieldList {
 	        $html[]     =   '<li class="list-group-item"><i class="fas fa-check"></i>&nbsp;&nbsp;SP Page Builder Pro Included</li>';
 	        $html[]     =   '<li class="list-group-item"><i class="fas fa-check"></i>&nbsp;&nbsp;Unite Slider Pro Included</li>';
 	        $html[]     =   '</ul>';
-	        $html[]     =   '<div class="card-body"><a class="btn btn-primary" href="https://1.envato.market/zODvW" target="_blank"><i class="fas fa-shopping-cart"></i> Click here to buy a License</a></div>';
+	        $html[]     =   '<div class="card-body"><a class="btn btn-primary" href="https://1.envato.market/jollyany-multipurpose-joomla-template" target="_blank"><i class="fas fa-shopping-cart"></i> Click here to buy a License</a></div>';
 	        $html[]     =   '</div>';
 	        $html[]     =   '</div>';
 	        $html[]     =   '<div class="col-12 col-sm-6">';

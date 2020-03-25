@@ -8,6 +8,11 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.2.6**
+
+    [new topic] Everline - Wedding Joomla template
+    [improve] Improve css cache feature
+
 **Version 1.2.5**
 
     [fixed bug] Fix css issue with Joomla Cache
