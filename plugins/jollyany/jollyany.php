@@ -10,7 +10,7 @@ defined('_JEXEC') or die;
 /**
  * Jollyany system plugin
  *
- * @since  1.2.4
+ * @since  1.2.7
  */
 
 class plgSystemJollyany extends JPlugin {
@@ -27,6 +27,54 @@ class plgSystemJollyany extends JPlugin {
 
 		if ($option == 'com_ajax') {
 			switch ($jollyany) {
+                case 'check_domain':
+                    header('Content-Type: application/json');
+                    header('Access-Control-Allow-Origin: *');
+                    $return = array();
+                    try {
+                        $domain     =   JUri::getInstance() -> getHost();
+                        // If is localhost do-not do anything
+                        if ( in_array($domain, array('localhost', '127.0.0.1', '::1')) ) {
+                            throw new \Exception(\JText::_('JOLLYANY_IS_LOCALHOST'), 204);
+                        }
+                        jimport('jollyany.framework.helper');
+                        jimport('jollyany.framework.importer.data');
+                        $lictext    =   JollyanyFrameworkHelper::getLicense();
+                        $license    =   JollyanyFrameworkHelper::maybe_unserialize($lictext);
+                        if ( is_object( $license ) && isset( $license->purchase_code ) ) {
+                            $ch = curl_init();
+                            curl_setopt($ch, CURLOPT_URL, JollyanyFrameworkDataImport::getApiUrl());
+                            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+                            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+                            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+                            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+                            curl_setopt($ch, CURLOPT_POSTREDIR, 3);
+
+                            curl_setopt($ch, CURLOPT_POST, 1);
+                            curl_setopt($ch, CURLOPT_POSTFIELDS,
+                                "option=com_tz_envato_license&task=licenses.verify&purchase_code=".$license->purchase_code."&domain=".$domain);
+
+                            $data     =   json_decode(curl_exec ($ch));
+
+                            curl_close ($ch);
+                            if (isset($data->error)) {
+                                throw new \Exception($data->error_description, 403);
+                            }
+                            $return["data"]     =   $data;
+                            $return["status"]   =   "success";
+                            $return["code"]     =   200;
+                        } else {
+                            throw new \Exception(\JText::_('JOLLYANY_FREE_LICENSE'), 204);
+                        }
+                    } catch (\Exception $e) {
+                        $return["status"] = "error";
+                        $return["code"] = $e->getCode();
+                        $return["message"] = $e->getMessage();
+                    }
+                    echo \json_encode($return);
+                    die();
+                    break;
 				case 'activation' :
 					header('Access-Control-Allow-Origin: *');
 					$return = array();
@@ -121,6 +169,7 @@ class plgSystemJollyany extends JPlugin {
 								'task'          => 'download.package',
 								'produce'       => $install_code,
 								'purchase_code' => $license->purchase_code,
+                                'domain'        => JUri::getInstance() -> getHost(),
 								'step'          => $step,
 								'type'          => 'quickstart-api'
 							);
@@ -532,6 +581,7 @@ class plgSystemJollyany extends JPlugin {
 			'task'          => 'download.package',
 			'produce'       => $extension->code,
 			'purchase_code' => $license->purchase_code,
+			'domain'        => JUri::getInstance() -> getHost(),
 			'step'          => $step,
 			'type'          => $extension->ext_code
 		);

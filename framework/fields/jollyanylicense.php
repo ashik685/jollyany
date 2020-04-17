@@ -53,7 +53,7 @@ class JFormFieldJollyanyLicense extends JFormFieldList {
         $html[]     =   '<div class="card-text">'.JText::_(preg_replace('/tz_/i', 'tpl_', $template->template).'_desc').'</div>';
         $html[]     =   '</div></div>';
         $html[]     =   '</div>';
-        $html[]     =   '<div class="col-12 col-xl-8 col-xxl-7">';
+        $html[]     =   '<div class="col-12 col-xl-8 col-xxl-7 license-info">';
 	    $html[]     =   '<div class="card"><div class="card-body">';
         if ( is_object( $license ) && isset( $license->purchase_code ) ) {
 	        $license->support_expired    = strtotime( $license->supported_until ) < time();

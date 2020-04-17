@@ -32,7 +32,7 @@ class JFormFieldJollyanyImport extends JFormFieldList {
 		$lictext    =   JollyanyFrameworkHelper::getLicense();
 		$license    =   JollyanyFrameworkHelper::maybe_unserialize($lictext);
 		$activated  =   0;
-		if ( is_object( $license ) && isset( $license->purchase_code ) && isset( $license->supported_until ) && (strtotime( $license->supported_until ) >= time()) ) {
+		if ( is_object( $license ) && isset( $license->purchase_code ) ) {
 			$activated  =   1;
 		}
 

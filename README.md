@@ -8,6 +8,11 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.2.7**
+
+    [term of use] Verify only one valid domain can import demo style. (Valid domain includes wwww.domain.com, subdomain.domain.com & domain.com)
+    [term of use] Old customer can download/update/import demo style in lifetime even their support license is expired.
+
 **Version 1.2.6**
 
     [new topic] Everline - Wedding Joomla template

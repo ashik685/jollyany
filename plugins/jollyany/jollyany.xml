@@ -2,8 +2,8 @@
 <extension version="3.1" type="plugin" method="upgrade" group="system">
    <name>Jollyany Plugin</name>
    <author>TemPlaza</author>
-   <creationDate>September 2019</creationDate>
-   <version>1.2.4</version>
+   <creationDate>April 2020</creationDate>
+   <version>1.2.7</version>
    <url>https://www.jollyany.co</url>
    <copyright>Copyright (C) 2019 TemPlaza, Jsc. All rights reserved.</copyright>
    <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
