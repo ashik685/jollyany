@@ -8,6 +8,10 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.2.8**
+
+    [fixed bug] Fix bug language in Jollyany Framework
+
 **Version 1.2.7**
 
     [term of use] Verify only one valid domain can import demo style. (Valid domain includes wwww.domain.com, subdomain.domain.com & domain.com)
