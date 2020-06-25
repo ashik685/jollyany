@@ -379,9 +379,9 @@ $footerType = $template->params->get('footer_typography');
 if (trim($footerType) == 'custom') {
 	$footer_font = $template->params->get('footer_typography_options');
 	$footer_fontface = str_replace('+', ' ', explode(":", $footer_font->font_face));
-	$footer_style = '#astroid-footer {';
+	$footer_style = '.astroid-footer {';
 
-	$footer_style = ['desktop' => '#astroid-footer {', 'tablet' => '#astroid-footer {', 'mobile' => '#astroid-footer {'];
+	$footer_style = ['desktop' => '.astroid-footer {', 'tablet' => '.astroid-footer {', 'mobile' => '.astroid-footer {'];
 
 	if (isset($footer_fontface[0]) && !empty($footer_fontface[0])) {
 		if (isset($libraryFonts[$footer_fontface[0]])) {

@@ -8,6 +8,12 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.2.9**
+
+    [new topic] Musika - Music Band Joomla Template
+    [improve] Improve Hikashop CSS
+    [improve] Improve Languages
+    
 **Version 1.2.8**
 
     [fixed bug] Fix bug language in Jollyany Framework

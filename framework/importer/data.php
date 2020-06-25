@@ -10,6 +10,50 @@ defined('_JEXEC') or die;
 class JollyanyFrameworkDataImport {
 	protected static $api  =   'https://www.templaza.com';
 	protected static $data = array(
+        'tz_musika'      =>  array(
+            // Pack Info
+            'name'        => 'Musika',
+            'desc'        => 'Music Band Joomla Template',
+
+            // Pack Data
+            'thumb'       => '/images/stories/musika/thumbnail.jpg',
+            'category'    => 'joomla',
+
+            'demo_url'    => 'https://musika.jollyany.co/',
+            'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/musika',
+
+            'template'      => array(
+                'name'      =>  'Musika Template',
+                'type'      =>  'included',
+                'code'      =>  'tz_musika',
+                'ext_code'  =>  'tz-musika-api',
+            ),
+
+            'extensions'  => array(
+                array(
+                    'name'      =>  'SP Page Builder Pro',
+                    'type'      =>  'included',
+                    'code'      =>  'tz_extensions',
+                    'ext_code'  =>  'sp-page-builder',
+                ),
+                array(
+                    'name'      =>  'TZ Portfolio',
+                    'type'      =>  'url',
+                    'url'       =>  'https://github.com/templaza/tz_portfolio_plus/archive/master.zip',
+                ),
+                array(
+                    'name'      =>  'Hikashop',
+                    'type'      =>  'url',
+                    'url'       =>  'https://www.hikashop.com/component/updateme/downloadxml/component-hikashop/level-starter/download.zip',
+                ),
+                array(
+                    'name'      =>  'Unite Slider',
+                    'type'      =>  'included',
+                    'code'      =>  'tz_extensions',
+                    'ext_code'  =>  'unite-slider',
+                ),
+            ),
+        ),
 		'tz_jollyany'   =>  array(
 			// Pack Info
 			'name'        => 'Jollyany Classic',
