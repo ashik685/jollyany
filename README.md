@@ -8,6 +8,12 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.3.0**
+
+    [new topic] Profiler - Personal Blog Joomla Template
+    [fixbug] Fix issue with Typography responsive
+    [improve] Improve Languages
+    
 **Version 1.2.9**
 
     [new topic] Musika - Music Band Joomla Template

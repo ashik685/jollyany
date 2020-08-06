@@ -76,10 +76,43 @@ a.jollyany-login-icon {
   }
 }
 blockquote {
+  font-size: 1.5em;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.5;
+  text-transform: none;
+  color: #000000;
+  position: relative;
+  border-left: none;
+  padding: 20px 68px 35px;
   p {
     &:last-child {
       margin-bottom: 0;
       margin-top: 0;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    padding: 10px 0 25px 40px;
+    font-size: 1.1em;
+  }
+  &:before {
+    content: "\f10d";
+    font-family: "Font Awesome 5 Free";
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+    font-weight: 900;
+    color: $colorMain;
+    position: absolute;
+    top: 15px;
+    left: 1px;
+    font-size: 1.3em;
+    @media screen and (max-width: 768px) {
+      top: 10px;
     }
   }
 }

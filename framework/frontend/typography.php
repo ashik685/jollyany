@@ -62,6 +62,7 @@ foreach ($typography as $typo) {
          if (is_object($typoParams->font_size)) {
             // if responsive
             foreach (['desktop', 'tablet', 'mobile'] as $device) {
+
                $font_size_unit = isset($typoParams->font_size_unit->{$device}) ? $typoParams->font_size_unit->{$device} : 'em';
                $styles[$device] .= 'font-size: ' . $typoParams->font_size->{$device} . $font_size_unit . ';';
             }
@@ -453,6 +454,164 @@ if (trim($footerType) == 'custom') {
 	$footer_style['mobile'] .= '}';
 }
 
+// Article detail Font Styles
+$articleType = $template->params->get('article_typography');
+if (trim($articleType) == 'custom') {
+    $article_font = $template->params->get('article_typography_options');
+    $article_fontface = str_replace('+', ' ', explode(":", $article_font->font_face));
+    $article_style = '.articleBody, #eb .eb-entry-article, .tpItemPage {';
+
+    $article_style = ['desktop' => '.articleBody, #eb .eb-entry-article, .tpItemPage > #tz-portfolio-template-body {', 'tablet' => '.articleBody, #eb .eb-entry-article, .tpItemPage > #tz-portfolio-template-body {', 'mobile' => '.articleBody, #eb .eb-entry-article, .tpItemPage > #tz-portfolio-template-body {'];
+
+    if (isset($article_fontface[0]) && !empty($article_fontface[0])) {
+        if (isset($libraryFonts[$article_fontface[0]])) {
+            $article_style['desktop'] .= 'font-family: ' . $libraryFonts[$article_fontface[0]]['name'] . ',' . $article_font->alt_font_face . ';';
+            AstroidFrameworkHelper::loadLibraryFont($libraryFonts[$article_fontface[0]], $template);
+        } else {
+            $article_style['desktop'] .= 'font-family: ' . $article_fontface[0] . ', ' . $article_font->alt_font_face . ';';
+            if (!AstroidFrameworkHelper::isSystemFont($article_fontface[0])) {
+                array_push($ast_fontfamily, $article_font->font_face);
+            }
+        }
+    }
+
+    if (isset($article_font->line_height) && !empty($article_font->line_height)) {
+        if (is_object($article_font->line_height)) {
+            // if responsive
+            foreach (['desktop', 'tablet', 'mobile'] as $device) {
+                $font_size_unit = isset($article_font->font_size_unit->{$device}) ? $article_font->font_size_unit->{$device} : 'em';
+                $article_style[$device] .= 'font-size: ' . $article_font->font_size->{$device} . $font_size_unit . ';';
+            }
+        } else {
+            // if old type value
+            $font_size_unit = isset($article_font->font_size_unit) ? $article_font->font_size_unit : 'em';
+            $article_style['desktop'] .= 'font-size: ' . $article_font->font_size . $font_size_unit . ';';
+        }
+    }
+
+    if (isset($article_font->font_color) && !empty($article_font->font_color)) {
+        $article_style['desktop'] .= 'color: ' . $article_font->font_color . ';';
+    }
+
+    if (isset($article_font->letter_spacing) && !empty($article_font->letter_spacing)) {
+        if (is_object($article_font->letter_spacing)) {
+            // if responsive
+            foreach (['desktop', 'tablet', 'mobile'] as $device) {
+                $letter_spacing_unit = isset($article_font->letter_spacing_unit->{$device}) ? $article_font->letter_spacing_unit->{$device} : 'em';
+                $article_style[$device] .= 'letter-spacing: ' . $article_font->letter_spacing->{$device} . $letter_spacing_unit . ';';
+            }
+        } else {
+            // if old type value
+            $letter_spacing_unit = isset($article_font->letter_spacing_unit) ? $article_font->letter_spacing_unit : 'em';
+            $article_style['desktop'] .= 'letter-spacing: ' . $article_font->letter_spacing . $letter_spacing_unit . ';';
+        }
+    }
+
+    if (isset($article_font->font_weight) && !empty($article_font->font_weight)) {
+        $article_style['desktop'] .= 'font-weight: ' . $article_font->font_weight . ';';
+    }
+
+    if (isset($article_font->line_height) && !empty($article_font->line_height)) {
+        if (is_object($article_font->line_height)) {
+            // if responsive
+            foreach (['desktop', 'tablet', 'mobile'] as $device) {
+                $line_height_unit = isset($article_font->line_height_unit->{$device}) ? $article_font->line_height_unit->{$device} : 'em';
+                $article_style[$device] .= 'line-height: ' . $article_font->line_height->{$device} . $line_height_unit . ';';
+            }
+        } else {
+            // if old type value
+            $line_height_unit = isset($article_font->line_height_unit) ? $article_font->line_height_unit : 'em';
+            $article_style['desktop'] .= 'line-height: ' . $article_font->line_height . $line_height_unit . ';';
+        }
+    }
+
+    if (isset($article_font->text_transform) && !empty($article_font->text_transform)) {
+        $article_style['desktop'] .= 'text-transform: ' . $article_font->text_transform . ';';
+    }
+    $article_style['desktop'] .= '}';
+    $article_style['tablet'] .= '}';
+    $article_style['mobile'] .= '}';
+}
+
+// Header Font Styles
+$articleType = $template->params->get('header_typography');
+if (trim($articleType) == 'custom') {
+    $header_font = $template->params->get('header_typography_options');
+    $header_fontface = str_replace('+', ' ', explode(":", $header_font->font_face));
+    $header_style = '.astroid-header {';
+
+    $header_style = ['desktop' => '.astroid-header {', 'tablet' => '.astroid-header {', 'mobile' => '.astroid-header {'];
+
+    if (isset($header_fontface[0]) && !empty($header_fontface[0])) {
+        if (isset($libraryFonts[$header_fontface[0]])) {
+            $header_style['desktop'] .= 'font-family: ' . $libraryFonts[$header_fontface[0]]['name'] . ',' . $header_font->alt_font_face . ';';
+            AstroidFrameworkHelper::loadLibraryFont($libraryFonts[$header_fontface[0]], $template);
+        } else {
+            $header_style['desktop'] .= 'font-family: ' . $header_fontface[0] . ', ' . $header_font->alt_font_face . ';';
+            if (!AstroidFrameworkHelper::isSystemFont($header_fontface[0])) {
+                array_push($ast_fontfamily, $header_font->font_face);
+            }
+        }
+    }
+
+    if (isset($header_font->line_height) && !empty($header_font->line_height)) {
+        if (is_object($header_font->line_height)) {
+            // if responsive
+            foreach (['desktop', 'tablet', 'mobile'] as $device) {
+                $font_size_unit = isset($header_font->font_size_unit->{$device}) ? $header_font->font_size_unit->{$device} : 'em';
+                $header_style[$device] .= 'font-size: ' . $header_font->font_size->{$device} . $font_size_unit . ';';
+            }
+        } else {
+            // if old type value
+            $font_size_unit = isset($header_font->font_size_unit) ? $header_font->font_size_unit : 'em';
+            $header_style['desktop'] .= 'font-size: ' . $header_font->font_size . $font_size_unit . ';';
+        }
+    }
+
+    if (isset($header_font->font_color) && !empty($header_font->font_color)) {
+        $header_style['desktop'] .= 'color: ' . $header_font->font_color . ';';
+    }
+
+    if (isset($header_font->letter_spacing) && !empty($header_font->letter_spacing)) {
+        if (is_object($header_font->letter_spacing)) {
+            // if responsive
+            foreach (['desktop', 'tablet', 'mobile'] as $device) {
+                $letter_spacing_unit = isset($header_font->letter_spacing_unit->{$device}) ? $header_font->letter_spacing_unit->{$device} : 'em';
+                $header_style[$device] .= 'letter-spacing: ' . $header_font->letter_spacing->{$device} . $letter_spacing_unit . ';';
+            }
+        } else {
+            // if old type value
+            $letter_spacing_unit = isset($header_font->letter_spacing_unit) ? $header_font->letter_spacing_unit : 'em';
+            $header_style['desktop'] .= 'letter-spacing: ' . $header_font->letter_spacing . $letter_spacing_unit . ';';
+        }
+    }
+
+    if (isset($header_font->font_weight) && !empty($header_font->font_weight)) {
+        $header_style['desktop'] .= 'font-weight: ' . $header_font->font_weight . ';';
+    }
+
+    if (isset($header_font->line_height) && !empty($header_font->line_height)) {
+        if (is_object($header_font->line_height)) {
+            // if responsive
+            foreach (['desktop', 'tablet', 'mobile'] as $device) {
+                $line_height_unit = isset($header_font->line_height_unit->{$device}) ? $header_font->line_height_unit->{$device} : 'em';
+                $header_style[$device] .= 'line-height: ' . $header_font->line_height->{$device} . $line_height_unit . ';';
+            }
+        } else {
+            // if old type value
+            $line_height_unit = isset($header_font->line_height_unit) ? $header_font->line_height_unit : 'em';
+            $header_style['desktop'] .= 'line-height: ' . $header_font->line_height . $line_height_unit . ';';
+        }
+    }
+
+    if (isset($header_font->text_transform) && !empty($header_font->text_transform)) {
+        $header_style['desktop'] .= 'text-transform: ' . $header_font->text_transform . ';';
+    }
+    $header_style['desktop'] .= '}';
+    $header_style['tablet'] .= '}';
+    $header_style['mobile'] .= '}';
+}
+
 // styles for tablet
 $tabletCSS = '';
 if (!empty($styles['tablet'])) {
@@ -469,6 +628,12 @@ if (isset($top_bar_style['tablet'])) {
 }
 if (isset($footer_style['tablet'])) {
 	$tabletCSS .= $footer_style['tablet'];
+}
+if (isset($article_style['tablet'])) {
+    $tabletCSS .= $article_style['tablet'];
+}
+if (isset($header_style['tablet'])) {
+    $tabletCSS .= $header_style['tablet'];
 }
 
 // styles for mobile
@@ -488,6 +653,12 @@ if (isset($top_bar_style['mobile'])) {
 if (isset($footer_style['mobile'])) {
 	$mobileCSS .= $footer_style['mobile'];
 }
+if (isset($article_style['mobile'])) {
+    $mobileCSS .= $article_style['mobile'];
+}
+if (isset($header_style['mobile'])) {
+    $mobileCSS .= $header_style['mobile'];
+}
 
 // Let's add combined style sheet here
 $ast_fontfamily_list = implode("|", str_replace(" ", "+", array_unique($ast_fontfamily)));
@@ -502,6 +673,8 @@ if ($in_head) {
 	$template->addStyleDeclaration($submenu_style['desktop']);
 	$template->addStyleDeclaration($footer_style['desktop']);
 	$template->addStyleDeclaration($top_bar_style['desktop']);
+	$template->addStyleDeclaration($article_style['desktop']);
+	$template->addStyleDeclaration($header_style['desktop']);
 
 	$template->addStyleDeclaration($tabletCSS, 'tablet');
 	$template->addStyleDeclaration($mobileCSS, 'mobile');
@@ -515,6 +688,8 @@ if ($in_head) {
    echo $submenu_style['desktop'];
    echo $top_bar_style['desktop'];
    echo $footer_style['desktop'];
+   echo $article_style['desktop'];
+   echo $header_style['desktop'];
    echo $tabletCSS;
    echo $mobileCSS;
    echo "</style>";

@@ -119,15 +119,17 @@
       > li {
         display: inline-block;
         margin-right: 1rem;
+        margin-bottom: 1rem;
         text-align: center;
         a {
           color: $colorBlack;
+          display: block;
           &:hover {
             color: $colorMain;
           }
         }
         &:last-child {
-          margin-right: 0;
+          margin: 0;
         }
       }
     }
@@ -139,8 +141,19 @@
       color: $white !important;
     }
   }
-  ul li.sppb-social-share-dribbble a {
-    background-color: #e84f89;
+  ul {
+    li.sppb-social-share-dribbble a {
+      background-color: #e84f89;
+    }
+    li.sppb-social-share-instagram a {
+      background-color: #e40036;
+    }
+    li.sppb-social-share-youtube a {
+      background-color: #fe0000;
+    }
+    li.sppb-social-share-vimeo a {
+      background-color: #1bb6ec;
+    }
   }
 }
 .sppb-progress {

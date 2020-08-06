@@ -2,7 +2,7 @@
 /**
  * @package   Jollyany Framework
  * @author    TemPlaza https://www.templaza.com
- * @copyright Copyright (C) 2009 - 2019 TemPlaza.
+ * @copyright Copyright (C) 2009 - 2020 TemPlaza.
  * @license https://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or Later
  */
 defined('_JEXEC') or die;
@@ -10,6 +10,44 @@ defined('_JEXEC') or die;
 class JollyanyFrameworkDataImport {
 	protected static $api  =   'https://www.templaza.com';
 	protected static $data = array(
+        'tz_profiler'      =>  array(
+            // Pack Info
+            'name'        => 'Profiler',
+            'desc'        => 'Personal Blog Joomla Template',
+
+            // Pack Data
+            'thumb'       => '/images/stories/profiler/thumbnail.jpg',
+            'category'    => 'joomla',
+
+            'demo_url'    => 'https://profiler.jollyany.co/',
+            'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/profiler',
+
+            'template'      => array(
+                'name'      =>  'Profiler Template',
+                'type'      =>  'included',
+                'code'      =>  'profiler-joomla-template',
+                'ext_code'  =>  'tz-profiler-api',
+            ),
+
+            'extensions'  => array(
+                array(
+                    'name'      =>  'SP Page Builder Pro',
+                    'type'      =>  'included',
+                    'code'      =>  'tz_extensions',
+                    'ext_code'  =>  'sp-page-builder',
+                ),
+                array(
+                    'name'      =>  'TZ Portfolio',
+                    'type'      =>  'url',
+                    'url'       =>  'https://github.com/templaza/tz_portfolio_plus/archive/master.zip',
+                ),
+                array(
+                    'name'      =>  'Acymailing',
+                    'type'      =>  'url',
+                    'url'       =>  'http://www.acyba.com/component/updateme/downloadxml/component-acymailing/level-starter/version-5/download.zip',
+                ),
+            ),
+        ),
         'tz_musika'      =>  array(
             // Pack Info
             'name'        => 'Musika',
