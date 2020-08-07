@@ -91,7 +91,7 @@ class JFormFieldJollyanyLicense extends JFormFieldList {
 	        $html[]     =   '</div>';
 	        $html[]     =   '<ul class="list-group list-group-flush">';
 	        $html[]     =   '<li class="list-group-item"><i class="fas fa-check"></i>&nbsp;&nbsp;All Jollyany templates</li>';
-	        $html[]     =   '<li class="list-group-item"><i class="fas fa-check"></i>&nbsp;&nbsp;16+ News Templates</li>';
+	        $html[]     =   '<li class="list-group-item"><i class="fas fa-check"></i>&nbsp;&nbsp;17+ News Templates</li>';
 	        $html[]     =   '<li class="list-group-item"><i class="fas fa-check"></i>&nbsp;&nbsp;6 Months Support</li>';
 	        $html[]     =   '<li class="list-group-item"><i class="fas fa-check"></i>&nbsp;&nbsp;Lifetime Usage</li>';
 	        $html[]     =   '<li class="list-group-item"><i class="fas fa-check"></i>&nbsp;&nbsp;Lifetime Update in 1 valid domain</li>';
