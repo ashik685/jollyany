@@ -8,6 +8,10 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.3.2**
+
+    [fixbug] Fix issue with Typography in old template
+
 **Version 1.3.1**
 
     [new topic] Profiler - Personal Blog Joomla Template

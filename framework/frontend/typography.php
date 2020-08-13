@@ -29,7 +29,7 @@ if (isset($params) && !empty($params) && !$params['in_head']) {
 
 $typography = array('body', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6');
 
-$styles = $menu_style = $submenu_style = $top_bar_style = $footer_style = ['desktop' => '', 'tablet' => '', 'mobile' => ''];
+$styles = $menu_style = $submenu_style = $top_bar_style = $footer_style = $header_style = $article_style = ['desktop' => '', 'tablet' => '', 'mobile' => ''];
 
 $libraryFonts = AstroidFrameworkHelper::getUploadedFonts($template->template);
 
@@ -671,10 +671,18 @@ if ($in_head) {
 	$template->addStyleDeclaration($styles['desktop']);
 	$template->addStyleDeclaration($menu_style['desktop']);
 	$template->addStyleDeclaration($submenu_style['desktop']);
-	$template->addStyleDeclaration($footer_style['desktop']);
-	$template->addStyleDeclaration($top_bar_style['desktop']);
-	$template->addStyleDeclaration($article_style['desktop']);
-	$template->addStyleDeclaration($header_style['desktop']);
+    if (isset($footer_style['desktop'])) {
+        $template->addStyleDeclaration($footer_style['desktop']);
+    }
+    if (isset($top_bar_style['desktop'])) {
+        $template->addStyleDeclaration($top_bar_style['desktop']);
+    }
+    if (isset($header_style['desktop'])) {
+        $template->addStyleDeclaration($header_style['desktop']);
+    }
+    if (isset($article_style['desktop'])) {
+        $template->addStyleDeclaration($article_style['desktop']);
+    }
 
 	$template->addStyleDeclaration($tabletCSS, 'tablet');
 	$template->addStyleDeclaration($mobileCSS, 'mobile');
