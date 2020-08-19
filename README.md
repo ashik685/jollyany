@@ -8,6 +8,10 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.3.3**
+
+    [improve] Move Owl.Carousel and Fancybox to Library
+
 **Version 1.3.2**
 
     [fixbug] Fix issue with Typography in old template
