@@ -9,7 +9,7 @@ defined('JPATH_BASE') or die;
 
 JLoader::register('ModulesHelper', JPATH_ADMINISTRATOR . '/components/com_modules/helpers/modules.php');
 
-jimport('astroid.framework.helper');
+use Astroid\Helper;
 
 JFormHelper::loadFieldClass('list');
 
@@ -87,7 +87,7 @@ class JFormFieldJollyanyModulesID extends JFormFieldList {
       //$attr .= $this->element['ngHide'] ? ' ng-hide="' . AstroidFrameworkHelper::replaceRelationshipOperators($this->element['ngHide']) . '"' : '';
       $attr .= ' ng-model="' . $this->fieldname . '"';
       $attr .= ' data-fieldname="' . $this->fieldname . '"';
-      $attr .= $this->element['ngRequired'] ? ' ng-required="' . AstroidFrameworkHelper::replaceRelationshipOperators($this->element['ngRequired']) . '"' : '';
+      $attr .= $this->element['ngRequired'] ? ' ng-required="' . Helper::replaceRelationshipOperators($this->element['ngRequired']) . '"' : '';
 
       if (isset($this->element['astroid-content-layout']) && !empty($this->element['astroid-content-layout'])) {
          $attr .= ' data-astroid-content-layout="' . $this->element['astroid-content-layout'] . '"';

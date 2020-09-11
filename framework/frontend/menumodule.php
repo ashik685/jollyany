@@ -11,9 +11,12 @@
 // No direct access.
 defined('_JEXEC') or die;
 extract($displayData);
-$menu                   = $template->params->get('menu_option', 0);
-$menu_module            = $template->params->get('menu_module', 0);
-$whendisplay            = $template->params->get('when_menu_module_display', '');
+$template = Astroid\Framework::getTemplate();
+$params = $template->getParams();
+$document = Astroid\Framework::getDocument();
+$menu                   = $params->get('menu_option', 0);
+$menu_module            = $params->get('menu_module', 0);
+$whendisplay            = $params->get('when_menu_module_display', '');
 
 if ($whendisplay) {
 	$user       =   \JFactory::getUser();
@@ -27,5 +30,5 @@ if (!$menu || !$menu_module) {
 ?>
 
 <div class="jollyany-menu">
-	<?php echo $template->_loadid($menu_module); ?>
+	<?php echo $document->loadModule("{loadmoduleid $menu_module}"); ?>
 </div>

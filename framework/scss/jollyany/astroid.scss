@@ -10,3 +10,11 @@
     }
   }
 }
+.article-review {
+  padding: 0 15px 15px;
+}
+.item-page {
+  .article-review {
+    border: 1px solid $border-color;
+  }
+}

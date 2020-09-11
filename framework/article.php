@@ -6,12 +6,10 @@
  * @license https://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or Later
  */
 defined('_JEXEC') or die;
-jimport('astroid.framework.constants');
+jimport('astroid.framework.article');
 jimport('jollyany.framework.jollyany');
 
 class JollyanyFrameworkArticle extends AstroidFrameworkArticle {
-	protected $params;
-
 	function __construct($article, $categoryView = false) {
 		parent::__construct($article, $categoryView);
 		$this->template = JollyanyFramework::getTemplate();

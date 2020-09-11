@@ -11,6 +11,7 @@ use Joomla\Archive\Archive;
 \JLoader::import('joomla.filesystem.folder');
 \JLoader::import('joomla.filesystem.path');
 jimport('astroid.framework.helper');
+use Astroid\Framework;
 class JollyanyFrameworkHelper extends AstroidFrameworkHelper {
 
 	/**
@@ -286,8 +287,7 @@ class JollyanyFrameworkHelper extends AstroidFrameworkHelper {
 	 * @return array
 	 */
 	public static function getPresets() {
-		jimport('astroid.framework.astroid');
-		$template   =   AstroidFramework::getTemplate();
+		$template   =   Framework::getTemplate();
 		$presets_path = JPATH_SITE . "/templates/{$template->template}/astroid/presets/";
 
 		if (!file_exists($presets_path)) {

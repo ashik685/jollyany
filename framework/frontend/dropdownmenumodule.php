@@ -11,9 +11,11 @@
 // No direct access.
 defined('_JEXEC') or die;
 extract($displayData);
-$menu                   = $template->params->get('dropdownmenu_option', 0);
-$menu_module            = $template->params->get('dropdownmenu_module', 0);
-$whendisplay            = $template->params->get('when_dropdownmenu_module_display', '');
+$params = Astroid\Framework::getTemplate()->getParams();
+$document = Astroid\Framework::getDocument();
+$menu                   = $params->get('dropdownmenu_option', 0);
+$menu_module            = $params->get('dropdownmenu_module', 0);
+$whendisplay            = $params->get('when_dropdownmenu_module_display', '');
 
 if ($whendisplay) {
 	$user       =   \JFactory::getUser();
@@ -29,8 +31,8 @@ $title  =   $module && isset($module->title) && $module->title ? $module->title 
 ?>
 
 	<div class="jollyany-dropdownmenu">
-		<a href="#" id="jollyany-dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user mr-1"></i> <?php echo $title; ?></a>
+		<a href="#" id="jollyany-dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bars mr-1"></i> <?php echo $title; ?></a>
         <div class="dropdown-menu" aria-labelledby="jollyany-dropdownmenu">
-	        <?php echo $template->_loadid($menu_module); ?>
+	        <?php echo $document->loadModule("{loadmoduleid $menu_module}"); ?>
         </div>
 	</div>

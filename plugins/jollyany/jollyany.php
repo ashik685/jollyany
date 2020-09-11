@@ -7,6 +7,9 @@
  */
 defined('_JEXEC') or die;
 
+JLoader::registerNamespace('Astroid', JPATH_LIBRARIES . '/astroid/framework/library/astroid', false, false, 'psr4');
+use Astroid\Framework;
+
 /**
  * Jollyany system plugin
  *
@@ -15,7 +18,15 @@ defined('_JEXEC') or die;
 
 class plgSystemJollyany extends JPlugin {
 	protected $app;
-
+    public function onAfterDispatch()
+    {
+        Astroid\Framework::getDocument()->addLayoutPath(JPATH_LIBRARIES . '/jollyany/framework/frontend/');
+    }
+    public function onBeforeRender()
+    {
+        $document = Astroid\Framework::getDocument(); // Astroid Document
+        $document->addScript('libraries/jollyany/framework/assets/js/jollyany.js', 'body');
+    }
 	public function onAfterInitialise() {
 		// load jollyany language
 		$lang = JFactory::getLanguage();
@@ -492,7 +503,7 @@ class plgSystemJollyany extends JPlugin {
                         $file           = $this->app->input->post->get('name', '', 'RAW');
                         $json           = file_get_contents($presets_path.$file.'.json');
                         if (!$json) {
-                            throw new \Exception(\JText::_('JOLLYANY_LOAD_PRESET_FILE_ERROR'));
+                            throw new \Exception(\JText::_('JOLLYANY_LOAD_PRESET_FILE_ERROR').': '.$presets_path.$file.'.json');
                         }
                         $data = \json_decode($json, true);
                         if (!isset($data['preset']) || empty($data['preset'])) {
@@ -620,8 +631,9 @@ class plgSystemJollyany extends JPlugin {
 
 	// Astroid Admin Events
 	public function onBeforeAstroidAdminRender(&$template) {
-//		AstroidFramework::addStyleSheet(); // to add css link
-		AstroidFramework::addStyleDeclaration('
+        $document = Framework::getDocument();
+//		$document->addStyleSheet(); // to add css link
+        $document->addStyleDeclaration('
 		.jollyany_placeholder {
 			width: 100%;
 			min-height: 200px;
@@ -655,10 +667,10 @@ class plgSystemJollyany extends JPlugin {
 	    }
 	    }
 		'); // to add css script
-//		AstroidFramework::addScript(); // to add js file in head
-		AstroidFramework::addScript(JUri::root().'media/jollyany/assets/js/jollyany.min.js', "body"); // to add js file in body
-//		AstroidFramework::addScriptDeclaration(); // to add js script in head
-//		AstroidFramework::addScriptDeclaration($js, "body"); // to add js script in body
+//		$document->addScript(); // to add js file in head
+        $document->addScript(JUri::root().'media/jollyany/assets/js/jollyany.min.js', "body"); // to add js file in body
+		$document->addScriptDeclaration('var TZ_TEMPLATE_NAME = \''.$template->template.'\';'); // to add js script in head
+//		$document->addScriptDeclaration($js, "body"); // to add js script in body
 	}
 
 	// Astroid Admin Events

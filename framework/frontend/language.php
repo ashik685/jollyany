@@ -11,12 +11,15 @@
 // No direct access.
 defined('_JEXEC') or die;
 extract($displayData);
-$language               = $template->params->get('language_mod', 0);
-$language_module        = $template->params->get('language_module', 0);
+$template = Astroid\Framework::getTemplate();
+$params = $template->getParams();
+$document = Astroid\Framework::getDocument();
+$language               = $params->get('language_mod', 0);
+$language_module        = $params->get('language_module', 0);
 if (!$language || !$language_module) {
 	return;
 }
 ?>
 	<div class="jollyany-language">
-		<?php echo $template->_loadid($language_module); ?>
+		<?php echo $document->loadModule("{loadmoduleid $language_module}"); ?>
 	</div>
