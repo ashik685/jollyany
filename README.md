@@ -8,6 +8,12 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.4.0**
+
+    [fixbug] Fix error with Astroid 2.4.2
+    [improve] Compatible with latest function of Astroid 2.4.2
+    [improve] Remove unnecessary files
+
 **Version 1.3.3**
 
     [improve] Move Owl.Carousel and Fancybox to Library
