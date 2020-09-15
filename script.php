@@ -13,6 +13,15 @@ class jollyanyInstallerScript {
 
     /**
      *
+     * Function to run when installing the component
+     * @return void
+     */
+    public function install($parent) {
+        $this->removeUnnecessary();
+    }
+
+    /**
+     *
      * Function to run when updating the component
      * @return void
      */
