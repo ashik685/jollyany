@@ -8,6 +8,10 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.4.1**
+
+    [improve] Improve Jollyany options
+
 **Version 1.4.0**
 
     [fixbug] Fix error with Astroid 2.4.2

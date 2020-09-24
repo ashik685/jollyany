@@ -29,3 +29,23 @@ if ($header_absolute == '1') {
 	});
 	', 'body');
 }
+
+// Color option
+$header_heading_color = $params->get('header_heading_color', '');
+$header_link_color = $params->get('header_link_color', '');
+$header_link_hover_color = $params->get('header_link_hover_color', '');
+$topbar_bordercolor = $params->get('topbar_bordercolor', '');
+$header_styles = [];
+if (!empty($header_heading_color)) {
+    $header_styles[] = 'header h1,header h2,header h3,header h4,header h5,header h6{ color: ' . $header_heading_color . ';}';
+}
+if (!empty($header_link_color)) {
+    $header_styles[] = 'body header a{ color: ' . $header_link_color . ';}';
+}
+if (!empty($header_link_hover_color)) {
+    $header_styles[] = 'body header a:hover{ color: ' . $header_link_hover_color . ';}';
+}
+if (!empty($topbar_bordercolor)) {
+    $header_styles[]    = '.top-bar, .top-bar .astroid-contact-info > span,.top-bar .astroid-social-icons > li,.top-bar .jollyany-hikacart, .top-bar .jollyany-login, .top-bar .border-right {border-color:'.$topbar_bordercolor.';}';
+}
+$document->addStyledeclaration(implode('', $header_styles));
