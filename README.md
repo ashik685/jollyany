@@ -8,6 +8,10 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.4.2**
+
+    [fixbug] Fix error load Preset
+
 **Version 1.4.1**
 
     [improve] Improve Jollyany options
