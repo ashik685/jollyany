@@ -2,13 +2,14 @@
 /**
  * @package   Jollyany Framework
  * @author    TemPlaza https://www.templaza.com
- * @copyright Copyright (C) 2009 - 2019 TemPlaza.
+ * @copyright Copyright (C) 2009 - 2020 TemPlaza.
  * @license https://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or Later
  */
 defined('_JEXEC') or die;
 
 JLoader::registerNamespace('Astroid', JPATH_LIBRARIES . '/astroid/framework/library/astroid', false, false, 'psr4');
 use Astroid\Framework;
+use Astroid\Helper;
 
 /**
  * Jollyany system plugin
@@ -683,4 +684,85 @@ class plgSystemJollyany extends JPlugin {
 			$form->loadFile($fname, false);
 		}
 	}
+
+    public function onContentPrepareForm($form, $data) {
+        $pluginParams = Helper::getPluginParams();
+        $lib_dir = 'libraries/jollyany';
+        Helper::loadLanguage('jollyany');
+        $frontendVisibility = $pluginParams->get('frontend_tabs_visibility', 1);
+
+        \JForm::addFormPath(JPATH_SITE . '/' . $lib_dir . '/framework/forms');
+
+        if ($form->getName() == 'com_content.article' && ((Framework::isSite() && $frontendVisibility) || Framework::isAdmin())) {
+            $form->loadFile('article', false);
+        }
+
+        if ($form->getName() == 'com_categories.categorycom_content' && ((Framework::isSite() && $frontendVisibility) || Framework::isAdmin())) {
+            $form->loadFile('category', false);
+        }
+    }
+
+    public function onContentBeforeSave($context, $table, $isNew) {
+        // Check we are handling the frontend edit form.
+        if ($context == 'com_content.article')
+        {
+            $db     =   JFactory::getDbo();
+            $results = $db->setQuery('SHOW TABLES')->loadColumn();
+            $prefix = $db->getPrefix();
+            if (!array_search($prefix.'jollyany_course_data',$results,true)) {
+                $db->setQuery('CREATE TABLE IF NOT EXISTS `#__jollyany_course_data` (
+                                      `id` int(11) NOT NULL AUTO_INCREMENT,
+                                      `cid` int(11) NOT NULL,
+                                      `data` longtext NOT NULL DEFAULT \'\',
+                                      PRIMARY KEY (`id`)
+                                    ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;');
+                $db->execute();
+            }
+
+            $table->attribs                 =   json_decode($table->attribs, true);
+            $table->jollyany_course_data    =   $table->attribs['jollyany_course_lessons'];
+            $table->attribs['jollyany_course_lessons']  =   '';
+            $table->attribs                 =   json_encode($table->attribs);
+            return true;
+        }
+    }
+
+    public function onContentAfterSave($context, $table, $isNew) {
+        if ($context == 'com_content.article') {
+            $db     =   JFactory::getDbo();
+            $data   =   json_encode($table->jollyany_course_data);
+            $db->setQuery('SELECT * FROM #__jollyany_course_data WHERE cid='.$table->id);
+            if ($db->loadResult()) {
+                $db->setQuery('UPDATE #__jollyany_course_data SET `data`='.$db->quote($data).' WHERE cid='.$table->id)->execute();
+            } else {
+                $db->setQuery('INSERT INTO #__jollyany_course_data(`cid`,`data`) VALUES ('.$table->id.','.$db->quote($data).')')->execute();
+            }
+            return true;
+        }
+    }
+
+    public function onContentPrepareData($context, $data)
+    {
+        if ($context == 'com_content.article') {
+            $db     =   JFactory::getDbo();
+            $db->setQuery('SELECT * FROM #__jollyany_course_data WHERE cid='.$data->id);
+            $course   =   $db->loadObject();
+            if ($course) {
+                $data->attribs['jollyany_course_lessons'] = $course->data;
+            }
+            return true;
+        }
+    }
+
+    public function onContentPrepare($context, &$row, &$params, $page = 0) {
+        if ($context == 'com_content.article') {
+            $db     =   JFactory::getDbo();
+            $db->setQuery('SELECT * FROM #__jollyany_course_data WHERE cid='.$row->id);
+            $course   =   $db->loadObject();
+            if ($course) {
+                $params->set('jollyany_course_lessons',json_decode($course->data,true));
+            }
+            return true;
+        }
+    }
 }

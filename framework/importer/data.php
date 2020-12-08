@@ -10,6 +10,44 @@ defined('_JEXEC') or die;
 class JollyanyFrameworkDataImport {
 	protected static $api  =   'https://www.templaza.com';
 	protected static $data = array(
+        'tz_educab'      =>  array(
+            // Pack Info
+            'name'        => 'Educab',
+            'desc'        => 'University Education Joomla Template',
+
+            // Pack Data
+            'thumb'       => '/images/stories/educab/thumbnail.jpg',
+            'category'    => 'joomla',
+
+            'demo_url'    => 'https://educab.jollyany.co/',
+            'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/educab',
+
+            'template'      => array(
+                'name'      =>  'Educab Template',
+                'type'      =>  'included',
+                'code'      =>  'tz_educab',
+                'ext_code'  =>  'tz-educab-api',
+            ),
+
+            'extensions'  => array(
+                array(
+                    'name'      =>  'SP Page Builder Pro',
+                    'type'      =>  'included',
+                    'code'      =>  'tz_extensions',
+                    'ext_code'  =>  'sp-page-builder',
+                ),
+                array(
+                    'name'      =>  'TZ Portfolio',
+                    'type'      =>  'url',
+                    'url'       =>  'https://github.com/templaza/tz_portfolio_plus/archive/master.zip',
+                ),
+                array(
+                    'name'      =>  'Acymailing',
+                    'type'      =>  'url',
+                    'url'       =>  'http://www.acyba.com/component/updateme/downloadxml/component-acymailing/level-starter/version-5/download.zip',
+                ),
+            ),
+        ),
         'tz_profiler'      =>  array(
             // Pack Info
             'name'        => 'Profiler',

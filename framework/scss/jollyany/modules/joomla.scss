@@ -15,6 +15,13 @@
     }
   }
 }
+.article-info {
+  > dd {
+    &.article-post-type {
+      padding-right: 0;
+    }
+  }
+}
 .author-info {
   p {
     margin-bottom: 0;
@@ -81,7 +88,7 @@ blockquote {
   font-weight: 400;
   line-height: 1.5;
   text-transform: none;
-  color: #000000;
+  color: lighten($colorMain, 10%);
   position: relative;
   border-left: none;
   padding: 20px 68px 35px;
@@ -110,9 +117,93 @@ blockquote {
     position: absolute;
     top: 15px;
     left: 1px;
-    font-size: 1.3em;
+    font-size: 2.4rem;
     @media screen and (max-width: 768px) {
       top: 10px;
+    }
+  }
+}
+.article-body {
+  .tab-content {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  .lesson-section-title {
+    margin-bottom: 1rem;
+  }
+  .lesson-title {
+    i {
+      margin-right: 0.6rem;
+    }
+  }
+  .lesson-option {
+    text-align: right;
+    color: #8dadc3;
+    a {
+      color: #8dadc3;
+      &:hover {
+        color: $colorMain;
+      }
+    }
+    span {
+      color: #8dadc3;
+      margin: 0 20px;
+    }
+  }
+  .event-information {
+    padding: 30px;
+    border: 1px solid $border-color;
+    background-color: #eeeeee;
+    margin-bottom: 1rem;
+    .event_googlemaps {
+      margin-bottom: 2rem;
+    }
+    .event-info {
+      border-top: 1px solid $border-color;
+      padding-top: 25px;
+    }
+    .time-count-down, .call-to-action {
+      margin-bottom: 25px;
+    }
+  }
+  .event_googlemaps {
+    margin-bottom: 2rem;
+  }
+}
+.article-body, .blog {
+  .event-information {
+    .event-countdown {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .time-count-down {
+      font-size: 40px;
+      font-weight: bolder;
+      line-height: 1.2;
+    }
+    .count-down-intro {
+      font-size: 16px;
+      font-weight: normal;
+    }
+    .event-info {
+      div {
+        margin-top: 5px;
+        margin-bottom: 5px;
+      }
+      i {
+        min-width: 30px;
+      }
+    }
+  }
+}
+.blog {
+  .event-information {
+    .time-count-down {
+      margin-bottom: 15px;
+    }
+    .event-info {
+      margin-bottom: 1rem;
     }
   }
 }

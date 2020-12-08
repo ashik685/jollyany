@@ -8,6 +8,13 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.4.5**
+
+    [new topic] Educab - University Education Joomla Template
+    [new feature] Course System Manager
+    [new feature] Event System Manager
+    [improve] Remove unnecessary files
+
 **Version 1.4.2**
 
     [fixbug] Fix error load Preset

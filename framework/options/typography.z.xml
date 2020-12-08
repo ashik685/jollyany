@@ -6,6 +6,7 @@
          <field type="astroidgroup" name="article_typography_group" title="TPL_JOLLYANY_TYPOGRAPHY_ARTICLE" description="TPL_JOLLYANY_TYPOGRAPHY_ARTICLE_DESC" />
          <field type="astroidgroup" name="top_bar_typography_group" title="TPL_ASTROID_TYPOGRAPHY_TOP_BAR" description="TPL_ASTROID_TYPOGRAPHY_TOP_BAR_DESC" />
          <field type="astroidgroup" name="footer_typography_group" title="TPL_JOLLYANY_TYPOGRAPHY_FOOTER" description="TPL_JOLLYANY_TYPOGRAPHY_FOOTER_DESC" />
+         <field type="astroidgroup" name="button_typography_group" title="TPL_JOLLYANY_TYPOGRAPHY_BUTTON" description="TPL_JOLLYANY_TYPOGRAPHY_BUTTON_DESC" />
 
          <!-- Article Typography Options -->
          <field astroidgroup="article_typography_group" description="TPL_ASTROID_TYPOGRAPHY_OPTION_DESC" name="article_typography" type="astroidradio" default="inherit" label="TPL_ASTROID_TYPOGRAPHY_OPTIONS_LABEL">
@@ -38,6 +39,15 @@
          </field>
 
          <field astroidgroup="footer_typography_group" ngShow="footer_typography=='custom'" name="footer_typography_options" type="astroidtypography" font-style-picker="false" font-face="Arial, Helvetica, sans-serif" alt-font-face="Arial, Helvetica, sans-serif" font-color="#000" font-size="0.88" font-unit="em" letter-spacing="0" line-height="1" font-weight="400" text-transform="none"></field>
+
+         <!-- Top Bar Typography Options -->
+         <field astroidgroup="button_typography_group" description="TPL_ASTROID_TYPOGRAPHY_OPTION_DESC" name="button_typography" type="astroidradio" default="inherit" label="TPL_ASTROID_TYPOGRAPHY_OPTIONS_LABEL">
+            <option value="inherit">JGLOBAL_INHERIT</option>
+            <option value="custom">TPL_ASTROID_OPTIONS_CUSTOM</option>
+         </field>
+
+         <field astroidgroup="button_typography_group" ngShow="button_typography=='custom'" name="button_typography_options" type="astroidtypography" font-style-picker="false" font-face="Arial, Helvetica, sans-serif" alt-font-face="Arial, Helvetica, sans-serif" font-color="#000" font-size="0.7" font-unit="em" letter-spacing="0" line-height="1" font-weight="500" text-transform="none"></field>
+
       </fieldset>
    </fields>
 </form>

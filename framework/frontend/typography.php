@@ -30,7 +30,7 @@ if (trim($topbarType) == 'custom') {
 $footerType = $params->get('footer_typography');
 if (trim($footerType) == 'custom') {
     $typography     = $params->get('footer_typography_options');
-    $selector       = '.astroid-footer';
+    $selector       = '.astroid-footer, .astroid-footer-section, .jollyany-bottom-section';
     Helper\Style::renderTypography($selector, $typography);
 }
 
@@ -47,5 +47,13 @@ $headerType = $params->get('header_typography');
 if (trim($headerType) == 'custom') {
     $typography     = $params->get('header_typography_options');
     $selector       = '.astroid-header-section, .astroid-sidebar-header';
+    Helper\Style::renderTypography($selector, $typography);
+}
+
+// Button Font Styles
+$buttonType = $params->get('button_typography');
+if (trim($buttonType) == 'custom') {
+    $typography     = $params->get('button_typography_options');
+    $selector       = 'button, [type="button"], [type="reset"], [type="submit"], .sppb-btn, .btn';
     Helper\Style::renderTypography($selector, $typography);
 }
