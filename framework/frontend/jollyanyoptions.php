@@ -31,21 +31,29 @@ if ($header_absolute == '1') {
 }
 
 // Color option
+$body_heading_color = $params->get('body_heading_color', '');
 $header_heading_color = $params->get('header_heading_color', '');
 $header_link_color = $params->get('header_link_color', '');
 $header_link_hover_color = $params->get('header_link_hover_color', '');
 $topbar_bordercolor = $params->get('topbar_bordercolor', '');
-$header_styles = [];
+$sticky_off_canvas_button_color = $params->get('sticky_off_canvas_button_color', '');
+$styles = [];
+if (!empty($body_heading_color)) {
+    $styles[] = 'h1,h2,h3,h4,h5,h6{ color: ' . $body_heading_color . ';}';
+}
 if (!empty($header_heading_color)) {
-    $header_styles[] = 'header h1,header h2,header h3,header h4,header h5,header h6{ color: ' . $header_heading_color . ';}';
+    $styles[] = 'header h1,header h2,header h3,header h4,header h5,header h6{ color: ' . $header_heading_color . ';}';
 }
 if (!empty($header_link_color)) {
-    $header_styles[] = 'body header a{ color: ' . $header_link_color . ';}';
+    $styles[] = 'body header a{ color: ' . $header_link_color . ';}';
 }
 if (!empty($header_link_hover_color)) {
-    $header_styles[] = 'body header a:hover{ color: ' . $header_link_hover_color . ';}';
+    $styles[] = 'body header a:hover{ color: ' . $header_link_hover_color . ';}';
 }
 if (!empty($topbar_bordercolor)) {
-    $header_styles[]    = '.top-bar, .top-bar .astroid-contact-info > span,.top-bar .astroid-social-icons > li,.top-bar .jollyany-hikacart, .top-bar .jollyany-login, .top-bar .border-right {border-color:'.$topbar_bordercolor.';}';
+    $styles[]    = '.top-bar, .top-bar .astroid-contact-info > span,.top-bar .astroid-social-icons > li,.top-bar .jollyany-hikacart, .top-bar .jollyany-login, .top-bar .border-right {border-color:'.$topbar_bordercolor.';}';
 }
-$document->addStyledeclaration(implode('', $header_styles));
+if (!empty($sticky_off_canvas_button_color)) {
+    $styles[]    = '#astroid-sticky-header .header-offcanvas-trigger.burger-menu-button .inner, #astroid-sticky-header .header-offcanvas-trigger.burger-menu-button .inner::before, #astroid-sticky-header .header-offcanvas-trigger.burger-menu-button .inner::after {background-color:'.$sticky_off_canvas_button_color.';}';
+}
+$document->addStyledeclaration(implode('', $styles));

@@ -704,21 +704,8 @@ class plgSystemJollyany extends JPlugin {
 
     public function onContentBeforeSave($context, $table, $isNew) {
         // Check we are handling the frontend edit form.
-        if ($context == 'com_content.article')
+        if ($context == 'com_content.article' && $this->checkCourseDB())
         {
-            $db     =   JFactory::getDbo();
-            $results = $db->setQuery('SHOW TABLES')->loadColumn();
-            $prefix = $db->getPrefix();
-            if (!array_search($prefix.'jollyany_course_data',$results,true)) {
-                $db->setQuery('CREATE TABLE IF NOT EXISTS `#__jollyany_course_data` (
-                                      `id` int(11) NOT NULL AUTO_INCREMENT,
-                                      `cid` int(11) NOT NULL,
-                                      `data` longtext NOT NULL DEFAULT \'\',
-                                      PRIMARY KEY (`id`)
-                                    ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;');
-                $db->execute();
-            }
-
             $table->attribs                 =   json_decode($table->attribs, true);
             $table->jollyany_course_data    =   $table->attribs['jollyany_course_lessons'];
             $table->attribs['jollyany_course_lessons']  =   '';
@@ -728,7 +715,7 @@ class plgSystemJollyany extends JPlugin {
     }
 
     public function onContentAfterSave($context, $table, $isNew) {
-        if ($context == 'com_content.article') {
+        if ($context == 'com_content.article' && $this->checkCourseDB()) {
             $db     =   JFactory::getDbo();
             $data   =   json_encode($table->jollyany_course_data);
             $db->setQuery('SELECT * FROM #__jollyany_course_data WHERE cid='.$table->id);
@@ -743,7 +730,7 @@ class plgSystemJollyany extends JPlugin {
 
     public function onContentPrepareData($context, $data)
     {
-        if ($context == 'com_content.article') {
+        if ($context == 'com_content.article' && $this->checkCourseDB()) {
             $db     =   JFactory::getDbo();
             $db->setQuery('SELECT * FROM #__jollyany_course_data WHERE cid='.$data->id);
             $course   =   $db->loadObject();
@@ -755,7 +742,7 @@ class plgSystemJollyany extends JPlugin {
     }
 
     public function onContentPrepare($context, &$row, &$params, $page = 0) {
-        if ($context == 'com_content.article') {
+        if ($context == 'com_content.article' && $this->checkCourseDB()) {
             $db     =   JFactory::getDbo();
             $db->setQuery('SELECT * FROM #__jollyany_course_data WHERE cid='.$row->id);
             $course   =   $db->loadObject();
@@ -764,5 +751,27 @@ class plgSystemJollyany extends JPlugin {
             }
             return true;
         }
+    }
+
+    private function checkCourseDB () {
+        $db     =   JFactory::getDbo();
+        $results = $db->setQuery('SHOW TABLES')->loadColumn();
+        $prefix = $db->getPrefix();
+        $courseDB   =   true;
+        if (!array_search($prefix.'jollyany_course_data',$results,true)) {
+            $courseDB = $this->createCourseDB();
+        }
+        return $courseDB;
+    }
+
+    private function createCourseDB () {
+        $db     =   JFactory::getDbo();
+        $db->setQuery('CREATE TABLE IF NOT EXISTS `#__jollyany_course_data` (
+                                      `id` int(11) NOT NULL AUTO_INCREMENT,
+                                      `cid` int(11) NOT NULL,
+                                      `data` longtext NOT NULL DEFAULT \'\',
+                                      PRIMARY KEY (`id`)
+                                    ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;');
+        return $db->execute();
     }
 }

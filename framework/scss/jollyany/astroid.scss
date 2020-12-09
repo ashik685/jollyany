@@ -1,5 +1,17 @@
 @import "header";
 @import "layouts";
+@media (min-width: 1430px){
+  .container {
+    max-width: 1370px;
+  }
+  .sppb-row-container {
+    width: 1370px;
+    max-width: 1370px;
+  }
+  .astroid-layout.astroid-layout-boxed .astroid-wrapper {
+    max-width: 1400px;
+  }
+}
 .author-wrap {
   .author-social-links {
     a {

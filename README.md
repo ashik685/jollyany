@@ -8,12 +8,15 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
-**Version 1.4.5**
+**Version 1.4.6**
 
     [new topic] Educab - University Education Joomla Template
     [new feature] Course System Manager
     [new feature] Event System Manager
     [improve] Remove unnecessary files
+    [improve] Improve max-width to 1370
+    [fixbug] Fixed issue Heading Color in version 1.4.0
+    [fixbug] Fixed issue max-width of SP Page Builder 3.7.7
 
 **Version 1.4.2**
 
