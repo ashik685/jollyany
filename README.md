@@ -8,6 +8,10 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.4.7**
+
+    [fixbug] Fixed issue load countdown js
+
 **Version 1.4.6**
 
     [new topic] Educab - University Education Joomla Template
