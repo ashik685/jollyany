@@ -8,6 +8,11 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.4.8**
+
+    [fixbug] Fixed issue save preset
+    [improve] Add logo template in admin-panel
+
 **Version 1.4.7**
 
     [fixbug] Fixed issue load countdown js

@@ -71,6 +71,7 @@ class JFormFieldJollyanyPreset extends JFormFieldList {
 		$html[]     =   '<div class="form-group"><label for="jollyany-preset-name">Title</label><input type="text" name="jollyany-preset-name" class="form-control" id="jollyany-preset-name" placeholder="Name of Preset"></div>';
 		$html[]     =   '<div class="form-group"><label for="jollyany-preset-desc">Description</label><textarea class="form-control" name="jollyany-preset-desc" id="jollyany-preset-desc" rows="3"></textarea></div>';
 		$html[]     =   '<input type="hidden" name="jollyany-preset" id="jollyany-preset" rows="3">';
+		$html[]     =   '<input type="hidden" name="jollyany-template" id="jollyany-template" rows="3">';
 		$html[]     =   '<a href="#" class="btn btn-primary" id="jollyany-save-preset">'.JText::_('JOLLYANY_SAVE_PRESET').'</a>';
 		$html[]     =   '</div></div>';
 		$html[]     =   '</div>';
