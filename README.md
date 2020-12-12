@@ -8,6 +8,10 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.4.9**
+
+    [fixbug] Submenu color in sidebar mode
+
 **Version 1.4.8**
 
     [fixbug] Fixed issue save preset

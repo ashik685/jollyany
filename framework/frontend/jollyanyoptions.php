@@ -31,13 +31,14 @@ if ($header_absolute == '1') {
 }
 
 // Color option
+$styles = [];
 $body_heading_color = $params->get('body_heading_color', '');
 $header_heading_color = $params->get('header_heading_color', '');
 $header_link_color = $params->get('header_link_color', '');
 $header_link_hover_color = $params->get('header_link_hover_color', '');
 $topbar_bordercolor = $params->get('topbar_bordercolor', '');
 $sticky_off_canvas_button_color = $params->get('sticky_off_canvas_button_color', '');
-$styles = [];
+
 if (!empty($body_heading_color)) {
     $styles[] = 'h1,h2,h3,h4,h5,h6{ color: ' . $body_heading_color . ';}';
 }
@@ -56,4 +57,24 @@ if (!empty($topbar_bordercolor)) {
 if (!empty($sticky_off_canvas_button_color)) {
     $styles[]    = '#astroid-sticky-header .header-offcanvas-trigger.burger-menu-button .inner, #astroid-sticky-header .header-offcanvas-trigger.burger-menu-button .inner::before, #astroid-sticky-header .header-offcanvas-trigger.burger-menu-button .inner::after {background-color:'.$sticky_off_canvas_button_color.';}';
 }
+
+// Color Menu Options
+$dropdown_link_color = $params->get('dropdown_link_color', '');
+$dropdown_menu_link_hover_color = $params->get('dropdown_menu_link_hover_color', '');
+$dropdown_menu_active_bg_color = $params->get('dropdown_menu_active_bg_color', '');
+$dropdown_bg_color = $params->get('dropdown_bg_color', '');
+
+if (!empty($dropdown_link_color)) {
+    $styles[]    = '.astroid-sidebar-menu .nav-item-submenu a.item-link-component {color:'.$dropdown_link_color.';}';
+}
+if (!empty($dropdown_menu_link_hover_color)) {
+    $styles[]    = '.astroid-sidebar-menu .nav-item-submenu a.item-link-component:hover {color:'.$dropdown_menu_link_hover_color.';}';
+}
+if (!empty($dropdown_menu_active_bg_color)) {
+    $styles[]    = '.astroid-sidebar-menu .nav-item-submenu a.item-link-component.active {color:'.$dropdown_menu_active_bg_color.';}';
+}
+if (!empty($dropdown_bg_color)) {
+    $styles[]    = '.astroid-sidebar-menu .navbar-subnav {background-color:'.$dropdown_bg_color.';}';
+}
+
 $document->addStyledeclaration(implode('', $styles));
