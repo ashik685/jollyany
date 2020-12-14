@@ -14,7 +14,7 @@ use Astroid\Helper;
 /**
  * Jollyany system plugin
  *
- * @since  1.2.7
+ * @since  1.5.0
  */
 
 class plgSystemJollyany extends JPlugin {
@@ -736,7 +736,7 @@ class plgSystemJollyany extends JPlugin {
 
     public function onContentPrepareData($context, $data)
     {
-        if ($context == 'com_content.article' && $this->checkCourseDB()) {
+        if ($context == 'com_content.article' && $this->checkCourseDB() && $data->id) {
             $db     =   JFactory::getDbo();
             $db->setQuery('SELECT * FROM #__jollyany_course_data WHERE cid='.$data->id);
             $course   =   $db->loadObject();
