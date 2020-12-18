@@ -1,9 +1,9 @@
 // Colors
-$border-main-color              : #5bc0de;
+$border-main-color              : $colorMain;
 $nav-text-color                 : #bbbbbb;
 $nav-background-color           : #f9f9f9;
-$nav-active-text-color          : #ffffff;
-$nav-active-background-color    : #5bc0de;
+$nav-active-background-color    : $colorMain;
+$nav-active-text-color          : a11y-color(#ffffff, $nav-active-background-color);
 $nav-disabled-text-color        : #eeeeee;
 
 .st-theme-brick {
