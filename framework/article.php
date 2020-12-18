@@ -31,20 +31,32 @@ class JollyanyFrameworkArticle extends AstroidFrameworkArticle {
         echo $this->renderEventData();
         // Todo Not that elegant would be nice to group the params
         $useDefList = ($this->article->params->get('show_modify_date') || $this->article->params->get('show_publish_date') || $this->article->params->get('show_create_date') || $this->article->params->get('show_hits') || $this->article->params->get('show_category') || $this->article->params->get('show_parent_category') || $this->article->params->get('show_author') || $assocParam || $this->template->params->get('astroid_readtime', 1));
-        if (($this->categoryParams->get('course_category_data','') || ($this->categoryParams->get('course_category_data','') === "" && $this->template->params->get('course_category_data',''))) && (is_array($lessons) && count($lessons))) : ?>
-            <ul class="nav nav-tabs" id="courseTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link active" id="lesson-tab" data-toggle="tab" href="#lessons" role="tab" aria-controls="lessons" aria-selected="true"><?php echo JText::_('JOLLYANY_COURSE_OPTIONS_TITLE_BASIC_LABEL') ?></a>
+        if (($this->categoryParams->get('course_category_data','') || ($this->categoryParams->get('course_category_data','') === "" && $this->template->params->get('course_category_data',''))) && (is_array($lessons) && count($lessons))) :
+            $document = Framework::getDocument();
+            $document->addScript('libraries/jollyany/framework/assets/js/vendor/jquery.smartTab.min.js');
+            $tabid  =   uniqid('courseTab_');
+            $document->addScriptDeclaration('
+            jQuery(document).ready(function(){
+              jQuery(\'#'.$tabid.'\').smartTab({
+                theme: \''.$this->categoryParams->get('course_theme','default').'\'
+              });
+            });
+            ');
+            ?>
+        <div id="<?php echo $tabid; ?>">
+            <ul class="nav">
+                <li>
+                    <a class="nav-link" href="#lessons"><?php echo JText::_('JOLLYANY_COURSE_OPTIONS_TITLE_BASIC_LABEL') ?></a>
                 </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="false"><?php echo JText::_('JGLOBAL_DESCRIPTION') ?></a>
+                <li>
+                    <a class="nav-link" href="#description"><?php echo JText::_('JGLOBAL_DESCRIPTION') ?></a>
                 </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false"><?php echo JText::_('JOLLYANY_LESSON_CONTACT') ?></a>
+                <li>
+                    <a class="nav-link" href="#contact"><?php echo JText::_('JOLLYANY_LESSON_CONTACT') ?></a>
                 </li>
             </ul>
-            <div class="tab-content" id="courseTabContent">
-                <div class="tab-pane fade show active" id="lessons" role="tabpanel" aria-labelledby="home-tab">
+            <div class="tab-content">
+                <div class="tab-pane" id="lessons" role="tabpanel">
                     <?php
                     $opened_flag    =   false;
                     foreach ($lessons as $lesson) {
@@ -65,7 +77,7 @@ class JollyanyFrameworkArticle extends AstroidFrameworkArticle {
                     echo '</tbody></table>';
                     ?>
                 </div>
-                <div class="tab-pane fade" id="description" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="tab-pane" id="description" role="tabpanel">
                     <?php if (!$this->print) : ?>
                         <?php if ($canEdit || $this->article->params->get('show_print_icon') || $this->article->params->get('show_email_icon')) : ?>
                             <?php echo JLayoutHelper::render('joomla.content.icons', array('params' => $this->article->params, 'item' => $this->article, 'print' => false)); ?>
@@ -79,7 +91,7 @@ class JollyanyFrameworkArticle extends AstroidFrameworkArticle {
                     <?php endif; ?>
                     <?php echo $this->article->text; ?>
                 </div>
-                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                <div class="tab-pane" id="contact" role="tabpanel">
                     <?php
                     $contact_course_link    =   $this->categoryParams->get('course_category_contact_link','');
                     if (!$contact_course_link) {
@@ -93,6 +105,7 @@ class JollyanyFrameworkArticle extends AstroidFrameworkArticle {
                     ?>
                 </div>
             </div>
+        </div>
         <?php else: ?>
             <?php echo $this->article->text; ?>
         <?php endif;

@@ -8,6 +8,10 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.5.1**
+
+    [improve] Improve style of Course Tab
+
 **Version 1.5.0**
 
     [fixbug] Fix error 500 when new Content article
