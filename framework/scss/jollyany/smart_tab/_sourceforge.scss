@@ -1,11 +1,11 @@
 // Colors
 $border-main-color              : #e1e4e8;
 $nav-text-color                 : #586069;
-$nav-text-hover-color           : #09c;
+$nav-text-hover-color           : $colorMain;
 $nav-background-color           : #fff;
-$nav-active-text-color          : #0cf;
+$nav-active-text-color          : lighten($colorMain,10%);
 $nav-active-background-color    : #ffffff;
-$nav-active-top-border-color    : #0cf;
+$nav-active-top-border-color    : lighten($colorMain,10%);
 $nav-disabled-text-color        : #eeeeee;
 
 .st-theme-sourceforge {
@@ -45,7 +45,7 @@ $nav-disabled-text-color        : #eeeeee;
         color: $nav-active-text-color !important;
         background-color: $nav-active-background-color !important;
         cursor: pointer;
-        border-image-source: linear-gradient(to bottom, #00ccff 0%,#00ccff 3px,#dcdcdc 3px);
+        border-image-source: linear-gradient(to bottom, $nav-active-top-border-color 0%,$nav-active-top-border-color 3px,#dcdcdc 3px);
         border-image-slice: 3 0 0 1;
       }
     }
@@ -65,7 +65,7 @@ $nav-disabled-text-color        : #eeeeee;
         border-image-slice: 0 1 1 3;
 
         &.active {
-          border-image-source: linear-gradient(to right, #00ccff 0%,#00ccff 3px,#dcdcdc 3px);
+          border-image-source: linear-gradient(to right, $nav-active-top-border-color 0%,$nav-active-top-border-color 3px,#dcdcdc 3px);
           border-image-slice: 0 0 1 3;
         }
       }
