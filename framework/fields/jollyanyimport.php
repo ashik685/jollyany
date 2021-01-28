@@ -37,7 +37,6 @@ class JFormFieldJollyanyImport extends JFormFieldList {
 		}
 
 		$templates  =   JollyanyFrameworkDataImport::getData();
-		$api_url    =   JollyanyFrameworkDataImport::getApiUrl();
 		$html[]     =   '<div class="row mt-4">';
 		foreach ($templates as $index => $value) {
 			$status     =   $value['category'] == 'comingsoon' ? ' tabindex="-1" aria-disabled="true"' : '';
@@ -45,7 +44,7 @@ class JFormFieldJollyanyImport extends JFormFieldList {
 			$comingsoon =   $value['category'] == 'comingsoon' ? '_COMINGSOON' : '';
 			$data   =  '<div class="col-12 col-md-6 col-lg-6 col-xl-4 mb-5">';
 			$data   .=  '<div class="card">';
-			$data   .=  '<img src="'.$api_url.$value['thumb'].'" class="card-img-top" alt="'.$value['name'].'" />';
+			$data   .=  '<img src="'.$value['thumb'].'" class="card-img-top" alt="'.$value['name'].'" />';
 			$data   .=  '<div class="card-body"><h5 class="card-title">'.$value['name'].'</h5><p class="card-text">'.$value['desc'].'</p><div class="btn-group" role="group" aria-label="Install Action"><a href="#" class="btn btn-primary intall-package btn-sm'.$clsstatus.'"  data-token="'.JSession::getFormToken().'" data-name="'.$value['name'].'" data-file="'.$index.'" data-status="'.$activated.'"'.$status.'>'.JText::_('JOLLYANY_ACTION_INSTALL_PACKAGE'.$comingsoon).'</a><a href="'.$value['demo_url'].'" class="btn btn-outline-primary btn-sm'.$clsstatus.'" target="_blank"'.$status.'>'.JText::_('JOLLYANY_ACTION_DEMO_URL').'</a><a href="'.$value['doc_url'].'" class="btn btn-outline-primary btn-sm'.$clsstatus.'" target="_blank"'.$status.'>'.JText::_('JOLLYANY_ACTION_DOC_URL').'</a></div></div>';
 			$data   .=  '</div>';
 			$data   .=  '</div>';
@@ -83,6 +82,16 @@ class JFormFieldJollyanyImport extends JFormFieldList {
       </div>
     </div>
   </div></script>';
+        $tzthumbs   =   array();
+		if (count(JollyanyFrameworkDataImport::$cache['thumb'])) {
+		    foreach (JollyanyFrameworkDataImport::$cache['thumb'] as $value) {
+                $tzthumbs[]     =   "'$value'";
+            }
+        }
+        $html[]     .=  '<script type="text/javascript">
+                var tzthumbs_cache    = ['.implode(',', $tzthumbs).'];
+                var tztoken         = \''.JSession::getFormToken().'\';
+</script>';
 		return implode($html);
 	}
 }

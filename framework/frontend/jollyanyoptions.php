@@ -18,6 +18,9 @@ $template = Framework::getTemplate();
 $params = $template->getParams();
 $document = Framework::getDocument();
 
+// Linearicon icon
+$document->addStyleSheet('libraries/jollyany/framework/assets/fonts/linearicons/font.css');
+
 // Header Absolute option
 $header_absolute = $params->get('header_absolute');
 if ($header_absolute == '1') {

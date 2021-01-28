@@ -8,6 +8,19 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.5.2**
+
+    [new topic] GoldenA - Single Property Joomla Template
+    [improve] Improve performance for Admin Template Options
+    [improve] Move Page builder addon to Jollyany Library
+    [improve] Improve Framework Language
+    [new addon] Tiny Slider addon for Page Builder
+    [new addon] Video Button addon for Page Builder
+    [new addon] Testimonial addon for Page Builder
+    [new addon] Social Follow addon for Page Builder
+    [new addon] Feature Section addon for Page Builder
+    [update] Linearicons font update
+
 **Version 1.5.1**
 
     [improve] Improve style of Course Tab

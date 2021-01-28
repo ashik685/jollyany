@@ -550,6 +550,40 @@ class plgSystemJollyany extends JPlugin {
 					echo \json_encode($return);
 					die();
 					break;
+                case 'cache_thumb':
+                    header('Content-Type: application/json');
+                    header('Access-Control-Allow-Origin: *');
+                    $return = array();
+                    try {
+                        // Check for request forgeries.
+                        if (!JSession::checkToken()) {
+                            throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR'));
+                        }
+                        $thumbs     = $this->app->input->get('thumbs', array(), 'RAW');
+                        jimport('joomla.filesystem.file');
+                        jimport('jollyany.framework.importer.data');
+                        $api_url    =   JollyanyFrameworkDataImport::getApiUrl();
+                        for ($i = 0; $i < count($thumbs); $i++) {
+                            $http       =   JHttpFactory::getHttp();
+                            $response   =   $http -> get ($api_url.$thumbs[$i], array(
+                                'Content-type' => 'application/x-www-form-urlencoded'
+                            ));
+                            if ($response->code == 200) {
+                                JFile::write(JPATH_ADMINISTRATOR.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.'jollyany'.$thumbs[$i], $response->body);
+                            }
+                        }
+
+                        $return["status"]   =   'success';
+                        $return["code"]     =   200;
+
+                    } catch (\Exception $e) {
+                        $return["status"] = "error";
+                        $return["code"] = $e->getCode();
+                        $return["message"] = $e->getMessage();
+                    }
+                    echo \json_encode($return);
+                    die();
+                    break;
 			}
             switch ($astroid) {
                 case "save":

@@ -462,7 +462,7 @@ $linear-channel-values:
 //   color: #d200d2;
 // }
 //
-@function a11y-color($fg, $bg, $level: 'AA', $size: 15, $bold: false) {
+@function a11y-color($fg, $bg, $level: 'AA', $size: 16, $bold: false) {
   // Helper: make sure the font size value is acceptable
   $font-size: validate-font-size($size);
   // Helper: With the level, font size, and bold boolean, return the proper target ratio. 3.0, 4.5, or 7.0 expected

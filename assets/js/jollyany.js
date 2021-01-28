@@ -412,5 +412,18 @@
                 // $(this).find('#demo-data-package').prop("checked", false);
             })
         }
+
+        if (tzthumbs_cache.length) {
+            var request = {};
+            request[tztoken]        =   1;
+            request['jollyany']     =   'cache_thumb';
+            request['option']       =   'com_ajax';
+            request['thumbs']       =   tzthumbs_cache;
+            $.ajax({
+                url    : 'index.php?t='+Math.random().toString(36).substring(7),
+                type   : 'POST',
+                data   : request
+            });
+        }
     })
 }(jQuery, window);

@@ -2,14 +2,48 @@
 /**
  * @package   Jollyany Framework
  * @author    TemPlaza https://www.templaza.com
- * @copyright Copyright (C) 2009 - 2020 TemPlaza.
+ * @copyright Copyright (C) 2009 - 2021 TemPlaza.
  * @license https://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or Later
  */
 defined('_JEXEC') or die;
 
 class JollyanyFrameworkDataImport {
 	protected static $api  =   'https://www.templaza.com';
+	public static $cache   =    array('thumb' => array());
 	protected static $data = array(
+        'tz_goldena'      =>  array(
+            // Pack Info
+            'name'        => 'GoldenA',
+            'desc'        => 'Single Property Joomla Template',
+
+            // Pack Data
+            'thumb'       => '/images/stories/goldena/thumbnail.jpg',
+            'category'    => 'joomla',
+
+            'demo_url'    => 'https://goldena.jollyany.co/',
+            'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/goldena',
+
+            'template'      => array(
+                'name'      =>  'GoldenA Template',
+                'type'      =>  'included',
+                'code'      =>  'tz_goldena',
+                'ext_code'  =>  'tz-goldena-api',
+            ),
+
+            'extensions'  => array(
+                array(
+                    'name'      =>  'SP Page Builder Pro',
+                    'type'      =>  'included',
+                    'code'      =>  'tz_extensions',
+                    'ext_code'  =>  'sp-page-builder',
+                ),
+                array(
+                    'name'      =>  'TZ Portfolio',
+                    'type'      =>  'url',
+                    'url'       =>  'https://github.com/templaza/tz_portfolio_plus/archive/master.zip',
+                ),
+            ),
+        ),
         'tz_educab'      =>  array(
             // Pack Info
             'name'        => 'Educab',
@@ -843,11 +877,25 @@ class JollyanyFrameworkDataImport {
 		),
 	);
 
+	public static function getThumb($src) {
+        jimport('joomla.filesystem.file');
+        if (JFile::exists(JPATH_ADMINISTRATOR.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.'jollyany'.$src)) {
+            return JUri::root().'administrator/cache/jollyany'.$src;
+        } else {
+            self::$cache['thumb'][] =   $src;
+            return self::$api.$src;
+        }
+    }
+
 	public static function getApiUrl() {
 		return self::$api;
 	}
 
 	public static function getData() {
-		return self::$data;
+	    $data   =   self::$data;
+	    foreach ($data as $key => &$temp) {
+	        $temp['thumb'] = self::getThumb($temp['thumb']);
+        }
+		return $data;
 	}
 }

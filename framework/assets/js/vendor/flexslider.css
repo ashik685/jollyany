@@ -14,8 +14,8 @@
  * ====================================================================================================================*/
 @font-face {
   font-family: 'flexslider-icon';
-  src: url('../../../../../../templates/tz_educab/assets/fonts/flexslider-icon.eot');
-  src: url('../../../../../../templates/tz_educab/assets/fonts/flexslider-icon.eot?#iefix') format('embedded-opentype'), url('../../../../../../templates/tz_educab/assets/fonts/flexslider-icon.woff') format('woff'), url('../../../../../../templates/tz_educab/assets/fonts/flexslider-icon.ttf') format('truetype'), url('../../../../../../templates/tz_educab/assets/fonts/flexslider-icon.svg#flexslider-icon') format('svg');
+  src: url('../../fonts/flexslider/flexslider-icon.eot');
+  src: url('../../fonts/flexslider/flexslider-icon.eot?#iefix') format('embedded-opentype'), url('../../fonts/flexslider/flexslider-icon.woff') format('woff'), url('../../fonts/flexslider/flexslider-icon.ttf') format('truetype'), url('../../fonts/flexslider/flexslider-icon.svg#flexslider-icon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
