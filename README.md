@@ -8,6 +8,10 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.5.3**
+
+    [fixbug] Fix issue display Logo sidebar collapsed
+
 **Version 1.5.2**
 
     [new topic] GoldenA - Single Property Joomla Template

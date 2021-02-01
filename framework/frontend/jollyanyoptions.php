@@ -33,6 +33,20 @@ if ($header_absolute == '1') {
 	', 'body');
 }
 
+// Logo sidebar
+$app = JFactory::getApplication();
+$sitename = $app->get('sitename');
+$sidebar_logo = $params->get('sidebar_logo', false);
+if (!empty($sidebar_logo)) {
+    $document->addCustomTag('
+<script id="jollyany-sidebar-collapsed-logo-template" type="text/template">
+	<div class="astroid-sidebar-collapsed-logo">
+         <img src="'.JURI::root() . Astroid\Helper\Media::getPath() . '/' . $sidebar_logo .'" alt="'.$sitename.'" class="astroid-logo-sidebar" />
+    </div>
+</script>
+', 'body');
+}
+
 // Color option
 $styles = [];
 $body_heading_color = $params->get('body_heading_color', '');
