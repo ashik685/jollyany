@@ -8,6 +8,10 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.5.4**
+
+    [fixbug] Fix issue hikashop cart count display
+
 **Version 1.5.3**
 
     [fixbug] Fix issue display Logo sidebar collapsed

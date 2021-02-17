@@ -1,7 +1,7 @@
 jQuery(function($){
     var updateHikashopCart = function () {
         if ($(".jollyany-hikacart").length){
-            $('.jollyany-hikacart-icon > i').html('<span class="cart-count">'+$('.jollyany-hikacart .hikashop_cart_module tbody tr').length+'</span>');
+            $('.jollyany-hikacart-icon > i').html('<span class="cart-count">'+$('#jollyany-hikacart-content .hikashop_cart_module tbody tr').length+'</span>');
         }
     };
     var removeHikashopItem = function () {
