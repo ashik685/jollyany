@@ -60,6 +60,8 @@ class jollyanyInstallerScript {
    public function installPlugin($plugin, $plugin_dir) {
       $db = JFactory::getDbo();
       $plugin_name = str_replace($plugin_dir, '', $plugin);
+      $plugin_name  =   explode('_', $plugin_name);
+      $plugin_name  =   end($plugin_name);
 
       $installer = new JInstaller;
       $installer->install($plugin);
@@ -77,6 +79,8 @@ class jollyanyInstallerScript {
    public function uninstallPlugin($plugin, $plugin_dir) {
       $db = JFactory::getDbo();
       $plugin_name = str_replace($plugin_dir, '', $plugin);
+       $plugin_name  =   explode('_', $plugin_name);
+       $plugin_name  =   end($plugin_name);
       $query = $db->getQuery(true);
       $query->update('#__extensions');
       $query->set($db->quoteName('enabled') . ' = 0');
