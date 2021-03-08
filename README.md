@@ -8,6 +8,78 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.6.0**
+
+    [new topic] PetHub - Dog, Cat Care & Veterinary Joomla Template
+    [new addon] UI Accordion for Page Builder
+    [new addon] UI Alert for Page Builder
+    [new addon] UI Articles for Page Builder
+    [new addon] UI Business Hours for Page Builder
+    [new addon] UI Button for Page Builder
+    [new addon] UI Button Group for Page Builder
+    [new addon] UI Call Out for Page Builder
+    [new addon] UI Call to Action for Page Builder
+    [new addon] UI Card for Page Builder
+    [new addon] UI Card Header for Page Builder
+    [new addon] UI Card Slider for Page Builder
+    [new addon] UI Code for Page Builder
+    [new addon] UI Content Align for Page Builder
+    [new addon] UI Cookie for Page Builder
+    [new addon] UI Count Down for Page Builder
+    [new addon] UI Counter for Page Builder
+    [new addon] UI Description for Page Builder
+    [new addon] UI Divider for Page Builder
+    [new addon] UI Gallery for Page Builder
+    [new addon] UI Grid for Page Builder
+    [new addon] UI Heading for Page Builder
+    [new addon] UI Heading Highlighted for Page Builder
+    [new addon] UI Headline for Page Builder
+    [new addon] UI Icon for Page Builder
+    [new addon] UI Image for Page Builder
+    [new addon] UI Infor Box for Page Builder
+    [new addon] UI Leader Price for Page Builder
+    [new addon] UI Light Gallery for Page Builder
+    [new addon] UI List for Page Builder
+    [new addon] UI Map for Page Builder
+    [new addon] UI Marker for Page Builder
+    [new addon] UI Modal for Page Builder
+    [new addon] UI Navbar for Page Builder
+    [new addon] UI Notification for Page Builder
+    [new addon] UI Overlay for Page Builder
+    [new addon] UI Particles for Page Builder
+    [new addon] UI Person for Page Builder
+    [new addon] UI Pricing for Page Builder
+    [new addon] UI Progress for Page Builder
+    [new addon] UI Simple Gallery for Page Builder
+    [new addon] UI Simple Pricing for Page Builder
+    [new addon] UI Slider for Page Builder
+    [new addon] UI Slideshow for Page Builder
+    [new addon] UI Social for Page Builder
+    [new addon] UI Subnav for Page Builder
+    [new addon] UI SVG for Page Builder
+    [new addon] UI Switcher for Page Builder
+    [new addon] UI Table for Page Builder
+    [new addon] UI Team for Page Builder
+    [new addon] UI Testimonials for Page Builder
+    [new addon] UI Testimonial Slider for Page Builder
+    [new addon] UI Text for Page Builder
+    [new addon] UI Toggle for Page Builder
+    [new addon] UI To Top for Page Builder
+    [new addon] UI Video for Page Builder
+    [new addon] Linearicon for Page Builder
+    [new addon] Feature Section for Page Builder
+    [new addon] Raw Html for Page Builder
+    [new addon] Social Follow for Page Builder
+    [new addon] Testimonial Carousel for Page Builder
+    [new addon] Tiny Slider for Page Builder
+    [new addon] Video Button for Page Builder
+    [improve] Get UIkit Library Integrated
+    [improve] Linearicon Font Integrated
+    [improve] Languages
+    [improve] Style CSS
+    [new feature] Preloader Logo Image feature
+    [new feature] Background Image for Body
+
 **Version 1.5.4**
 
     [fixbug] Fix issue hikashop cart count display

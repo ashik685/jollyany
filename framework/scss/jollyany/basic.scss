@@ -1,5 +1,22 @@
 @import "ally";
+
+// 1. Your custom variables and variable overwrites.
+$global-link-color: $colorMain !default;
+
+// 2. Import default variables and available mixins.
+@import "uikit/variables-theme.scss";
+@import "uikit/mixins-theme.scss";
+
+// 3. Your custom mixin overwrites.
+//@mixin hook-card() { color: #000; }
+
+// 4. Import UIkit.
+@import "uikit/uikit-theme.scss";
+
+// 5 Tiny Slider style
 @import "tiny_slider/theme";
+
+// 6 Smart Tab style
 @import 'smart_tab/smart_tab_all';
 .lead {
   line-height: 1.6em;

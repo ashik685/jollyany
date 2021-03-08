@@ -17,9 +17,25 @@ use Astroid\Framework;
 $template = Framework::getTemplate();
 $params = $template->getParams();
 $document = Framework::getDocument();
+$app = JFactory::getApplication();
+$sitename = $app->get('sitename');
 
 // Linearicon icon
 $document->addStyleSheet('libraries/jollyany/framework/assets/fonts/linearicons/font.css');
+
+// Preloader Logo
+if ($params->get('preloader', 1)) {
+    $preloader_logo = $params->get('preloader_logo', false);
+    if (!empty($preloader_logo)) {
+        $document->addCustomTag('
+<script id="jollyany-preloader-logo-template" type="text/template">
+	<div class="jollyany-preloader-logo mb-3">
+         <img src="'.JURI::root() . Astroid\Helper\Media::getPath() . '/' . $preloader_logo .'" alt="'.$sitename.'" class="astroid-logo-preloader" />
+    </div>
+</script>
+', 'body');
+    }
+}
 
 // Header Absolute option
 $header_absolute = $params->get('header_absolute');
@@ -34,8 +50,6 @@ if ($header_absolute == '1') {
 }
 
 // Logo sidebar
-$app = JFactory::getApplication();
-$sitename = $app->get('sitename');
 $sidebar_logo = $params->get('sidebar_logo', false);
 if (!empty($sidebar_logo)) {
     $document->addCustomTag('
@@ -55,7 +69,13 @@ $header_link_color = $params->get('header_link_color', '');
 $header_link_hover_color = $params->get('header_link_hover_color', '');
 $topbar_bordercolor = $params->get('topbar_bordercolor', '');
 $sticky_off_canvas_button_color = $params->get('sticky_off_canvas_button_color', '');
+$background_image = $params->get('body_background_image', false);
+$body_link_color = $params->get('body_link_color', '');
+$body_link_hover_color = $params->get('body_link_hover_color', '');
 
+if (!empty($background_image)) {
+    $styles[] = 'body{ background-image: url('.JURI::root() . Astroid\Helper\Media::getPath() . '/' . $background_image.');}';
+}
 if (!empty($body_heading_color)) {
     $styles[] = 'h1,h2,h3,h4,h5,h6{ color: ' . $body_heading_color . ';}';
 }
@@ -73,6 +93,12 @@ if (!empty($topbar_bordercolor)) {
 }
 if (!empty($sticky_off_canvas_button_color)) {
     $styles[]    = '#astroid-sticky-header .header-offcanvas-trigger.burger-menu-button .inner, #astroid-sticky-header .header-offcanvas-trigger.burger-menu-button .inner::before, #astroid-sticky-header .header-offcanvas-trigger.burger-menu-button .inner::after {background-color:'.$sticky_off_canvas_button_color.';}';
+}
+if (!empty($body_link_color)) {
+    $styles[] = '.tpp-bootstrap a{ color: ' . $body_link_color . ';}';
+}
+if (!empty($body_link_hover_color)) {
+    $styles[] = '.tpp-bootstrap a:hover{ color: ' . $body_link_hover_color . ';}';
 }
 
 // Color Menu Options

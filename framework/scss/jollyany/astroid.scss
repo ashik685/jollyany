@@ -12,6 +12,10 @@
     max-width: 1400px;
   }
 }
+#astroid-preloader {
+  flex-direction: column;
+  justify-content: center;
+}
 .author-wrap {
   .author-social-links {
     a {

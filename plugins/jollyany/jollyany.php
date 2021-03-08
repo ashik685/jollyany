@@ -14,7 +14,7 @@ use Astroid\Helper;
 /**
  * Jollyany system plugin
  *
- * @since  1.5.0
+ * @since  1.6.0
  */
 
 class plgSystemJollyany extends JPlugin {
@@ -27,6 +27,8 @@ class plgSystemJollyany extends JPlugin {
     {
         $document = Astroid\Framework::getDocument(); // Astroid Document
         $document->addScript('libraries/jollyany/framework/assets/js/jollyany.js', 'body');
+        $document->addScript('media/jollyany/assets/js/uikit.min.js', 'body');
+        $document->addScript('media/jollyany/assets/js/uikit-icons.min.js', 'body');
     }
 	public function onAfterInitialise() {
 		// load jollyany language

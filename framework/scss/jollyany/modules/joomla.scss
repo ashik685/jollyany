@@ -152,14 +152,14 @@ blockquote {
   }
   .event-information {
     padding: 30px;
-    border: 1px solid $border-color;
+    border: 1px solid #dddddd;
     background-color: #eeeeee;
     margin-bottom: 1rem;
     .event_googlemaps {
       margin-bottom: 2rem;
     }
     .event-info {
-      border-top: 1px solid $border-color;
+      border-top: 1px solid #dddddd;
       padding-top: 25px;
     }
     .time-count-down, .call-to-action {

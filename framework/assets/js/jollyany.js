@@ -25,6 +25,9 @@ jQuery(function($){
         }
     };
     $(document).ready(function(){
+        if ($('#astroid-preloader').length && $('#jollyany-preloader-logo-template').length && !$('#astroid-preloader .jollyany-preloader-logo').length) {
+            $('#astroid-preloader').prepend($('#jollyany-preloader-logo-template').html());
+        }
         if ($(".jollyany-hikacart").length){
             $(".jollyany-hikacart-icon").on("click", function(e){
                 e.preventDefault();
