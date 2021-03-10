@@ -8,6 +8,10 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.6.1**
+
+    [fixbug] Fix issue can not load video in Course tab
+
 **Version 1.6.0**
 
     [new topic] PetHub - Dog, Cat Care & Veterinary Joomla Template

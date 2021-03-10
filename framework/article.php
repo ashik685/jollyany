@@ -33,6 +33,8 @@ class JollyanyFrameworkArticle extends AstroidFrameworkArticle {
         $useDefList = ($this->article->params->get('show_modify_date') || $this->article->params->get('show_publish_date') || $this->article->params->get('show_create_date') || $this->article->params->get('show_hits') || $this->article->params->get('show_category') || $this->article->params->get('show_parent_category') || $this->article->params->get('show_author') || $assocParam || $this->template->params->get('astroid_readtime', 1));
         if (($this->categoryParams->get('course_category_data','') || ($this->categoryParams->get('course_category_data','') === "" && $this->template->params->get('course_category_data',''))) && (is_array($lessons) && count($lessons))) :
             $document = Framework::getDocument();
+            $document->addStyleSheet('libraries/jollyany/framework/assets/js/vendor/jquery.fancybox.min.css');
+            $document->addScript('libraries/jollyany/framework/assets/js/vendor/jquery.fancybox.min.js');
             $document->addScript('libraries/jollyany/framework/assets/js/vendor/jquery.smartTab.min.js');
             $tabid  =   uniqid('courseTab_');
             $document->addScriptDeclaration('
@@ -43,7 +45,7 @@ class JollyanyFrameworkArticle extends AstroidFrameworkArticle {
             });
             ');
             ?>
-        <div id="<?php echo $tabid; ?>">
+        <div id="<?php echo $tabid; ?>" class="jollyany-course-tab">
             <ul class="nav">
                 <li>
                     <a class="nav-link" href="#lessons"><?php echo JText::_('JOLLYANY_COURSE_OPTIONS_TITLE_BASIC_LABEL') ?></a>
