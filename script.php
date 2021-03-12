@@ -137,7 +137,6 @@ class jollyanyInstallerScript {
             'framework/frontend/offcanvas.php',
             'framework/frontend/preloader.php',
             'framework/frontend/social.php',
-            'framework/options/basic.xml',
             'framework/options/custom.xml',
             'framework/options/footer.xml',
             'framework/options/header.xml',
