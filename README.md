@@ -12,6 +12,7 @@ Astroid Framework: https://astroidframework.com/
 
     [fixbug] Fix issue Social Icon Color
     [fixbug] Fix issue Preload Logo Image option disappear
+    [new feature] Footer Custom color added
 
 **Version 1.6.1**
 
