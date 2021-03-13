@@ -8,6 +8,11 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.6.2**
+
+    [fixbug] Fix issue Social Icon Color
+    [fixbug] Fix issue Preload Logo Image option disappear
+
 **Version 1.6.1**
 
     [fixbug] Fix issue can not load video in Course tab

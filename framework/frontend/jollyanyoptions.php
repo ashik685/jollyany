@@ -72,6 +72,9 @@ $sticky_off_canvas_button_color = $params->get('sticky_off_canvas_button_color',
 $background_image = $params->get('body_background_image', false);
 $body_link_color = $params->get('body_link_color', '');
 $body_link_hover_color = $params->get('body_link_hover_color', '');
+$social_icon_color = $params->get('social_icon_color', '');
+$social_icon_color_hover = $params->get('social_icon_color_hover', '');
+$social_profiles_style = $params->get('social_profiles_style', 1);
 
 if (!empty($background_image)) {
     $styles[] = 'body{ background-image: url('.JURI::root() . Astroid\Helper\Media::getPath() . '/' . $background_image.');}';
@@ -100,6 +103,12 @@ if (!empty($body_link_color)) {
 if (!empty($body_link_hover_color)) {
     $styles[] = '.tpp-bootstrap a:hover{ color: ' . $body_link_hover_color . ';}';
 }
+if (!empty($social_icon_color) && $social_profiles_style == 1) {
+    $styles[] = '.astroid-social-icons > li a{ color: ' . $social_icon_color . ' !important;}';
+}
+if (!empty($social_icon_color_hover) && $social_profiles_style == 1) {
+    $styles[] = '.astroid-social-icons > li a:hover{ color: ' . $social_icon_color_hover . ' !important;}';
+}
 
 // Color Menu Options
 $dropdown_link_color = $params->get('dropdown_link_color', '');
@@ -118,6 +127,28 @@ if (!empty($dropdown_menu_active_bg_color)) {
 }
 if (!empty($dropdown_bg_color)) {
     $styles[]    = '.astroid-sidebar-menu .navbar-subnav {background-color:'.$dropdown_bg_color.';}';
+}
+
+// Color Footer Options
+$footer_background_color = $params->get('footer_background_color', '');
+$footer_text_color = $params->get('footer_text_color', '');
+$footer_heading_color = $params->get('footer_heading_color', '');
+$footer_link_color = $params->get('footer_link_color', '');
+$footer_link_hover_color = $params->get('footer_link_hover_color', '');
+if (!empty($footer_background_color)) {
+    $styles[]    = '.jollyany-bottom-section {background-color:'.$footer_background_color.' !important;}';
+}
+if (!empty($footer_text_color)) {
+    $styles[]    = '.jollyany-bottom-section {color:'.$footer_text_color.' !important;}';
+}
+if (!empty($footer_heading_color)) {
+    $styles[]    = '.jollyany-bottom-section h1, .jollyany-bottom-section h2, .jollyany-bottom-section h3, .jollyany-bottom-section h4, .jollyany-bottom-section h5, .jollyany-bottom-section h6 {color:'.$footer_heading_color.' !important;}';
+}
+if (!empty($footer_link_color)) {
+    $styles[]    = '.jollyany-bottom-section a {color:'.$footer_link_color.' !important;}';
+}
+if (!empty($footer_link_hover_color)) {
+    $styles[]    = '.jollyany-bottom-section a:hover {color:'.$footer_link_hover_color.' !important;}';
 }
 
 $document->addStyledeclaration(implode('', $styles));
