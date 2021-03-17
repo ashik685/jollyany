@@ -8,6 +8,14 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.6.3**
+
+    [new topic] Logistics - Cargo Transportation Joomla Template
+    [update] Update style for TinySlider, UIKit and Page Builder
+    [update] Update Linearicon Addon
+    [update] Update UI Articles Addon
+    [update] Update UI Business Hours Addon
+
 **Version 1.6.2**
 
     [fixbug] Fix issue Social Icon Color

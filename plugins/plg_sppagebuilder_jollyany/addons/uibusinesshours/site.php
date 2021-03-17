@@ -170,10 +170,11 @@ class SppagebuilderAddonUiBusinessHours extends SppagebuilderAddons {
 			$business_time = ( isset( $value->business_time ) && $value->business_time ) ? $value->business_time : '';
 			$active        = ( isset( $value->active ) && $value->active ) ? 'day-highlight-' : '';
 			$output       .= '<li id="' . $active . '' . $el_id . '" class="uk-block">';
+			$output       .= '<div class="uk-grid-small" uk-grid>';
 			if ( ! empty( $business_day ) ) {
 				$business_days = explode( "\n", $business_day );
 				foreach ( $business_days as $days ) {
-					$output .= '<span>' . $days . '</span>';
+                    $output .= '<div class="uk-width-expand" uk-leader>' . $days . '</div>';
 				}
 			}
 
@@ -181,9 +182,10 @@ class SppagebuilderAddonUiBusinessHours extends SppagebuilderAddons {
 
 				$business_times = explode( "\n", $business_time );
 				foreach ( $business_times as $times ) {
-					$output .= '<span class="uk-float-right">' . $times . '</span>';
+					$output .= '<div class="uk-time">' . $times . '</div>';
 				}
 			}
+            $output .= '</div>';
 			$output .= '</li>';
 		}
 
@@ -199,15 +201,13 @@ class SppagebuilderAddonUiBusinessHours extends SppagebuilderAddons {
 		$card_style      = ( isset( $settings->card_style ) && $settings->card_style ) ? $settings->card_style : '';
 		$card_background = ( isset( $settings->card_background ) && $settings->card_background ) ? 'background-color: ' . $settings->card_background . ';' : '';
 		$card_color      = ( isset( $settings->card_color ) && $settings->card_color ) ? 'color: ' . $settings->card_color . ';' : '';
-		$card_padding    = ( isset( $settings->card_padding ) && $settings->card_padding ) ? $settings->card_padding : '20';
-		$head_padding    = ( isset( $settings->head_padding ) && $settings->head_padding ) ? $settings->head_padding : '10';
 
 		$background_style  = ( isset( $settings->title_background ) && $settings->title_background ) ? 'background: ' . $settings->title_background . ';' : '';
 		$background_style .= ( isset( $settings->title_color ) && $settings->title_color ) ? 'color: ' . $settings->title_color . ';' : '';
 		$css               = '';
 
-		$css .= $addon_id . ' .tz-body-wrapper {padding: ' . $card_padding . 'px;}';
-		$css .= $addon_id . ' .tz-title {padding: ' . $head_padding . 'px;}';
+		$css .= ( isset( $settings->card_padding ) && $settings->card_padding ) ? $addon_id . ' .tz-body-wrapper {padding: ' . $settings->card_padding . 'px;}' : '';
+		$css .= ( isset( $settings->head_padding ) && $settings->head_padding ) ? $addon_id . ' .tz-title {padding: ' . $settings->head_padding . 'px;}' : '';
 		if ( $card_style == 'uk-card-custom' ) {
 			if ( $card_color || $card_background ) {
 				$css .= $addon_id . ' .uk-card-custom {' . $card_background . $card_color . '}';

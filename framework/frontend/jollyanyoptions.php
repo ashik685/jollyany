@@ -72,6 +72,9 @@ $sticky_off_canvas_button_color = $params->get('sticky_off_canvas_button_color',
 $background_image = $params->get('body_background_image', false);
 $body_link_color = $params->get('body_link_color', '');
 $body_link_hover_color = $params->get('body_link_hover_color', '');
+$login_icon_color = $params->get('login_icon_color', '');
+$hikacart_icon_color = $params->get('hikacart_icon_color', '');
+$dropdownmenu_icon_color = $params->get('dropdownmenu_icon_color', '');
 $social_icon_color = $params->get('social_icon_color', '');
 $social_icon_color_hover = $params->get('social_icon_color_hover', '');
 $social_profiles_style = $params->get('social_profiles_style', 1);
@@ -108,6 +111,15 @@ if (!empty($social_icon_color) && $social_profiles_style == 1) {
 }
 if (!empty($social_icon_color_hover) && $social_profiles_style == 1) {
     $styles[] = '.astroid-social-icons > li a:hover{ color: ' . $social_icon_color_hover . ' !important;}';
+}
+if (!empty($login_icon_color)) {
+    $styles[] = '.jollyany-login-icon > i{ color: ' . $login_icon_color . ' !important;}';
+}
+if (!empty($hikacart_icon_color)) {
+    $styles[] = '.jollyany-hikacart-icon > i{ color: ' . $hikacart_icon_color . ' !important;}';
+}
+if (!empty($dropdownmenu_icon_color)) {
+    $styles[] = '#jollyany-dropdownmenu > i{ color: ' . $dropdownmenu_icon_color . ' !important;}';
 }
 
 // Color Menu Options

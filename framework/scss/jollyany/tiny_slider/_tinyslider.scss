@@ -1,5 +1,8 @@
 .jollyany-tinyslider {
   position: relative;
+  .tiny-slider {
+    overflow: hidden;
+  }
   .sppb-slider-item {
     width: 100%;
     height: 100%;

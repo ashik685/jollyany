@@ -85,13 +85,13 @@ class JFormFieldJollyanyLicense extends JFormFieldList {
 	        $html[]     =   '<div class="card card-highlight"><div class="card-body">';
 	        $html[]     =   '<h4 class="card-title">'.JText::_('JOLLYANY_BENEFIT').'</h4>';
 	        $html[]     =   '<h6 class="card-subtitle mb-2 text-muted">Paid only once</h6>';
-	        $html[]     =   '<h3><small class="text-muted"><del>$826</del></small> <strong>$59</strong></h3>';
+	        $html[]     =   '<h3><small class="text-muted"><del>$1029</del></small> <strong>$59</strong></h3>';
 
 	        $html[]     =   '<p class="card-text">If you haven\'t purchased Jollyany, <a href="https://1.envato.market/jollyany-multipurpose-joomla-template" target="_blank"><strong>click here to buy a license</strong></a> and activate template.</p>';
 	        $html[]     =   '</div>';
 	        $html[]     =   '<ul class="list-group list-group-flush">';
 	        $html[]     =   '<li class="list-group-item"><i class="fas fa-check"></i>&nbsp;&nbsp;All Jollyany templates</li>';
-	        $html[]     =   '<li class="list-group-item"><i class="fas fa-check"></i>&nbsp;&nbsp;19+ Joomla Templates</li>';
+	        $html[]     =   '<li class="list-group-item"><i class="fas fa-check"></i>&nbsp;&nbsp;21+ Joomla Templates</li>';
 	        $html[]     =   '<li class="list-group-item"><i class="fas fa-check"></i>&nbsp;&nbsp;6 Months Support</li>';
 	        $html[]     =   '<li class="list-group-item"><i class="fas fa-check"></i>&nbsp;&nbsp;Lifetime Usage</li>';
 	        $html[]     =   '<li class="list-group-item"><i class="fas fa-check"></i>&nbsp;&nbsp;Lifetime Update in 1 valid domain</li>';

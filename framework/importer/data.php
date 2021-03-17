@@ -11,6 +11,44 @@ class JollyanyFrameworkDataImport {
 	protected static $api  =   'https://www.templaza.com';
 	public static $cache   =    array('thumb' => array());
 	protected static $data = array(
+        'tz_logistics'      =>  array(
+            // Pack Info
+            'name'        => 'Logistics',
+            'desc'        => 'Cargo Transportation Joomla Template',
+
+            // Pack Data
+            'thumb'       => '/images/stories/logistics/thumbnail.jpg',
+            'category'    => 'joomla',
+
+            'demo_url'    => 'https://logistics.jollyany.co/',
+            'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/logistics',
+
+            'template'      => array(
+                'name'      =>  'Logistics Template',
+                'type'      =>  'included',
+                'code'      =>  'tz_logistics',
+                'ext_code'  =>  'tz-logistics-api',
+            ),
+
+            'extensions'  => array(
+                array(
+                    'name'      =>  'SP Page Builder Pro',
+                    'type'      =>  'included',
+                    'code'      =>  'tz_extensions',
+                    'ext_code'  =>  'sp-page-builder',
+                ),
+                array(
+                    'name'      =>  'TZ Portfolio',
+                    'type'      =>  'url',
+                    'url'       =>  'https://github.com/templaza/tz_portfolio_plus/archive/master.zip',
+                ),
+                array(
+                    'name'      =>  'Acymailing',
+                    'type'      =>  'url',
+                    'url'       =>  'http://www.acyba.com/component/updateme/downloadxml/component-acymailing/level-starter/version-5/download.zip',
+                ),
+            ),
+        ),
         'tz_pethub'      =>  array(
             // Pack Info
             'name'        => 'PetHub',

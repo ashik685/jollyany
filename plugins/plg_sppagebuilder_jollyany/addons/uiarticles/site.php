@@ -39,7 +39,8 @@ class SppagebuilderAddonUIArticles extends SppagebuilderAddons{
 		$show_category 	= (isset($settings->show_category)) ? $settings->show_category : 1;
 		$show_date 		= (isset($settings->show_date)) ? $settings->show_date : 1;
 		$show_readmore 	= (isset($settings->show_readmore)) ? $settings->show_readmore : 1;
-		$readmore_text 	= (isset($settings->readmore_text) && $settings->readmore_text) ? $settings->readmore_text : 'Read More';
+        $button_text    = (isset($settings->button_text) && $settings->button_text) ? $settings->button_text : 'Read More';
+        $button_class   = (isset($settings->button_type) && $settings->button_type) ? ' sppb-btn-' . $settings->button_type : ' sppb-btn-default';
 		$link_articles 	= (isset($settings->link_articles)) ? $settings->link_articles : 0;
 		$link_catid 	= (isset($settings->link_catid)) ? $settings->link_catid : 0;
 		$link_k2catid 	= (isset($settings->link_k2catid)) ? $settings->link_k2catid : 0;
@@ -52,6 +53,26 @@ class SppagebuilderAddonUIArticles extends SppagebuilderAddons{
 		$all_articles_btn_class .= (isset($settings->all_articles_btn_block) && $settings->all_articles_btn_block) ? ' ' . $settings->all_articles_btn_block : '';
 		$all_articles_btn_icon   = (isset($settings->all_articles_btn_icon) && $settings->all_articles_btn_icon) ? $settings->all_articles_btn_icon : '';
 		$all_articles_btn_icon_position = (isset($settings->all_articles_btn_icon_position) && $settings->all_articles_btn_icon_position) ? $settings->all_articles_btn_icon_position: 'left';
+
+        if ($show_readmore) {
+            $button_class .= (isset($settings->button_size) && $settings->button_size) ? ' sppb-btn-' . $settings->button_size : '';
+            $button_class .= (isset($settings->button_shape) && $settings->button_shape) ? ' sppb-btn-' . $settings->button_shape : ' sppb-btn-rounded';
+            $button_class .= (isset($settings->button_appearance) && $settings->button_appearance) ? ' sppb-btn-' . $settings->button_appearance : '';
+            $button_class .= (isset($settings->button_block) && $settings->button_block) ? ' ' . $settings->button_block : '';
+            $button_icon = (isset($settings->button_icon) && $settings->button_icon) ? $settings->button_icon : '';
+            $button_icon_position = (isset($settings->button_icon_position) && $settings->button_icon_position) ? $settings->button_icon_position : 'left';
+
+            $icon_arr = array_filter(explode(' ', $button_icon));
+            if (count($icon_arr) === 1) {
+                $button_icon = 'fa ' . $button_icon;
+            }
+
+            if ($button_icon_position == 'left') {
+                $button_text = ($button_icon) ? '<span class="' . $button_icon . '" aria-hidden="true"></span> ' . $button_text : $button_text;
+            } else {
+                $button_text = ($button_icon) ? $button_text . ' <span class="' . $button_icon . '" aria-hidden="true"></span>' : $button_text;
+            }
+        }
 
 		$output   = '';
 		//include k2 helper
@@ -226,7 +247,10 @@ class SppagebuilderAddonUIArticles extends SppagebuilderAddons{
 					}
 
 					if($show_readmore) {
-						$output .= '<a class="sppb-readmore" href="'. $item->link .'" itemprop="url">'. $readmore_text .'</a>';
+					    if (isset($settings->button_type) && $settings->button_type != 'link') {
+                            $button_class = 'sppb-btn' . $button_class ;
+                        }
+						$output .= '<a class="btn-readmore-'. $this->addon->id .' sppb-readmore ' . $button_class . '" href="'. $item->link .'" itemprop="url">'. $button_text .'</a>';
 					}
 				$output .= '</div>'; //.sppb-article-info-wrap
 
@@ -287,6 +311,14 @@ class SppagebuilderAddonUIArticles extends SppagebuilderAddons{
 		$options->button_letterspace = (isset($this->addon->settings->all_articles_btn_letterspace) && $this->addon->settings->all_articles_btn_letterspace) ? $this->addon->settings->all_articles_btn_letterspace : '';
 
         $css = $css_path->render(array('addon_id' => $addon_id, 'options' => $options, 'id' => 'btn-' . $this->addon->id));
+
+        //Readmore button
+        $show_readmore 	= (isset($settings->show_readmore)) ? $settings->show_readmore : 1;
+        if ($show_readmore) {
+            $layout_path = JPATH_ROOT . '/libraries/jollyany/framework/extensions/sppagebuilder/layouts';
+            $jollyany_css_path = new JLayoutFile('addon.css.button', $layout_path);
+            $css .= $jollyany_css_path->render(array('addon_id' => $addon_id, 'options' => $this->addon->settings, 'class' => 'btn-readmore-'. $this->addon->id));
+        }
 
         //Title style
         $title_style = '';

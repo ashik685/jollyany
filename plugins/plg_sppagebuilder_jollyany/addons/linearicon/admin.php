@@ -29,6 +29,7 @@ SpAddonsConfig::addonConfig(
 				'name'=>array(
 					'type'=>'select',
 					'title'=>JText::_('COM_SPPAGEBUILDER_GLOBAL_ICON_NAME'),
+                    'desc'=>JText::_('COM_SPPAGEBUILDER_GLOBAL_LINEARICON_DESC'),
                     'values'=>array(
                         'lnr-home'=>'lnr-home',
                         'lnr-home2'=>'lnr-home2',
