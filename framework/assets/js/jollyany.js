@@ -1,27 +1,15 @@
 jQuery(function($){
     var updateHikashopCart = function () {
         if ($(".jollyany-hikacart").length){
-            $('.jollyany-hikacart-icon > i').html('<span class="cart-count">'+$('#jollyany-hikacart-content .hikashop_cart_module tbody tr').length+'</span>');
-        }
-    };
-    var removeHikashopItem = function () {
-        if ($('.hikashop_cart_module_product_delete_value').length) {
-            $('.hikashop_cart_module_product_delete_value > a').on('click', function (e) {
-                setTimeout(
-                    function() {
-                        updateHikashopCart();
-                        removeHikashopItem();
-                    }, 3000);
+            var hikacart_quantity = 0;
+            $('#jollyany-hikacart-content .hikashop_cart_module tbody tr').find('input.hikashop_product_quantity_field').each(function (i, el) {
+                hikacart_quantity   +=  parseInt($(el).val());
             });
-        }
-        if ($('.hikashop_cart_product_quantity_delete').length) {
-            $('.hikashop_cart_product_quantity_delete > a').on('click', function (e) {
-                setTimeout(
-                    function() {
-                        updateHikashopCart();
-                        removeHikashopItem();
-                    }, 3000);
-            });
+            if (hikacart_quantity>0) {
+                $('.jollyany-hikacart-icon > i').html('<span class="cart-count">'+hikacart_quantity+'</span>');
+            } else {
+                $('.jollyany-hikacart-icon > i').empty();
+            }
         }
     };
     $(document).ready(function(){
@@ -29,20 +17,35 @@ jQuery(function($){
             $('#astroid-preloader').prepend($('#jollyany-preloader-logo-template').html());
         }
         if ($(".jollyany-hikacart").length){
+            var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+
+            $.fn.attrchange = function(callback) {
+                if (MutationObserver) {
+                    var options = {
+                        subtree: false,
+                        attributes: true
+                    };
+
+                    var observer = new MutationObserver(function(mutations) {
+                        mutations.forEach(function(e) {
+                            callback.call(e.target, e.attributeName);
+                        });
+                    });
+
+                    return this.each(function() {
+                        observer.observe(this, options);
+                    });
+                }
+            }
+            $('#jollyany-hikacart-content .hikashop_cart').attrchange(function(attrName) {
+                if(attrName=='class'){
+                    updateHikashopCart();
+                }
+            });
             $(".jollyany-hikacart-icon").on("click", function(e){
                 e.preventDefault();
             });
             updateHikashopCart();
-            removeHikashopItem();
-            if ($('.hikacart').length) {
-                $('.hikacart').on('click', function (e) {
-                    setTimeout(
-                        function() {
-                            updateHikashopCart();
-                            removeHikashopItem();
-                        }, 3000);
-                });
-            }
         }
         if ($(".jollyany-login").length){
             $(".jollyany-login-icon").on("click", function(e){
