@@ -11,7 +11,11 @@ Astroid Framework: https://astroidframework.com/
 **Version 1.6.5**
 
     [new topic] Martha | Creative Portfolio Joomla Template
-    [improve] Improve style for Add to Cart block
+    [improve] Minify JS Jollyany, Gmap, Tiny Slider, Flexslider
+    [update] UI Article add responsive thumbnail height
+    [update] UI Heading Highlighted add Highlight Color option
+    [update] UI Video add Support Video options
+    [fixbug] UI Button Group fix issue alignment
 
 **Version 1.6.4**
 
