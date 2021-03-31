@@ -46,7 +46,7 @@ class SppagebuilderAddonTinyslider extends SppagebuilderAddons {
                 $attribs .= ' href="' . $value->btn_url . '"';
                 $attribs .= ' id="btn-' . $this->addon->id . '-'.$key.'"';
                 $video = parse_url($value->btn_url);
-                if (in_array($video['host'], ['youtu.be','www.youtube.com','youtube.com','vimeo.com','www.vimeo.com'])) {
+                if (isset($video['host']) && in_array($video['host'], ['youtu.be','www.youtube.com','youtube.com','vimeo.com','www.vimeo.com'])) {
                     $doc = JFactory::getDocument();
                     $doc->addStyleSheet('libraries/jollyany/framework/assets/js/vendor/jquery.fancybox.min.css');
                     $doc->addScript('libraries/jollyany/framework/assets/js/vendor/jquery.fancybox.min.js');
@@ -144,7 +144,7 @@ class SppagebuilderAddonTinyslider extends SppagebuilderAddons {
     }
 
 	public function scripts() {
-        return array(JURI::base(true) . '/libraries/jollyany/framework/assets/js/vendor/tiny-slider.js');
+        return array(JURI::base(true) . '/libraries/jollyany/framework/assets/js/vendor/tiny-slider.min.js');
 	}
 
     public function css() {

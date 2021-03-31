@@ -265,11 +265,15 @@ class SppagebuilderAddonUiHeadingHighLighted extends SppagebuilderAddons {
         $title_style .= (isset($settings->title_fontsize) && $settings->title_fontsize) ? 'font-size:'.$settings->title_fontsize . 'px;' : '';
         $title_style .= (isset($settings->title_lineheight) && $settings->title_lineheight) ? 'line-height:'.$settings->title_lineheight . 'px;' : '';
         $title_style .= (isset($settings->title_letterspace) && $settings->title_letterspace) ? 'letter-spacing:'.$settings->title_letterspace . ';' : '';
+        $title_highlight_color = (isset($settings->title_highlight_color) && $settings->title_highlight_color) ? 'color:'.$settings->title_highlight_color . ';' : '';
 		$css         = '';
 		$svg         = '';
 		if ( $title_style ) {
 			$css .= $addon_id . ' .heading-highlighted-wrapper {' . $title_style . '}';
 		}
+        if ( $title_highlight_color ) {
+            $css .= $addon_id . ' .heading-highlighted-text {' . $title_highlight_color . '}';
+        }
 		$svg .= ( isset( $settings->color ) && $settings->color ) ? ' stroke: ' . $settings->color . ';' : '';
 		$svg .= ( isset( $settings->shapes_width ) && $settings->shapes_width ) ? ' stroke-width: ' . $settings->shapes_width . ';' : '';
 		if ( $svg ) {

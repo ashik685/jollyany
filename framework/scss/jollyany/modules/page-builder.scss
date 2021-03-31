@@ -18,7 +18,6 @@
 .sppb-btn-primary {
   background-color: $colorMain;
   border-color: $colorMain;
-  color: $dark;
   &:hover {
     background-color: darken($colorMain, 10%);
     border-color: darken($colorMain, 10%);

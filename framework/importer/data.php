@@ -11,6 +11,44 @@ class JollyanyFrameworkDataImport {
 	protected static $api  =   'https://www.templaza.com';
 	public static $cache   =    array('thumb' => array());
 	protected static $data = array(
+        'tz_martha'      =>  array(
+            // Pack Info
+            'name'        => 'Martha',
+            'desc'        => 'Creative Portfolio Joomla Template',
+
+            // Pack Data
+            'thumb'       => '/images/stories/martha/thumbnail.jpg',
+            'category'    => 'joomla',
+
+            'demo_url'    => 'https://martha.jollyany.co/',
+            'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/martha',
+
+            'template'      => array(
+                'name'      =>  'Martha Template',
+                'type'      =>  'included',
+                'code'      =>  'tz_martha',
+                'ext_code'  =>  'tz-martha-api',
+            ),
+
+            'extensions'  => array(
+                array(
+                    'name'      =>  'SP Page Builder Pro',
+                    'type'      =>  'included',
+                    'code'      =>  'tz_extensions',
+                    'ext_code'  =>  'sp-page-builder',
+                ),
+                array(
+                    'name'      =>  'TZ Portfolio',
+                    'type'      =>  'url',
+                    'url'       =>  'https://github.com/templaza/tz_portfolio_plus/archive/master.zip',
+                ),
+                array(
+                    'name'      =>  'Hikashop',
+                    'type'      =>  'url',
+                    'url'       =>  'https://www.hikashop.com/component/updateme/downloadxml/component-hikashop/level-starter/download.zip',
+                ),
+            ),
+        ),
         'tz_logistics'      =>  array(
             // Pack Info
             'name'        => 'Logistics',

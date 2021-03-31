@@ -206,7 +206,7 @@ class JollyanyFrameworkArticle extends AstroidFrameworkArticle {
                 $google_id    =   uniqid('googlemap_');
                 $document->addStyleDeclaration('#'.$google_id.'{height:'.$this->template->params->get('googlemapheight', '400').'px;}');
                 $document->addScript('https://maps.googleapis.com/maps/api/js?key='. $this->template->params->get('googleapikey', ''));
-                $document->addScript('libraries/jollyany/framework/assets/js/vendor/gmap.js');
+                $document->addScript('libraries/jollyany/framework/assets/js/vendor/gmap.min.js');
                 echo '<div class="event_googlemaps">';
                 echo '<div id="'.$google_id.'" class="googlemapapi" data-lat="' . trim($longlat[0]) . '" data-lng="' . trim($longlat[1]) . '"  data-location=\''.base64_encode($location_json).'\' data-maptype="' . $this->template->params->get('googlemaptype','ROADMAP') . '" data-mapzoom="' . $this->template->params->get('googlemapzoom', '15') . '" data-mousescroll="' . $googlemapmousescroll . '" data-infowindow="' . base64_encode($this->article->params->get('jollyany_event_infowindow', '')) . '" data-show-controll=\''.$googlemapshowcontrol.'\'></div>';
                 echo '</div>';

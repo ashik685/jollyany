@@ -8,6 +8,11 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.6.5**
+
+    [new topic] Martha | Creative Portfolio Joomla Template
+    [improve] Improve style for Add to Cart block
+
 **Version 1.6.4**
 
     [fixbug] Fix issue Hikacart total count

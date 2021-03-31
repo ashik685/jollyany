@@ -109,7 +109,7 @@ class SppagebuilderAddonUIArticles extends SppagebuilderAddons{
 			foreach ($items as $key => $item) {
 
 				$output .= '<div class="sppb-col-md-'. round(12/$columns) .' sppb-col-sm-'. ((round(12/$columns)*2 <=6) ? round(12/$columns)*2 : round(12/$columns)) .'">';
-				$output .= '<div class="sppb-addon-article uk-article">';
+				$output .= '<div class="sppb-addon-article uk-article uk-card">';
 
 				if(!$hide_thumbnail) {
 					$image = '';
@@ -210,12 +210,12 @@ class SppagebuilderAddonUIArticles extends SppagebuilderAddons{
 								$img_alt_text = $item->title;
 							}
 
-							$output .= '<a class="sppb-article-img-wrap" href="'. $item->link .'" itemprop="url"><img class="sppb-img-responsive'.($default_placeholder && $page_view_name != 'form' ? ' sppb-element-lazy' : '').'" src="' . ($default_placeholder && $page_view_name != 'form' ? $default_placeholder : $image) . '" alt="'. $img_alt_text .'" itemprop="thumbnailUrl" '.($default_placeholder && $page_view_name != 'form' ? 'data-large="'.$image.'"' : '').' loading="lazy"></a>';
+							$output .= '<a class="sppb-article-img-wrap uk-card-media-top" href="'. $item->link .'" itemprop="url"><img class="sppb-img-responsive'.($default_placeholder && $page_view_name != 'form' ? ' sppb-element-lazy' : '').'" src="' . ($default_placeholder && $page_view_name != 'form' ? $default_placeholder : $image) . '" alt="'. $img_alt_text .'" itemprop="thumbnailUrl" '.($default_placeholder && $page_view_name != 'form' ? 'data-large="'.$image.'"' : '').' loading="lazy"></a>';
 						}
 					}
 				}
 
-				$output .= '<div class="sppb-article-info-wrap">';
+				$output .= '<div class="sppb-article-info-wrap uk-card-body">';
 					$output .= '<'.$heading_selector.' class="ui-title uk-article-title"><a href="'. $item->link .'" itemprop="url">' . $item->title . '</a></'.$heading_selector.'>';
 
 					if($show_author || $show_category || $show_date) {
@@ -248,7 +248,7 @@ class SppagebuilderAddonUIArticles extends SppagebuilderAddons{
 
 					if($show_readmore) {
 					    if (isset($settings->button_type) && $settings->button_type != 'link') {
-                            $button_class = 'sppb-btn' . $button_class ;
+                            $button_class = ' sppb-btn ' . $button_class ;
                         }
 						$output .= '<a class="btn-readmore-'. $this->addon->id .' sppb-readmore ' . $button_class . '" href="'. $item->link .'" itemprop="url">'. $button_text .'</a>';
 					}
@@ -351,6 +351,8 @@ class SppagebuilderAddonUIArticles extends SppagebuilderAddons{
 
         if (isset($settings->thumbnail_height->md)) $settings->thumbnail_height = $settings->thumbnail_height->md;
         $thumbnail_height = (isset($settings->thumbnail_height) && $settings->thumbnail_height) ? 'height:'.$settings->thumbnail_height . 'px;' : '';
+        $thumbnail_height_sm = (isset($settings->thumbnail_height_sm) && $settings->thumbnail_height_sm) ? "height: " . $settings->thumbnail_height_sm . "px;" : "";
+        $thumbnail_height_xs = (isset($settings->thumbnail_height_xs) && $settings->thumbnail_height_xs) ? "height: " . $settings->thumbnail_height_xs . "px;" : "";
         if ($thumbnail_height) {
             $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-article-img-wrap {display:block;';
             $css .= $thumbnail_height;
@@ -411,6 +413,11 @@ class SppagebuilderAddonUIArticles extends SppagebuilderAddons{
             $css .= $meta_style_sm;
             $css .= '}';
         }
+        if($thumbnail_height_sm){
+            $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-article-img-wrap {';
+            $css .= $thumbnail_height_sm;
+            $css .= '}';
+        }
         $css .='}';
 
         $css .= '@media (max-width: 767px) {';
@@ -420,6 +427,11 @@ class SppagebuilderAddonUIArticles extends SppagebuilderAddons{
         if($meta_style_xs){
             $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-article-meta {';
             $css .= $meta_style_xs;
+            $css .= '}';
+        }
+        if($thumbnail_height_xs){
+            $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-article-img-wrap {';
+            $css .= $thumbnail_height_xs;
             $css .= '}';
         }
         $css .= '}';

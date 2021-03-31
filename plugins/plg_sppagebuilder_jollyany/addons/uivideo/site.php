@@ -185,22 +185,22 @@ class SppagebuilderAddonUiVideo extends SppagebuilderAddons {
 				switch ( $video['host'] ) {
 					case 'youtu.be':
 						$id  = trim( $video['path'], '/' );
-						$src = '//www.youtube.com/embed/' . $id;
+						$src = '//www.youtube.com/embed/' . $id.'?'.$video['query'];
 						break;
 
 					case 'www.youtube.com':
 					case 'youtube.com':
 						parse_str( $video['query'], $query );
 						$id  = $query['v'];
-						$src = '//www.youtube.com/embed/' . $id;
+						$src = '//www.youtube.com/embed/' . $id.'?'.$video['query'];
 						break;
 
 					case 'vimeo.com':
 					case 'www.vimeo.com':
 						$id  = trim( $video['path'], '/' );
-						$src = '//player.vimeo.com/video/' . $id;
+						$src = '//player.vimeo.com/video/' . $id.'?'.$video['query'];
 				}
-				$output .= '<iframe class="tz-video' . $box_shadow . '"' . $video_width_init . $video_height_init . ' src="' . $src . '" frameborder="0" allowfullscreen uk-responsive></iframe>';
+				$output .= '<div class="sppb-embed-responsive sppb-embed-responsive-16by9"><iframe class="tz-video sppb-embed-responsive-item' . $box_shadow . '"' . $video_width_init . $video_height_init . ' src="' . $src . '" frameborder="0" allowfullscreen uk-responsive></iframe></div>';
 			}
 		} elseif ( $video_source == 'html5' ) {
 			$output .= '<video class="html5-video' . $box_shadow . '"' . $video_width_init . $video_height_init . ' src="' . $url_mp4 . '"' . $show_control . $loop_video . $mute_video . $play_inline . $lazy_load . $autoplay_init . '></video>';

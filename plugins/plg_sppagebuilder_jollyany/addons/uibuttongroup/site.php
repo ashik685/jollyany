@@ -124,7 +124,7 @@ class SppagebuilderAddonUiButtonGroup extends SppagebuilderAddons {
 
 		$output = '';
 
-		$output .= '<div class="uikit-addon-button-group' . $zindex_cls . $general . '"' . $animation . '>';
+		$output .= '<div class="uikit-addon-button-group uk-flex' . $button_alignment . $zindex_cls . $general . '"' . $animation . '>';
 		if ( $title_addon ) {
 			$output .= '<' . $title_heading_selector . ' class="tz-title' . $title_style . $title_heading_decoration . '">';
 
@@ -136,7 +136,7 @@ class SppagebuilderAddonUiButtonGroup extends SppagebuilderAddons {
 
 			$output .= '</' . $title_heading_selector . '>';
 		}
-		$output .= '<div class="uk-button-group' . $button_alignment . '">';
+		$output .= '<div class="uk-button-group">';
 
 		if ( isset( $settings->ui_button_group_item ) && count( (array) $settings->ui_button_group_item ) ) {
 			foreach ( $settings->ui_button_group_item as $key => $value ) {
@@ -173,7 +173,7 @@ class SppagebuilderAddonUiButtonGroup extends SppagebuilderAddons {
 						$text = ( $icon ) ? $text . ' <i class="' . $icon . '" aria-hidden="true"></i>' : $text;
 					}
 
-					$output .= '<a class="ui-item-' . $key . $button_style_cls . $font_weight . '"' . $attribs . $render_linkscroll . $scrollspy_cls . ' uk-scroll>' . $text . '</a>';
+					$output .= '<a class="ui-item-' . $key . $button_style_cls . $font_weight . '"' . $attribs . $render_linkscroll . $scrollspy_cls . '>' . $text . '</a>';
 				}
 			}
 		}

@@ -177,6 +177,10 @@ SpAddonsConfig::addonConfig(
 					'type' => 'color',
 					'title' => JText::_('Color'),
 				),
+                'title_highlight_color' => array(
+                    'type' => 'color',
+                    'title' => JText::_('Highlight Color'),
+                ),
 				'title_fontsize' => array(
 					'type' => 'slider',
 					'title' => JText::_('Font Size'),

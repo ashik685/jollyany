@@ -104,7 +104,7 @@ if (!empty($body_link_color)) {
     $styles[] = '.tpp-bootstrap a{ color: ' . $body_link_color . ';}';
 }
 if (!empty($body_link_hover_color)) {
-    $styles[] = '.tpp-bootstrap a:hover{ color: ' . $body_link_hover_color . ';}';
+    $styles[] = '.tpp-bootstrap a:hover, a.uk-link-heading:hover, .uk-link-heading a:hover, .uk-link-toggle:hover .uk-link-heading, .uk-link-toggle:focus .uk-link-heading{ color: ' . $body_link_hover_color . ';}';
 }
 if (!empty($social_icon_color) && $social_profiles_style == 1) {
     $styles[] = '.astroid-social-icons > li a{ color: ' . $social_icon_color . ' !important;}';

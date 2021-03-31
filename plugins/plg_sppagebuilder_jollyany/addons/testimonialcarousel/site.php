@@ -65,7 +65,7 @@ class SppagebuilderAddonTestimonialcarousel extends SppagebuilderAddons {
         $settings = $this->addon->settings;
         $testimonial_type = (isset($settings->testimonial_type)) ? $settings->testimonial_type : 'slides';
         if ($testimonial_type == 'slides') {
-            return array(JURI::base(true) . '/libraries/jollyany/framework/assets/js/vendor/jquery.flexslider.js');
+            return array(JURI::base(true) . '/libraries/jollyany/framework/assets/js/vendor/jquery.flexslider.min.js');
         } else {
             return array(JURI::base(true) . '/libraries/jollyany/framework/assets/js/vendor/owl.carousel.min.js');
         }
