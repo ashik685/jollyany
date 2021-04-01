@@ -8,6 +8,10 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.6.6**
+
+    [fixbug] UI Social fix issue Icon alignment
+
 **Version 1.6.5**
 
     [new topic] Martha | Creative Portfolio Joomla Template

@@ -145,7 +145,7 @@ class SppagebuilderAddonUiSocial extends SppagebuilderAddons {
 			$output .= '</' . $title_heading_selector . '>';
 		}
 
-		$output .= '<div class="uk-child-width-auto' . $gutter . '" uk-grid>';
+		$output .= '<div class="uk-child-width-auto' . $gutter . $flex_alignment . '" uk-grid>';
 
 		if ( isset( $settings->ui_subnav_items ) && count( (array) $settings->ui_subnav_items ) ) {
 			foreach ( $settings->ui_subnav_items as $key => $item ) {
