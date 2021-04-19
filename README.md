@@ -8,7 +8,7 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
-**Version 1.6.6**
+**Version 1.6.7**
 
     [new topic] Alita | Web Studio & Creative Agency Joomla Template
     [improve] Imrove style for Hikashop Modal
