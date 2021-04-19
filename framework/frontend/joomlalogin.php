@@ -30,25 +30,17 @@ $module = JModuleHelper::getModuleById($joomlalogin_module);
 $title  =   $module && isset($module->title) && $module->title ? $module->title : JText::_('TPL_JOLLYANY_LOGIN');
 ?>
 	<div class="jollyany-login">
-		<a href="#" class="jollyany-login-icon" data-toggle="modal" data-target="#jollyany-login-content"><i class="fas fa-user mr-1"></i> <?php echo $title; ?></a>
+		<a href="#jollyany-login-content" class="jollyany-login-icon" uk-toggle><i class="fas fa-user mr-1"></i> <?php echo $title; ?></a>
 	</div>
 <?php
 ob_start();
 ?>
     <!-- Modal -->
-    <div class="modal fade" id="jollyany-login-content" tabindex="-1" role="dialog" aria-labelledby="jollyany-login-title" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="jollyany-login-title"><?php echo JText::_('TPL_JOLLYANY_LOGIN'); ?></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <?php echo $document->loadModule("{loadmoduleid $joomlalogin_module}"); ?>
-                </div>
-            </div>
+    <div id="jollyany-login-content" uk-modal>
+        <div class="uk-modal-dialog uk-margin-auto-vertical uk-modal-body">
+            <h2 class="uk-modal-title" id="jollyany-login-title"><?php echo JText::_('TPL_JOLLYANY_LOGIN'); ?></h2>
+            <?php echo $document->loadModule("{loadmoduleid $joomlalogin_module}"); ?>
+            <button class="uk-modal-close-default" type="button" uk-close></button>
         </div>
     </div>
 <?php

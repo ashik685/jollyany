@@ -118,6 +118,7 @@ class SppagebuilderAddonUiCard extends SppagebuilderAddons {
 		$content_style .= ( isset( $settings->content_margin_top ) && $settings->content_margin_top ) ? ' uk-margin-' . $settings->content_margin_top . '-top' : ' uk-margin-top';
 
 		$card_content = ( isset( $settings->card_content ) && $settings->card_content ) ? $settings->card_content : '';
+		$card_type = ( isset( $settings->card_type ) && $settings->card_type ) ? $settings->card_type : 'image';
 
 		// Image
 		$image = ( isset( $settings->image ) && $settings->image ) ? $settings->image : '';
@@ -133,6 +134,21 @@ class SppagebuilderAddonUiCard extends SppagebuilderAddons {
 		$image_alt = ( isset( $settings->alt_text ) && $settings->alt_text ) ? $settings->alt_text : '';
 
 		$image_margin_top = ( isset( $settings->image_margin_top ) && $settings->image_margin_top ) ? ' uk-margin-' . $settings->image_margin_top . '-top' : ' uk-margin-top';
+
+		// Icon
+        $icon_type = ( isset( $settings->icon_type ) && $settings->icon_type ) ? $settings->icon_type : 'fontawesome';
+        $icon_size = ( isset( $settings->icon_size ) && $settings->icon_size ) ? $settings->icon_size : '36';
+        if ($icon_type == 'fontawesome') {
+            $icon_class = (isset($settings->fontawesome_icon) && $settings->fontawesome_icon) ? $settings->fontawesome_icon : '';
+            $icon_arr = array_filter(explode(' ', $icon_class));
+            if (count($icon_arr) === 1) {
+                $icon_class = 'fa ' . $icon_class;
+            }
+        } elseif ($icon_type == 'uikit') {
+            $icon_class = ( isset( $settings->uikit_icon ) && $settings->uikit_icon ) ? $settings->uikit_icon : '';
+        } else {
+            $icon_class = ( isset( $settings->linear_icon ) && $settings->linear_icon ) ? 'lnr ' .$settings->linear_icon : '';
+        }
 
 		$title_alt_text = ( isset( $settings->card_title ) && $settings->card_title ) ? $settings->card_title : '';
 
@@ -313,7 +329,7 @@ class SppagebuilderAddonUiCard extends SppagebuilderAddons {
 
 			$output .= ( $image_padding ) ? '<div class="' . $img_class . ' uk-cover-container">' : '';
 
-			if ( $image_src ) {
+			if ( $card_type == 'image' && $image_src ) {
 
 				if ( $image_link && $title_link && $panel_link == false ) {
 					$output .= '<a href="' . $title_link . '"' . $link_target . $render_linkscroll . $link_cover . '>';
@@ -425,7 +441,7 @@ class SppagebuilderAddonUiCard extends SppagebuilderAddons {
 
 		} else {
 
-			if ( $positions == 'top' && $image_src ) {
+			if ( $positions == 'top' && $card_type == 'image' && $image_src ) {
 
 				$output .= ( $image_padding ) ? '<div class="uk-card-media-top">' : '';
 
@@ -447,6 +463,16 @@ class SppagebuilderAddonUiCard extends SppagebuilderAddons {
 
 			$output .= ( $image_padding ) ? '<div class="uk-card-body uk-margin-remove-first-child">' : '';
 			$output .= ( $card_content_padding ) ? '<div class="' . $card_content_padding . 'uk-margin-remove-first-child">' : '';
+
+			if ($card_type == 'icon' && $icon_class) {
+			    $output .= '<div class="ui-icon">';
+			    if ($icon_type == 'fontawesome' || $icon_type == 'linear') {
+			        $output .=  '<i class="' . $icon_class . '" aria-hidden="true"></i>';
+                } else {
+                    $output .=  '<span uk-icon="icon: ' . $icon_class . '; width: '.$icon_size.'"></span>';
+                }
+			    $output .= '</div>';
+            }
 
 			$output .= ( $label_text ) ? '<div class="uk-card-badge uk-label' . $label_styles . '">' . $label_text . '</div>' : '';
 
@@ -578,6 +604,9 @@ class SppagebuilderAddonUiCard extends SppagebuilderAddons {
 		$button_style       = ( isset( $settings->button_style ) && $settings->button_style ) ? $settings->button_style : '';
 		$button_background  = ( isset( $settings->button_background ) && $settings->button_background ) ? 'background-color: ' . $settings->button_background . ';' : '';
 		$button_color       = ( isset( $settings->button_color ) && $settings->button_color ) ? 'color: ' . $settings->button_color . ';' : '';
+		$icon_color         = ( isset( $settings->icon_color ) && $settings->icon_color ) ? 'color: ' . $settings->icon_color . ';' : '';
+        $icon_size          = ( isset( $settings->icon_size ) && $settings->icon_size ) ? $settings->icon_size : '36';
+        $icon_size          = 'font-size: '.$icon_size.'px;';
 
 		$button_background_hover = ( isset( $settings->button_background_hover ) && $settings->button_background_hover ) ? 'background-color: ' . $settings->button_background_hover . ';' : '';
 		$button_hover_color      = ( isset( $settings->button_hover_color ) && $settings->button_hover_color ) ? 'color: ' . $settings->button_hover_color . ';' : '';
@@ -610,6 +639,10 @@ class SppagebuilderAddonUiCard extends SppagebuilderAddons {
 		if ( $content_color ) {
 			$css .= $addon_id . ' .ui-content {' . $content_color . '}';
 		}
+
+		if ( $icon_color || $icon_size ) {
+            $css .= $addon_id . ' .ui-icon {' . $icon_color . $icon_size . '}';
+        }
 
 		if ( $button_title && $button_style == 'custom' ) {
 			if ( $button_background || $button_color ) {

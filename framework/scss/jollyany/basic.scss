@@ -24,6 +24,42 @@ $global-link-color: $colorMain !default;
     font-weight: 700;
   }
 }
+.uk-button-rounded {
+  border-radius: 5px;
+}
+.uk-button-round {
+  border-radius: 500px;
+}
+.tz-price-table_featured {
+  position: absolute;
+  top: 0;
+  left: auto;
+  right: 0;
+  z-index: 9;
+  -webkit-transform: rotate(
+                  90deg
+  );
+  -ms-transform: rotate(90deg);
+  transform: rotate(
+                  90deg
+  );
+  width: 150px;
+  overflow: hidden;
+  height: 150px;
+}
+.tz-price-table_featured-inner {
+  text-align: center;
+  text-transform: uppercase;
+  left: 0;
+  width: 200%;
+  -webkit-transform: translateY(-50%) translateX(-50%) translateX(35px) rotate(-45deg);
+  -ms-transform: translateY(-50%) translateX(-50%) translateX(35px) rotate(-45deg);
+  transform: translateY(-50%) translateX(-50%) translateX(35px) rotate(-45deg);
+  margin-top: 35px;
+  font-size: 12px;
+  line-height: 2;
+  color: #fff;
+}
 .btn {
   padding: 0.375rem 1rem;
 }

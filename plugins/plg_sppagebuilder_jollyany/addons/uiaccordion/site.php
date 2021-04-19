@@ -321,16 +321,10 @@ class SppagebuilderAddonUiAccordion extends SppagebuilderAddons {
 			}
 		}
 
-		if ( empty( $styles ) ) {
-			$css .= $addon_id . ' .uk-accordion>:nth-child(n+2) {';
-			$css .= 'margin-top: 15px;';
-			$css .= 'padding-top: 15px;';
-			$css .= 'border-top: 1px solid #eaeaea;';
-			$css .= '}';
-		} else {
-			$css .= $addon_id . ' .ui-accordion .uk-card-small .uk-card-body, .ui-accordion .uk-card-small.uk-card-body {';
-			$css .= 'padding: 12px 20px;';
-			$css .= '}';
+		if ( !empty( $styles ) ) {
+            $css .= $addon_id . ' .ui-accordion .uk-card-small .uk-card-body, .ui-accordion .uk-card-small.uk-card-body {';
+            $css .= 'padding: 12px 20px;';
+            $css .= '}';
 		}
 		return $css;
 	}

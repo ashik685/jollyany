@@ -177,6 +177,7 @@ class SppagebuilderAddonUiButton extends SppagebuilderAddons {
 				$link_title    = ( isset( $button->link_title ) && $button->link_title ) ? ' title="' . $button->link_title . '"' : '';
 				$title         = ( isset( $button->button_title ) && $button->button_title ) ? $button->button_title : '';
 				$button_style  = ( isset( $button->button_style ) && $button->button_style ) ? $button->button_style : '';
+                $button_shape  = (isset($button->button_shape) && $button->button_shape) ? ' uk-button-' . $button->button_shape : ' uk-button-square';
 
 				$icon        = ( empty( $icon_type ) ) ? ( ( isset( $button->btn_icon ) && $button->btn_icon ) ? $button->btn_icon : '' ) : false;
 				$uk_icon     = ( $icon_type === 'uikit' ) ? ( ( isset( $button->uikit_icon ) && $button->uikit_icon ) ? $button->uikit_icon : '' ) : false;
@@ -198,11 +199,11 @@ class SppagebuilderAddonUiButton extends SppagebuilderAddons {
 				$button_width     = ( isset( $settings->grid_width ) && $settings->grid_width ) ? ' uk-width-1-1' : '';
 				$button_style_cls = '';
 				if ( empty( $button_style ) ) {
-					$button_style_cls .= 'uk-button uk-button-default' . $button_width . $button_size;
+					$button_style_cls .= 'uk-button uk-button-default' . $button_width . $button_size. $button_shape;
 				} elseif ( $button_style == 'link' || $button_style == 'link-muted' || $button_style == 'link-text' ) {
 					$button_style_cls .= 'uk-' . $button_style;
 				} else {
-					$button_style_cls .= 'uk-button uk-button-' . $button_style . $button_width . $button_size;
+					$button_style_cls .= 'uk-button uk-button-' . $button_style . $button_width . $button_size. $button_shape;
 				}
 
 				$check_target      = ( isset( $button->target ) && $button->target ) ? $button->target : '';

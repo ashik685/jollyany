@@ -351,6 +351,22 @@ SpAddonsConfig::addonConfig(
                     ),
                     'std' => '',
                 ),
+                  'button_shape' => array(
+                      'type' => 'select',
+                      'title' => JText::_('COM_SPPAGEBUILDER_GLOBAL_BUTTON_SHAPE'),
+                      'desc' => JText::_('COM_SPPAGEBUILDER_GLOBAL_BUTTON_SHAPE_DESC'),
+                      'values' => array(
+                          'rounded' => JText::_('COM_SPPAGEBUILDER_GLOBAL_BUTTON_SHAPE_ROUNDED'),
+                          'square' => JText::_('COM_SPPAGEBUILDER_GLOBAL_BUTTON_SHAPE_SQUARE'),
+                          'round' => JText::_('COM_SPPAGEBUILDER_GLOBAL_BUTTON_SHAPE_ROUND'),
+                      ),
+                      'depends' => array(
+                          array('button_style', '!=', 'link'),
+                          array('button_style', '!=', 'link-muted'),
+                          array('button_style', '!=', 'link-text'),
+                          array('button_style', '!=', 'text'),
+                      )
+                  ),
                 'separator_button_custom_options' => array(
                     'type' => 'separator',
                     'title' => JText::_('Custom Button Style'),
@@ -416,7 +432,7 @@ SpAddonsConfig::addonConfig(
                     'small' => JText::_('Small'),
                     'large' => JText::_('Large'),
                 ),
-            ),     
+            ),
             'grid_width' => array(
                 'type' => 'checkbox',
                 'title' => JText::_('Full width button'),

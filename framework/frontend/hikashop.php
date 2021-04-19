@@ -20,25 +20,17 @@ if (!$hikacart || !$hikacart_module) {
 }
 ?>
 <div class="jollyany-hikacart">
-    <a href="#" class="jollyany-hikacart-icon" data-toggle="modal" data-target="#jollyany-hikacart-content"><i class="fas fa-shopping-cart mr-1"></i> <?php echo JText::_('TPL_JOLLYANY_YOUR_CART'); ?></a>
+    <a href="#jollyany-hikacart-content" class="jollyany-hikacart-icon" uk-toggle><i class="fas fa-shopping-cart mr-1"></i> <?php echo JText::_('TPL_JOLLYANY_YOUR_CART'); ?></a>
 </div>
 <?php
 ob_start();
 ?>
 <!-- Modal -->
-<div class="modal fade" id="jollyany-hikacart-content" tabindex="-1" role="dialog" aria-labelledby="jollyany-hikacart-title" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="jollyany-hikacart-title"><?php echo JText::_('TPL_JOLLYANY_YOUR_CART'); ?></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <?php echo $document->loadModule("{loadmoduleid $hikacart_module}"); ?>
-            </div>
-        </div>
+<div id="jollyany-hikacart-content" class="uk-modal-container" uk-modal>
+    <div class="uk-modal-dialog uk-margin-auto-vertical uk-modal-body">
+        <h2 class="uk-modal-title" id="jollyany-hikacart-title"><?php echo JText::_('TPL_JOLLYANY_YOUR_CART'); ?></h2>
+        <?php echo $document->loadModule("{loadmoduleid $hikacart_module}"); ?>
+        <button class="uk-modal-close-default" type="button" uk-close></button>
     </div>
 </div>
 <?php

@@ -18,6 +18,14 @@ $template = Framework::getTemplate();
 $params = $template->getParams();
 $document = Framework::getDocument();
 
+// Body Font Styles
+$bodyType = $params->get('body_typography');
+if (trim($bodyType) == 'custom') {
+    $typography     = $params->get('body_typography_options');
+    $selector       = 'html';
+    Helper\Style::renderTypography($selector, $typography);
+}
+
 // Top Bar Font Styles
 $topbarType = $params->get('top_bar_typography');
 if (trim($topbarType) == 'custom') {

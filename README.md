@@ -10,6 +10,18 @@ Astroid Framework: https://astroidframework.com/
 
 **Version 1.6.6**
 
+    [new topic] Alita | Web Studio & Creative Agency Joomla Template
+    [improve] Imrove style for Hikashop Modal
+    [improve] Imrove style for Login Modal
+    [improve] Imrove Basic Style
+    [update] Update UI Accordion Style
+    [update] Update UI Button Style
+    [update] Update UI Card Style
+    [update] Update UI Image Style
+    [added] Addon UI Testimonial Pro Addon
+
+**Version 1.6.6**
+
     [fixbug] UI Social fix issue Icon alignment
 
 **Version 1.6.5**

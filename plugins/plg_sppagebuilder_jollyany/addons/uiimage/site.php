@@ -26,10 +26,18 @@ class SppagebuilderAddonUiImage extends SppagebuilderAddons {
 		$image     = ( isset( $settings->image ) && $settings->image ) ? $settings->image : '';
 		$image_src = isset( $image->src ) ? $image->src : $image;
 		if ( strpos( $image_src, 'http://' ) !== false || strpos( $image_src, 'https://' ) !== false ) {
+            $image_properties   =   getimagesize($image_src);
 			$image_src = $image_src;
 		} elseif ( $image_src ) {
+            $image_properties   =   getimagesize(JURI::base() . '/' . $image_src);
 			$image_src = JURI::base( true ) . '/' . $image_src;
 		}
+
+        if (is_array($image_properties) && count($image_properties) > 2) {
+            $data_image_src = 'data-src="' . $image_src . '" width="' . $image_properties[0] . '" height="' . $image_properties[1] . '" uk-img';
+        } else {
+            $data_image_src = 'src="' . $image_src . '"';
+        }
 		$alt_text = ( isset( $settings->alt_text ) && $settings->alt_text ) ? $settings->alt_text : '';
 
 		$link_type = ( isset( $settings->link_type ) && $settings->link_type ) ? $settings->link_type : '';
@@ -154,7 +162,6 @@ class SppagebuilderAddonUiImage extends SppagebuilderAddons {
 		}
 
 		$output = '';
-
 		if ( $image_src ) {
 
 			$output .= '<div class="ui-addon-image' . $zindex_cls . $general . $max_width_cfg . '"' . $animation . $link_type_cls . '>';
@@ -176,7 +183,8 @@ class SppagebuilderAddonUiImage extends SppagebuilderAddons {
 			$output .= ( $link_type == 'use_link' && $title_link ) ? '<a ' . $link_target . ' href="' . $title_link . '">' : '';
 
 			$output .= ( $image_transition ) ? '<div class="uk-inline-clip uk-transition-toggle" tabindex="0"' . $media_background . '>' : '<div' . $media_background . '>';
-			$output .= '<img class="el-image' . $image_svg_color . $image_transition . $image_styles . $media_blend_mode . '" src="' . $image_src . '" alt="' . str_replace( '"', '', $alt_text ) . '"' . $image_svg_inline_cls . '>';
+
+			$output .= '<img class="el-image' . $image_svg_color . $image_transition . $image_styles . $media_blend_mode . '" ' . $data_image_src . ' alt="' . str_replace( '"', '', $alt_text ) . '"' . $image_svg_inline_cls . '>';
 			$output .= $media_overlay;
 			$output .= ( $image_transition ) ? '</div>' : '</div>';
 
