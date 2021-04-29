@@ -125,11 +125,20 @@ class SppagebuilderAddonUiCard extends SppagebuilderAddons {
 
 		$image_src = isset( $image->src ) ? $image->src : $image;
 
+        $image_properties   =   false;
 		if ( strpos( $image_src, 'http://' ) !== false || strpos( $image_src, 'https://' ) !== false ) {
+            $image_properties   =   getimagesize($image_src);
 			$image_src = $image_src;
 		} elseif ( $image_src ) {
+            $image_properties   =   getimagesize(JURI::base() . '/' . $image_src);
 			$image_src = JURI::base( true ) . '/' . $image_src;
 		}
+
+        if (is_array($image_properties) && count($image_properties) > 2) {
+            $data_image_src = 'data-src="' . $image_src . '" data-width="' . $image_properties[0] . '" data-height="' . $image_properties[1] . '" uk-img';
+        } else {
+            $data_image_src = 'src="' . $image_src . '"';
+        }
 
 		$image_alt = ( isset( $settings->alt_text ) && $settings->alt_text ) ? $settings->alt_text : '';
 
@@ -338,8 +347,8 @@ class SppagebuilderAddonUiCard extends SppagebuilderAddons {
 
 				$output .= ( $panel_link && ( $image_transition || $image_border || $image_box_shadow ) ) ? '<div class="uk-inline-clip' . $image_border . $image_box_shadow . '">' : '';
 
-				$output .= '<img class="ui-img' . $image_svg_color . ( $image_link || $panel_link ? $image_transition : $image_border . $image_box_shadow ) . '" src="' . $image_src . '" ' . $image_alt_init . $image_svg_inline_cls . $cover_init . '>';
-				$output .= ( $image_padding && ! empty( $card ) ) ? '<img class="uk-invisible uk-display-inline-block' . $image_svg_color . '" src="' . $image_src . '" ' . $image_alt_init . $image_svg_inline_cls . '>' : '';
+				$output .= '<img class="ui-img' . $image_svg_color . ( $image_link || $panel_link ? $image_transition : $image_border . $image_box_shadow ) . '" ' . $data_image_src . ' ' . $image_alt_init . $image_svg_inline_cls . $cover_init . '>';
+				$output .= ( $image_padding && ! empty( $card ) ) ? '<img class="uk-invisible uk-display-inline-block' . $image_svg_color . '" ' . $data_image_src . ' ' . $image_alt_init . $image_svg_inline_cls . '>' : '';
 
 				$output .= ( $panel_link && ( $image_transition || $image_border || $image_box_shadow ) ) ? '</div>' : '';
 
@@ -450,7 +459,7 @@ class SppagebuilderAddonUiCard extends SppagebuilderAddons {
 					$output .= ( $image_transition ) ? '<div class="uk-inline-clip uk-transition-toggle' . $image_border . $image_box_shadow . $image_hover_box_shadow . '">' : '';
 				}
 					$output .= ( $panel_link && ( $image_transition || $image_border || $image_box_shadow ) ) ? '<div class="uk-inline-clip' . $image_border . $image_box_shadow . '">' : '';
-					$output .= '<img class="ui-img' . $image_svg_color . ( $image_link || $panel_link ? $image_transition : $image_border . $image_box_shadow ) . '" src="' . $image_src . '" ' . $image_alt_init . $image_svg_inline_cls . '>';
+					$output .= '<img class="ui-img' . $image_svg_color . ( $image_link || $panel_link ? $image_transition : $image_border . $image_box_shadow ) . '" ' . $data_image_src . ' ' . $image_alt_init . $image_svg_inline_cls . '>';
 					$output .= ( $panel_link && ( $image_transition || $image_border || $image_box_shadow ) ) ? '</div>' : '';
 
 				if ( $image_link && $title_link && $panel_link == false ) {
@@ -521,7 +530,7 @@ class SppagebuilderAddonUiCard extends SppagebuilderAddons {
 					$output .= ( $image_transition ) ? '<div class="uk-inline-clip uk-transition-toggle' . $image_border . $image_box_shadow . $image_hover_box_shadow . $image_margin_top . '">' : '';
 				}
 				$output .= ( $panel_link && ( $image_transition || $image_border || $image_box_shadow ) ) ? '<div class="uk-inline-clip' . $image_border . $image_box_shadow . $image_margin_top . '">' : '';
-				$output .= '<img class="ui-img' . ( $image_transition ? '' : $image_margin_top ) . $image_svg_color . ( $image_link || $panel_link ? $image_transition : $image_border . $image_box_shadow ) . '" src="' . $image_src . '" ' . $image_alt_init . $image_svg_inline_cls . '>';
+				$output .= '<img class="ui-img' . ( $image_transition ? '' : $image_margin_top ) . $image_svg_color . ( $image_link || $panel_link ? $image_transition : $image_border . $image_box_shadow ) . '" ' . $data_image_src . ' ' . $image_alt_init . $image_svg_inline_cls . '>';
 				$output .= ( $panel_link && ( $image_transition || $image_border || $image_box_shadow ) ) ? '</div>' : '';
 				if ( $image_link && $title_link && $panel_link == false ) {
 					$output .= ( $image_transition ) ? '</div>' : '';
@@ -572,7 +581,7 @@ class SppagebuilderAddonUiCard extends SppagebuilderAddons {
 					$output .= ( $image_transition ) ? '<div class="uk-inline-clip uk-transition-toggle' . $image_border . $image_box_shadow . $image_hover_box_shadow . $image_margin_top . '">' : '';
 				}
 				$output .= ( $panel_link && ( $image_transition || $image_border || $image_box_shadow ) ) ? '<div class="uk-inline-clip' . $image_border . $image_box_shadow . $image_margin_top . '">' : '';
-				$output .= '<img class="ui-img' . ( $image_transition || $image_padding ? '' : $image_margin_top ) . $image_svg_color . ( $image_link || $panel_link ? $image_transition : $image_border . $image_box_shadow ) . '" src="' . $image_src . '" ' . $image_alt_init . $image_svg_inline_cls . '>';
+				$output .= '<img class="ui-img' . ( $image_transition || $image_padding ? '' : $image_margin_top ) . $image_svg_color . ( $image_link || $panel_link ? $image_transition : $image_border . $image_box_shadow ) . '" ' . $data_image_src . ' ' . $image_alt_init . $image_svg_inline_cls . '>';
 				$output .= ( $panel_link && ( $image_transition || $image_border || $image_box_shadow ) ) ? '</div>' : '';
 				if ( $image_link && $title_link && $panel_link == false ) {
 					$output .= ( $image_transition ) ? '</div>' : '';

@@ -62,11 +62,19 @@ class SppagebuilderAddonUiMarker extends SppagebuilderAddons {
 		// Options.
 		$image_marker     = ( isset( $settings->image ) && $settings->image ) ? $settings->image : '';
 		$image_marker_src = isset( $image_marker->src ) ? $image_marker->src : $image_marker;
+        $image_properties   =   false;
 		if ( strpos( $image_marker_src, 'http://' ) !== false || strpos( $image_marker_src, 'https://' ) !== false ) {
-			$image_marker_src = $image_marker_src;
+            $image_properties   =   getimagesize($image_marker_src);
+			$image_marker_src   =   $image_marker_src;
 		} elseif ( $image_marker_src ) {
-			$image_marker_src = JURI::base( true ) . '/' . $image_marker_src;
+            $image_properties   =   getimagesize(JURI::base() . '/' . $image_marker_src);
+			$image_marker_src   =   JURI::base( true ) . '/' . $image_marker_src;
 		}
+        if (is_array($image_properties) && count($image_properties) > 2) {
+            $data_marker_src = 'data-src="' . $image_marker_src . '" data-width="' . $image_properties[0] . '" data-height="' . $image_properties[1] . '" uk-img';
+        } else {
+            $data_marker_src = 'src="' . $image_marker_src . '"';
+        }
 		$alt_text      = ( isset( $settings->alt_text ) && $settings->alt_text ) ? $settings->alt_text : '';
 		$alt_text_init = ( ! empty( $alt_text ) ) ? 'alt="' . $alt_text . '"' : '';
 
@@ -247,7 +255,7 @@ class SppagebuilderAddonUiMarker extends SppagebuilderAddons {
 		$output .= '<div class="uk-inline"' . $media_background . '>';
 
 		if ( $image_marker_src ) {
-			$output .= '<img class="ui-image' . $media_blend_mode . '" src="' . $image_marker_src . '" ' . $alt_text_init . '>';
+			$output .= '<img class="ui-image' . $media_blend_mode . '" ' . $data_marker_src . ' ' . $alt_text_init . '>';
 			$output .= $media_overlay;
 		}
 
@@ -270,11 +278,19 @@ class SppagebuilderAddonUiMarker extends SppagebuilderAddons {
 
 				$image     = ( isset( $item->marker_image ) && $item->marker_image ) ? $item->marker_image : '';
 				$image_src = isset( $image->src ) ? $image->src : $image;
+                $image_properties   =   false;
 				if ( strpos( $image_src, 'http://' ) !== false || strpos( $image_src, 'https://' ) !== false ) {
+                    $image_properties   =   getimagesize($image_src);
 					$image_src = $image_src;
 				} elseif ( $image_src ) {
+                    $image_properties   =   getimagesize(JURI::base() . '/' . $image_src);
 					$image_src = JURI::base( true ) . '/' . $image_src;
 				}
+                if (is_array($image_properties) && count($image_properties) > 2) {
+                    $data_image_src = 'data-src="' . $image_src . '" data-width="' . $image_properties[0] . '" data-height="' . $image_properties[1] . '" uk-img';
+                } else {
+                    $data_image_src = 'src="' . $image_src . '"';
+                }
 				$image_alt      = ( isset( $item->marker_image_alt_text ) && $item->marker_image_alt_text ) ? $item->marker_image_alt_text : '';
 				$title_alt_text = ( isset( $item->marker_title ) && $item->marker_title ) ? $item->marker_title : '';
 
@@ -301,7 +317,7 @@ class SppagebuilderAddonUiMarker extends SppagebuilderAddons {
 					if ( $image_link && $title_link && $panel_link == false ) {
 						$output .= ( $title_link ) ? '<a href="' . $title_link . '"' . $link_target . $render_linkscroll . '>' : '';
 					}
-					$output .= '<img' . $image_width . $image_height . ' class="ui-image uk-margin-auto uk-display-block' . $image_styles_cls . $image_svg_color . '" src="' . $image_src . '" ' . $image_alt_init . $image_svg_inline_cls . '>';
+					$output .= '<img' . $image_width . $image_height . ' class="ui-image uk-margin-auto uk-display-block' . $image_styles_cls . $image_svg_color . '" ' . $data_image_src . ' ' . $image_alt_init . $image_svg_inline_cls . '>';
 					if ( $image_link && $title_link && $panel_link == false ) {
 						$output .= ( $title_link ) ? '</a>' : '';
 					}
@@ -422,11 +438,19 @@ class SppagebuilderAddonUiMarker extends SppagebuilderAddons {
 
 					$image     = ( isset( $item->marker_image ) && $item->marker_image ) ? $item->marker_image : '';
 					$image_src = isset( $image->src ) ? $image->src : $image;
-					if ( strpos( $image_src, 'http://' ) !== false || strpos( $image_src, 'https://' ) !== false ) {
-						$image_src = $image_src;
-					} elseif ( $image_src ) {
-						$image_src = JURI::base( true ) . '/' . $image_src;
-					}
+                    $image_properties   =   false;
+                    if ( strpos( $image_src, 'http://' ) !== false || strpos( $image_src, 'https://' ) !== false ) {
+                        $image_properties   =   getimagesize($image_src);
+                        $image_src = $image_src;
+                    } elseif ( $image_src ) {
+                        $image_properties   =   getimagesize(JURI::base() . '/' . $image_src);
+                        $image_src = JURI::base( true ) . '/' . $image_src;
+                    }
+                    if (is_array($image_properties) && count($image_properties) > 2) {
+                        $data_image_src = 'data-src="' . $image_src . '" data-width="' . $image_properties[0] . '" data-height="' . $image_properties[1] . '" uk-img';
+                    } else {
+                        $data_image_src = 'src="' . $image_src . '"';
+                    }
 
 					$image_alt      = ( isset( $item->marker_image_alt_text ) && $item->marker_image_alt_text ) ? $item->marker_image_alt_text : '';
 					$title_alt_text = ( isset( $item->marker_title ) && $item->marker_title ) ? $item->marker_title : '';
@@ -450,7 +474,7 @@ class SppagebuilderAddonUiMarker extends SppagebuilderAddons {
 						if ( $image_link && $title_link && $panel_link == false ) {
 							$output .= ( $title_link ) ? '<a href="' . $title_link . '"' . $link_target . $render_linkscroll . '>' : '';
 						}
-						$output .= '<img' . $image_width . $image_height . ' class="ui-image uk-margin-auto uk-display-block' . $image_styles_cls . $image_svg_color . '" src="' . $image_src . '" ' . $image_alt_init . $image_svg_inline_cls . '>';
+						$output .= '<img' . $image_width . $image_height . ' class="ui-image uk-margin-auto uk-display-block' . $image_styles_cls . $image_svg_color . '" ' . $data_image_src . ' ' . $image_alt_init . $image_svg_inline_cls . '>';
 						if ( $image_link && $title_link && $panel_link == false ) {
 							$output .= ( $title_link ) ? '</a>' : '';
 						}

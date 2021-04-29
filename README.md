@@ -8,6 +8,15 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.6.8**
+
+    [improve] EasyDiscuss 5 style support
+    [update] Update UI Person lazyload support
+    [update] Update UI Marker lazyload support
+    [update] Update UI Card support icon
+    [update] Update UI Image lazyload support
+    [update] Update UI Pricing button shape support
+
 **Version 1.6.7**
 
     [new topic] Alita | Web Studio & Creative Agency Joomla Template

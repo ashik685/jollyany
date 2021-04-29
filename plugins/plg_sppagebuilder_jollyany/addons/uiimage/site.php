@@ -25,6 +25,7 @@ class SppagebuilderAddonUiImage extends SppagebuilderAddons {
 		// Options.
 		$image     = ( isset( $settings->image ) && $settings->image ) ? $settings->image : '';
 		$image_src = isset( $image->src ) ? $image->src : $image;
+		$image_properties   =   false;
 		if ( strpos( $image_src, 'http://' ) !== false || strpos( $image_src, 'https://' ) !== false ) {
             $image_properties   =   getimagesize($image_src);
 			$image_src = $image_src;
@@ -34,7 +35,7 @@ class SppagebuilderAddonUiImage extends SppagebuilderAddons {
 		}
 
         if (is_array($image_properties) && count($image_properties) > 2) {
-            $data_image_src = 'data-src="' . $image_src . '" width="' . $image_properties[0] . '" height="' . $image_properties[1] . '" uk-img';
+            $data_image_src = 'data-src="' . $image_src . '" data-width="' . $image_properties[0] . '" data-height="' . $image_properties[1] . '" uk-img';
         } else {
             $data_image_src = 'src="' . $image_src . '"';
         }

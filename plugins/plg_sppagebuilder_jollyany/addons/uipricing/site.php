@@ -142,15 +142,16 @@ class SppagebuilderAddonUiPricing extends SppagebuilderAddons {
 		$attribs      = ( isset( $settings->link_new_tab ) && $settings->link_new_tab ) ? ' target="' . $settings->link_new_tab . '"' : '';
 		$btn_styles   = ( isset( $settings->button_style ) && $settings->button_style ) ? '' . $settings->button_style : '';
 		$button_size  = ( isset( $settings->button_size ) && $settings->button_size ) ? ' ' . $settings->button_size : '';
+        $button_shape = (isset($settings->button_shape) && $settings->button_shape) ? ' uk-button-' . $settings->button_shape : ' uk-button-square';
 		$button_width = ( isset( $settings->button_width ) && $settings->button_width ) ? ' uk-width-1-1' : '';
 
 		$button_style_cls = '';
 		if ( empty( $btn_styles ) ) {
-			$button_style_cls .= 'uk-button uk-button-default' . $button_size . $button_width;
+			$button_style_cls .= 'uk-button uk-button-default' . $button_size . $button_width. $button_shape;
 		} elseif ( $btn_styles == 'link' || $btn_styles == 'link-muted' || $btn_styles == 'link-text' ) {
 			$button_style_cls .= 'uk-' . $btn_styles;
 		} else {
-			$button_style_cls .= 'uk-button uk-button-' . $btn_styles . $button_size . $button_width;
+			$button_style_cls .= 'uk-button uk-button-' . $btn_styles . $button_size . $button_width. $button_shape;
 		}
 
 		$btn_margin_top = ( isset( $settings->button_margin_top ) && $settings->button_margin_top ) ? 'uk-margin-' . $settings->button_margin_top . '-top' : 'uk-margin-top';

@@ -29,11 +29,21 @@ class SppagebuilderAddonUiPerson extends SppagebuilderAddons {
 		// Options.
 		$image     = ( isset( $settings->image ) && $settings->image ) ? $settings->image : '';
 		$image_src = isset( $image->src ) ? $image->src : $image;
+        $image_properties   =   false;
 		if ( strpos( $image_src, 'http://' ) !== false || strpos( $image_src, 'https://' ) !== false ) {
+            $image_properties   =   getimagesize($image_src);
 			$image_src = $image_src;
 		} elseif ( $image_src ) {
+            $image_properties   =   getimagesize(JURI::base() . '/' . $image_src);
 			$image_src = JURI::base( true ) . '/' . $image_src;
 		}
+
+        if (is_array($image_properties) && count($image_properties) > 2) {
+            $data_image_src = 'data-src="' . $image_src . '" data-width="' . $image_properties[0] . '" data-height="' . $image_properties[1] . '" uk-img';
+        } else {
+            $data_image_src = 'src="' . $image_src . '"';
+        }
+
 		$name        = ( isset( $settings->name ) && $settings->name ) ? $settings->name : '';
 		$designation = ( isset( $settings->designation ) && $settings->designation ) ? $settings->designation : '';
 		$email       = ( isset( $settings->email ) && $settings->email ) ? $settings->email : '';
@@ -274,7 +284,7 @@ class SppagebuilderAddonUiPerson extends SppagebuilderAddons {
 
 			$output .= ( $image_transition || $overlay_on_hover ) ? '<div class="uk-inline-clip uk-transition-toggle' . $box_shadow . $hover_box_shadow . '" tabindex="0"' . $media_background . '>' : '<div class="uk-inline-clip"' . $media_background . $box_shadow . $hover_box_shadow . '>';
 
-			$output .= ( $image_transition ) ? '<img class="ui-image' . $media_blend_mode . $image_transition . ' uk-transition-opaque" src="' . $image_src . '" ' . $image_alt_init . '>' : '<img class="ui-image' . $media_blend_mode . $image_border . '" src="' . $image_src . '" ' . $image_alt_init . '>';
+			$output .= ( $image_transition ) ? '<img class="ui-image' . $media_blend_mode . $image_transition . ' uk-transition-opaque" ' . $data_image_src . ' ' . $image_alt_init . '>' : '<img class="ui-image' . $media_blend_mode . $image_border . '" ' . $data_image_src . ' ' . $image_alt_init . '>';
 			$output .= $media_overlay;
 
 			if ( $social_position == 'overlay' && $use_social && ! empty( $social_icons ) ) {
