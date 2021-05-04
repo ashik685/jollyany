@@ -31,8 +31,8 @@ $title  =   $module && isset($module->title) && $module->title ? $module->title 
 ?>
 
 	<div class="jollyany-dropdownmenu">
-		<a href="#" id="jollyany-dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bars mr-1"></i> <?php echo $title; ?></a>
-        <div class="dropdown-menu" aria-labelledby="jollyany-dropdownmenu">
+		<a href="#" id="jollyany-dropdownmenu"><i class="fas fa-bars mr-1"></i> <?php echo $title; ?></a>
+        <div uk-dropdown>
 	        <?php echo $document->loadModule("{loadmoduleid $menu_module}"); ?>
         </div>
 	</div>
