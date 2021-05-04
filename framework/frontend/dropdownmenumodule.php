@@ -30,7 +30,7 @@ $module = JModuleHelper::getModuleById($menu_module);
 $title  =   $module && isset($module->title) && $module->title ? $module->title : JText::_('TPL_JOLLYANY_MENU');
 ?>
 
-	<div class="jollyany-dropdownmenu">
+	<div class="jollyany-dropdownmenu uk-inline">
 		<a href="#" id="jollyany-dropdownmenu"><i class="fas fa-bars mr-1"></i> <?php echo $title; ?></a>
         <div uk-dropdown>
 	        <?php echo $document->loadModule("{loadmoduleid $menu_module}"); ?>
