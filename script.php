@@ -132,7 +132,6 @@ class jollyanyInstallerScript {
             'framework/frontend/header/sidebar.php',
             'framework/frontend/header/stacked.php',
             'framework/frontend/header/sticky.php',
-            'framework/frontend/logo.php',
             'framework/frontend/mobilemenu.php',
             'framework/frontend/offcanvas.php',
             'framework/frontend/preloader.php',
