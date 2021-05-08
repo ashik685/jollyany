@@ -13,6 +13,13 @@ jQuery(function($){
         }
     };
     $(document).ready(function(){
+        if ($('.logo-wrapper').length) {
+            $('.logo-wrapper img').each(function (i, el){
+                if ($(el).attr('src') && $(el).attr('src').substr( ($(el).attr('src').lastIndexOf('.') +1) ) === 'svg') {
+                    $(el).attr('uk-svg','');
+                }
+            });
+        }
         if ($('#astroid-preloader').length && $('#jollyany-preloader-logo-template').length && !$('#astroid-preloader .jollyany-preloader-logo').length) {
             $('#astroid-preloader').prepend($('#jollyany-preloader-logo-template').html());
         }

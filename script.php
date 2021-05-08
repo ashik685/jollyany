@@ -121,6 +121,7 @@ class jollyanyInstallerScript {
             'framework/frontend/blog/quote.php',
             'framework/frontend/blog/review.php',
             'framework/frontend/blog/video.php',
+            'framework/frontend/logo.php',
             'framework/frontend/colors.php',
             'framework/frontend/comingsoon.php',
             'framework/frontend/contactinfo.php',
