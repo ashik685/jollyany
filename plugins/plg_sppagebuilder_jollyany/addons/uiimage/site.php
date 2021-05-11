@@ -23,8 +23,21 @@ class SppagebuilderAddonUiImage extends SppagebuilderAddons {
 		$title_position = ( isset( $settings->title_position ) && $settings->title_position ) ? $settings->title_position : 'top';
 
 		// Options.
+        $safari =   false;
+        $ua = $_SERVER["HTTP_USER_AGENT"];      // Get user-agent of browser
+
+        $safariorchrome = strpos($ua, 'Safari') ? true : false;     // Browser is either Safari or Chrome (since Chrome User-Agent includes the word 'Safari')
+        $chrome = strpos($ua, 'Chrome') ? true : false;             // Browser is Chrome
+
+        if($safariorchrome == true AND $chrome == false){ $safari = true; }     // Browser should be Safari, because there is no 'Chrome' in the User-Agent
 		$image     = ( isset( $settings->image ) && $settings->image ) ? $settings->image : '';
 		$image_src = isset( $image->src ) ? $image->src : $image;
+        $image_webp_enable      = ( isset( $settings->image_webp_enable )) ? $settings->image_webp_enable : 0;
+        $image_webp             = ( isset( $settings->image_webp ) && $settings->image_webp ) ? $settings->image_webp : '';
+        $image_webp_src         = isset( $image_webp->src ) ? $image_webp->src : $image_webp;
+        if (!$safari && $image_webp_enable && $image_webp_src) {
+            $image_src          =   $image_webp_src;
+        }
 		$image_properties   =   false;
 		if ( strpos( $image_src, 'http://' ) !== false || strpos( $image_src, 'https://' ) !== false ) {
             $image_properties   =   getimagesize($image_src);

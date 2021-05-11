@@ -131,6 +131,19 @@ SpAddonsConfig::addonConfig(
 					'show_input' => true,
 					'placeholder' => 'http://www.example.com/my-photo.jpg',
 				),
+                'image_webp_enable' => array(
+                    'type' => 'checkbox',
+                    'title' => JText::_('Enable WebP Type'),
+                    'desc' => JText::_('Use WebP image type.'),
+                    'std' => 0,
+                ),
+                'image_webp' => array(
+                    'type' => 'media',
+                    'title' => JText::_('Select WebP Image'),
+                    'show_input' => true,
+                    'placeholder' => 'http://www.example.com/my-photo.jpg',
+                    'depends' => array(array('image_webp_enable', '=', 1)),
+                ),
 				'alt_text' => array(
 					'type' => 'text',
 					'title' => JText::_('Image Alt'),
