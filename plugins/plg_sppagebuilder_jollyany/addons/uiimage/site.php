@@ -46,7 +46,7 @@ class SppagebuilderAddonUiImage extends SppagebuilderAddons {
         }
 
         if (is_array($image_properties) && count($image_properties) > 2) {
-            $data_image_src = 'data-src="' . $data_image_src . '" data-width="' . $image_properties[0] . '" data-height="' . $image_properties[1] . '" uk-img';
+            $data_image_src = 'data-src="' . $data_image_src . '" data-origin="'.$image_src.'" data-type="'.$image_properties['mime'].'" data-width="' . $image_properties[0] . '" data-height="' . $image_properties[1] . '" uk-img';
         } else {
             $data_image_src = 'src="' . $data_image_src . '"';
         }
@@ -196,10 +196,10 @@ class SppagebuilderAddonUiImage extends SppagebuilderAddons {
 
 			$output .= ( $image_transition ) ? '<div class="uk-inline-clip uk-transition-toggle" tabindex="0"' . $media_background . '>' : '<div' . $media_background . '>';
             $output .= '<picture>';
-            if ($image_webp_enable && $image_webp_src) {
-                $output .= '<source srcset="'.$image_webp_src.'" type="image/webp">';
-            }
-            $output .= '<source srcset="'.$image_src.'" type="'.$image_properties['mime'].'">';
+//            if ($image_webp_enable && $image_webp_src) {
+//                $output .= '<source srcset="'.$image_webp_src.'" type="image/webp">';
+//            }
+//            $output .= '<source srcset="'.$image_src.'" type="'.$image_properties['mime'].'">';
 			$output .= '<img class="el-image' . $image_svg_color . $image_transition . $image_styles . $media_blend_mode . '" ' . $data_image_src . ' alt="' . str_replace( '"', '', $alt_text ) . '"' . $image_svg_inline_cls . '>';
 			$output .= '</picture>';
 			$output .= $media_overlay;

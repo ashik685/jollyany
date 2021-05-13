@@ -20,6 +20,14 @@ jQuery(function($){
                 }
             });
         }
+        var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+        if (isSafari) {
+            $('picture').each(function (i, el){
+                if ($(el).find('img').data('origin')) {
+                    $(el).prepend('<source srcset="'+$(el).find('img').data('origin')+'" type="'+$(el).find('img').data('type')+'">');
+                }
+            });
+        }
         if ($('#astroid-preloader').length && $('#jollyany-preloader-logo-template').length && !$('#astroid-preloader .jollyany-preloader-logo').length) {
             $('#astroid-preloader').prepend($('#jollyany-preloader-logo-template').html());
         }
