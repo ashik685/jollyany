@@ -23,34 +23,32 @@ class SppagebuilderAddonUiImage extends SppagebuilderAddons {
 		$title_position = ( isset( $settings->title_position ) && $settings->title_position ) ? $settings->title_position : 'top';
 
 		// Options.
-        $safari =   false;
-        $ua = $_SERVER["HTTP_USER_AGENT"];      // Get user-agent of browser
-
-        $safariorchrome = strpos($ua, 'Safari') ? true : false;     // Browser is either Safari or Chrome (since Chrome User-Agent includes the word 'Safari')
-        $chrome = strpos($ua, 'Chrome') ? true : false;             // Browser is Chrome
-
-        if($safariorchrome == true AND $chrome == false){ $safari = true; }     // Browser should be Safari, because there is no 'Chrome' in the User-Agent
 		$image     = ( isset( $settings->image ) && $settings->image ) ? $settings->image : '';
 		$image_src = isset( $image->src ) ? $image->src : $image;
         $image_webp_enable      = ( isset( $settings->image_webp_enable )) ? $settings->image_webp_enable : 0;
         $image_webp             = ( isset( $settings->image_webp ) && $settings->image_webp ) ? $settings->image_webp : '';
         $image_webp_src         = isset( $image_webp->src ) ? $image_webp->src : $image_webp;
-        if (!$safari && $image_webp_enable && $image_webp_src) {
-            $image_src          =   $image_webp_src;
-        }
+
 		$image_properties   =   false;
 		if ( strpos( $image_src, 'http://' ) !== false || strpos( $image_src, 'https://' ) !== false ) {
             $image_properties   =   getimagesize($image_src);
-			$image_src = $image_src;
 		} elseif ( $image_src ) {
             $image_properties   =   getimagesize(JURI::base() . '/' . $image_src);
 			$image_src = JURI::base( true ) . '/' . $image_src;
 		}
+        $data_image_src     =   $image_src;
+
+        if ($image_webp_enable && $image_webp_src) {
+            if ( $image_webp_src && (!strpos( $image_webp_src, 'http://' ) !== false && !strpos( $image_webp_src, 'https://' ) !== false )) {
+                $image_webp_src = JURI::base( true ) . '/' . $image_webp_src;
+            }
+            $data_image_src     =   $image_webp_src;
+        }
 
         if (is_array($image_properties) && count($image_properties) > 2) {
-            $data_image_src = 'data-src="' . $image_src . '" data-width="' . $image_properties[0] . '" data-height="' . $image_properties[1] . '" uk-img';
+            $data_image_src = 'data-src="' . $data_image_src . '" data-width="' . $image_properties[0] . '" data-height="' . $image_properties[1] . '" uk-img';
         } else {
-            $data_image_src = 'src="' . $image_src . '"';
+            $data_image_src = 'src="' . $data_image_src . '"';
         }
 		$alt_text = ( isset( $settings->alt_text ) && $settings->alt_text ) ? $settings->alt_text : '';
 
@@ -197,8 +195,13 @@ class SppagebuilderAddonUiImage extends SppagebuilderAddons {
 			$output .= ( $link_type == 'use_link' && $title_link ) ? '<a ' . $link_target . ' href="' . $title_link . '">' : '';
 
 			$output .= ( $image_transition ) ? '<div class="uk-inline-clip uk-transition-toggle" tabindex="0"' . $media_background . '>' : '<div' . $media_background . '>';
-
+            $output .= '<picture>';
+            if ($image_webp_enable && $image_webp_src) {
+                $output .= '<source srcset="'.$image_webp_src.'" type="image/webp">';
+            }
+            $output .= '<source srcset="'.$image_src.'" type="'.$image_properties['mime'].'">';
 			$output .= '<img class="el-image' . $image_svg_color . $image_transition . $image_styles . $media_blend_mode . '" ' . $data_image_src . ' alt="' . str_replace( '"', '', $alt_text ) . '"' . $image_svg_inline_cls . '>';
+			$output .= '</picture>';
 			$output .= $media_overlay;
 			$output .= ( $image_transition ) ? '</div>' : '</div>';
 
