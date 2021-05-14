@@ -33,7 +33,7 @@ class SppagebuilderAddonUiImage extends SppagebuilderAddons {
 		if ( strpos( $image_src, 'http://' ) !== false || strpos( $image_src, 'https://' ) !== false ) {
             $image_properties   =   getimagesize($image_src);
 		} elseif ( $image_src ) {
-            $image_properties   =   getimagesize(JURI::base() . '/' . $image_src);
+		    if (file_exists(JPATH_BASE . '/' . $image_src)) $image_properties   =   getimagesize(JPATH_BASE . '/' . $image_src);
 			$image_src = JURI::base( true ) . '/' . $image_src;
 		}
         $data_image_src     =   $image_src;
@@ -45,7 +45,7 @@ class SppagebuilderAddonUiImage extends SppagebuilderAddons {
             $data_image_src     =   $image_webp_src;
         }
 
-        if (is_array($image_properties) && count($image_properties) > 2) {
+        if ($image_properties && is_array($image_properties) && count($image_properties) > 2) {
             $data_image_src = 'data-src="' . $data_image_src . '" data-origin="'.$image_src.'" data-type="'.$image_properties['mime'].'" data-width="' . $image_properties[0] . '" data-height="' . $image_properties[1] . '" uk-img';
         } else {
             $data_image_src = 'src="' . $data_image_src . '"';
