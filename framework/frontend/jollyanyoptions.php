@@ -19,19 +19,9 @@ $params = $template->getParams();
 $document = Framework::getDocument();
 $app = JFactory::getApplication();
 $sitename = $app->get('sitename');
-jimport('joomla.filesystem.file');
 
 // Linearicon icon
 $document->addStyleSheet('libraries/jollyany/framework/assets/fonts/linearicons/font.css');
-
-// Preloader Logo
-if ($params->get('preloader', 1)) {
-    $preloader_logo = $params->get('preloader_logo', false);
-    if (!empty($preloader_logo)) {
-        $svg    =    JFile::getExt($preloader_logo) == 'svg' ? 'uk-svg' : '';
-        $document->addCustomTag('<script id="jollyany-preloader-logo-template" type="text/template"><div class="jollyany-preloader-logo mb-3"><img src="'.JURI::root() . Astroid\Helper\Media::getPath() . '/' . $preloader_logo .'" alt="'.$sitename.'" '.$svg.' class="astroid-logo-preloader" /></div></script>', 'body');
-    }
-}
 
 // Header Absolute option
 $header_absolute = $params->get('header_absolute');
