@@ -29,13 +29,7 @@ if ($params->get('preloader', 1)) {
     $preloader_logo = $params->get('preloader_logo', false);
     if (!empty($preloader_logo)) {
         $svg    =    JFile::getExt($preloader_logo) == 'svg' ? 'uk-svg' : '';
-        $document->addCustomTag('
-<script id="jollyany-preloader-logo-template" type="text/template">
-	<div class="jollyany-preloader-logo mb-3">
-         <img src="'.JURI::root() . Astroid\Helper\Media::getPath() . '/' . $preloader_logo .'" alt="'.$sitename.'" '.$svg.' class="astroid-logo-preloader" />
-    </div>
-</script>
-', 'body');
+        $document->addCustomTag('<script id="jollyany-preloader-logo-template" type="text/template"><div class="jollyany-preloader-logo mb-3"><img src="'.JURI::root() . Astroid\Helper\Media::getPath() . '/' . $preloader_logo .'" alt="'.$sitename.'" '.$svg.' class="astroid-logo-preloader" /></div></script>', 'body');
     }
 }
 
@@ -55,13 +49,7 @@ if ($header_absolute == '1') {
 $sidebar_logo = $params->get('sidebar_logo', false);
 if (!empty($sidebar_logo)) {
     $svg    =    JFile::getExt($sidebar_logo) == 'svg' ? 'uk-svg' : '';
-    $document->addCustomTag('
-<script id="jollyany-sidebar-collapsed-logo-template" type="text/template">
-	<div class="astroid-sidebar-collapsed-logo">
-         <img src="'.JURI::root() . Astroid\Helper\Media::getPath() . '/' . $sidebar_logo .'" alt="'.$sitename.'" '.$svg.' class="astroid-logo-sidebar" />
-    </div>
-</script>
-', 'body');
+    $document->addCustomTag('<script id="jollyany-sidebar-collapsed-logo-template" type="text/template"><div class="astroid-sidebar-collapsed-logo"><img src="'.JURI::root() . Astroid\Helper\Media::getPath() . '/' . $sidebar_logo .'" alt="'.$sitename.'" '.$svg.' class="astroid-logo-sidebar" /></div></script>', 'body');
 }
 
 // Color option
