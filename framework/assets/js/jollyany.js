@@ -28,6 +28,9 @@ jQuery(function($){
                 }
             });
         }
+        if ($('#astroid-preloader').length && $('#jollyany-preloader-logo-template').length && !$('#astroid-preloader .jollyany-preloader-logo').length) {
+            $('#astroid-preloader').prepend($('#jollyany-preloader-logo-template').html());
+        }
         if ($(".jollyany-hikacart").length){
             var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
 
