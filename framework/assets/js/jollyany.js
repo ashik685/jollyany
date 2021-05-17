@@ -24,7 +24,7 @@ jQuery(function($){
         if (isSafari) {
             $('picture').each(function (i, el){
                 if ($(el).find('img').data('origin')) {
-                    $(el).prepend('<source srcset="'+$(el).find('img').data('origin')+'" type="'+$(el).find('img').data('type')+'">');
+                    $(el).find('img').attr('data-src',$(el).find('img').data('origin'));
                 }
             });
         }
