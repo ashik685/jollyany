@@ -15,7 +15,7 @@
                 <option value="after">TPL_ASTROID_AFTER_MODULE</option>
                 <option value="before">TPL_ASTROID_BEFORE_MODULE</option>
             </field>
-            <field astroidgroup="hikashop" ngShow="hikacart=='1'" ngRequired="hikacart=='1'" description="TPL_ASTROID_ICON_COLOR_HIKACART_DESC" name="hikacart_icon_color" type="astroidcolor" large="true" label="TPL_ASTROID_ICON_COLOR_HIKACART_LABEL">
+            <field astroidgroup="hikashop" ngShow="hikacart=='1'" description="TPL_ASTROID_ICON_COLOR_HIKACART_DESC" name="hikacart_icon_color" type="astroidcolor" large="true" label="TPL_ASTROID_ICON_COLOR_HIKACART_LABEL">
             </field>
 
             <field astroidgroup="login" name="joomlalogin" type="astroidtext" astroid-switch="true" default="0" label="TPL_JOLLYANY_OPTIONS_LOGIN_LABEL" description="TPL_JOLLYANY_OPTIONS_LOGIN_DESC"></field>
@@ -30,7 +30,7 @@
                 <option value="logged-in">TPL_JOLLYANY_DISPLAY_WHEN_LOGGEDIN</option>
                 <option value="logged-out">TPL_JOLLYANY_DISPLAY_WHEN_LOGGEDOUT</option>
             </field>
-            <field astroidgroup="login" ngShow="joomlalogin=='1'" ngRequired="joomlalogin=='1'" description="TPL_ASTROID_ICON_COLOR_LOGIN_DESC" name="login_icon_color" type="astroidcolor" large="true" label="TPL_ASTROID_ICON_COLOR_LOGIN_LABEL">
+            <field astroidgroup="login" ngShow="joomlalogin=='1'" description="TPL_ASTROID_ICON_COLOR_LOGIN_DESC" name="login_icon_color" type="astroidcolor" large="true" label="TPL_ASTROID_ICON_COLOR_LOGIN_LABEL">
             </field>
 
             <field astroidgroup="menu" name="menu_option" type="astroidtext" astroid-switch="true" default="0" label="TPL_JOLLYANY_OPTIONS_MENU_LABEL" description="TPL_JOLLYANY_OPTIONS_MENU_DESC"></field>
