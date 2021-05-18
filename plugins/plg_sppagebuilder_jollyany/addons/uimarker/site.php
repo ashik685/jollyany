@@ -65,9 +65,8 @@ class SppagebuilderAddonUiMarker extends SppagebuilderAddons {
         $image_properties   =   false;
 		if ( strpos( $image_marker_src, 'http://' ) !== false || strpos( $image_marker_src, 'https://' ) !== false ) {
             $image_properties   =   getimagesize($image_marker_src);
-			$image_marker_src   =   $image_marker_src;
 		} elseif ( $image_marker_src ) {
-            $image_properties   =   getimagesize(JURI::base() . '/' . $image_marker_src);
+            $image_properties   =   getimagesize(JPATH_BASE . '/' . $image_marker_src);
 			$image_marker_src   =   JURI::base( true ) . '/' . $image_marker_src;
 		}
         if (is_array($image_properties) && count($image_properties) > 2) {
