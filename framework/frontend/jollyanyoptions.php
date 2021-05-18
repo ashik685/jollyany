@@ -60,6 +60,8 @@ $header_link_color = $params->get('header_link_color', '');
 $header_link_hover_color = $params->get('header_link_hover_color', '');
 $topbar_bordercolor = $params->get('topbar_bordercolor', '');
 $sticky_off_canvas_button_color = $params->get('sticky_off_canvas_button_color', '');
+$stick_header_menu_link_color = $params->get('stick_header_menu_link_color', '');
+$stick_header_menu_link_hover_color = $params->get('stick_header_menu_link_hover_color', '');
 $background_image = $params->get('body_background_image', false);
 $body_link_color = $params->get('body_link_color', '');
 $body_link_hover_color = $params->get('body_link_hover_color', '');
@@ -90,6 +92,12 @@ if (!empty($topbar_bordercolor)) {
 }
 if (!empty($sticky_off_canvas_button_color)) {
     $styles[]    = '#astroid-sticky-header .header-offcanvas-trigger.burger-menu-button .inner, #astroid-sticky-header .header-offcanvas-trigger.burger-menu-button .inner::before, #astroid-sticky-header .header-offcanvas-trigger.burger-menu-button .inner::after {background-color:'.$sticky_off_canvas_button_color.';}';
+}
+if (!empty($stick_header_menu_link_color)) {
+    $styles[]    = '#astroid-sticky-header a {color:'.$stick_header_menu_link_color.';}';
+}
+if (!empty($stick_header_menu_link_hover_color)) {
+    $styles[]    = '#astroid-sticky-header a:hover {color:'.$stick_header_menu_link_hover_color.';}';
 }
 if (!empty($body_link_color)) {
     $styles[] = '.tpp-bootstrap a{ color: ' . $body_link_color . ';}';
