@@ -37,6 +37,11 @@ class JollyanyFrameworkDataImport {
                     'code'      =>  'tz_extensions',
                     'ext_code'  =>  'sp-page-builder',
                 ),
+                array(
+                    'name'      =>  'Acymailing',
+                    'type'      =>  'url',
+                    'url'       =>  'http://www.acyba.com/component/updateme/downloadxml/component-acymailing/level-starter/version-5/download.zip',
+                ),
             ),
         ),
         'tz_alita'      =>  array(
