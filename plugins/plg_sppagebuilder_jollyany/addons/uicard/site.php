@@ -128,9 +128,8 @@ class SppagebuilderAddonUiCard extends SppagebuilderAddons {
         $image_properties   =   false;
 		if ( strpos( $image_src, 'http://' ) !== false || strpos( $image_src, 'https://' ) !== false ) {
             $image_properties   =   getimagesize($image_src);
-			$image_src = $image_src;
 		} elseif ( $image_src ) {
-            $image_properties   =   getimagesize(JURI::base() . '/' . $image_src);
+		    if (file_exists(JPATH_BASE . '/' . $image_src)) $image_properties   =   getimagesize(JPATH_BASE . '/' . $image_src);
 			$image_src = JURI::base( true ) . '/' . $image_src;
 		}
 

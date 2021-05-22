@@ -165,7 +165,17 @@ SpAddonsConfig::addonConfig(
 						'div' => JText::_('div'),
 					),
 					'std' => 'h3',
-				),				
+				),
+                'title_position' => array(
+                    'type' => 'select',
+                    'title' => JText::_('Title Position'),
+                    'desc' => JText::_('Display title on top or after progress'),
+                    'values' => array(
+                        '' => JText::_('Top'),
+                        'after' => JText::_('After')
+                    ),
+                    'std' => '',
+                ),
 				'separator_general_options' => array(
 					'type' => 'separator',
 					'title' => JText::_('General'),

@@ -11,6 +11,34 @@ class JollyanyFrameworkDataImport {
 	protected static $api  =   'https://www.templaza.com';
 	public static $cache   =    array('thumb' => array());
 	protected static $data = array(
+        'tz_krypton'      =>  array(
+            // Pack Info
+            'name'        => 'Krypton',
+            'desc'        => 'Bitcoin Crypto Currency Joomla Template',
+
+            // Pack Data
+            'thumb'       => '/images/stories/krypton/thumbnail.jpg',
+            'category'    => 'joomla',
+
+            'demo_url'    => 'https://krypton.jollyany.co/',
+            'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/krypton',
+
+            'template'      => array(
+                'name'      =>  'Krypton Template',
+                'type'      =>  'included',
+                'code'      =>  'tz_krypton',
+                'ext_code'  =>  'tz-krypton-api',
+            ),
+
+            'extensions'  => array(
+                array(
+                    'name'      =>  'SP Page Builder Pro',
+                    'type'      =>  'included',
+                    'code'      =>  'tz_extensions',
+                    'ext_code'  =>  'sp-page-builder',
+                ),
+            ),
+        ),
         'tz_alita'      =>  array(
             // Pack Info
             'name'        => 'Alita',

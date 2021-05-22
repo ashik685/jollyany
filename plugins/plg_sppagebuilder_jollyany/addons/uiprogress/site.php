@@ -19,6 +19,7 @@ class SppagebuilderAddonUiProgress extends SppagebuilderAddons {
 		$general       .= ( isset( $settings->class ) && $settings->class ) ? ' ' . $settings->class : '';
 		$progress_value = ( isset( $settings->progress_value ) && $settings->progress_value ) ? $settings->progress_value : 70;
 		$text           = ( isset( $settings->text ) && $settings->text ) ? $settings->text : '';
+		$title_position = ( isset( $settings->title_position ) && $settings->title_position ) ? $settings->title_position : '';
 
 		$max_width_cfg              = ( isset( $settings->addon_max_width ) && $settings->addon_max_width ) ? ' uk-width-' . $settings->addon_max_width : '';
 		$addon_max_width_breakpoint = ( $max_width_cfg ) ? ( ( isset( $settings->addon_max_width_breakpoint ) && $settings->addon_max_width_breakpoint ) ? '@' . $settings->addon_max_width_breakpoint : '' ) : '';
@@ -66,7 +67,7 @@ class SppagebuilderAddonUiProgress extends SppagebuilderAddons {
 		$heading_decoration = ( isset( $settings->decoration ) && $settings->decoration ) ? $settings->decoration : '';
 		$heading_selector   = ( isset( $settings->heading_selector ) && $settings->heading_selector ) ? $settings->heading_selector : 'h3';
 
-		$bar_margin_top = ( isset( $settings->bar_margin_top ) && $settings->bar_margin_top ) ? ' uk-margin-' . $settings->bar_margin_top . '-top' : ' uk-margin-top';
+		$bar_margin_top = ( isset( $settings->bar_margin_top ) && $settings->bar_margin_top ) ? ' uk-margin-' . $settings->bar_margin_top  : ' uk-margin';
 
 		$heading_decoration_cls = '';
 		if ( $heading_decoration ) {
@@ -127,34 +128,37 @@ class SppagebuilderAddonUiProgress extends SppagebuilderAddons {
 		$output .= '<div class="ui-progress' . $zindex_cls . $general . $max_width_cfg . '"' . $animation . '>';
 		$output .= '<div id="progress-wrapper" class="progress-element">';
 
-		$output .= '<div class="uk-child-width-auto uk-grid-small uk-flex-bottom" uk-grid>';
-		$output .= '<div class="uk-width-expand">';
+		$content    =   '';
+        $content .= '<div class="uk-child-width-auto uk-grid-small uk-flex-bottom" uk-grid>';
+        $content .= '<div class="uk-width-expand">';
 
 		if ( $text ) {
-			$output .= '<' . $heading_selector . ' class="progress-name uk-margin-remove-bottom' . $heading_style . $font_weight . $heading_decoration_cls . '">';
+            $content .= '<' . $heading_selector . ' class="progress-name uk-margin-remove-bottom' . $heading_style . $font_weight . $heading_decoration_cls . '">';
 			if ( $heading_decoration == 'line' ) {
-				$output .= '<span>';
-				$output .= nl2br( $title );
-				$output .= '</span>';
+                $content .= '<span>';
+                $content .= nl2br( $title );
+                $content .= '</span>';
 			} else {
-				$output .= nl2br( $title );
+                $content .= nl2br( $title );
 			}
-			$output .= '</' . $heading_selector . '>';
+            $content .= '</' . $heading_selector . '>';
 		}
 
-		$output .= '</div>';
-		$output .= '<div class="uk-width-auto uk-flex-last">';
-		$output .= '<div><span class="counter"">' . (int) $progress_value . '</span>%</div>';
-		$output .= '</div>';
-		$output .= '</div>';
+        $content .= '</div>';
+        $content .= '<div class="uk-width-auto uk-flex-last">';
+        $content .= '<div><span class="counter"">' . (int) $progress_value . '</span>%</div>';
+        $content .= '</div>';
+        $content .= '</div>';
 
+        if (!$title_position) $output .=    $content;
 		$output .= '<div class="ui-skill' . $bar_margin_top . '">';
 		$output .= '<div class="ui-skillholder" data-percent="' . (int) $progress_value . '%">';
 		$output .= '<div class="ui-skillbar"></div>';
 		$output .= '</div>';
 		$output .= '</div>';
-		$output .= '</div>';
+		if ($title_position) $output .=    $content;
 
+		$output .= '</div>';
 		$output .= '</div>';
 
 		return $output;
