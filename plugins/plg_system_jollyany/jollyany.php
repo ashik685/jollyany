@@ -706,6 +706,7 @@ class plgSystemJollyany extends JPlugin {
 		'); // to add css script
 //		$document->addScript(); // to add js file in head
         $document->addScript(JUri::root().'media/jollyany/assets/js/jollyany.min.js', "body"); // to add js file in body
+        $document->addScript(JUri::root().'media/jollyany/assets/js/uikit.min.js', 'body');
 		$document->addScriptDeclaration('var TZ_TEMPLATE_NAME = \''.$template->template.'\';'); // to add js script in head
 //		$document->addScriptDeclaration($js, "body"); // to add js script in body
         jimport('joomla.filesystem.file');

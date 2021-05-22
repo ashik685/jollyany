@@ -44,7 +44,7 @@ class JFormFieldJollyanyImport extends JFormFieldList {
 			$comingsoon =   $value['category'] == 'comingsoon' ? '_COMINGSOON' : '';
 			$data   =  '<div class="col-12 col-md-6 col-lg-6 col-xl-4 mb-5">';
 			$data   .=  '<div class="card">';
-			$data   .=  '<img src="'.$value['thumb'].'" class="card-img-top" alt="'.$value['name'].'" />';
+			$data   .=  '<img data-src="'.$value['thumb']['src'].'" data-width="'.$value['thumb']['image_properties'][0].'" data-height="'.$value['thumb']['image_properties'][1].'" class="card-img-top" alt="'.$value['name'].'" uk-img />';
 			$data   .=  '<div class="card-body"><h5 class="card-title">'.$value['name'].'</h5><p class="card-text">'.$value['desc'].'</p><div class="btn-group" role="group" aria-label="Install Action"><a href="#" class="btn btn-primary intall-package btn-sm'.$clsstatus.'"  data-token="'.JSession::getFormToken().'" data-name="'.$value['name'].'" data-file="'.$index.'" data-status="'.$activated.'"'.$status.'>'.JText::_('JOLLYANY_ACTION_INSTALL_PACKAGE'.$comingsoon).'</a><a href="'.$value['demo_url'].'" class="btn btn-outline-primary btn-sm'.$clsstatus.'" target="_blank"'.$status.'>'.JText::_('JOLLYANY_ACTION_DEMO_URL').'</a><a href="'.$value['doc_url'].'" class="btn btn-outline-primary btn-sm'.$clsstatus.'" target="_blank"'.$status.'>'.JText::_('JOLLYANY_ACTION_DOC_URL').'</a></div></div>';
 			$data   .=  '</div>';
 			$data   .=  '</div>';

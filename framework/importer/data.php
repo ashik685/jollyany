@@ -1063,13 +1063,24 @@ class JollyanyFrameworkDataImport {
 	);
 
 	public static function getThumb($src) {
-        jimport('joomla.filesystem.file');
-        if (JFile::exists(JPATH_ADMINISTRATOR.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.'jollyany'.$src)) {
-            return JUri::root().'administrator/cache/jollyany'.$src;
+        $image = array(
+            'image_properties' => array(),
+            'src' => ''
+        );
+        if (file_exists(JPATH_ADMINISTRATOR.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.'jollyany'.$src)) {
+            $image['image_properties'] = getimagesize(JPATH_ADMINISTRATOR.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.'jollyany'.$src);
+            $image['src'] = JUri::base(true).'/cache/jollyany'.$src;
+            return $image;
         } else {
             self::$cache['thumb'][] =   $src;
-            return self::$api.$src;
+            $image['image_properties'] = getimagesize(self::$api.$src);
+            $image['src'] = self::$api.$src;
+            return $image;
         }
+    }
+
+    public static function getTotalTemplate() {
+        return count(self::$data);
     }
 
 	public static function getApiUrl() {
