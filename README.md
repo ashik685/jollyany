@@ -10,12 +10,18 @@ Astroid Framework: https://astroidframework.com/
 
 **Version 1.6.8**
 
+    [new topic] Krypton - Bitcoin Crypto Currency Joomla Template 
     [improve] EasyDiscuss 5 style support
+    [improve] Header link color and Sticky link color configure added
     [update] Update UI Person lazyload support
     [update] Update UI Marker lazyload support
     [update] Update UI Card support icon
     [update] Update UI Image lazyload support
     [update] Update UI Pricing button shape support
+    [update] Update UI Progress Addon
+    [update] Support SVG Logo
+    [added] Add Horizontal Timeline Addon
+    [added] Add Pie Chart Addon
 
 **Version 1.6.7**
 
