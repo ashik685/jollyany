@@ -23,6 +23,15 @@ class SppagebuilderAddonTestimonialcarousel extends SppagebuilderAddons {
         $content_alignment = (isset($settings->content_alignment)) ? $settings->content_alignment : 'sppb-text-center';
         $testimonial_type = (isset($settings->testimonial_type)) ? $settings->testimonial_type : 'slides';
 
+        if ($testimonial_type == 'slides') {
+            \JFactory::getDocument()->addScript(JURI::base(true) . '/libraries/jollyany/framework/assets/js/vendor/jquery.flexslider.min.js');
+            \JFactory::getDocument()->addStyleSheet(JURI::base(true) . '/libraries/jollyany/framework/assets/js/vendor/flexslider.css');
+        } else {
+            \JFactory::getDocument()->addScript(JURI::base(true) . '/libraries/jollyany/framework/assets/js/vendor/owl.carousel.min.js');
+            \JFactory::getDocument()->addStyleSheet(JURI::base(true) . '/libraries/jollyany/framework/assets/js/vendor/owl.carousel.min.css');
+            \JFactory::getDocument()->addStyleSheet(JURI::base(true) . '/libraries/jollyany/framework/assets/js/vendor/owl.theme.default.min.css');
+        }
+
         //Output
         $output = '<div id="sppb-testimonial-pro-' . $this->addon->id . '" class="sppb-slider-wrap sppb-testimonial-carousel sppb-slide '.$content_alignment.' ' . $class . '"' . '>';
         $output .= '<ul class="'.$testimonial_type.'">';
@@ -45,7 +54,7 @@ class SppagebuilderAddonTestimonialcarousel extends SppagebuilderAddons {
                 $output .= '</div>';
             }
             $output .= '<div class="sppb-addon-testimonial-pro-footer">';
-	        $output .= (isset($value->avatar) && $value->avatar) ? '<img src="' . $value->avatar . '" class="' . $avatar_shape . '" alt="' . $name . '">' : '';
+            $output .= (isset($value->avatar) && $value->avatar) ? '<img src="' . $value->avatar . '" class="' . $avatar_shape . '" alt="' . $name . '">' : '';
             $output .= '<div class="testimonial-pro-client-name-wrap">';
             $output .= $name ? '<span class="sppb-addon-testimonial-pro-client-name">' . $name . '</span>' : '';
             $output .= (isset($value->url) && $value->url) ? '&nbsp;-&nbsp;<span class="sppb-addon-testimonial-pro-client-url">' . $value->url . '</span>' : '';
@@ -61,32 +70,12 @@ class SppagebuilderAddonTestimonialcarousel extends SppagebuilderAddons {
         return $output;
     }
 
-	public function scripts() {
+    public function js() {
         $settings = $this->addon->settings;
+        $interval = (isset($settings->interval) && $settings->interval) ? ((int) $settings->interval * 1000) : 3000;
         $testimonial_type = (isset($settings->testimonial_type)) ? $settings->testimonial_type : 'slides';
-        if ($testimonial_type == 'slides') {
-            return array(JURI::base(true) . '/libraries/jollyany/framework/assets/js/vendor/jquery.flexslider.min.js');
-        } else {
-            return array(JURI::base(true) . '/libraries/jollyany/framework/assets/js/vendor/owl.carousel.min.js');
-        }
-	}
-
-    public function stylesheets() {
-        $settings = $this->addon->settings;
-        $testimonial_type = (isset($settings->testimonial_type)) ? $settings->testimonial_type : 'slides';
-        if ($testimonial_type == 'slides') {
-            return array(JURI::base(true) . '/libraries/jollyany/framework/assets/js/vendor/flexslider.css');
-        } else {
-            return array(JURI::base(true) . '/libraries/jollyany/framework/assets/js/vendor/owl.carousel.min.css',JURI::base(true) . '/libraries/jollyany/framework/assets/js/vendor/owl.theme.default.min.css');
-        }
-    }
-
-	public function js() {
-		$settings = $this->addon->settings;
-		$interval = (isset($settings->interval) && $settings->interval) ? ((int) $settings->interval * 1000) : 3000;
-        $testimonial_type = (isset($settings->testimonial_type)) ? $settings->testimonial_type : 'slides';
-		$addon_id = '#sppb-testimonial-pro-' . $this->addon->id;
-		if ($testimonial_type== 'slides') {
+        $addon_id = '#sppb-testimonial-pro-' . $this->addon->id;
+        if ($testimonial_type== 'slides') {
             $js ='
             jQuery(function($){
                 $(window).load(function() {
@@ -121,13 +110,14 @@ class SppagebuilderAddonTestimonialcarousel extends SppagebuilderAddons {
         }
 
 
-		return $js;
-	}
+        return $js;
+    }
 
     public function css() {
         $addon_id = '#sppb-addon-' . $this->addon->id;
         $settings = $this->addon->settings;
         //Avatar Style
+        if (isset($settings->avatar_width->md)) $settings->avatar_width = $settings->avatar_width->md;
         $avatar_size = (isset($settings->avatar_width) && $settings->avatar_width) ? $settings->avatar_width : '32';
 
         //Css output start
@@ -146,6 +136,7 @@ class SppagebuilderAddonTestimonialcarousel extends SppagebuilderAddons {
         $icon_style_xs = '';
 
         $icon_style .= (isset($settings->icon_color) && $settings->icon_color) ? "color: " . $settings->icon_color . ";" : "";
+        if (isset($settings->icon_size->md)) $settings->icon_size = $settings->icon_size->md;
         $icon_style .= (isset($settings->icon_size) && $settings->icon_size) ? "font-size: " . $settings->icon_size . "px;" : "";
         $icon_style_sm .= (isset($settings->icon_size_sm) && $settings->icon_size_sm) ? "font-size: " . $settings->icon_size_sm . "px;" : "";
         $icon_style_xs .= (isset($settings->icon_size_xs) && $settings->icon_size_xs) ? "font-size: " . $settings->icon_size_xs . "px;" : "";
@@ -170,13 +161,13 @@ class SppagebuilderAddonTestimonialcarousel extends SppagebuilderAddons {
 
         if($arrow_style){
             $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-testimonial-pro .sppb-carousel-control{';
-                $css .= $arrow_style;
+            $css .= $arrow_style;
             $css .= '}';
         }
 
         if($arrow_hover_style){
             $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-testimonial-pro .sppb-carousel-control:hover{';
-                $css .= $arrow_hover_style;
+            $css .= $arrow_hover_style;
             $css .= '}';
         }
 
@@ -186,9 +177,12 @@ class SppagebuilderAddonTestimonialcarousel extends SppagebuilderAddons {
         //Content style
         $content_style ='';
         $content_style .= (isset($settings->content_color) && $settings->content_color) ? 'color:' . $settings->content_color . ';' : '';
+        if (isset($settings->content_lineheight->md)) $settings->content_lineheight = $settings->content_lineheight->md;
         $content_style .= (isset($settings->content_lineheight) && $settings->content_lineheight) ? 'line-height:' . $settings->content_lineheight . 'px;' : '';
         $content_style .= (isset($settings->content_fontweight) && $settings->content_fontweight) ? 'font-weight:' . $settings->content_fontweight . ';' : '';
-        $content_style .= (isset($settings->content_margin) && trim($settings->content_margin)) ? 'margin:' . $settings->content_margin . ';' : '';
+        if (isset($settings->content_margin->md)) $settings->content_margin = $settings->content_margin->md;
+        $content_style .= (isset($settings->content_margin) && $settings->content_margin) ? 'margin:' . $settings->content_margin . ';' : '';
+        if (isset($settings->content_fontsize->md)) $settings->content_fontsize = $settings->content_fontsize->md;
         $content_fontsize = (isset($settings->content_fontsize) && $settings->content_fontsize) ? 'font-size:' . $settings->content_fontsize . 'px;' : '';
         $content_font_style = (isset($settings->content_font_style) && $settings->content_font_style) ? $settings->content_font_style : '';
         if(isset($content_font_style->underline) && $content_font_style->underline){
@@ -208,92 +202,97 @@ class SppagebuilderAddonTestimonialcarousel extends SppagebuilderAddons {
         }
         if($content_style || $content_fontsize){
             $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-testimonial-message {';
-                $css .= $content_style;
-                $css .= $content_fontsize;
+            $css .= $content_style;
+            $css .= $content_fontsize;
             $css .= '}';
         }
         //Name style
         $name_style = '';
         $name_style .= (isset($settings->name_color) && $settings->name_color) ? 'color:'.$settings->name_color . ';' : '';
+        if (isset($settings->name_font_size->md)) $settings->name_font_size = $settings->name_font_size->md;
         $name_style .= (isset($settings->name_font_size) && $settings->name_font_size) ? 'font-size:'.$settings->name_font_size . 'px;' : '';
+        if (isset($settings->name_line_height->md)) $settings->name_line_height = $settings->name_line_height->md;
         $name_style .= (isset($settings->name_line_height) && $settings->name_line_height) ? 'line-height:'.$settings->name_line_height . 'px;' : '';
         $name_style .= (isset($settings->name_letterspace) && $settings->name_letterspace) ? 'letter-spacing:'.$settings->name_letterspace . ';' : '';
         $name_font_style = (isset($settings->name_font_style) && $settings->name_font_style) ? $settings->name_font_style : '';
         if(isset($name_font_style->underline) && $name_font_style->underline){
-			$name_style .= 'text-decoration:underline;';
-		}
-		if(isset($name_font_style->italic) && $name_font_style->italic){
-			$name_style .= 'font-style:italic;';
-		}
-		if(isset($name_font_style->uppercase) && $name_font_style->uppercase){
-			$name_style .= 'text-transform:uppercase;';
+            $name_style .= 'text-decoration:underline;';
+        }
+        if(isset($name_font_style->italic) && $name_font_style->italic){
+            $name_style .= 'font-style:italic;';
+        }
+        if(isset($name_font_style->uppercase) && $name_font_style->uppercase){
+            $name_style .= 'text-transform:uppercase;';
         }
         if(!isset($name_font_style->weight)){
-			$name_style .= 'font-weight:700;';
-		}
-		if(isset($name_font_style->weight) && $name_font_style->weight){
-			$name_style .= 'font-weight:'.$name_font_style->weight.';';
-		}
+            $name_style .= 'font-weight:700;';
+        }
+        if(isset($name_font_style->weight) && $name_font_style->weight){
+            $name_style .= 'font-weight:'.$name_font_style->weight.';';
+        }
         if($name_style){
             $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-addon-testimonial-pro-footer .sppb-addon-testimonial-pro-client-name {';
-                $css .= $name_style;
+            $css .= $name_style;
             $css .= '}';
         }
 
         //Designation style
         $designation_style = '';
         $designation_style .= (isset($settings->designation_color) && $settings->designation_color) ? 'color:'.$settings->designation_color . ';' : '';
+        if (isset($settings->designation_font_size->md)) $settings->designation_font_size = $settings->designation_font_size->md;
         $designation_style .= (isset($settings->designation_font_size) && $settings->designation_font_size) ? 'font-size:'.$settings->designation_font_size . 'px;' : '';
-        $designation_style .= (isset($settings->designation_margin) && trim($settings->designation_margin)) ? 'margin:'.$settings->designation_margin . ';' : '';
+        if (isset($settings->designation_margin->md)) $settings->designation_margin = $settings->designation_margin->md;
+        $designation_style .= (isset($settings->designation_margin) && $settings->designation_margin) ? 'margin:'.$settings->designation_margin . ';' : '';
         $designation_style .= (isset($settings->designation_letterspace) && $settings->designation_letterspace) ? 'letter-spacing:'.$settings->designation_letterspace . ';' : '';
+        if (isset($settings->designation_line_height->md)) $settings->designation_line_height = $settings->designation_line_height->md;
         $designation_style .= (isset($settings->designation_line_height) && $settings->designation_line_height) ? 'line-height:'.$settings->designation_line_height . 'px;' : '';
         $designation_font_style = (isset($settings->designation_font_style) && $settings->designation_font_style) ? $settings->designation_font_style : '';
         if(isset($designation_font_style->underline) && $designation_font_style->underline){
-			$designation_style .= 'text-decoration:underline;';
-		}
-		if(isset($designation_font_style->italic) && $designation_font_style->italic){
-			$designation_style .= 'font-style:italic;';
-		}
-		if(isset($designation_font_style->uppercase) && $designation_font_style->uppercase){
-			$designation_style .= 'text-transform:uppercase;';
-		}
-		if(isset($designation_font_style->weight) && $designation_font_style->weight){
-			$designation_style .= 'font-weight:'.$designation_font_style->weight.';';
+            $designation_style .= 'text-decoration:underline;';
+        }
+        if(isset($designation_font_style->italic) && $designation_font_style->italic){
+            $designation_style .= 'font-style:italic;';
+        }
+        if(isset($designation_font_style->uppercase) && $designation_font_style->uppercase){
+            $designation_style .= 'text-transform:uppercase;';
+        }
+        if(isset($designation_font_style->weight) && $designation_font_style->weight){
+            $designation_style .= 'font-weight:'.$designation_font_style->weight.';';
         }
         $designation_block = (isset($settings->designation_block) && $settings->designation_block) ? 'display:block;' : '';
         if($designation_style || $designation_block){
             $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-addon-testimonial-pro-footer .sppb-addon-testimonial-pro-client-designation {';
-                $css .= $designation_style;
-                $css .= $designation_block;
+            $css .= $designation_style;
+            $css .= $designation_block;
             $css .= '}';
         }
         //Bullet style
         $bullet_border_color = (isset($settings->bullet_border_color) && $settings->bullet_border_color) ? $settings->bullet_border_color . ';' : '';
         if($bullet_border_color){
             $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-carousel-indicators li {';
-                $css .= 'border-color:'.$bullet_border_color.';';
+            $css .= 'border-color:'.$bullet_border_color.';';
             $css .= '}';
         }
         //Active Bullet
         $bullet_active_bg_color = (isset($settings->bullet_active_bg_color) && $settings->bullet_active_bg_color) ? $settings->bullet_active_bg_color . ';' : '';
         if($bullet_active_bg_color){
             $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-carousel-indicators li.active {';
-                $css .= 'background:'.$bullet_active_bg_color.';';
+            $css .= 'background:'.$bullet_active_bg_color.';';
             $css .= '}';
         }
 
-	    //Height of Slider
-	    $height = (isset($settings->height)) ? $settings->height : '530';
-	    $css .= $addon_id . ' .sppb-carousel-list {height:'.$height.'px;}';
+        //Height of Slider
+        $height = (isset($settings->height)) ? $settings->height : '530';
+        $css .= $addon_id . ' .sppb-carousel-list {height:'.$height.'px;}';
 
         //Style for Tablet
-	    $height_sm = (isset($settings->height_sm)) ? $settings->height_sm : '530';
+        $height_sm = (isset($settings->height_sm)) ? $settings->height_sm : '530';
         $name_font_size_sm = (isset($settings->name_font_size_sm) && $settings->name_font_size_sm) ? 'font-size:' . $settings->name_font_size_sm . 'px;' : '';
         $name_line_height_sm = (isset($settings->name_line_height_sm) && $settings->name_line_height_sm) ? 'line-height:' . $settings->name_line_height_sm . 'px;' : '';
         $content_fontsize_sm = (isset($settings->content_fontsize_sm) && $settings->content_fontsize_sm) ? 'font-size:' . $settings->content_fontsize_sm . 'px;' : '';
         $content_lineheight_sm = (isset($settings->content_lineheight_sm) && $settings->content_lineheight_sm) ? 'line-height:' . $settings->content_lineheight_sm . 'px;' : '';
-        $content_margin_sm = (isset($settings->content_margin_sm) && trim($settings->content_margin_sm)) ? 'margin:' . $settings->content_margin_sm . ';' : '';
-        $arrow_margin_sm = (isset($settings->arrow_margin) && trim($settings->arrow_margin)) ? "margin: " . $settings->arrow_margin_sm . ";" : "";
+        $content_margin_sm = (isset($settings->content_margin_sm) && $settings->content_margin_sm) ? 'margin:' . $settings->content_margin_sm . ';' : '';
+        $arrow_margin_sm = (isset($settings->arrow_margin) && $settings->arrow_margin) ? "margin: " . $settings->arrow_margin_sm . ";" : "";
         //Avatar Tablet Style
         $avatar_width_sm = (isset($settings->avatar_width_sm) && $settings->avatar_width_sm) ? $settings->avatar_width_sm : '';
         //Designation tablet style
@@ -304,78 +303,78 @@ class SppagebuilderAddonTestimonialcarousel extends SppagebuilderAddons {
 
         if($icon_style_sm || $content_fontsize_sm || $arrow_margin_sm || $content_margin_sm || $name_font_size_sm || $name_line_height_sm || $content_lineheight_sm || $avatar_width_sm || $designation_style_sm ){
             $css .= '@media (min-width: 768px) and (max-width: 991px) {';
-	            $css .= $addon_id . ' .sppb-carousel-list {height:'.$height_sm.'px;}';
-                $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-testimonial-pro .fa-quote-left{';
-                    $css .= $icon_style_sm;
+            $css .= $addon_id . ' .sppb-carousel-list {height:'.$height_sm.'px;}';
+            $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-testimonial-pro .fa-quote-left{';
+            $css .= $icon_style_sm;
+            $css .= '}';
+            $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-testimonial-message {';
+            $css .= $content_fontsize_sm;
+            $css .= $content_margin_sm;
+            $css .= $content_lineheight_sm;
+            $css .= '}';
+            $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-testimonial-pro .sppb-carousel-control{';
+            $css .= $arrow_margin_sm;
+            $css .= '}';
+            if($name_font_size_sm || $name_line_height_sm){
+                $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-addon-testimonial-pro-footer .sppb-addon-testimonial-pro-client-name {';
+                $css .= $name_font_size_sm;
+                $css .= $name_line_height_sm;
                 $css .= '}';
-                $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-testimonial-message {';
-                    $css .= $content_fontsize_sm;
-                    $css .= $content_margin_sm;
-                    $css .= $content_lineheight_sm;
+            }
+            if($avatar_width_sm){
+                $css .= $addon_id . ' .sppb-item > img{width:'.$avatar_width_sm.'px; height:'.$avatar_width_sm.'px;}';
+            }
+            if($designation_style_sm){
+                $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-addon-testimonial-pro-footer .sppb-addon-testimonial-pro-client-designation {';
+                $css .= $designation_style_sm;
                 $css .= '}';
-                $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-testimonial-pro .sppb-carousel-control{';
-                    $css .= $arrow_margin_sm;
-                $css .= '}';
-                if($name_font_size_sm || $name_line_height_sm){
-                    $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-addon-testimonial-pro-footer .sppb-addon-testimonial-pro-client-name {';
-                        $css .= $name_font_size_sm;
-                        $css .= $name_line_height_sm;
-                    $css .= '}';
-                }
-                if($avatar_width_sm){
-                    $css .= $addon_id . ' .sppb-item > img{width:'.$avatar_width_sm.'px; height:'.$avatar_width_sm.'px;}';
-                }
-                if($designation_style_sm){
-                    $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-addon-testimonial-pro-footer .sppb-addon-testimonial-pro-client-designation {';
-                        $css .= $designation_style_sm;
-                    $css .= '}';
-                }
+            }
             $css .= '}';
         }
         //Mobile
-	    $height_xs = (isset($settings->height_xs)) ? $settings->height_xs : '530';
+        $height_xs = (isset($settings->height_xs)) ? $settings->height_xs : '530';
         $name_font_size_xs = (isset($settings->name_font_size_xs) && $settings->name_font_size_xs) ? 'font-size:' . $settings->name_font_size_xs . 'px;' : '';
         $name_line_height_xs = (isset($settings->name_line_height_xs) && $settings->name_line_height_xs) ? 'line-height:' . $settings->name_line_height_xs . 'px;' : '';
         $content_fontsize_xs = (isset($settings->content_fontsize_xs) && $settings->content_fontsize_xs) ? 'font-size:' . $settings->content_fontsize_xs . 'px;' : '';
         $content_lineheight_xs = (isset($settings->content_lineheight_xs) && $settings->content_lineheight_xs) ? 'line-height:' . $settings->content_lineheight_xs . 'px;' : '';
-        $content_margin_xs = (isset($settings->content_margin_xs) && trim($settings->content_margin_xs)) ? 'margin:' . $settings->content_margin_xs . ';' : '';
-        $arrow_margin_xs = (isset($settings->arrow_margin) && trim($settings->arrow_margin)) ? "margin: " . $settings->arrow_margin_xs . ";" : "";
+        $content_margin_xs = (isset($settings->content_margin_xs) && $settings->content_margin_xs) ? 'margin:' . $settings->content_margin_xs . ';' : '';
+        $arrow_margin_xs = (isset($settings->arrow_margin) && $settings->arrow_margin) ? "margin: " . $settings->arrow_margin_xs . ";" : "";
         //Avatar mobile style
         $avatar_width_xs = (isset($settings->avatar_width_xs) && $settings->avatar_width_xs) ? $settings->avatar_width_xs : '';
         //Designation mobile style
         $designation_style_xs = '';
         $designation_style_xs .= (isset($settings->designation_font_size_xs) && $settings->designation_font_size_xs) ? 'font-size:'.$settings->designation_font_size_xs . 'px;' : '';
-        $designation_style_xs .= (isset($settings->designation_margin_xs) && trim($settings->designation_margin_xs)) ? 'margin:'.$settings->designation_margin_xs . ';' : '';
+        $designation_style_xs .= (isset($settings->designation_margin_xs) && $settings->designation_margin_xs) ? 'margin:'.$settings->designation_margin_xs . ';' : '';
         $designation_style_xs .= (isset($settings->designation_line_height_xs) && $settings->designation_line_height_xs) ? 'line-height:'.$settings->designation_line_height_xs . 'px;' : '';
 
         if($icon_style_xs || $content_fontsize_xs || $arrow_margin_xs || $content_margin_xs || $name_font_size_xs || $name_line_height_xs || $content_lineheight_xs || $avatar_width_xs || $designation_style_xs){
             $css .= '@media (max-width: 767px) {';
-	            $css .= $addon_id . ' .sppb-carousel-list {height:'.$height_xs.'px;}';
-                $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-testimonial-pro .fa-quote-left{';
-                    $css .= $icon_style_xs;
+            $css .= $addon_id . ' .sppb-carousel-list {height:'.$height_xs.'px;}';
+            $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-testimonial-pro .fa-quote-left{';
+            $css .= $icon_style_xs;
+            $css .= '}';
+            $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-testimonial-message {';
+            $css .= $content_fontsize_xs;
+            $css .= $content_margin_xs;
+            $css .= $content_lineheight_xs;
+            $css .= '}';
+            $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-testimonial-pro .sppb-carousel-control{';
+            $css .= $arrow_margin_xs;
+            $css .= '}';
+            if($name_font_size_xs || $name_line_height_xs){
+                $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-addon-testimonial-pro-footer .sppb-addon-testimonial-pro-client-name {';
+                $css .= $name_font_size_xs;
+                $css .= $name_line_height_xs;
                 $css .= '}';
-                $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-testimonial-message {';
-                    $css .= $content_fontsize_xs;
-                    $css .= $content_margin_xs;
-                    $css .= $content_lineheight_xs;
+            }
+            if($avatar_width_xs){
+                $css .= $addon_id . ' .sppb-item > img{width:'.$avatar_width_xs.'px; height:'.$avatar_width_xs.'px;}';
+            }
+            if($designation_style_xs){
+                $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-addon-testimonial-pro-footer .sppb-addon-testimonial-pro-client-designation {';
+                $css .= $designation_style_xs;
                 $css .= '}';
-                $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-testimonial-pro .sppb-carousel-control{';
-                    $css .= $arrow_margin_xs;
-                $css .= '}';
-                if($name_font_size_xs || $name_line_height_xs){
-                    $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-addon-testimonial-pro-footer .sppb-addon-testimonial-pro-client-name {';
-                        $css .= $name_font_size_xs;
-                        $css .= $name_line_height_xs;
-                    $css .= '}';
-                }
-                if($avatar_width_xs){
-                    $css .= $addon_id . ' .sppb-item > img{width:'.$avatar_width_xs.'px; height:'.$avatar_width_xs.'px;}';
-                }
-                if($designation_style_xs){
-                    $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-addon-testimonial-pro-footer .sppb-addon-testimonial-pro-client-designation {';
-                        $css .= $designation_style_xs;
-                    $css .= '}';
-                }
+            }
             $css .= '}';
         }
 

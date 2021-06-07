@@ -143,9 +143,9 @@ class SppagebuilderAddonTinyslider extends SppagebuilderAddons {
         return $output;
     }
 
-	public function scripts() {
+    public function scripts() {
         return array(JURI::base(true) . '/libraries/jollyany/framework/assets/js/vendor/tiny-slider.min.js');
-	}
+    }
 
     public function css() {
         $addon_id = '#sppb-addon-' . $this->addon->id;
@@ -170,13 +170,13 @@ class SppagebuilderAddonTinyslider extends SppagebuilderAddons {
 
         if($arrow_style){
             $css .= '#sppb-addon-' . $this->addon->id . ' .jollyany-tinyslider ul.controls li{';
-                $css .= $arrow_style;
+            $css .= $arrow_style;
             $css .= '}';
         }
 
         if($arrow_hover_style){
             $css .= '#sppb-addon-' . $this->addon->id . ' .jollyany-tinyslider ul.controls li:hover{';
-                $css .= $arrow_hover_style;
+            $css .= $arrow_hover_style;
             $css .= '}';
         }
         if (isset($settings->content_padding->md)) $settings->content_padding = $settings->content_padding->md;
@@ -210,8 +210,8 @@ class SppagebuilderAddonTinyslider extends SppagebuilderAddons {
         }
         if($content_style || $content_fontsize){
             $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-slider-message {';
-                $css .= $content_style;
-                $css .= $content_fontsize;
+            $css .= $content_style;
+            $css .= $content_fontsize;
             $css .= '}';
         }
         //Title style
@@ -223,26 +223,27 @@ class SppagebuilderAddonTinyslider extends SppagebuilderAddons {
         $title_style .= (isset($settings->title_line_height) && $settings->title_line_height) ? 'line-height:'.$settings->title_line_height . 'px;' : '';
         $title_style .= (isset($settings->title_letterspace) && $settings->title_letterspace) ? 'letter-spacing:'.$settings->title_letterspace . ';' : '';
         $title_style .= (isset($settings->title_margin_top) && $settings->title_margin_top) ? 'margin-top:'.$settings->title_margin_top . 'px;' : '';
+        if (isset($settings->title_margin_bottom->md)) $settings->title_margin_bottom = $settings->title_margin_bottom->md;
         $title_style .= (isset($settings->title_margin_bottom) && $settings->title_margin_bottom) ? 'margin-bottom:'.$settings->title_margin_bottom . 'px;' : '';
         $title_font_style = (isset($settings->title_font_style) && $settings->title_font_style) ? $settings->title_font_style : '';
         if(isset($title_font_style->underline) && $title_font_style->underline){
-			$title_style .= 'text-decoration:underline;';
-		}
-		if(isset($title_font_style->italic) && $title_font_style->italic){
-			$title_style .= 'font-style:italic;';
-		}
-		if(isset($title_font_style->uppercase) && $title_font_style->uppercase){
-			$title_style .= 'text-transform:uppercase;';
+            $title_style .= 'text-decoration:underline;';
+        }
+        if(isset($title_font_style->italic) && $title_font_style->italic){
+            $title_style .= 'font-style:italic;';
+        }
+        if(isset($title_font_style->uppercase) && $title_font_style->uppercase){
+            $title_style .= 'text-transform:uppercase;';
         }
         if(!isset($title_font_style->weight)){
-			$title_style .= 'font-weight:700;';
-		}
-		if(isset($title_font_style->weight) && $title_font_style->weight){
-			$title_style .= 'font-weight:'.$title_font_style->weight.';';
-		}
+            $title_style .= 'font-weight:700;';
+        }
+        if(isset($title_font_style->weight) && $title_font_style->weight){
+            $title_style .= 'font-weight:'.$title_font_style->weight.';';
+        }
         if($title_style){
             $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-slider-title {';
-                $css .= $title_style;
+            $css .= $title_style;
             $css .= '}';
         }
 
@@ -250,23 +251,23 @@ class SppagebuilderAddonTinyslider extends SppagebuilderAddons {
         $bullet_border_color = (isset($settings->bullet_border_color) && $settings->bullet_border_color) ? $settings->bullet_border_color . ';' : '';
         if($bullet_border_color){
             $css .= '#sppb-addon-' . $this->addon->id . ' .jollyany-tinyslider ul.dots li:before {';
-                $css .= 'background-color:'.$bullet_border_color.';';
+            $css .= 'background-color:'.$bullet_border_color.';';
             $css .= '}';
         }
         //Active Bullet
         $bullet_active_bg_color = (isset($settings->bullet_active_bg_color) && $settings->bullet_active_bg_color) ? $settings->bullet_active_bg_color . ';' : '';
         if($bullet_active_bg_color){
             $css .= '#sppb-addon-' . $this->addon->id . ' .jollyany-tinyslider ul.dots li.tns-nav-active:before  {';
-                $css .= 'background-color:'.$bullet_active_bg_color.';';
+            $css .= 'background-color:'.$bullet_active_bg_color.';';
             $css .= '}';
         }
 
-	    //Height of Slider
+        //Height of Slider
         if (isset($settings->height->md)) $settings->height = $settings->height->md;
-	    $height = (isset($settings->height)) ? $settings->height : '530';
-	    $css .= $addon_id . ' .tiny-slider {height:'.$height.'px;}';
+        $height = (isset($settings->height)) ? $settings->height : '530';
+        $css .= $addon_id . ' .tiny-slider {height:'.$height.'px;}';
 
-	    //Button Style
+        //Button Style
         foreach ($settings->sp_tinyslider_item as $key => $value) {
             $layout_path = JPATH_ROOT . '/components/com_sppagebuilder/layouts';
             $css_path = new JLayoutFile('addon.css.button', $layout_path);
@@ -279,9 +280,9 @@ class SppagebuilderAddonTinyslider extends SppagebuilderAddons {
             $options->button_background_color_hover = (isset($value->btn_background_color_hover) && $value->btn_background_color_hover) ? $value->btn_background_color_hover : '';
             $options->button_fontstyle = (isset($value->btn_fontstyle) && $value->btn_fontstyle) ? $value->btn_fontstyle : '';
             $options->button_font_style = (isset($value->btn_font_style) && $value->btn_font_style) ? $value->btn_font_style : '';
-            $options->button_padding = (isset($value->button_padding) && trim($value->button_padding)) ? $value->button_padding : '';
-            $options->button_padding_sm = (isset($value->button_padding_sm) && trim($value->button_padding_sm)) ? $value->button_padding_sm : '';
-            $options->button_padding_xs = (isset($value->button_padding_xs) && trim($value->button_padding_xs)) ? $value->button_padding_xs : '';
+            $options->button_padding = (isset($value->button_padding) && $value->button_padding) ? $value->button_padding : '';
+            $options->button_padding_sm = (isset($value->button_padding_sm) && $value->button_padding_sm) ? $value->button_padding_sm : '';
+            $options->button_padding_xs = (isset($value->button_padding_xs) && $value->button_padding_xs) ? $value->button_padding_xs : '';
             if (isset($value->btn_fontsize->md)) $value->btn_fontsize = $value->btn_fontsize->md;
             $options->fontsize = (isset($value->btn_fontsize) && $value->btn_fontsize) ? $value->btn_fontsize : '';
             $options->fontsize_sm = (isset($value->btn_fontsize_sm) && $value->btn_fontsize_sm) ? $value->btn_fontsize_sm : '';
@@ -291,9 +292,10 @@ class SppagebuilderAddonTinyslider extends SppagebuilderAddons {
             $options->button_background_gradient_hover = (isset($value->btn_background_gradient_hover) && $value->btn_background_gradient_hover) ? $value->btn_background_gradient_hover : new stdClass();
 
             //Button Margin
-            $button_margin = (isset($value->button_margin) && trim($value->button_margin)) ? $value->button_margin : '';
-            $button_margin_sm = ((isset($value->button_margin_sm)) && trim($value->button_margin_sm)) ? $value->button_margin_sm : '';
-            $button_margin_xs = ((isset($value->button_margin_xs)) && trim($value->button_margin_xs)) ? $value->button_margin_xs : '';
+            if (isset($value->button_margin->md)) $value->button_margin = $value->button_margin->md;
+            $button_margin = (isset($value->button_margin) && $value->button_margin) ? $value->button_margin : '';
+            $button_margin_sm = ((isset($value->button_margin_sm)) && $value->button_margin_sm) ? $value->button_margin_sm : '';
+            $button_margin_xs = ((isset($value->button_margin_xs)) && $value->button_margin_xs) ? $value->button_margin_xs : '';
 
             if ($button_margin) {
                 $css .= '#btn-' . $this->addon->id.'-'.$key.' {';
@@ -321,82 +323,82 @@ class SppagebuilderAddonTinyslider extends SppagebuilderAddons {
         }
 
         //Style for Tablet
-	    $height_sm = (isset($settings->height_sm)) ? $settings->height_sm : '530';
+        $height_sm = (isset($settings->height_sm)) ? $settings->height_sm : '530';
         $title_font_size_sm = (isset($settings->title_font_size_sm) && $settings->title_font_size_sm) ? 'font-size:' . $settings->title_font_size_sm . 'px;' : '';
         $title_line_height_sm = (isset($settings->title_line_height_sm) && $settings->title_line_height_sm) ? 'line-height:' . $settings->title_line_height_sm . 'px;' : '';
         $title_margin_top_sm = (isset($settings->title_margin_top_sm) && $settings->title_margin_top_sm) ? 'margin-top:' . $settings->title_margin_top_sm . 'px;' : '';
         $title_margin_bottom_sm = (isset($settings->title_margin_bottom_sm) && $settings->title_margin_bottom_sm) ? 'margin-bottom:' . $settings->title_margin_bottom_sm . 'px;' : '';
         $content_fontsize_sm = (isset($settings->content_fontsize_sm) && $settings->content_fontsize_sm) ? 'font-size:' . $settings->content_fontsize_sm . 'px;' : '';
         $content_lineheight_sm = (isset($settings->content_lineheight_sm) && $settings->content_lineheight_sm) ? 'line-height:' . $settings->content_lineheight_sm . 'px;' : '';
-        $content_margin_sm = (isset($settings->content_margin_sm) && trim($settings->content_margin_sm)) ? 'margin:' . $settings->content_margin_sm . ';' : '';
-        $content_padding_sm = (isset($settings->content_padding_sm) && trim($settings->content_padding_sm)) ? 'padding:' . $settings->content_padding_sm . ';' : '';
+        $content_margin_sm = (isset($settings->content_margin_sm) && $settings->content_margin_sm) ? 'margin:' . $settings->content_margin_sm . ';' : '';
+        $content_padding_sm = (isset($settings->content_padding_sm) && $settings->content_padding_sm) ? 'padding:' . $settings->content_padding_sm . ';' : '';
 
         if( $content_fontsize_sm || $content_margin_sm || $content_padding_sm || $title_font_size_sm || $title_line_height_sm || $content_lineheight_sm || $height_sm ){
             $css .= '@media (min-width: 768px) and (max-width: 991px) {';
-                if ($height_sm) $css .= $addon_id . ' .tiny-slider {height:'.$height_sm.'px;}';
+            if ($height_sm) $css .= $addon_id . ' .tiny-slider {height:'.$height_sm.'px;}';
 
-                if ($content_fontsize_sm || $content_lineheight_sm) {
-                    $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-slider-message {';
-                    $css .= $content_fontsize_sm;
-                    $css .= $content_lineheight_sm;
-                    $css .= '}';
-                }
+            if ($content_fontsize_sm || $content_lineheight_sm) {
+                $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-slider-message {';
+                $css .= $content_fontsize_sm;
+                $css .= $content_lineheight_sm;
+                $css .= '}';
+            }
 
-                if ($content_margin_sm || $content_padding_sm) {
-                    $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-slider-item-inner {';
-                    $css .= $content_margin_sm;
-                    $css .= $content_padding_sm;
-                    $css .= '}';
-                }
+            if ($content_margin_sm || $content_padding_sm) {
+                $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-slider-item-inner {';
+                $css .= $content_margin_sm;
+                $css .= $content_padding_sm;
+                $css .= '}';
+            }
 
-                if($title_font_size_sm || $title_line_height_sm || $title_margin_top_sm || $title_margin_bottom_sm){
-                    $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-slider-title {';
-                        $css .= $title_font_size_sm;
-                        $css .= $title_line_height_sm;
-                        $css .= $title_margin_top_sm;
-                        $css .= $title_margin_bottom_sm;
-                    $css .= '}';
-                }
+            if($title_font_size_sm || $title_line_height_sm || $title_margin_top_sm || $title_margin_bottom_sm){
+                $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-slider-title {';
+                $css .= $title_font_size_sm;
+                $css .= $title_line_height_sm;
+                $css .= $title_margin_top_sm;
+                $css .= $title_margin_bottom_sm;
+                $css .= '}';
+            }
 
             $css .= '}';
         }
         //Mobile
-	    $height_xs = (isset($settings->height_xs)) ? $settings->height_xs : '530';
+        $height_xs = (isset($settings->height_xs)) ? $settings->height_xs : '530';
         $title_font_size_xs = (isset($settings->title_font_size_xs) && $settings->title_font_size_xs) ? 'font-size:' . $settings->title_font_size_xs . 'px;' : '';
         $title_line_height_xs = (isset($settings->title_line_height_xs) && $settings->title_line_height_xs) ? 'line-height:' . $settings->title_line_height_xs . 'px;' : '';
         $title_margin_top_xs = (isset($settings->title_margin_top_xs) && $settings->title_margin_top_xs) ? 'margin-top:' . $settings->title_margin_top_xs . 'px;' : '';
         $title_margin_bottom_xs = (isset($settings->title_margin_bottom_xs) && $settings->title_margin_bottom_xs) ? 'margin-bottom:' . $settings->title_margin_bottom_xs . 'px;' : '';
         $content_fontsize_xs = (isset($settings->content_fontsize_xs) && $settings->content_fontsize_xs) ? 'font-size:' . $settings->content_fontsize_xs . 'px;' : '';
         $content_lineheight_xs = (isset($settings->content_lineheight_xs) && $settings->content_lineheight_xs) ? 'line-height:' . $settings->content_lineheight_xs . 'px;' : '';
-        $content_margin_xs = (isset($settings->content_margin_xs) && trim($settings->content_margin_xs)) ? 'margin:' . $settings->content_margin_xs . ';' : '';
-        $content_padding_xs = (isset($settings->content_padding_xs) && trim($settings->content_padding_xs)) ? 'padding:' . $settings->content_padding_xs . ';' : '';
+        $content_margin_xs = (isset($settings->content_margin_xs) && $settings->content_margin_xs) ? 'margin:' . $settings->content_margin_xs . ';' : '';
+        $content_padding_xs = (isset($settings->content_padding_xs) && $settings->content_padding_xs) ? 'padding:' . $settings->content_padding_xs . ';' : '';
 
         if($content_fontsize_xs || $content_margin_xs || $content_padding_xs || $title_font_size_xs || $title_line_height_xs || $content_lineheight_xs || $height_xs){
             $css .= '@media (max-width: 767px) {';
-                if ($height_xs) $css .= $addon_id . ' .tiny-slider {height:'.$height_xs.'px;}';
+            if ($height_xs) $css .= $addon_id . ' .tiny-slider {height:'.$height_xs.'px;}';
 
-                if ($content_fontsize_xs || $content_lineheight_xs) {
-                    $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-slider-message {';
-                    $css .= $content_fontsize_xs;
-                    $css .= $content_lineheight_xs;
-                    $css .= '}';
-                }
+            if ($content_fontsize_xs || $content_lineheight_xs) {
+                $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-slider-message {';
+                $css .= $content_fontsize_xs;
+                $css .= $content_lineheight_xs;
+                $css .= '}';
+            }
 
-                if ($content_margin_xs || $content_padding_xs) {
-                    $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-slider-item-inner {';
-                    $css .= $content_margin_xs;
-                    $css .= $content_padding_xs;
-                    $css .= '}';
-                }
+            if ($content_margin_xs || $content_padding_xs) {
+                $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-slider-item-inner {';
+                $css .= $content_margin_xs;
+                $css .= $content_padding_xs;
+                $css .= '}';
+            }
 
-                if($title_font_size_xs || $title_line_height_xs || $title_margin_top_xs || $title_margin_bottom_xs){
-                    $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-slider-title {';
-                        $css .= $title_font_size_xs;
-                        $css .= $title_line_height_xs;
-                        $css .= $title_margin_top_xs;
-                        $css .= $title_margin_bottom_xs;
-                    $css .= '}';
-                }
+            if($title_font_size_xs || $title_line_height_xs || $title_margin_top_xs || $title_margin_bottom_xs){
+                $css .= '#sppb-addon-' . $this->addon->id . ' .sppb-slider-title {';
+                $css .= $title_font_size_xs;
+                $css .= $title_line_height_xs;
+                $css .= $title_margin_top_xs;
+                $css .= $title_margin_bottom_xs;
+                $css .= '}';
+            }
             $css .= '}';
         }
 
