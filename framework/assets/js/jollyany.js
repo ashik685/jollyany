@@ -70,5 +70,32 @@ jQuery(function($){
         if ($('#astroid-header').length && $('#astroid-header').hasClass('has-sidebar') && $('#jollyany-sidebar-collapsed-logo-template').length && !$('#astroid-header .astroid-sidebar-collapsed-logo').length) {
             $('#astroid-header').find('.astroid-sidebar-collapsable').after($('#jollyany-sidebar-collapsed-logo-template').html());
         }
+        if ($('.jollyany-course-contact-form').length) {
+            $(document).on('submit', '.jollyany-course-contact-form' , function (e) {
+                e.preventDefault();
+                var request = {},
+                    $this   = $(this);
+                request['data'] = $this.serializeArray();
+                request['option'] = 'com_ajax';
+                request['jollyany'] = 'course_contact_form';
+                request[$this.find('.token').attr('name')] = 1;
+                $.ajax({
+                    type   : 'POST',
+                    data   : request,
+                    beforeSend: function(){
+                        $this.find('.jollyany-ajax-contact-status').empty()
+                    },
+                    success: function (response) {
+                        if (response.status == 'success') {
+                            $this.find('.jollyany-ajax-contact-status').append('<div class="uk-alert-success" uk-alert><a class="uk-alert-close" uk-close></a><p>'+response.message+'</p></div>');
+                            $this.find('.uk-input').val('');
+                            $this.find('.uk-textarea').val('');
+                        } else {
+                            $this.find('.jollyany-ajax-contact-status').append('<div class="uk-alert-danger" uk-alert><a class="uk-alert-close" uk-close></a><p>'+JSON.stringify(response)+'</p></div>');
+                        }
+                    }
+                });
+            });
+        }
     });
 });

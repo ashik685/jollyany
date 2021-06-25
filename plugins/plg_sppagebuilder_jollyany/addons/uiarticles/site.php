@@ -19,7 +19,8 @@ class SppagebuilderAddonUIArticles extends SppagebuilderAddons{
 
 		$settings = $this->addon->settings;
 		$class = (isset($settings->class) && $settings->class) ? $settings->class : '';
-		$style = (isset($settings->style) && $settings->style) ? $settings->style : 'panel-default';
+		$layout = (isset($settings->layout) && $settings->layout) ? $settings->layout : '';
+		$style = (isset($settings->color_style) && $settings->color_style) ? ' '.$settings->color_style : '';
 		$heading_selector = (isset($settings->heading_selector) && $settings->heading_selector) ? $settings->heading_selector : 'h3';
 
 		// Addon options
@@ -31,21 +32,48 @@ class SppagebuilderAddonUIArticles extends SppagebuilderAddons{
 		$post_type 		= (isset($settings->post_type) && $settings->post_type) ? $settings->post_type : '';
 		$ordering 		= (isset($settings->ordering) && $settings->ordering) ? $settings->ordering : 'latest';
 		$limit 			= (isset($settings->limit) && $settings->limit) ? $settings->limit : 3;
-		$columns 		= (isset($settings->columns) && $settings->columns) ? $settings->columns : 3;
+		$columns 		= (isset($settings->columns) && $settings->columns) ? $settings->columns : '';
 		$show_intro 	= (isset($settings->show_intro)) ? $settings->show_intro : 1;
 		$intro_limit 	= (isset($settings->intro_limit) && $settings->intro_limit) ? $settings->intro_limit : 200;
 		$hide_thumbnail = (isset($settings->hide_thumbnail)) ? $settings->hide_thumbnail : 0;
 		$show_author 	= (isset($settings->show_author)) ? $settings->show_author : 1;
 		$show_category 	= (isset($settings->show_category)) ? $settings->show_category : 1;
 		$show_date 		= (isset($settings->show_date)) ? $settings->show_date : 1;
+        $show_course 	= (isset($settings->show_course)) ? $settings->show_course : 0;
+        $show_course_lecture_count 	= (isset($settings->show_course_lecture_count)) ? $settings->show_course_lecture_count : 1;
+		$show_event 	= (isset($settings->show_event)) ? $settings->show_event : 0;
+		$show_event_date= (isset($settings->show_event_date)) ? $settings->show_event_date : 1;
+		$show_event_duration 	= (isset($settings->show_event_duration)) ? $settings->show_event_duration : 1;
+		$show_event_location 	= (isset($settings->show_event_location)) ? $settings->show_event_location : 1;
+		$show_event_spot 	= (isset($settings->show_event_spot)) ? $settings->show_event_spot : 1;
+		$show_event_phone 	= (isset($settings->show_event_phone)) ? $settings->show_event_phone : 1;
 		$show_readmore 	= (isset($settings->show_readmore)) ? $settings->show_readmore : 1;
         $button_text    = (isset($settings->button_text) && $settings->button_text) ? $settings->button_text : 'Read More';
         $button_class   = (isset($settings->button_type) && $settings->button_type) ? ' sppb-btn-' . $settings->button_type : ' sppb-btn-default';
 		$link_articles 	= (isset($settings->link_articles)) ? $settings->link_articles : 0;
 		$link_catid 	= (isset($settings->link_catid)) ? $settings->link_catid : 0;
 		$link_k2catid 	= (isset($settings->link_k2catid)) ? $settings->link_k2catid : 0;
+        $use_slider     = (isset($settings->use_slider)) ? $settings->use_slider : 0;
+        $enable_navigation     = (isset($settings->enable_navigation)) ? $settings->enable_navigation : 1;
+        $navigation_position   = (isset($settings->navigation_position)) ? $settings->navigation_position : '';
+        $enable_dotnav  = (isset($settings->enable_dotnav)) ? $settings->enable_dotnav : 1;
+        $center_slider 	= (isset($settings->center_slider)) ? $settings->center_slider : 0;
+        $card_size 		= (isset($settings->card_size) && $settings->card_size) ? $settings->card_size : '';
+        $card_size_cls  = $card_size ? ' uk-card-'.$card_size : '';
+        $uk_card_body   = $card_size != 'none' ? ' uk-card-body' : '';
 
-		$all_articles_btn_text   = (isset($settings->all_articles_btn_text) && $settings->all_articles_btn_text) ? $settings->all_articles_btn_text : 'See all posts';
+        //responsive width
+        if (isset($settings->responsive_width->md)) $settings->responsive_width = $settings->responsive_width->md;
+        $responsive_width = (isset($settings->responsive_width) && $settings->responsive_width) ? $settings->responsive_width : 4;
+        $responsive_width_sm = (isset($settings->responsive_width_sm) && $settings->responsive_width_sm) ? $settings->responsive_width_sm : 3;
+        $responsive_width_xs = (isset($settings->responsive_width_xs) && $settings->responsive_width_xs) ? $settings->responsive_width_xs : 2;
+
+        //for old version
+        if ($columns) {
+            $responsive_width = $columns;
+        }
+
+        $all_articles_btn_text   = (isset($settings->all_articles_btn_text) && $settings->all_articles_btn_text) ? $settings->all_articles_btn_text : 'See all posts';
 		$all_articles_btn_class  = (isset($settings->all_articles_btn_size) && $settings->all_articles_btn_size) ? ' sppb-btn-' . $settings->all_articles_btn_size : '';
 		$all_articles_btn_class .= (isset($settings->all_articles_btn_type) && $settings->all_articles_btn_type) ? ' sppb-btn-' . $settings->all_articles_btn_type : ' sppb-btn-default';
 		$all_articles_btn_class .= (isset($settings->all_articles_btn_shape) && $settings->all_articles_btn_shape) ? ' sppb-btn-' . $settings->all_articles_btn_shape: ' sppb-btn-rounded';
@@ -103,14 +131,18 @@ class SppagebuilderAddonUIArticles extends SppagebuilderAddons{
 
 		if(count((array) $items)) {
 			$output  .= '<div class="sppb-addon sppb-addon-articles ' . $class . '">';
-			$output .= '<div class="sppb-addon-content">';
-			$output	.= '<div class="sppb-row">';
+			$output .= '<div class="sppb-addon-content'.$style.'">';
+			if ($use_slider) {
+                $output .= '<div uk-slider="'.($center_slider ? 'center: true' : '').'">';
+                $output .= '<div class="uk-position-relative">';
+                $output .= '<div class="uk-slider-container">';
+            }
+			$output	.= '<div class="uk-child-width-1-'.$responsive_width.'@l uk-child-width-1-'.$responsive_width_sm.'@m uk-child-width-1-'.$responsive_width_xs.'@s'.($use_slider ? ' uk-slider-items': '').'" uk-grid>';
 
 			foreach ($items as $key => $item) {
-
-				$output .= '<div class="sppb-col-md-'. round(12/$columns) .' sppb-col-sm-'. ((round(12/$columns)*2 <=6) ? round(12/$columns)*2 : round(12/$columns)) .'">';
-				$output .= '<div class="sppb-addon-article uk-article uk-card">';
-
+			    $params = json_decode($item->attribs, true);
+				$output .= '<div>';
+				$output .= '<div class="sppb-addon-article uk-article uk-card'.$card_size_cls.'">';
 				if(!$hide_thumbnail) {
 					$image = '';
 					if ($resource == 'k2') {
@@ -122,7 +154,6 @@ class SppagebuilderAddonUIArticles extends SppagebuilderAddons{
 					} else {
 						$image = $item->image_thumbnail;
 					}
-
 					if($resource != 'k2' && $item->post_format=='gallery') {
 						if(count((array) $item->imagegallery->images)) {
 							$output .= '<div class="sppb-carousel sppb-slide" data-sppb-ride="sppb-carousel">';
@@ -143,12 +174,9 @@ class SppagebuilderAddonUIArticles extends SppagebuilderAddons{
 								}
 							}
 							$output	.= '</div>';
-
 							$output	.= '<a class="left sppb-carousel-control" role="button" data-slide="prev" aria-label="'.JText::_('COM_SPPAGEBUILDER_ARIA_PREVIOUS').'"><i class="fa fa-angle-left" aria-hidden="true"></i></a>';
 							$output	.= '<a class="right sppb-carousel-control" role="button" data-slide="next" aria-label="'.JText::_('COM_SPPAGEBUILDER_ARIA_NEXT').'"><i class="fa fa-angle-right" aria-hidden="true"></i></a>';
-
 							$output .= '</div>';
-
 						} elseif ( isset($item->image_thumbnail) && $item->image_thumbnail ) {
 							//Lazyload image
 							$placeholder = $item->image_thumbnail == '' ? false : $this->get_image_placeholder($item->image_thumbnail);
@@ -214,12 +242,33 @@ class SppagebuilderAddonUIArticles extends SppagebuilderAddons{
 						}
 					}
 				}
-
-				$output .= '<div class="sppb-article-info-wrap uk-card-body">';
-					$output .= '<'.$heading_selector.' class="ui-title uk-article-title"><a href="'. $item->link .'" itemprop="url">' . $item->title . '</a></'.$heading_selector.'>';
+                if ($layout == 'thumbnail') {
+                    $output .= '<div class="uk-position-cover uk-overlay uk-overlay-primary"></div>';
+                }
+				$output .= '<div class="sppb-article-info-wrap'.$uk_card_body.($layout == 'thumbnail' ? ' uk-position-bottom uk-light' : '').'">';
+                    if ($show_event && $show_event_date && isset($params['jollyany_event_start']) && $params['jollyany_event_start']) {
+                        $output .= '<span class="uk-badge uk-margin">' . Jhtml::_('date', strtotime($params['jollyany_event_start']), 'DATE_FORMAT_LC1') . '</span>';
+                    }
+                    if ($show_course) {
+                        jimport('jollyany.framework.course');
+                        if ($show_course_lecture_count) {
+                            $courses    =   JollyanyFrameworkCourse::getData($item->id);
+                            $courses    =   json_decode($courses->data, true);
+                            if (count($courses)) {
+                                $lectures   =   0;
+                                foreach ($courses as $course) {
+                                    if ($course['jollyany_lesson_type'] == 'content') {
+                                        $lectures++;
+                                    }
+                                }
+                                $output .= '<span class="uk-badge uk-margin">' . $lectures . ' ' . JText::_('JOLLYANY_COURSE_LECTURES') . '</span>';
+                            }
+                        }
+                    }
+					$output .= '<'.$heading_selector.' class="ui-title uk-article-title uk-margin-remove-top"><a href="'. $item->link .'" itemprop="url">' . $item->title . '</a></'.$heading_selector.'>';
 
 					if($show_author || $show_category || $show_date) {
-						$output .= '<div class="sppb-article-meta uk-article-meta">';
+						$output .= '<div class="uk-article-meta uk-grid-small uk-margin" uk-grid>';
 
 						if($show_date) {
 							$output .= '<span class="sppb-meta-date" itemprop="datePublished">' . Jhtml::_('date', $item->publish_up, 'DATE_FORMAT_LC3') . '</span>';
@@ -246,6 +295,42 @@ class SppagebuilderAddonUIArticles extends SppagebuilderAddons{
 						$output .= '<div class="sppb-article-introtext">'. mb_substr(strip_tags($item->introtext), 0, $intro_limit, 'UTF-8') .'...</div>';
 					}
 
+					if ($show_event) {
+                        $output .= '<div class="ui-article-event uk-text-meta uk-margin">';
+                        if ($show_event_duration && ((isset($params['jollyany_event_start']) && $params['jollyany_event_start']) || (isset($params['jollyany_event_end']) && $params['jollyany_event_end']))) {
+                            $output .= '<div class="uk-grid-small" uk-grid>';
+                            $event_duration =   array();
+                            if (isset($params['jollyany_event_start']) && $params['jollyany_event_start']) {
+                                $event_duration[]   =   date('F d, Y H:i', strtotime($params['jollyany_event_start']));
+                            }
+                            if (isset($params['jollyany_event_end']) && $params['jollyany_event_end']) {
+                                $event_duration[]   =   date('F d, Y H:i', strtotime($params['jollyany_event_end']));
+                            }
+                            $output .= '<div class="uk-width-auto"><span uk-icon="icon: clock; ratio: 0.8"></span></div><div class="uk-width-expand">'. implode('<span uk-icon="icon: arrow-right"></span>', $event_duration).'</div>';
+                            $output .= '</div>';
+                        }
+
+                        if ($show_event_location && isset($params['jollyany_event_location']) && $params['jollyany_event_location']) {
+                            $output .= '<div class="uk-grid-small" uk-grid>';
+                            $output .= '<div class="uk-width-auto"><span uk-icon="icon: location; ratio: 0.8"></span></div><div class="uk-width-expand">'.$params['jollyany_event_location'].'</div>';
+                            $output .= '</div>';
+                        }
+
+                        if ($show_event_spot && isset($params['jollyany_event_spot']) && $params['jollyany_event_spot']) {
+                            $output .= '<div class="uk-grid-small" uk-grid>';
+                            $output .= '<div class="uk-width-auto"><span uk-icon="icon: users; ratio: 0.8"></span></div><div class="uk-width-expand">'.JText::sprintf('JOLLYANY_EVENT_SPOT_TEXT', $params['jollyany_event_spot']).'</div>';
+                            $output .= '</div>';
+                        }
+
+                        if ($show_event_phone && isset($params['jollyany_event_phone']) && $params['jollyany_event_phone']) {
+                            $output .= '<div class="uk-grid-small" uk-grid>';
+                            $output .= '<div class="uk-width-auto"><span uk-icon="icon: receiver; ratio: 0.8"></span></div><div class="uk-width-expand">'.$params['jollyany_event_phone'].'</div>';
+                            $output .= '</div>';
+                        }
+                        $output .= '</div>';
+                    }
+
+
 					if($show_readmore) {
 					    if (isset($settings->button_type) && $settings->button_type != 'link') {
                             $button_class = ' sppb-btn ' . $button_class ;
@@ -259,6 +344,22 @@ class SppagebuilderAddonUIArticles extends SppagebuilderAddons{
 			}
 
 			$output  .= '</div>';
+			if ($use_slider) {
+			    // End Slider Container
+                $output  .= '</div>';
+                if ($enable_navigation) {
+                    // Nav
+                    $output .= '<div class="'.($navigation_position == 'inside' ? '' : 'uk-hidden@l ').'uk-light"><a class="uk-position-center-left uk-position-small" href="#" uk-slidenav-previous uk-slider-item="previous"></a><a class="uk-position-center-right uk-position-small" href="#" uk-slidenav-next uk-slider-item="next"></a></div>';
+                    $output .= $navigation_position == 'inside' ? '' : '<div class="uk-visible@l"><a class="uk-position-center-left-out uk-position-small" href="#" uk-slidenav-previous uk-slider-item="previous"></a><a class="uk-position-center-right-out uk-position-small" href="#" uk-slidenav-next uk-slider-item="next"></a></div>';
+                }
+                $output  .= '</div>';
+                if ($enable_dotnav) {
+                    // Dot nav
+                    $output .= '<ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>';
+                }
+                // End Slider
+                $output  .= '</div>';
+            }
 
 			// See all link
 			if($link_articles) {
@@ -319,6 +420,8 @@ class SppagebuilderAddonUIArticles extends SppagebuilderAddons{
             $jollyany_css_path = new JLayoutFile('addon.css.button', $layout_path);
             $css .= $jollyany_css_path->render(array('addon_id' => $addon_id, 'options' => $this->addon->settings, 'class' => 'btn-readmore-'. $this->addon->id));
         }
+
+        $css .= (isset($settings->overlay_color) && $settings->overlay_color) ? '#sppb-addon-' . $this->addon->id . ' .uk-overlay-primary {background-color:'.$settings->overlay_color . ';}' : '';
 
         //Title style
         $title_style = '';

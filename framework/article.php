@@ -27,6 +27,8 @@ class JollyanyFrameworkArticle extends AstroidFrameworkArticle {
         $canEdit = $this->article->params->get('access-edit');
         $assocParam = (JLanguageAssociations::isEnabled() && $this->article->params->get('show_associations'));
         $lessons    =   $this->article->params->get('jollyany_course_lessons', '');
+        $language = JFactory::getLanguage();
+        $language->load('com_contact', JPATH_SITE);
         ob_start();
         echo $this->renderEventData();
         // Todo Not that elegant would be nice to group the params
@@ -35,51 +37,21 @@ class JollyanyFrameworkArticle extends AstroidFrameworkArticle {
             $document = Framework::getDocument();
             $document->addStyleSheet('libraries/jollyany/framework/assets/js/vendor/jquery.fancybox.min.css');
             $document->addScript('libraries/jollyany/framework/assets/js/vendor/jquery.fancybox.min.js');
-            $document->addScript('libraries/jollyany/framework/assets/js/vendor/jquery.smartTab.min.js');
-            $tabid  =   uniqid('courseTab_');
-            $document->addScriptDeclaration('
-            jQuery(document).ready(function(){
-              jQuery(\'#'.$tabid.'\').smartTab({
-                theme: \''.$this->categoryParams->get('course_theme','default').'\'
-              });
-            });
-            ');
             ?>
-        <div id="<?php echo $tabid; ?>" class="jollyany-course-tab">
-            <ul class="nav">
-                <li>
-                    <a class="nav-link" href="#lessons"><?php echo JText::_('JOLLYANY_COURSE_OPTIONS_TITLE_BASIC_LABEL') ?></a>
-                </li>
+        <div class="jollyany-course-tab">
+            <ul class="uk-child-width-expand" uk-tab uk-switcher="connect: .jollyany-course-content">
                 <li>
                     <a class="nav-link" href="#description"><?php echo JText::_('JGLOBAL_DESCRIPTION') ?></a>
                 </li>
                 <li>
-                    <a class="nav-link" href="#contact"><?php echo JText::_('JOLLYANY_LESSON_CONTACT') ?></a>
+                    <a class="nav-link" href="#lessons"><?php echo JText::_('JOLLYANY_COURSE_OPTIONS_TITLE_BASIC_LABEL') ?></a>
+                </li>
+                <li>
+                    <a class="nav-link" href="#contact"><?php echo JText::_('COM_CONTACT_DETAILS') ?></a>
                 </li>
             </ul>
-            <div class="tab-content">
-                <div class="tab-pane" id="lessons" role="tabpanel">
-                    <?php
-                    $opened_flag    =   false;
-                    foreach ($lessons as $lesson) {
-                        if ($lesson['jollyany_lesson_type'] == 'section') {
-                            if ($opened_flag) echo '</tbody></table>';
-                            echo '<h4 class="lesson-section-title">'.$lesson['lesson_section_title'].'</h4>';
-                            echo '<table class="table table-hover"><tbody>';
-                            $opened_flag    =    true;
-                        } else {
-                            if (!$opened_flag) {
-                                echo '<table class="table table-hover"><tbody>';
-                                $opened_flag    =   true;
-                            }
-                            $downloadslider     =   isset($lesson['lesson_content_download_link']) && $lesson['lesson_content_download_link'] ? '|</span><a href="'.JUri::root().'images/'.$lesson['lesson_content_download_link'].'" title="'.$lesson['lesson_content_title'].'" target="_blank"><i class="fas fa-download"></i> '.JText::_('JOLLYANY_LESSON_DOWNLOAD_SLIDER').'</a>' : '';
-                            echo '<tr><td class="lesson-title"><a href="'.$lesson['lesson_content_video_url'].'" title="'.$lesson['lesson_content_title'].'" data-fancybox><i class="far fa-play-circle"></i> '.$lesson['lesson_content_title'].'</a></td><td class="lesson-option">'.$lesson['lesson_content_duration'].'<span>'.$downloadslider.'</td></tr>';
-                        }
-                    }
-                    echo '</tbody></table>';
-                    ?>
-                </div>
-                <div class="tab-pane" id="description" role="tabpanel">
+            <div class="uk-switcher jollyany-course-content uk-margin-medium">
+                <div class="uk-animation-slide-bottom-small">
                     <?php if (!$this->print) : ?>
                         <?php if ($canEdit || $this->article->params->get('show_print_icon') || $this->article->params->get('show_email_icon')) : ?>
                             <?php echo JLayoutHelper::render('joomla.content.icons', array('params' => $this->article->params, 'item' => $this->article, 'print' => false)); ?>
@@ -93,18 +65,84 @@ class JollyanyFrameworkArticle extends AstroidFrameworkArticle {
                     <?php endif; ?>
                     <?php echo $this->article->text; ?>
                 </div>
-                <div class="tab-pane" id="contact" role="tabpanel">
+                <div class="uk-animation-slide-bottom-small">
                     <?php
-                    $contact_course_link    =   $this->categoryParams->get('course_category_contact_link','');
-                    if (!$contact_course_link) {
-                        $contact_course_link = $this->template->params->get('course_contact_link','');
+                    $opened_flag    =   false;
+                    foreach ($lessons as $lesson) {
+                        if ($lesson['jollyany_lesson_type'] == 'section') {
+                            if ($opened_flag) echo '</tbody></table>';
+                            echo '<h4 class="lesson-section-title">'.$lesson['lesson_section_title'].'</h4>';
+                            echo '<table class="table table-hover lesson-table"><tbody>';
+                            $opened_flag    =    true;
+                        } else {
+                            if (!$opened_flag) {
+                                echo '<table class="table table-hover lesson-table"><tbody>';
+                                $opened_flag    =   true;
+                            }
+                            $downloadslider     =   isset($lesson['lesson_content_download_link']) && $lesson['lesson_content_download_link'] ? '|</span><a href="'.JUri::root().'images/'.$lesson['lesson_content_download_link'].'" title="'.$lesson['lesson_content_title'].'" target="_blank"><i class="fas fa-download"></i> '.JText::_('JOLLYANY_LESSON_DOWNLOAD_SLIDER').'</a>' : '';
+                            echo '<tr><td width="45"><span uk-icon="play-circle"></span></td><td class="lesson-title"><a href="'.$lesson['lesson_content_video_url'].'" title="'.$lesson['lesson_content_title'].'" data-fancybox>'.$lesson['lesson_content_title'].'</a></td><td class="lesson-option">'.$lesson['lesson_content_duration'].'<span>'.$downloadslider.'</td></tr>';
+                        }
                     }
+                    echo '</tbody></table>';
+                    ?>
+                </div>
+                <div class="uk-animation-slide-bottom-small">
+                    <?php
                     $contact_course_info    =   $this->categoryParams->get('course_category_contact_info','');
                     if (!$contact_course_info) {
                         $contact_course_info = $this->template->params->get('course_contact_info','');
                     }
-                    echo '<div class="course-contact-info">'.$contact_course_info.'</div><div class="course-contact-link"><a href="'.$contact_course_link.'" class="btn btn-success" target="_blank">'.JText::_('JOLLYANY_COURSE_CONTACT_US').'</a></div>';
+                    echo '<div class="course-contact-info">'.$contact_course_info.'</div>';
                     ?>
+                    <form class="jollyany-course-contact-form">
+                        <div class="uk-child-width-1-2@m uk-margin uk-grid-small" uk-grid>
+                            <div>
+                                <input class="uk-input" name="from_name" type="text" required="required" placeholder="<?php echo JText::_('COM_CONTACT_CONTACT_EMAIL_NAME_DESC'); ?>">
+                            </div>
+                            <div>
+                                <input class="uk-input" name="from_email" type="text" required="required" placeholder="<?php echo JText::_('COM_CONTACT_CONTACT_ENTER_VALID_EMAIL'); ?>">
+                            </div>
+                        </div>
+                        <div class="uk-child-width-1-2@m uk-margin uk-grid-small" uk-grid>
+                            <div>
+                                <input class="uk-input" name="phone" type="text" placeholder="<?php echo JText::_('JOLLYANY_COURSE_CONTACT_TELEPHONE'); ?>">
+                            </div>
+                            <div>
+                                <input class="uk-input" name="subject" type="text" required="required" placeholder="<?php echo JText::_('COM_CONTACT_CONTACT_MESSAGE_SUBJECT_DESC'); ?>">
+                            </div>
+                        </div>
+                        <div class="uk-margin">
+                            <textarea class="uk-textarea" name="message" rows="5" required="required" placeholder="<?php echo JText::_('COM_CONTACT_CONTACT_ENTER_MESSAGE_DESC'); ?>"></textarea>
+                        </div>
+                        <div class="uk-margin">
+                            <label><input class="uk-checkbox" name="agreement" type="checkbox"><?php echo ' '.$this->template->params->get('course_contact_agreement','I agree with the <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a> and I declare that I have read the information that is required in accordance with <a href="http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.L_.2016.119.01.0001.01.ENG&amp;toc=OJ:L:2016:119:TOC" target="_blank">Article 13 of GDPR.</a>'); ?></label>
+                        </div>
+                        <?php if ($this->template->params->get('course_contact_recaptcha',0)) : ?>
+                        <div class="uk-margin">
+                            <?php
+                            if ($this->template->params->get('course_contact_recaptcha_type','recaptcha')) {
+                                JPluginHelper::importPlugin('captcha', 'recaptcha');
+                                $dispatcher = JDispatcher::getInstance();
+                                $dispatcher->trigger('onInit', 'jollyany_course_contact_recaptcha');
+                                $recaptcha = $dispatcher->trigger('onDisplay', array(null, 'jollyany_course_contact_recaptcha' , 'jollyany-course-contact-recaptcha'));
+                                echo (isset($recaptcha[0])) ? $recaptcha[0] : '<p class="uk-alert-danger">' . JText::_('JOLLYANY_RECAPTCHA_NOT_INSTALLED') . '</p>';
+                            } else {
+                                JPluginHelper::importPlugin('captcha', 'recaptcha_invisible');
+                                $dispatcher = JDispatcher::getInstance();
+                                $dispatcher->trigger('onInit', 'jollyany_course_contact_invisible_recaptcha');
+                                $recaptcha = $dispatcher->trigger('onDisplay', array(null, 'jollyany_course_contact_invisible_recaptcha' , 'jollyany-course-contact-invisible-recaptcha'));
+                                echo (isset($recaptcha[0])) ? $recaptcha[0] : '<p class="uk-alert-danger">' . JText::_('JOLLYANY_RECAPTCHA_NOT_INSTALLED') . '</p>';
+                            }
+                            ?>
+                            <input type="hidden" name="captcha_type" value="<?php echo $this->template->params->get('course_contact_recaptcha_type','recaptcha'); ?>">
+                        </div>
+                        <?php endif; ?>
+                        <input type="hidden" class="token" name="<?php echo \JSession::getFormToken(); ?>" value="1">
+                        <div class="uk-margin">
+                            <button type="submit" class="uk-button uk-button-primary uk-border-rounded"><?php echo JText::_('COM_CONTACT_CONTACT_SEND'); ?></button>
+                        </div>
+                        <div class="jollyany-ajax-contact-status uk-margin"></div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -119,7 +157,7 @@ class JollyanyFrameworkArticle extends AstroidFrameworkArticle {
         $event_available    =   $this->article->params->get('jollyany_event_location', '') || $this->article->params->get('jollyany_event_phone', '') || $this->article->params->get('jollyany_event_start', '') || $this->article->params->get('jollyany_event_end', '') || $this->article->params->get('jollyany_event_spot', '') || $this->article->params->get('jollyany_event_long_lat', '') || $this->article->params->get('jollyany_event_url', '');
         if ($event_available) :
             $document = Framework::getDocument();
-            echo '<div class="event-information">';
+            echo '<div class="event-information uk-card uk-card-body uk-card-default uk-margin-medium">';
             echo '<div class="event-countdown">';
             if ((!$this->isCategoryView || ($this->isCategoryView && $this->categoryParams->get('jollyany_show_event_countdown',0))) && ($this->article->params->get('jollyany_event_start', '') || $this->article->params->get('jollyany_event_end', ''))) {
 
@@ -141,14 +179,14 @@ class JollyanyFrameworkArticle extends AstroidFrameworkArticle {
 
                 echo $txt ? '<div class="count-down-intro">'.$txt.'</div>' : '';
                 ?>
-                <div id="<?php echo $countdown_id; ?>"></div>
+                <h3 id="<?php echo $countdown_id; ?>" class="uk-heading-small uk-margin-remove-vertical"></h3>
                 <script type="text/javascript">
                     jQuery(function($){
                         $(document).ready(function(){
                             $('#<?php echo $countdown_id; ?>').countdown('<?php echo $countdown_time; ?>')
                                 .on('update.countdown', function(event) {
                                     var format = '%H:%M:%S';
-                                    if(event.offset.totalDays > 0) {
+                                    if((event.offset.totalDays > 0 && event.offset.weeks === 0) || (event.offset.totalDays % 7 > 0)) {
                                         format = '%-d day%!d ' + format;
                                     }
                                     if(event.offset.weeks > 0) {
@@ -170,9 +208,11 @@ class JollyanyFrameworkArticle extends AstroidFrameworkArticle {
                 <div class="call-to-action"><a href="<?php echo $this->article->params->get('jollyany_event_url', ''); ?>" class="btn btn-primary"><?php echo $this->article->params->get('jollyany_event_url_text', JText::_('JOLLYANY_EVENT_BUTTON_TEXT')); ?></a></div>
             <?php }
             echo '</div>';
+            echo '<hr />';
             echo '<div class="event-info">';
+            echo '<table><tbody>';
             if ((!$this->isCategoryView || ($this->isCategoryView && $this->categoryParams->get('jollyany_show_event_location',0))) && $this->article->params->get('jollyany_event_location', '')) {
-                echo '<div class="event-location"><i class="fas fa-map-marker-alt"></i>'. $this->article->params->get('jollyany_event_location', '') .'</div>';
+                echo '<tr><td class="event-location" width="30"><span uk-icon="icon: location"></span></td><td>'. $this->article->params->get('jollyany_event_location', '') .'</td></tr>';
             }
             if ((!$this->isCategoryView || ($this->isCategoryView && $this->categoryParams->get('jollyany_show_event_duration',0))) && ($this->article->params->get('jollyany_event_start', '') || $this->article->params->get('jollyany_event_end', ''))) {
                 $event_duration =   array();
@@ -182,14 +222,15 @@ class JollyanyFrameworkArticle extends AstroidFrameworkArticle {
                 if ($this->article->params->get('jollyany_event_end', '')) {
                     $event_duration[]   =   date(JText::_('DATE_FORMAT_LC2'), strtotime($this->article->params->get('jollyany_event_end', '')));
                 }
-                echo '<div class="event-duration"><i class="fas fa-calendar-alt"></i>'. implode('<i class="fas fa-long-arrow-alt-right text-center"></i>', $event_duration) .'</div>';
+                echo '<tr><td class="event-duration"><span uk-icon="icon: calendar"></span></td><td>'. implode('<span uk-icon="icon: arrow-right"></span>', $event_duration) .'</td></tr>';
             }
             if ((!$this->isCategoryView || ($this->isCategoryView && $this->categoryParams->get('jollyany_show_event_seats',0))) && $this->article->params->get('jollyany_event_spot', '')) {
-                echo '<div class="event-spot"><i class="fas fa-user-friends"></i>'. JText::sprintf('JOLLYANY_EVENT_SPOT_TEXT', $this->article->params->get('jollyany_event_spot', ''))  .'</div>';
+                echo '<tr><td class="event-spot"><span uk-icon="icon: users"></span></td><td>'. JText::sprintf('JOLLYANY_EVENT_SPOT_TEXT', $this->article->params->get('jollyany_event_spot', ''))  .'</td></tr>';
             }
             if ((!$this->isCategoryView || ($this->isCategoryView && $this->categoryParams->get('jollyany_show_event_phone',0))) && $this->article->params->get('jollyany_event_phone', '')) {
-                echo '<div class="event-phone"><i class="fas fa-phone-alt"></i>'. $this->article->params->get('jollyany_event_phone', '') .'</div>';
+                echo '<tr><td class="event-phone"><span uk-icon="icon: receiver"></span></td><td>'. $this->article->params->get('jollyany_event_phone', '') .'</td></tr>';
             }
+            echo '</tbody></table>';
             echo '</div>';
             echo '</div>';
             if (!$this->isCategoryView && $this->article->params->get('jollyany_event_long_lat', '')) {
@@ -200,14 +241,16 @@ class JollyanyFrameworkArticle extends AstroidFrameworkArticle {
                 $location_addr = [];
                 foreach ($locations as $location) {
                     $location_longlat   =   explode(',', $location['jollyany_location_long_lat']);
-                    $location_addr[] = array('address'=>$location['jollyany_location_infowindow'], 'latitude'=>trim($location_longlat[0]),'longitude'=>trim($location_longlat[1]));
+                    if (count($location_longlat)>1) {
+                        $location_addr[] = array('address'=>$location['jollyany_location_infowindow'], 'latitude'=>trim($location_longlat[0]),'longitude'=>trim($location_longlat[1]));
+                    }
                 }
                 $location_json = json_encode($location_addr);
                 $google_id    =   uniqid('googlemap_');
                 $document->addStyleDeclaration('#'.$google_id.'{height:'.$this->template->params->get('googlemapheight', '400').'px;}');
                 $document->addScript('https://maps.googleapis.com/maps/api/js?key='. $this->template->params->get('googleapikey', ''));
                 $document->addScript('libraries/jollyany/framework/assets/js/vendor/gmap.min.js');
-                echo '<div class="event_googlemaps">';
+                echo '<div class="event_googlemaps uk-margin-medium">';
                 echo '<div id="'.$google_id.'" class="googlemapapi" data-lat="' . trim($longlat[0]) . '" data-lng="' . trim($longlat[1]) . '"  data-location=\''.base64_encode($location_json).'\' data-maptype="' . $this->template->params->get('googlemaptype','ROADMAP') . '" data-mapzoom="' . $this->template->params->get('googlemapzoom', '15') . '" data-mousescroll="' . $googlemapmousescroll . '" data-infowindow="' . base64_encode($this->article->params->get('jollyany_event_infowindow', '')) . '" data-show-controll=\''.$googlemapshowcontrol.'\'></div>';
                 echo '</div>';
             }
@@ -229,5 +272,64 @@ class JollyanyFrameworkArticle extends AstroidFrameworkArticle {
             }
         }
         return $params;
+    }
+
+    public static function getLectureTotal($id) {
+	    if (!$id) return '';
+	    $content = '';
+        $course_data =   JollyanyFrameworkCourse::getData($id);
+        if ($course_data) {
+            $courses = json_decode($course_data->data,true);
+            if (count($courses)) {
+                $lectures   =   0;
+                foreach ($courses as $course) {
+                    if ($course['jollyany_lesson_type'] == 'content') {
+                        $lectures++;
+                    }
+                }
+                $content .= '<div class="uk-text-meta uk-margin">';
+                $content .= '<i class="fas fa-book"></i>&nbsp;&nbsp;'. $lectures . ' ' . JText::_('JOLLYANY_COURSE_LECTURES');
+                $content .= '</div>';
+            }
+        }
+        return $content;
+    }
+
+    public static function getCourseData($params, $row) {
+        if (!$params) return '';
+        $content = '';
+        $content .= '<div class="ui-article-event uk-text-meta uk-margin">';
+        if ($params->get('jollyany_show_event_duration',0) && ($row->get('jollyany_event_start','') || $row->get('jollyany_event_end',''))) {
+            $content .= '<div class="uk-grid-small" uk-grid>';
+            $event_duration =   array();
+            if ($row->get('jollyany_event_start','')) {
+                $event_duration[]   =   date('F d, Y H:i', strtotime($row->get('jollyany_event_start','')));
+            }
+            if ($row->get('jollyany_event_end','')) {
+                $event_duration[]   =   date('F d, Y H:i', strtotime($row->get('jollyany_event_end','')));
+            }
+            $content .= '<div class="uk-width-auto"><span uk-icon="icon: clock; ratio: 0.8"></span></div><div class="uk-width-expand">'. implode('<span uk-icon="icon: arrow-right"></span>', $event_duration).'</div>';
+            $content .= '</div>';
+        }
+
+        if ($params->get('jollyany_show_event_location',0) && $row->get('jollyany_event_location','')) {
+            $content .= '<div class="uk-grid-small" uk-grid>';
+            $content .= '<div class="uk-width-auto"><span uk-icon="icon: location; ratio: 0.8"></span></div><div class="uk-width-expand">'.$row->get('jollyany_event_location','').'</div>';
+            $content .= '</div>';
+        }
+
+        if ($params->get('jollyany_show_event_seats',0) && $row->get('jollyany_event_spot','')) {
+            $content .= '<div class="uk-grid-small" uk-grid>';
+            $content .= '<div class="uk-width-auto"><span uk-icon="icon: users; ratio: 0.8"></span></div><div class="uk-width-expand">'.JText::sprintf('JOLLYANY_EVENT_SPOT_TEXT', $row->get('jollyany_event_spot','')).'</div>';
+            $content .= '</div>';
+        }
+
+        if ($params->get('jollyany_show_event_phone',0) && $row->get('jollyany_event_phone','')) {
+            $content .= '<div class="uk-grid-small" uk-grid>';
+            $content .= '<div class="uk-width-auto"><span uk-icon="icon: receiver; ratio: 0.8"></span></div><div class="uk-width-expand">'.$row->get('jollyany_event_phone','').'</div>';
+            $content .= '</div>';
+        }
+        $content .= '</div>';
+        return $content;
     }
 }

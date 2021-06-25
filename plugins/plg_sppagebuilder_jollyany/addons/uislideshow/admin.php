@@ -168,14 +168,51 @@ SpAddonsConfig::addonConfig(
 								array('media_background', '!=', '')
 							),
 						),
+                        'overlay_type'=>array(
+                            'type'=>'buttons',
+                            'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_IMAGE_OVERLAY_OVERLAY_CHOOSE'),
+                            'std'=>'gradient',
+                            'values'=>array(
+                                array(
+                                    'label' => 'None',
+                                    'value' => 'none'
+                                ),
+                                array(
+                                    'label' => 'Color',
+                                    'value' => 'color'
+                                ),
+                                array(
+                                    'label' => 'Gradient',
+                                    'value' => 'gradient'
+                                )
+                            ),
+                            'depends'=>array(
+                                array('image_panel', '=', 1)
+                            ),
+                        ),
 						'media_overlay'=>array(
 							'type'=>'color',
 							'title'=>JText::_('Overlay Color'),
 							'desc'=>JText::_('Set an additional transparent overlay to soften the image.'),
 							'depends'=>array(
-								array('image_panel', '=', 1)
+								array('image_panel', '=', 1),
+                                array('overlay_type', '=', 'color')
 							),
 						),
+                        'media_overlay_gradient'=>array(
+                            'type'=>'gradient',
+                            'title'=>JText::_('Overlay Gradient Color'),
+                            'std'=> array(
+                                "color" => "rgba(127, 0, 255, 0.8)",
+                                "color2" => "rgba(225, 0, 255, 0.7)",
+                                "deg" => "45",
+                                "type" => "linear"
+                            ),
+                            'depends'=>array(
+                                array('image_panel', '=', 1),
+                                array('overlay_type', '=', 'gradient')
+                            ),
+                        ),
 						'image_alt' => array(
 							'type' => 'text',
 							'title' => JText::_('Image ALT'),
@@ -375,7 +412,7 @@ SpAddonsConfig::addonConfig(
 				'kenburns_duration' => array(
 					'type' => 'slider',
 					'title' => JText::_('Duration'),
-					'min' => 10,
+					'min' => 0,
 					'max' => 30,
 					'placeholder' =>'15' ,
 					'desc' => JText::_('Set the duration for the Ken Burns effect in seconds.'),
@@ -395,6 +432,7 @@ SpAddonsConfig::addonConfig(
 						'' => JText::_('None'),
 						'dotnav' => JText::_('Dotnav'),
 						'thumbnav' => JText::_('Thumbnav'),
+                        'title' => JText::_('Title')
 					),
 					'std' => 'dotnav',
 				),
@@ -408,6 +446,7 @@ SpAddonsConfig::addonConfig(
 					'std' => 0,
 					'depends' => array(
 						array('navigation', '!=', ''),
+                        array('navigation', '!=', 'title'),
 					),
 				),
 				'navigation_vertical' => array(
@@ -421,6 +460,7 @@ SpAddonsConfig::addonConfig(
 					'depends' => array(
 						array('navigation_below', '!=', 1),
 						array('navigation', '!=', ''),
+                        array('navigation', '!=', 'title'),
 					),
 				),
 				'navigation_below_position' => array(
@@ -436,6 +476,7 @@ SpAddonsConfig::addonConfig(
 					'depends' => array(
 						array('navigation_below', '=', 1),
 						array('navigation', '!=', ''),
+                        array('navigation', '!=', 'title'),
 					),
 				),
 				'navigation_position' => array(
@@ -455,8 +496,27 @@ SpAddonsConfig::addonConfig(
 					'depends' => array(
 						array('navigation_below', '!=', 1),
 						array('navigation', '!=', ''),
+                        array('navigation', '!=', 'title'),
 					),
 				),
+                'navigation_title_selector' => array(
+                    'type' => 'select',
+                    'title' => JText::_('Navigation Title HTML Element'),
+                    'desc' => JText::_('Choose one of the HTML elements to fit your semantic structure.'),
+                    'values' => array(
+                        'h1' => JText::_('h1'),
+                        'h2' => JText::_('h2'),
+                        'h3' => JText::_('h3'),
+                        'h4' => JText::_('h4'),
+                        'h5' => JText::_('h5'),
+                        'h6' => JText::_('h6'),
+                        'div' => JText::_('div'),
+                    ),
+                    'std' => 'h5',
+                    'depends' => array(
+                        array('navigation', '=', 'title'),
+                    ),
+                ),
 				'navigation_below_margin' => array(
 					'type' => 'select',
 					'title' => JText::_('Margin'),
@@ -469,6 +529,7 @@ SpAddonsConfig::addonConfig(
 					'depends' => array(
 						array('navigation_below', '=', 1),
 						array('navigation', '!=', ''),
+                        array('navigation', '!=', 'title'),
 					),
 				),
 				'navigation_margin' => array(
@@ -1630,6 +1691,22 @@ SpAddonsConfig::addonConfig(
 						'uk-button-large' => JText::_('Large'),
 					),
 				),
+                'link_button_shape' => array(
+                    'type' => 'select',
+                    'title' => JText::_('COM_SPPAGEBUILDER_GLOBAL_BUTTON_SHAPE'),
+                    'desc' => JText::_('COM_SPPAGEBUILDER_GLOBAL_BUTTON_SHAPE_DESC'),
+                    'values' => array(
+                        'rounded' => JText::_('COM_SPPAGEBUILDER_GLOBAL_BUTTON_SHAPE_ROUNDED'),
+                        'square' => JText::_('COM_SPPAGEBUILDER_GLOBAL_BUTTON_SHAPE_SQUARE'),
+                        'round' => JText::_('COM_SPPAGEBUILDER_GLOBAL_BUTTON_SHAPE_ROUND'),
+                    ),
+                    'depends' => array(
+                        array('link_button_style', '!=', 'link'),
+                        array('link_button_style', '!=', 'link-muted'),
+                        array('link_button_style', '!=', 'link-text'),
+                        array('link_button_style', '!=', 'text'),
+                    )
+                ),
 				'button_margin_top' => array(
 					'type' => 'select',
 					'title' => JText::_('Margin Top'),

@@ -11,6 +11,34 @@ class JollyanyFrameworkDataImport {
 	protected static $api  =   'https://www.templaza.com';
 	public static $cache   =    array('thumb' => array());
 	protected static $data = array(
+        'tz_varaham'      =>  array(
+            // Pack Info
+            'name'        => 'Varaham',
+            'desc'        => 'Education University Joomla Template',
+
+            // Pack Data
+            'thumb'       => '/images/stories/varaham/thumbnail.jpg',
+            'category'    => 'joomla',
+
+            'demo_url'    => 'https://varaham.jollyany.co/',
+            'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/varaham',
+
+            'template'      => array(
+                'name'      =>  'Varaham Template',
+                'type'      =>  'included',
+                'code'      =>  'tz_varaham',
+                'ext_code'  =>  'tz-varaham-api',
+            ),
+
+            'extensions'  => array(
+                array(
+                    'name'      =>  'SP Page Builder Pro',
+                    'type'      =>  'included',
+                    'code'      =>  'tz_extensions',
+                    'ext_code'  =>  'sp-page-builder',
+                ),
+            ),
+        ),
         'tz_krypton'      =>  array(
             // Pack Info
             'name'        => 'Krypton',
@@ -1063,19 +1091,11 @@ class JollyanyFrameworkDataImport {
 	);
 
 	public static function getThumb($src) {
-        $image = array(
-            'image_properties' => array(),
-            'src' => ''
-        );
         if (file_exists(JPATH_ADMINISTRATOR.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.'jollyany'.$src)) {
-            $image['image_properties'] = getimagesize(JPATH_ADMINISTRATOR.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.'jollyany'.$src);
-            $image['src'] = JUri::base(true).'/cache/jollyany'.$src;
-            return $image;
+            return JUri::base(true).'/cache/jollyany'.$src;
         } else {
             self::$cache['thumb'][] =   $src;
-            $image['image_properties'] = getimagesize(self::$api.$src);
-            $image['src'] = self::$api.$src;
-            return $image;
+            return self::$api.$src;
         }
     }
 

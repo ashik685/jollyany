@@ -10,6 +10,8 @@ defined('_JEXEC') or die;
 JLoader::registerNamespace('Astroid', JPATH_LIBRARIES . '/astroid/framework/library/astroid', false, false, 'psr4');
 use Astroid\Framework;
 use Astroid\Helper;
+use Joomla\Registry\Registry;
+jimport('jollyany.framework.course');
 
 /**
  * Jollyany system plugin
@@ -26,7 +28,7 @@ class plgSystemJollyany extends JPlugin {
     public function onBeforeRender()
     {
         $document = Astroid\Framework::getDocument(); // Astroid Document
-        $document->addScript('libraries/jollyany/framework/assets/js/jollyany.min.js', 'body');
+        $document->addScript('libraries/jollyany/framework/assets/js/jollyany.js', 'body');
         $document->addScript('media/jollyany/assets/js/uikit.min.js', 'body');
         $document->addScript('media/jollyany/assets/js/uikit-icons.min.js', 'body');
     }
@@ -37,7 +39,7 @@ class plgSystemJollyany extends JPlugin {
         $option     = $this->app->input->get('option', '');
         $jollyany   = $this->app->input->get('jollyany', '');
         $astroid    = $this->app->input->get('astroid', '');
-		if(!$this->app->isAdmin() && $jollyany!='activation') return false;
+		if(!$this->app->isAdmin() && $jollyany!='activation' && $jollyany!='course_contact_form') return false;
 
 		if ($option == 'com_ajax') {
 			switch ($jollyany) {
@@ -586,6 +588,149 @@ class plgSystemJollyany extends JPlugin {
                     echo \json_encode($return);
                     die();
                     break;
+                case 'course_contact_form':
+                    header('Content-Type: application/json');
+                    header('Access-Control-Allow-Origin: *');
+                    $return = array();
+                    try {
+                        // Check for request forgeries.
+                        // if cache isn't enable
+                        if( !\JFactory::getConfig()->get('caching') && !JPluginHelper::getPlugin('system', 'cache') ) {
+                            // Check CSRF
+                            if (!\JSession::checkToken()) {
+                                throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR'));
+                            }
+                        }
+                        $input = $this->app->input;
+
+                        $mail = JFactory::getMailer();
+                        $message = '';
+                        $showcaptcha = false;
+                        //inputs
+                        $inputs = $input->get('data', array(), 'ARRAY');
+                        foreach ($inputs as $input) {
+
+                            if ($input['name'] == 'captcha_type') {
+                                $captcha_type = $input['value'];
+                            }
+
+                            if ($input['name'] == 'from_email') {
+                                $from_email = $input['value'];
+                            }
+
+                            if ($input['name'] == 'from_name') {
+                                $from_name = $input['value'];
+                            }
+
+                            if ($input['name'] == 'name') {
+                                $name = $input['value'];
+                            }
+
+                            if ($input['name'] == 'subject') {
+                                $subject = $input['value'];
+                            }
+
+                            if ($input['name'] == 'phone') {
+                                $phone = $input['value'];
+                            }
+
+                            if ($input['name'] == 'message') {
+                                $message = nl2br($input['value']);
+                            }
+
+                            if ($input['name'] == 'g-recaptcha-response') {
+                                $gcaptcha = $input['value'];
+                                $showcaptcha = true;
+                            }
+                            if ($input['name'] == 'agreement') {
+                                $agreement = $input['value'];
+                            }
+                        }
+
+                        if ($showcaptcha) {
+                            if ($captcha_type == 'recaptcha' || $captcha_type == 'recaptcha_invisible') {
+                                if($gcaptcha == ''){
+                                    throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR_INVALID_CAPTCHA'));
+                                } else {
+                                    if($captcha_type == 'recaptcha_invisible') {
+                                        JPluginHelper::importPlugin('captcha', 'recaptcha_invisible');
+                                    } else {
+                                        JPluginHelper::importPlugin('captcha', 'recaptcha');
+                                    }
+                                    $dispatcher = JEventDispatcher::getInstance();
+                                    $res = $dispatcher->trigger('onCheckAnswer', $gcaptcha);
+
+                                    if (!$res[0]) {
+                                        throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR_INVALID_CAPTCHA'));
+                                    }
+                                }
+                            }
+                        }
+
+                        //get sender UP
+                        $senderip       = isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'];
+                        // Subject Structure
+                        $site_name 	    = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : '';
+                        $mail_subject   = $subject . ' | ' . $from_email . ' | ' . $site_name;
+
+                        // Message structure
+                        $mail_body = '<div>';
+                        if (isset($from_name) && $from_name) {
+                            $mail_body .= '<p><strong>' . JText::_('JOLLYANY_COURSE_AJAX_CONTACT_NAME'). '</strong>: ' . $from_name .'</p>';
+                        }
+                        if (isset($from_email) && $from_email) {
+                            $mail_body .= '<p><strong>' . JText::_('JOLLYANY_COURSE_AJAX_CONTACT_EMAIL'). '</strong>: ' . $from_email .'</p>';
+                        }
+                        if (isset($phone) && $phone) {
+                            $mail_body .= '<p><strong>' . JText::_('JOLLYANY_COURSE_AJAX_CONTACT_PHONE'). '</strong>: ' . $phone .'</p>';
+                        }
+                        if (isset($message) && $message) {
+                            $mail_body .= '<p><strong>' . JText::_('JOLLYANY_COURSE_AJAX_CONTACT_MESSAGE'). '</strong>: ' . $message .'</p>';
+                        }
+                        if (isset($agreement) && $agreement) {
+                            $mail_body .= '<p><strong>' . JText::_('JOLLYANY_COURSE_AJAX_CONTACT_AGREEMENT'). '</strong>: ' . JText::_('JYES'). '</p>';
+                        } else {
+                            $mail_body .= '<p><strong>' . JText::_('JOLLYANY_COURSE_AJAX_CONTACT_AGREEMENT'). '</strong>: ' . JText::_('JNO'). '</p>';
+                        }
+                        $mail_body .= '<p><strong>' . JText::_('JOLLYANY_COURSE_AJAX_CONTACT_SENDER_IP'). '</strong>: ' . $senderip .'</p>';
+                        $mail_body .= '</div>';
+
+                        $config = JFactory::getConfig();
+
+                        $sender = array( $config->get( 'mailfrom' ), $config->get( 'fromname' ) );
+                        $recipient = $config->get( 'mailfrom' );
+
+                        // $sender = array( $email, $name );
+
+                        if (!empty($from_email)) {
+                            $sender = array($from_email, $from_name);
+                            $mail->addReplyTo($from_email, $from_name);
+                        }
+
+                        $mail->setSender($sender);
+                        $mail->addRecipient($recipient);
+                        $mail->setSubject($mail_subject);
+                        $mail->isHTML(true);
+                        $mail->Encoding = 'base64';
+                        $mail->setBody($mail_body);
+
+                        if ($mail->Send()) {
+                            $return["status"]   =   'success';
+                            $return["message"]  =   \JText::_('JOLLYANY_AJAX_ERROR_SENT_SUCCESSFULLY');
+                            $return["code"]     =   200;
+                        } else {
+                            throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR_SENT_MAIL_FAILED'));
+                        }
+                        $return["status"]   =   'success';
+                        $return["code"]     =   200;
+                    } catch (\Exception $e) {
+                        $return["status"] = "error";
+                        $return["code"] = $e->getCode();
+                        $return["message"] = $e->getMessage();
+                    }
+                    echo \json_encode($return);
+                    die();
+                    break;
 			}
             switch ($astroid) {
                 case "save":
@@ -740,6 +885,13 @@ class plgSystemJollyany extends JPlugin {
             $form->loadFile('article', false);
         }
 
+        if ($form->getName() == 'com_menus.item' && (isset($data->request['option']) && $data->request['option'] == 'com_content') && (isset($data->request['view']) && $data->request['view'] == 'category') && (isset($data->request['layout']) && $data->request['layout'] == 'blog') && ((Framework::isSite() && $frontendVisibility) || Framework::isAdmin())) {
+            $form->loadFile('article_menu', false);
+        }
+        if ($form->getName() == 'com_menus.item' && (isset($data->request['option']) && $data->request['option'] == 'com_content') && (isset($data->request['view']) && $data->request['view'] == 'featured') && ((Framework::isSite() && $frontendVisibility) || Framework::isAdmin())) {
+            $form->loadFile('article_menu', false);
+        }
+
         if ($form->getName() == 'com_categories.categorycom_content' && ((Framework::isSite() && $frontendVisibility) || Framework::isAdmin())) {
             $form->loadFile('category', false);
         }
@@ -747,7 +899,7 @@ class plgSystemJollyany extends JPlugin {
 
     public function onContentBeforeSave($context, $table, $isNew) {
         // Check we are handling the frontend edit form.
-        if ($context == 'com_content.article' && $this->checkCourseDB())
+        if ($context == 'com_content.article' && JollyanyFrameworkCourse::checkCourseDB())
         {
             $table->attribs                 =   json_decode($table->attribs, true);
             $table->jollyany_course_data    =   $table->attribs['jollyany_course_lessons'];
@@ -758,25 +910,15 @@ class plgSystemJollyany extends JPlugin {
     }
 
     public function onContentAfterSave($context, $table, $isNew) {
-        if ($context == 'com_content.article' && $this->checkCourseDB()) {
-            $db     =   JFactory::getDbo();
-            $data   =   json_encode($table->jollyany_course_data);
-            $db->setQuery('SELECT * FROM #__jollyany_course_data WHERE cid='.$table->id);
-            if ($db->loadResult()) {
-                $db->setQuery('UPDATE #__jollyany_course_data SET `data`='.$db->quote($data).' WHERE cid='.$table->id)->execute();
-            } else {
-                $db->setQuery('INSERT INTO #__jollyany_course_data(`cid`,`data`) VALUES ('.$table->id.','.$db->quote($data).')')->execute();
-            }
-            return true;
+        if ($context == 'com_content.article') {
+            return JollyanyFrameworkCourse::save($table);
         }
     }
 
     public function onContentPrepareData($context, $data)
     {
-        if ($context == 'com_content.article' && $this->checkCourseDB() && $data->id) {
-            $db     =   JFactory::getDbo();
-            $db->setQuery('SELECT * FROM #__jollyany_course_data WHERE cid='.$data->id);
-            $course   =   $db->loadObject();
+        if ($context == 'com_content.article' && $data->id) {
+            $course =   JollyanyFrameworkCourse::getData($data->id);
             if ($course) {
                 $data->attribs['jollyany_course_lessons'] = $course->data;
             }
@@ -785,10 +927,8 @@ class plgSystemJollyany extends JPlugin {
     }
 
     public function onContentPrepare($context, &$row, &$params, $page = 0) {
-        if ($context == 'com_content.article' && $this->checkCourseDB()) {
-            $db     =   JFactory::getDbo();
-            $db->setQuery('SELECT * FROM #__jollyany_course_data WHERE cid='.$row->id);
-            $course   =   $db->loadObject();
+        if ($context == 'com_content.article') {
+            $course =   JollyanyFrameworkCourse::getData($row->id);
             if ($course) {
                 $params->set('jollyany_course_lessons',json_decode($course->data,true));
             }
@@ -796,25 +936,20 @@ class plgSystemJollyany extends JPlugin {
         }
     }
 
-    private function checkCourseDB () {
-        $db     =   JFactory::getDbo();
-        $results = $db->setQuery('SHOW TABLES')->loadColumn();
-        $prefix = $db->getPrefix();
-        $courseDB   =   true;
-        if (!array_search($prefix.'jollyany_course_data',$results,true)) {
-            $courseDB = $this->createCourseDB();
+    public function onContentBeforeDisplay($context, &$row, &$params, $page = 0)
+    {
+        if ($context == 'com_content.category') {
+            jimport('jollyany.framework.article');
+            $content = '';
+            if ($params->get('jollyany_show_course_lecture',0)) {
+                $content .= JollyanyFrameworkArticle::getLectureTotal($row->id);
+            }
+            // Convert parameter fields to objects.
+            $row_params = new Registry($row->attribs);
+            $content .= JollyanyFrameworkArticle::getCourseData($params, $row_params);
+            return $content;
         }
-        return $courseDB;
-    }
 
-    private function createCourseDB () {
-        $db     =   JFactory::getDbo();
-        $db->setQuery('CREATE TABLE IF NOT EXISTS `#__jollyany_course_data` (
-                                      `id` int(11) NOT NULL AUTO_INCREMENT,
-                                      `cid` int(11) NOT NULL,
-                                      `data` longtext NOT NULL DEFAULT \'\',
-                                      PRIMARY KEY (`id`)
-                                    ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;');
-        return $db->execute();
+        return false;
     }
 }

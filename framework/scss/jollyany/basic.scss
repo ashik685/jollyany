@@ -16,8 +16,6 @@ $global-link-color: $colorMain !default;
 // 5 Tiny Slider style
 @import "tiny_slider/theme";
 
-// 6 Smart Tab style
-@import 'smart_tab/smart_tab_all';
 .lead {
   line-height: 1.6em;
   strong {
@@ -149,20 +147,11 @@ input[type="color"]:focus,
   -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
   box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
 }
-input[type="radio"],
-input[type="checkbox"] {
-  margin: 4px 0 0;
-  *margin-top: 0;
-  margin-top: 1px \9;
-  line-height: normal;
-}
 input[type="file"],
 input[type="image"],
 input[type="submit"],
 input[type="reset"],
-input[type="button"],
-input[type="radio"],
-input[type="checkbox"] {
+input[type="button"] {
   width: auto;
 }
 select,
@@ -914,6 +903,9 @@ legend + .control-group {
 .accordion-inner {
   padding: 9px 15px;
   border-top: 1px solid #e5e5e5;
+}
+.z-index-2 {
+  z-index: 2 !important;
 }
 @media (max-width: 767px) {
   div.modal {

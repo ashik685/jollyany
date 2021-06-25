@@ -66,6 +66,8 @@ class SppagebuilderAddonUiSlideShow extends SppagebuilderAddons {
 
 		$navigation = ( isset( $settings->navigation_position ) && $settings->navigation_position ) ? ' uk-position-' . $settings->navigation_position : '';
 
+        $navigation_title_selector   = ( isset( $settings->navigation_title_selector ) && $settings->navigation_title_selector ) ? $settings->navigation_title_selector : 'h5';
+
 		$navigation_cls  = ( $navigation == ' uk-position-bottom-center' ) ? ' uk-flex-center' : '';
 		$navigation_cls .= ( $navigation == ' uk-position-bottom-right' || $navigation == ' uk-position-center-right' || $navigation == ' uk-position-top-right' ) ? ' uk-flex-right' : '';
 
@@ -167,7 +169,7 @@ class SppagebuilderAddonUiSlideShow extends SppagebuilderAddons {
 
 		$overlay_container = ( isset( $settings->overlay_container ) && $settings->overlay_container ) ? $settings->overlay_container : '';
 
-		$overlay_container_cls = ( $overlay_container ) ? ' ' . ( ( $overlay_container == 'default' ) ? 'container' : 'uk-container uk-container-' . $overlay_container ) : '';
+		$overlay_container_cls = ( $overlay_container ) ? ' ' . ( ( $overlay_container == 'default' ) ? 'uk-container' : 'uk-container uk-container-' . $overlay_container ) : '';
 
 		$overlay_container_padding = ( $overlay_container ) ? ( ( isset( $settings->overlay_container_padding ) && $settings->overlay_container_padding ) ? ' uk-section-' . $settings->overlay_container_padding : '' ) : '';
 
@@ -472,14 +474,15 @@ class SppagebuilderAddonUiSlideShow extends SppagebuilderAddons {
 		$attribs          = ( isset( $settings->link_new_tab ) && $settings->link_new_tab ) ? ' target="' . $settings->link_new_tab . '"' : '';
 		$btn_styles       = ( isset( $settings->link_button_style ) && $settings->link_button_style ) ? '' . $settings->link_button_style : '';
 		$link_button_size = ( isset( $settings->link_button_size ) && $settings->link_button_size ) ? ' ' . $settings->link_button_size : '';
+        $link_button_shape = (isset($settings->link_button_shape) && $settings->link_button_shape) ? ' uk-button-' . $settings->link_button_shape : ' uk-button-square';
 
 		$button_style_cls = '';
 		if ( empty( $btn_styles ) ) {
-			$button_style_cls .= 'uk-button uk-button-default' . $link_button_size;
+			$button_style_cls .= 'uk-button uk-button-default' . $link_button_size.$link_button_shape;
 		} elseif ( $btn_styles == 'link' || $btn_styles == 'link-muted' || $btn_styles == 'link-text' ) {
 			$button_style_cls .= 'uk-' . $btn_styles;
 		} else {
-			$button_style_cls .= 'uk-button uk-button-' . $btn_styles . $link_button_size;
+			$button_style_cls .= 'uk-button uk-button-' . $btn_styles . $link_button_size.$link_button_shape;
 		}
 
 		$btn_margin_top   = ( isset( $settings->button_margin_top ) && $settings->button_margin_top ) ? 'uk-margin-' . $settings->button_margin_top . '-top' : 'uk-margin-top';
@@ -579,7 +582,32 @@ class SppagebuilderAddonUiSlideShow extends SppagebuilderAddons {
 				$image_panel      = ( isset( $value->image_panel ) && $value->image_panel ) ? 1 : 0;
 				$media_background = ( $image_panel ) ? ( ( isset( $value->media_background ) && $value->media_background ) ? ' style="background-color: ' . $value->media_background . ';"' : '' ) : '';
 				$media_blend_mode = ( $image_panel && $media_background ) ? ( ( isset( $value->media_blend_mode ) && $value->media_blend_mode ) ? ' uk-blend-' . $value->media_blend_mode : '' ) : false;
-				$media_overlay    = ( $image_panel ) ? ( ( isset( $value->media_overlay ) && $value->media_overlay ) ? '<div class="uk-position-cover" style="background-color: ' . $value->media_overlay . '"></div>' : '' ) : '';
+
+				// Overlay style
+                $overlay_type = (isset($value->overlay_type) && $value->overlay_type) ? $value->overlay_type : '';
+                $media_overlay_style = '';
+                if($overlay_type == 'color'){
+                    $media_overlay_style = isset( $value->media_overlay ) && $value->media_overlay  ? 'background-color: '.$value->media_overlay.';' : '';
+                } elseif ($overlay_type=='gradient'){
+                    $overlay_gradient = isset( $value->media_overlay_gradient ) && $value->media_overlay_gradient  ? $value->media_overlay_gradient : '';
+                    $gradient_color1 = (isset($overlay_gradient->color) && $overlay_gradient->color) ? $overlay_gradient->color : 'rgba(127, 0, 255, 0.8)';
+                    $gradient_color2 = (isset($overlay_gradient->color2) && $overlay_gradient->color2) ? $overlay_gradient->color2 : 'rgba(225, 0, 255, 0.7)';
+                    $degree = $overlay_gradient->deg;
+                    $type = $overlay_gradient->type;
+                    $radialPos = (isset($overlay_gradient->radialPos) && $overlay_gradient->radialPos) ? $overlay_gradient->radialPos : 'Center Center';
+                    $radial_angle1 = (isset($overlay_gradient->pos) && $overlay_gradient->pos) ? $overlay_gradient->pos : '0';
+                    $radial_angle2 = (isset($overlay_gradient->pos2) && $overlay_gradient->pos2) ? $overlay_gradient->pos2 : '100';
+                    if($type!=='radial'){
+                        $media_overlay_style = 'background: -webkit-linear-gradient('.$degree.'deg, '.$gradient_color1.' '.$radial_angle1.'%, '.$gradient_color2.' '.$radial_angle2.'%) transparent;';
+                        $media_overlay_style .= 'background: linear-gradient('.$degree.'deg, '.$gradient_color1.' '.$radial_angle1.'%, '.$gradient_color2.' '.$radial_angle2.'%) transparent;';
+                    } else {
+                        $media_overlay_style .= 'background: -webkit-radial-gradient(at '.$radialPos.', '.$gradient_color1.' '.$radial_angle1.'%, '.$gradient_color2.' '.$radial_angle2.'%) transparent;';
+                        $media_overlay_style .= 'background: radial-gradient(at '.$radialPos.', '.$gradient_color1.' '.$radial_angle1.'%, '.$gradient_color2.' '.$radial_angle2.'%) transparent;';
+                    }
+                }
+
+
+				$media_overlay    = ( $image_panel && $media_overlay_style ) ? '<div class="uk-position-cover" style="' . $media_overlay_style . '"></div>' : '';
 
 				$image_alt      = ( isset( $value->image_alt ) && $value->image_alt ) ? $value->image_alt : '';
 				$title_alt_text = ( isset( $value->title ) && $value->title ) ? $value->title : '';
@@ -747,7 +775,20 @@ class SppagebuilderAddonUiSlideShow extends SppagebuilderAddons {
 				$output .= '</ul>';
 				$output .= '</div> ';
 			}
-		}
+		} elseif ( $navigation_control == 'title' ) {
+            if ( isset( $settings->ui_slideshow_items ) && count( (array) $settings->ui_slideshow_items ) ) {
+                $output .= '<div class="ui-nav-control ui-nav-title uk-position-bottom-center' . $navigation_margin . $navigation_breakpoint_cls . '"> ';
+                $output .= '<div class="'.$overlay_container_cls.'"><ul class="ui-nav-title-items uk-light uk-child-width-1-'.count( (array) $settings->ui_slideshow_items ).' uk-flex-center uk-thumbnav">';
+                foreach ( $settings->ui_slideshow_items as $key => $value ) {
+                    $image_title    = ( isset( $value->title ) && $value->title ) ? $value->title : '';
+                    $output .= '<li>';
+                    $output .= '<a uk-slideshow-item="' . $key . '" href="#" class="uk-padding-small"><div class="uk-grid-small" uk-grid><h2 class="ui-nav-title-num uk-width-auto@l uk-width-1-1">'.($key+1).'.</h2><'.$navigation_title_selector.' class="uk-width-expand">'.$image_title.'</'.$navigation_title_selector.'></div></a>';
+                    $output .= '</li>';
+                }
+                $output .= '</ul></div>';
+                $output .= '</div> ';
+            }
+        }
 
 		if ( ! $navigation_below ) {
 			$output .= '</div>';

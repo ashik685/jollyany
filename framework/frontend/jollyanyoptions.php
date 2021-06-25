@@ -39,7 +39,6 @@ if ($header_absolute == '1') {
     $document->addScriptDeclaration('
 	jQuery(function($){
 		$(document).ready(function(){
-			$(".astroid-header-section").css("position","absolute").css("width","100%").css("background-color","transparent").css("z-index","1050");
 			$(".astroid-header-section").addClass("header-absolute");
 		});
 	});

@@ -215,7 +215,6 @@ array(
             'meta_font_style'=>array(
                 'type'=>'fontstyle',
                 'title'=> JText::_('COM_SPPAGEBUILDER_ADDON_TITLE_FONT_STYLE'),
-
             ),
 
             'meta_lineheight'=>array(
@@ -247,6 +246,24 @@ array(
 				'type'=>'separator',
 				'title'=>JText::_('COM_SPPAGEBUILDER_GLOBAL_ADDON_OPTIONS')
 			),
+
+            'layout'=>array(
+                'type'=>'select',
+                'title'=>JText::_('Choose Layout'),
+                'desc'=>JText::_('Choose layout display'),
+                'values'=>array(
+                    ''=>JText::_('Classic'),
+                    'thumbnail'=>JText::_('Thumbnail'),
+                ),
+                'std'=>'',
+            ),
+
+            'overlay_color' => array(
+                'type' => 'color',
+                'title' => JText::_('Overlay Color'),
+                'std' => '',
+                'depends' => array(array('layout', '=', 'thumbnail'))
+            ),
 
 			'resource'=>array(
 				'type'=>'select',
@@ -335,13 +352,6 @@ array(
 				'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_ARTICLES_LIMIT'),
 				'desc'=>JText::_('COM_SPPAGEBUILDER_ADDON_ARTICLES_LIMIT_DESC'),
 				'std'=>'3'
-			),
-
-			'columns'=>array(
-				'type'=>'number',
-				'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_ARTICLES_COLUMNS'),
-				'desc'=>JText::_('COM_SPPAGEBUILDER_ADDON_ARTICLES_COLUMNS_DESC'),
-				'std'=>'3',
 			),
 
 			'show_intro'=>array(
@@ -564,7 +574,15 @@ array(
 
 		),
 		'options' => array(
-
+            'color_style'=>array(
+                'type'=>'select',
+                'title'=>JText::_('Color Mode'),
+                'values'=>array(
+                    ''=>JText::_('Dark'),
+                    'uk-light'=>JText::_('Light')
+                ),
+                'std'=>''
+            ),
 			'hide_thumbnail'=>array(
 				'type'=>'checkbox',
 				'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_ARTICLES_HIDE_THUMBNAIL'),
@@ -583,6 +601,18 @@ array(
                 'max'=>1500,
                 'responsive'=>true,
                 'depends'=>array('hide_thumbnail'=>'0')
+            ),
+
+			'card_size'=>array(
+                'type'=>'select',
+                'title'=>JText::_('Card Size'),
+                'values'=>array(
+                    'none'=>JText::_('None'),
+                    ''=>JText::_('Default'),
+                    'small'=>JText::_('Small'),
+                    'large'=>JText::_('Large'),
+                ),
+                'std'=>''
             ),
 
 			'show_author'=>array(
@@ -618,6 +648,196 @@ array(
 				'std'=>1,
 			),
 
+            'responsive_separator_options'=>array(
+                'type'=>'separator',
+                'title'=>JText::_('RESPONSIVE OPTIONS')
+            ),
+
+            'responsive_width'=>array(
+                'type'=>'slider',
+                'title'=>JText::_('Responsive Width'),
+                'std'=>array('md' => '4', 'sm' => '3', 'xs' => '2'),
+                'max'=>6,
+                'min'=>1,
+                'responsive'=>true
+            ),
+
+            'slider_separator_options'=>array(
+                'type'=>'separator',
+                'title'=>JText::_('SLIDER OPTIONS')
+            ),
+
+            'use_slider'=>array(
+                'type'=>'checkbox',
+                'title'=>JText::_('Display Articles as Slider'),
+                'desc'=>JText::_('Display Articles as Carousel Slider'),
+                'values'=>array(
+                    1=>JText::_('COM_SPPAGEBUILDER_YES'),
+                    0=>JText::_('COM_SPPAGEBUILDER_NO'),
+                ),
+                'std'=>0,
+            ),
+
+            'enable_navigation'=>array(
+                'type'=>'checkbox',
+                'title'=>JText::_('Navigation'),
+                'desc'=>JText::_('Enable Navigation'),
+                'values'=>array(
+                    1=>JText::_('COM_SPPAGEBUILDER_YES'),
+                    0=>JText::_('COM_SPPAGEBUILDER_NO'),
+                ),
+                'std'=>1,
+                'depends'=>array('use_slider'=>'1')
+            ),
+
+            'navigation_position'=>array(
+                'type'=>'select',
+                'title'=>JText::_('Navigation Position'),
+                'values'=>array(
+                    ''=>JText::_('Outside'),
+                    'inside'=>JText::_('Inside')
+                ),
+                'std'=>'',
+                'depends'=>array(
+                    array('use_slider', '=', '1'),
+                    array('enable_navigation' , '=', '1')
+                )
+            ),
+
+            'enable_dotnav'=>array(
+                'type'=>'checkbox',
+                'title'=>JText::_('Dot Navigation'),
+                'desc'=>JText::_('Enable Dot Navigation'),
+                'values'=>array(
+                    1=>JText::_('COM_SPPAGEBUILDER_YES'),
+                    0=>JText::_('COM_SPPAGEBUILDER_NO'),
+                ),
+                'std'=>1,
+                'depends'=>array('use_slider'=>'1')
+            ),
+
+            'center_slider'=>array(
+                'type'=>'checkbox',
+                'title'=>JText::_('Center Slider'),
+                'desc'=>JText::_('To center the list items'),
+                'values'=>array(
+                    1=>JText::_('COM_SPPAGEBUILDER_YES'),
+                    0=>JText::_('COM_SPPAGEBUILDER_NO'),
+                ),
+                'std'=>0,
+                'depends'=>array('use_slider'=>'1')
+            ),
+
+            'event_separator_options'=>array(
+                'type'=>'separator',
+                'title'=>JText::_('EVENT OPTIONS')
+            ),
+
+            'show_event'=>array(
+                'type'=>'checkbox',
+                'title'=>JText::_('Show Event'),
+                'desc'=>JText::_('Whether to show article event.'),
+                'values'=>array(
+                    1=>JText::_('COM_SPPAGEBUILDER_YES'),
+                    0=>JText::_('COM_SPPAGEBUILDER_NO'),
+                ),
+                'std'=>0,
+            ),
+
+            'show_event_date'=>array(
+                'type'=>'checkbox',
+                'title'=>JText::_('Show Event Date'),
+                'desc'=>JText::_('Whether to show date of event.'),
+                'values'=>array(
+                    1=>JText::_('COM_SPPAGEBUILDER_YES'),
+                    0=>JText::_('COM_SPPAGEBUILDER_NO'),
+                ),
+                'std'=>1,
+                'depends'=>array('show_event'=>'1')
+            ),
+
+            'show_event_duration'=>array(
+                'type'=>'checkbox',
+                'title'=>JText::_('Show Event Duration'),
+                'desc'=>JText::_('Whether to show duration of event.'),
+                'values'=>array(
+                    1=>JText::_('COM_SPPAGEBUILDER_YES'),
+                    0=>JText::_('COM_SPPAGEBUILDER_NO'),
+                ),
+                'std'=>1,
+                'depends'=>array('show_event'=>'1')
+            ),
+
+            'show_event_location'=>array(
+                'type'=>'checkbox',
+                'title'=>JText::_('Show Event Location'),
+                'desc'=>JText::_('Whether to show location of event.'),
+                'values'=>array(
+                    1=>JText::_('COM_SPPAGEBUILDER_YES'),
+                    0=>JText::_('COM_SPPAGEBUILDER_NO'),
+                ),
+                'std'=>1,
+                'depends'=>array('show_event'=>'1')
+            ),
+
+            'show_event_spot'=>array(
+                'type'=>'checkbox',
+                'title'=>JText::_('Show Event Spot'),
+                'desc'=>JText::_('Whether to show spot of event.'),
+                'values'=>array(
+                    1=>JText::_('COM_SPPAGEBUILDER_YES'),
+                    0=>JText::_('COM_SPPAGEBUILDER_NO'),
+                ),
+                'std'=>1,
+                'depends'=>array('show_event'=>'1')
+            ),
+
+            'show_event_phone'=>array(
+                'type'=>'checkbox',
+                'title'=>JText::_('Show Event Phone'),
+                'desc'=>JText::_('Whether to show phone of event.'),
+                'values'=>array(
+                    1=>JText::_('COM_SPPAGEBUILDER_YES'),
+                    0=>JText::_('COM_SPPAGEBUILDER_NO'),
+                ),
+                'std'=>0,
+                'depends'=>array('show_event'=>'1')
+            ),
+
+            'course_separator_options'=>array(
+                'type'=>'separator',
+                'title'=>JText::_('COURSE OPTIONS')
+            ),
+
+            'show_course'=>array(
+                'type'=>'checkbox',
+                'title'=>JText::_('Course Event'),
+                'desc'=>JText::_('Whether to show article course.'),
+                'values'=>array(
+                    1=>JText::_('COM_SPPAGEBUILDER_YES'),
+                    0=>JText::_('COM_SPPAGEBUILDER_NO'),
+                ),
+                'std'=>0,
+            ),
+
+            'show_course_lecture_count'=>array(
+                'type'=>'checkbox',
+                'title'=>JText::_('Show Lecture Count'),
+                'desc'=>JText::_('Whether to show total of lecture.'),
+                'values'=>array(
+                    1=>JText::_('COM_SPPAGEBUILDER_YES'),
+                    0=>JText::_('COM_SPPAGEBUILDER_NO'),
+                ),
+                'std'=>1,
+                'depends'=>array('show_course'=>'1')
+            ),
+
+            // Button
+            'btn_separator'=>array(
+                'type'=>'separator',
+                'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_BUTTON_READMORE_OPTIONS')
+            ),
+
 			'show_readmore'=>array(
 				'type'=>'checkbox',
 				'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_ARTICLES_SHOW_READMORE'),
@@ -628,12 +848,7 @@ array(
 				),
 				'std'=>1,
 			),
-// Button
-            'btn_separator'=>array(
-                'type'=>'separator',
-                'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_BUTTON_READMORE_OPTIONS'),
-                'depends'=>array('show_readmore'=>'1')
-            ),
+
             'button_text' => array(
                 'type' => 'text',
                 'title' => JText::_('COM_SPPAGEBUILDER_GLOBAL_BUTTON_TEXT'),
