@@ -88,7 +88,6 @@ class JollyanyFrameworkArticle extends AstroidFrameworkArticle {
                             $modal_content  .=  '<div class="jollyany-course-lesson-detail uk-padding-large uk-width-2-3@m uk-width-3-5@l uk-flex-last@m" uk-height-viewport></div>';
                             $modal_content  .=  '<div class="jollyany-course-table-content uk-padding-large uk-background-muted uk-width-1-3@m uk-width-2-5@l"></div>';
 
-
                             $modal_content  .=  '</div>';
                             $modal_content  .=  '</div></div>';
                             $downloadslider     =   isset($lesson['lesson_content_download_link']) && $lesson['lesson_content_download_link'] ? '<div><a href="'.JUri::root().'images/'.$lesson['lesson_content_download_link'].'" title="'.$lesson['lesson_content_title'].'" target="_blank"><span class="uk-badge"><i class="fas fa-download"></i></span></a></div>' : '';

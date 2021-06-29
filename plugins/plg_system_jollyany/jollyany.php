@@ -778,9 +778,9 @@ class plgSystemJollyany extends JPlugin {
                                     $modal_content .= '</div>';
                                 }
                             }
-                            $modal_content  .=  $lesson_type == 'embed' ? '<div class="jollyany-embed-responsive jollyany-embed-responsive-16by9">'.$lesson['lesson_content_embed'].'</div>' : '';
-                            $modal_content  .=  '<h1>'.$lesson['lesson_content_title'].'</h1>';
-                            $modal_content  .=  $lesson['jollyany_content_description'];
+                            $modal_content  .=  $lesson_type == 'embed' && isset($lesson['lesson_content_embed']) && $lesson['lesson_content_embed'] ? '<div class="jollyany-embed-responsive jollyany-embed-responsive-16by9">'.$lesson['lesson_content_embed'].'</div>' : '';
+                            $modal_content  .=  isset($lesson['lesson_content_title']) && $lesson['lesson_content_title'] ? '<h1>'.$lesson['lesson_content_title'].'</h1>' : '';
+                            $modal_content  .=  isset($lesson['jollyany_content_description']) && $lesson['jollyany_content_description'] ? $lesson['jollyany_content_description'] : '';
                         }
 
                         $return["data"]     =   $modal_content;
