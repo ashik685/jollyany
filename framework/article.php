@@ -33,11 +33,7 @@ class JollyanyFrameworkArticle extends AstroidFrameworkArticle {
         echo $this->renderEventData();
         // Todo Not that elegant would be nice to group the params
         $useDefList = ($this->article->params->get('show_modify_date') || $this->article->params->get('show_publish_date') || $this->article->params->get('show_create_date') || $this->article->params->get('show_hits') || $this->article->params->get('show_category') || $this->article->params->get('show_parent_category') || $this->article->params->get('show_author') || $assocParam || $this->template->params->get('astroid_readtime', 1));
-        if (($this->categoryParams->get('course_category_data','') || ($this->categoryParams->get('course_category_data','') === "" && $this->template->params->get('course_category_data',''))) && (is_array($lessons) && count($lessons))) :
-            $document = Framework::getDocument();
-            $document->addStyleSheet('libraries/jollyany/framework/assets/js/vendor/jquery.fancybox.min.css');
-            $document->addScript('libraries/jollyany/framework/assets/js/vendor/jquery.fancybox.min.js');
-            ?>
+        if (($this->categoryParams->get('course_category_data','') || ($this->categoryParams->get('course_category_data','') === "" && $this->template->params->get('course_category_data',''))) && (is_array($lessons) && count($lessons))) : ?>
         <div class="jollyany-course-tab">
             <ul class="uk-child-width-expand" uk-tab uk-switcher="connect: .jollyany-course-content">
                 <li>
