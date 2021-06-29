@@ -644,3 +644,37 @@
     background: currentColor;
   }
 }
+.tz-slideshow-wrapper {
+  .ui-nav-title{
+    .ui-nav-title-items {
+      position: relative;
+      &:before {
+        border-top: 1px solid rgba(255,255,255,0.1);
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 0;
+        left: 15px;
+      }
+      > li {
+        position: relative;
+        a{
+          text-decoration: none;
+          padding-top: 40px;
+          padding-bottom: 40px;
+          &.uk-active:before {
+            content: '';
+            top: 0;
+            left: 0;
+            border-top: 1px solid $colorMain;
+            position: absolute;
+            right: 0;
+          }
+          &:after {
+            background-color: transparent;
+          }
+        }
+      }
+    }
+  }
+}

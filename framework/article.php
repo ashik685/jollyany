@@ -65,25 +65,47 @@ class JollyanyFrameworkArticle extends AstroidFrameworkArticle {
                     <?php endif; ?>
                     <?php echo $this->article->text; ?>
                 </div>
-                <div class="uk-animation-slide-bottom-small">
+                <div class="uk-animation-slide-bottom-small jollyany-course-table">
                     <?php
                     $opened_flag    =   false;
-                    foreach ($lessons as $lesson) {
+                    $modal_content  =   '';
+                    $table_content  =   '';
+                    $index          =   0;
+                    $section        =   0;
+                    foreach ($lessons as $key => $lesson) {
                         if ($lesson['jollyany_lesson_type'] == 'section') {
-                            if ($opened_flag) echo '</tbody></table>';
-                            echo '<h4 class="lesson-section-title">'.$lesson['lesson_section_title'].'</h4>';
-                            echo '<table class="table table-hover lesson-table"><tbody>';
+                            $section++;
+                            if ($opened_flag) $table_content    .=  '</tbody></table>';
+                            $table_content  .=  '<h4 class="lesson-section-title">'.$lesson['lesson_section_title'].'</h4>';
+                            $table_content  .=  '<table class="table table-hover lesson-table"><tbody>';
                             $opened_flag    =    true;
+                            $index          =   0;
                         } else {
+                            $index++;
                             if (!$opened_flag) {
-                                echo '<table class="table table-hover lesson-table"><tbody>';
+                                $table_content  .=  '<table class="table table-hover lesson-table"><tbody>';
                                 $opened_flag    =   true;
                             }
-                            $downloadslider     =   isset($lesson['lesson_content_download_link']) && $lesson['lesson_content_download_link'] ? '|</span><a href="'.JUri::root().'images/'.$lesson['lesson_content_download_link'].'" title="'.$lesson['lesson_content_title'].'" target="_blank"><i class="fas fa-download"></i> '.JText::_('JOLLYANY_LESSON_DOWNLOAD_SLIDER').'</a>' : '';
-                            echo '<tr><td width="45"><span uk-icon="play-circle"></span></td><td class="lesson-title"><a href="'.$lesson['lesson_content_video_url'].'" title="'.$lesson['lesson_content_title'].'" data-fancybox>'.$lesson['lesson_content_title'].'</a></td><td class="lesson-option">'.$lesson['lesson_content_duration'].'<span>'.$downloadslider.'</td></tr>';
+                            $modal_content  .=  '<div id="jollyany-course-modal-'.$key.'" class="uk-modal-full jollyany-course-detail" data-token="'.\JSession::getFormToken().'" data-id="'.$key.'" data-cid="'.$this->article->id.'" uk-modal><div class="uk-modal-dialog"><button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>';
+                            $modal_content  .=  '<div class="uk-grid-collapse" uk-height-match uk-grid>';
+
+                            $modal_content  .=  '<div class="jollyany-course-lesson-detail uk-padding-large uk-width-2-3@m uk-width-3-5@l uk-flex-last@m" uk-height-viewport></div>';
+                            $modal_content  .=  '<div class="jollyany-course-table-content uk-padding-large uk-background-muted uk-width-1-3@m uk-width-2-5@l"></div>';
+
+
+                            $modal_content  .=  '</div>';
+                            $modal_content  .=  '</div></div>';
+                            $downloadslider     =   isset($lesson['lesson_content_download_link']) && $lesson['lesson_content_download_link'] ? '<div><a href="'.JUri::root().'images/'.$lesson['lesson_content_download_link'].'" title="'.$lesson['lesson_content_title'].'" target="_blank"><span class="uk-badge"><i class="fas fa-download"></i></span></a></div>' : '';
+//                            echo '<tr><td width="45"><span uk-icon="play-circle"></span></td><td class="lesson-title"><a href="'.$lesson['lesson_content_video_url'].'" title="'.$lesson['lesson_content_title'].'" data-fancybox>'.$lesson['lesson_content_title'].'</a></td><td class="lesson-option">'.$lesson['lesson_content_duration'].'<span>'.$downloadslider.'</td></tr>';
+                            $table_content  .=  '<tr><td class="lesson-icon" width="45"><span uk-icon="file-text"></span></td><td class="lesson-index uk-visible@m" width="110">'.JText::_('JOLLYANY_COURSE_LECTURE').' '.$section.'.'.$index.'</td><td class="lesson-title"><a href="#jollyany-course-modal-'.$key.'" uk-toggle>'.$lesson['lesson_content_title'].'</a></td><td class="lesson-option uk-width-small uk-text-meta"><div class="uk-grid-small uk-flex-middle uk-flex-right" uk-grid><div>'.$lesson['lesson_content_duration'].'</div>'.$downloadslider.'</div></td></tr>';
                         }
                     }
-                    echo '</tbody></table>';
+                    $table_content  .=  '</tbody></table>';
+                    echo $table_content;
+                    $table_modal    =   preg_replace('/<a href="#jollyany-course-modal-(.*?)" uk-toggle>(.*?)<\/a>/i', '<a href="#" class="jollyany-course-modal-detail" data-id="$1" data-cid="'.$this->article->id.'">$2</a>', $table_content);
+                    $table_modal    =   preg_replace('/<td class="lesson-icon" width="45">/i', '<td class="lesson-icon uk-visible@l">', $table_modal);
+                    $table_modal    =   preg_replace('/<td class="lesson-index uk-visible@m" width="110">/i', '<td class="lesson-index uk-visible@xl" width="110">', $table_modal);
+                    echo '<script id="jollyany-course-table-content-template" type="text/template">'.$table_modal.'</script>'
                     ?>
                 </div>
                 <div class="uk-animation-slide-bottom-small">
@@ -146,6 +168,7 @@ class JollyanyFrameworkArticle extends AstroidFrameworkArticle {
                 </div>
             </div>
         </div>
+        <?php echo $modal_content; ?>
         <?php else: ?>
             <?php echo $this->article->text; ?>
         <?php endif;

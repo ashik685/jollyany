@@ -97,5 +97,39 @@ jQuery(function($){
                 });
             });
         }
+        var ajaxCourseContent = function ($this, $request) {
+            $.ajax({
+                type   : 'POST',
+                data   : $request,
+                beforeSend: function(){
+                    $this.find('.jollyany-course-lesson-detail').empty()
+                },
+                success: function (response) {
+                    if (response.status == 'success') {
+                        $this.find('.jollyany-course-lesson-detail').append(response.data);
+                    } else {
+                        $this.find('.jollyany-course-lesson-detail').append('<div class="uk-alert-danger" uk-alert><a class="uk-alert-close" uk-close></a><p>'+JSON.stringify(response)+'</p></div>');
+                    }
+                }
+            });
+        }
+        if ($('.jollyany-course-table').length) {
+            UIkit.util.on('.jollyany-course-detail', 'show', function () {
+                var request = {},
+                    $this   = $(this);
+                request['id'] = $this.data('id');
+                request['cid'] = $this.data('cid');
+                request['option'] = 'com_ajax';
+                request['jollyany'] = 'course_get_data';
+                request[$this.data('token')] = 1;
+                $this.find('.jollyany-course-table-content').empty().html($('#jollyany-course-table-content-template').html()).find('.jollyany-course-modal-detail').on('click', function (e){
+                    e.preventDefault();
+                    request['id'] = $(this).data('id');
+                    request['cid'] = $(this).data('cid');
+                    ajaxCourseContent($this, request);
+                });
+                ajaxCourseContent($this, request);
+            });
+        }
     });
 });

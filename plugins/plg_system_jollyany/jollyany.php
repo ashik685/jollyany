@@ -28,9 +28,9 @@ class plgSystemJollyany extends JPlugin {
     public function onBeforeRender()
     {
         $document = Astroid\Framework::getDocument(); // Astroid Document
-        $document->addScript('libraries/jollyany/framework/assets/js/jollyany.min.js', 'body');
         $document->addScript('media/jollyany/assets/js/uikit.min.js', 'body');
         $document->addScript('media/jollyany/assets/js/uikit-icons.min.js', 'body');
+        $document->addScript('libraries/jollyany/framework/assets/js/jollyany.min.js', 'body');
     }
 	public function onAfterInitialise() {
 		// load jollyany language
@@ -39,7 +39,7 @@ class plgSystemJollyany extends JPlugin {
         $option     = $this->app->input->get('option', '');
         $jollyany   = $this->app->input->get('jollyany', '');
         $astroid    = $this->app->input->get('astroid', '');
-		if(!$this->app->isAdmin() && $jollyany!='activation' && $jollyany!='course_contact_form') return false;
+		if(!$this->app->isAdmin() && $jollyany!='activation' && $jollyany!='course_contact_form'  && $jollyany!='course_get_data') return false;
 
 		if ($option == 'com_ajax') {
 			switch ($jollyany) {
@@ -723,6 +723,70 @@ class plgSystemJollyany extends JPlugin {
                         }
                         $return["status"]   =   'success';
                         $return["code"]     =   200;
+                    } catch (\Exception $e) {
+                        $return["status"] = "error";
+                        $return["code"] = $e->getCode();
+                        $return["message"] = $e->getMessage();
+                    }
+                    echo \json_encode($return);
+                    die();
+                    break;
+                case 'course_get_data' :
+                    header('Content-Type: application/json');
+                    header('Access-Control-Allow-Origin: *');
+                    $return = array();
+                    try {
+                        // Check for request forgeries.
+                        if (!JSession::checkToken()) {
+                            throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR'));
+                        }
+                        $cid            =   $this->app->input->get('cid', 0);
+                        $id             =   $this->app->input->get('id', '');
+
+                        if (!$cid || !$id) throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR'));
+                        $course_data    =   JollyanyFrameworkCourse::getData($cid);
+                        $modal_content  =   '';
+                        if ($course_data) {
+                            $courses    =   json_decode($course_data->data,true);
+                            if (!$courses[$id]) throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR'));
+                            $lesson     =   $courses[$id];
+                            $lesson_type    =   isset($lesson['jollyany_content_type']) && $lesson['jollyany_content_type'] ? $lesson['jollyany_content_type'] : 'video';
+                            if ($lesson_type == 'video') {
+                                $video = parse_url($lesson['lesson_content_video_url']);
+                                $src = '';
+                                switch($video['host']) {
+                                    case 'youtu.be':
+                                        $id = trim($video['path'],'/');
+                                        $src = '//www.youtube.com/embed/' . $id .'?iv_load_policy=3';
+                                        break;
+
+                                    case 'www.youtube.com':
+                                    case 'youtube.com':
+                                        parse_str($video['query'], $query);
+                                        $id = $query['v'];
+                                        $src = '//www.youtube.com/embed/' . $id .'?iv_load_policy=3';
+                                        break;
+
+                                    case 'vimeo.com':
+                                    case 'www.vimeo.com':
+                                        $id = trim($video['path'],'/');
+                                        $src = "//player.vimeo.com/video/{$id}";
+                                }
+                                if ($src) {
+                                    $modal_content .= '<div class="jollyany-embed-responsive jollyany-embed-responsive-16by9">';
+                                    $modal_content .= '<iframe class="jollyany-embed-responsive-item" ' . 'src="'.$src.'"' . ' webkitAllowFullScreen mozallowfullscreen allowFullScreen loading="lazy"></iframe>';
+                                    $modal_content .= '</div>';
+                                }
+                            }
+                            $modal_content  .=  $lesson_type == 'embed' ? '<div class="jollyany-embed-responsive jollyany-embed-responsive-16by9">'.$lesson['lesson_content_embed'].'</div>' : '';
+                            $modal_content  .=  '<h1>'.$lesson['lesson_content_title'].'</h1>';
+                            $modal_content  .=  $lesson['jollyany_content_description'];
+                        }
+
+                        $return["data"]     =   $modal_content;
+                        $return["status"]   =   'success';
+                        $return["code"]     =   200;
+
                     } catch (\Exception $e) {
                         $return["status"] = "error";
                         $return["code"] = $e->getCode();

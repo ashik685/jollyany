@@ -95,16 +95,13 @@ a.jollyany-login-icon {
   }
   .lesson-option {
     text-align: right;
-    color: #999;
+    line-height: inherit;
+    color: $global-muted-color;
     a {
-      color: #999;
+      color: $global-muted-color;
       &:hover {
         color: $colorMain;
       }
-    }
-    span {
-      color: #8dadc3;
-      margin: 0 20px;
     }
   }
   .event-information {
@@ -154,4 +151,34 @@ a.jollyany-login-icon {
   > .uk-tab > .uk-active > a {
     border-color: $colorMain;
   }
+}
+.jollyany-embed-responsive {
+  position: relative;
+  display: block;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+  &.jollyany-embed-responsive-16by9 {
+    padding-bottom: 56.25%;
+  }
+  .jollyany-embed-responsive-item, embed, iframe, object {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    border: 0;
+  }
+}
+.lesson-table {
+  a {
+    color: $global-color;
+  }
+}
+.lesson-icon {
+  width: 45px;
+}
+.lesson-index {
+  font-size: 0.9em;
 }
