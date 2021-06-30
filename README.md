@@ -8,6 +8,18 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.6.9**
+
+    [new topic] Varaham - Education University Joomla Template 
+    [improve] Course supports display Lecture detail in lightbox
+    [update] Update UI SlideShow support title thumbnail
+    [update] Update UI Articles support display in slider
+    [update] Update UI Articles display course, events information
+    [improve] Use UI Tab for course article
+    [improve] Use UI Formt for course contact
+    [improve] Use UIKit for Event article
+    [improve] Remove unnessary style and js
+
 **Version 1.6.8**
 
     [new topic] Krypton - Bitcoin Crypto Currency Joomla Template 
