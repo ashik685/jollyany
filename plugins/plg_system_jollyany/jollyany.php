@@ -39,7 +39,7 @@ class plgSystemJollyany extends JPlugin {
         $option     = $this->app->input->get('option', '');
         $jollyany   = $this->app->input->get('jollyany', '');
         $astroid    = $this->app->input->get('astroid', '');
-		if(!$this->app->isAdmin() && $jollyany!='activation' && $jollyany!='course_contact_form'  && $jollyany!='course_get_data') return false;
+		if(!Framework::isAdmin() && $jollyany!='activation' && $jollyany!='course_contact_form'  && $jollyany!='course_get_data') return false;
 
 		if ($option == 'com_ajax') {
 			switch ($jollyany) {

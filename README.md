@@ -8,6 +8,10 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.7.0**
+
+    [update] Joomla 4 Compatible
+
 **Version 1.6.9**
 
     [new topic] Varaham - Education University Joomla Template 
