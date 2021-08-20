@@ -8,6 +8,11 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.7.2**
+
+    [fixbug] Move all assets to Media. Joomla 4 Compatible
+    [fixbug] Fix issue getTemplate()
+
 **Version 1.7.1**
 
     [fixbug] Fix issue license field with Joomla 4
