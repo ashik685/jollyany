@@ -43,14 +43,12 @@ class JFormFieldJollyanyLicense extends JFormFieldList {
 	    $lictext    =   JollyanyFrameworkHelper::getLicense();
 	    $license    =   JollyanyFrameworkHelper::maybe_unserialize($lictext);
         $totaltemp  =   JollyanyFrameworkDataImport::getTotalTemplate();
-        $template   =   $this->getTemplateInfo();
-	    $filePath   =   JPath::clean(JPATH_ROOT.'/templates/'.$template->template.'/templateDetails.xml');
-	    $tmpXml     =   JFactory::getXML($filePath);
+        $template = Astroid\Framework::getTemplate();
 
         $html[]     =   '<div class="row mt-4">';
         $html[]     =   '<div class="col-12 col-xl-4 col-xxl-5 mb-4">';
         $html[]     =   '<div class="card"><img src="'.JUri::root().'templates/'.$template->template.'/template_preview.png" class="card-img-top" alt="'.$template->template.'" /><div class="card-body">';
-        $html[]     =   '<h6 class="card-subtitle mb-2 text-muted">You are using: Version <strong>'.$tmpXml->version.'</strong> - Updated: <strong>'.$tmpXml->creationDate.'</strong></h6>';
+        $html[]     =   '<h6 class="card-subtitle mb-2 text-muted">You are using: Version <strong>'.$template->version.'</strong></h6>';
         $html[]     =   '<h5 class="card-title">'.JText::_($template->template).'</h5>';
         $html[]     =   '<div class="card-text">'.JText::_(preg_replace('/tz_/i', 'tpl_', $template->template).'_desc').'</div>';
         $html[]     =   '</div></div>';
@@ -152,27 +150,4 @@ class JFormFieldJollyanyLicense extends JFormFieldList {
         $html[]     =   '<script id="jollyany-form-data-json" type="text/template">'.$javascript.'</script>';
         return implode($html);
     }
-
-	/**
-	 * Get template information
-	 * @return object|null
-	 */
-	protected function getTemplateInfo() {
-		$input = JFactory::getApplication()->input;
-		if($input->getCmd('option') == 'com_ajax' && $input->getCmd('astroid') == 'manager'){
-			$db = JFactory::getDBO();
-			$query = $db->getQuery(true);
-			$id = $input->getInt('id');
-
-			$query
-				->select('*')
-				->from('#__template_styles')
-				->where('id='.(int)$id);
-
-			$db->setQuery($query);
-			return $db->loadObject();
-		} else {
-			return null;
-		}
-	}
 }
