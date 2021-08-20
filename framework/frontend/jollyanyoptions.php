@@ -22,7 +22,7 @@ $sitename = $app->get('sitename');
 jimport('joomla.filesystem.file');
 
 // Linearicon icon
-$document->addStyleSheet('libraries/jollyany/framework/assets/fonts/linearicons/font.css');
+$document->addStyleSheet('media/jollyany/assets/fonts/linearicons/font.css');
 
 // Preloader Logo
 if ($params->get('preloader', 1)) {

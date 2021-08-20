@@ -144,7 +144,7 @@ class SppagebuilderAddonTinyslider extends SppagebuilderAddons {
     }
 
     public function scripts() {
-        return array(JURI::base(true) . '/libraries/jollyany/framework/assets/js/vendor/tiny-slider.min.js');
+        return array(JURI::base(true) . '/media/jollyany/assets/js/vendor/tiny-slider.min.js');
     }
 
     public function css() {

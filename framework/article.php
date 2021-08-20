@@ -16,7 +16,7 @@ class JollyanyFrameworkArticle extends AstroidFrameworkArticle {
     public $categoryParams;
 	function __construct($article, $categoryView = false, $print = null) {
 		parent::__construct($article, $categoryView);
-		$this->template = JollyanyFramework::getTemplate();
+		$this->template         =   Framework::getTemplate();
 		$this->print            =   $print;
 		$this->isCategoryView   =   $categoryView;
 		$this->categoryParams   =   $this->_getCategoryParams();
@@ -182,7 +182,7 @@ class JollyanyFrameworkArticle extends AstroidFrameworkArticle {
                 echo '<div class="time-count-down">';
                 $expired_ms     =   time() < strtotime($this->article->params->get('jollyany_event_end', ''))  ? JText::_('JOLLYANY_EVENT_START_MS') : JText::_('JOLLYANY_EVENT_EXPIRED_MS');
                 $event_expired  =   $this->article->params->get('jollyany_event_expired', $expired_ms);
-                $document->addScript('libraries/jollyany/framework/assets/js/vendor/jquery.countdown.min.js');
+                $document->addScript('media/jollyany/assets/js/vendor/jquery.countdown.min.js');
                 $countdown_id    =   uniqid('countdown_');
                 $txt            =   '';
                 $countdown_time =   '';
@@ -267,7 +267,7 @@ class JollyanyFrameworkArticle extends AstroidFrameworkArticle {
                 $google_id    =   uniqid('googlemap_');
                 $document->addStyleDeclaration('#'.$google_id.'{height:'.$this->template->params->get('googlemapheight', '400').'px;}');
                 $document->addScript('https://maps.googleapis.com/maps/api/js?key='. $this->template->params->get('googleapikey', ''));
-                $document->addScript('libraries/jollyany/framework/assets/js/vendor/gmap.min.js');
+                $document->addScript('media/jollyany/assets/js/vendor/gmap.min.js');
                 echo '<div class="event_googlemaps uk-margin-medium">';
                 echo '<div id="'.$google_id.'" class="googlemapapi" data-lat="' . trim($longlat[0]) . '" data-lng="' . trim($longlat[1]) . '"  data-location=\''.base64_encode($location_json).'\' data-maptype="' . $this->template->params->get('googlemaptype','ROADMAP') . '" data-mapzoom="' . $this->template->params->get('googlemapzoom', '15') . '" data-mousescroll="' . $googlemapmousescroll . '" data-infowindow="' . base64_encode($this->article->params->get('jollyany_event_infowindow', '')) . '" data-show-controll=\''.$googlemapshowcontrol.'\'></div>';
                 echo '</div>';

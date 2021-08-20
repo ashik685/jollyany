@@ -2,12 +2,12 @@
 <extension version="3.8" type="plugin" group="sppagebuilder" method="upgrade">
 	<name>Jollyany Addons Plugin - SP Page Builder</name>
 	<author>TemPlaza</author>
-	<creationDate>March 8 2021</creationDate>
+	<creationDate>August 20, 2021</creationDate>
     <copyright>Copyright (C) 2011 - 2021 TemPlaza. All rights reserved.</copyright>
     <license>http://www.gnu.org/licenses/gpl-2.0.html GPLv2 or later</license>
 	<authorEmail>info@templaza.com</authorEmail>
 	<authorUrl>https://templaza.com</authorUrl>
-    <version>1.6.0</version>
+    <version>1.7.2</version>
     <description>
 		Jollyany Addons for SP PageBuilder. A library of unique Jollyany Addons to add more functionality and flexibility to your favorite SP Page Builder.
     </description>	

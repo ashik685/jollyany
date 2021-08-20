@@ -24,12 +24,12 @@ class SppagebuilderAddonTestimonialcarousel extends SppagebuilderAddons {
         $testimonial_type = (isset($settings->testimonial_type)) ? $settings->testimonial_type : 'slides';
 
         if ($testimonial_type == 'slides') {
-            \JFactory::getDocument()->addScript(JURI::base(true) . '/libraries/jollyany/framework/assets/js/vendor/jquery.flexslider.min.js');
-            \JFactory::getDocument()->addStyleSheet(JURI::base(true) . '/libraries/jollyany/framework/assets/js/vendor/flexslider.css');
+            \JFactory::getDocument()->addScript(JURI::base(true) . '/media/jollyany/assets/js/vendor/jquery.flexslider.min.js');
+            \JFactory::getDocument()->addStyleSheet(JURI::base(true) . '/media/jollyany/assets/js/vendor/flexslider.css');
         } else {
-            \JFactory::getDocument()->addScript(JURI::base(true) . '/libraries/jollyany/framework/assets/js/vendor/owl.carousel.min.js');
-            \JFactory::getDocument()->addStyleSheet(JURI::base(true) . '/libraries/jollyany/framework/assets/js/vendor/owl.carousel.min.css');
-            \JFactory::getDocument()->addStyleSheet(JURI::base(true) . '/libraries/jollyany/framework/assets/js/vendor/owl.theme.default.min.css');
+            \JFactory::getDocument()->addScript(JURI::base(true) . '/media/jollyany/assets/js/vendor/owl.carousel.min.js');
+            \JFactory::getDocument()->addStyleSheet(JURI::base(true) . '/media/jollyany/assets/js/vendor/owl.carousel.min.css');
+            \JFactory::getDocument()->addStyleSheet(JURI::base(true) . '/media/jollyany/assets/js/vendor/owl.theme.default.min.css');
         }
 
         //Output

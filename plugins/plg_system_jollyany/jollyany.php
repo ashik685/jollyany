@@ -30,7 +30,7 @@ class plgSystemJollyany extends JPlugin {
         $document = Astroid\Framework::getDocument(); // Astroid Document
         $document->addScript('media/jollyany/assets/js/uikit.min.js', 'body');
         $document->addScript('media/jollyany/assets/js/uikit-icons.min.js', 'body');
-        $document->addScript('libraries/jollyany/framework/assets/js/jollyany.min.js', 'body');
+        $document->addScript('media/jollyany/assets/js/frontend.min.js', 'body');
     }
 	public function onAfterInitialise() {
 		// load jollyany language
