@@ -8,6 +8,10 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.7.1**
+
+    [fixbug] Fix issue license field with Joomla 4
+
 **Version 1.7.0**
 
     [update] Joomla 4 Compatible
