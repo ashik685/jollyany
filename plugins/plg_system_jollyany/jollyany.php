@@ -831,7 +831,7 @@ class plgSystemJollyany extends JPlugin {
 		}
 	}
 
-	protected function getPackageData($step = 1, $extension, $license) {
+	protected function getPackageData($step, $extension, $license) {
 		jimport('jollyany.framework.importer.data');
 		$url        = JollyanyFrameworkDataImport::getApiUrl().'/index.php?option=com_tz_membership';
 		$data = array(
