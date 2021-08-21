@@ -9,6 +9,15 @@ defined('_JEXEC') or die;
 jimport('astroid.framework.article');
 jimport('jollyany.framework.jollyany');
 use Astroid\Framework;
+use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Associations;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Layout\FileLayout;
+use Joomla\CMS\Layout\LayoutHelper;
+use Joomla\CMS\Router\Route;
+use Joomla\CMS\Uri\Uri;
+use Joomla\CMS\Plugin\PluginHelper;
 
 class JollyanyFrameworkArticle extends AstroidFrameworkArticle {
     public $print;
@@ -24,146 +33,149 @@ class JollyanyFrameworkArticle extends AstroidFrameworkArticle {
 
     public function renderArticleBody()
     {
+        $html   =   $this->renderEventData();
+        $html   .=  $this->renderCourseData();
+        return $html;
+    }
+
+    public function renderCourseData() {
         $canEdit = $this->article->params->get('access-edit');
         $assocParam = (JLanguageAssociations::isEnabled() && $this->article->params->get('show_associations'));
         $lessons    =   $this->article->params->get('jollyany_course_lessons', '');
-        $language = JFactory::getLanguage();
-        $language->load('com_contact', JPATH_SITE);
         ob_start();
-        echo $this->renderEventData();
         // Todo Not that elegant would be nice to group the params
         $useDefList = ($this->article->params->get('show_modify_date') || $this->article->params->get('show_publish_date') || $this->article->params->get('show_create_date') || $this->article->params->get('show_hits') || $this->article->params->get('show_category') || $this->article->params->get('show_parent_category') || $this->article->params->get('show_author') || $assocParam || $this->template->params->get('astroid_readtime', 1));
         if (($this->categoryParams->get('course_category_data','') || ($this->categoryParams->get('course_category_data','') === "" && $this->template->params->get('course_category_data',''))) && (is_array($lessons) && count($lessons))) : ?>
-        <div class="jollyany-course-tab">
-            <ul class="uk-child-width-expand" uk-tab uk-switcher="connect: .jollyany-course-content">
-                <li>
-                    <a class="nav-link" href="#description"><?php echo JText::_('JGLOBAL_DESCRIPTION') ?></a>
-                </li>
-                <li>
-                    <a class="nav-link" href="#lessons"><?php echo JText::_('JOLLYANY_COURSE_OPTIONS_TITLE_BASIC_LABEL') ?></a>
-                </li>
-                <li>
-                    <a class="nav-link" href="#contact"><?php echo JText::_('COM_CONTACT_DETAILS') ?></a>
-                </li>
-            </ul>
-            <div class="uk-switcher jollyany-course-content uk-margin-medium">
-                <div class="uk-animation-slide-bottom-small">
-                    <?php if (!$this->print) : ?>
-                        <?php if ($canEdit || $this->article->params->get('show_print_icon') || $this->article->params->get('show_email_icon')) : ?>
-                            <?php echo JLayoutHelper::render('joomla.content.icons', array('params' => $this->article->params, 'item' => $this->article, 'print' => false)); ?>
+            <div class="jollyany-course-tab">
+                <ul class="uk-child-width-expand" uk-tab uk-switcher="connect: .jollyany-course-content">
+                    <li>
+                        <a class="nav-link" href="#description"><?php echo JText::_('JGLOBAL_DESCRIPTION') ?></a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="#lessons"><?php echo JText::_('JOLLYANY_COURSE_OPTIONS_TITLE_BASIC_LABEL') ?></a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="#contact"><?php echo JText::_('JOLLYANY_COURSE_CONTACT_DETAILS') ?></a>
+                    </li>
+                </ul>
+                <div class="uk-switcher jollyany-course-content uk-margin-medium">
+                    <div class="uk-animation-slide-bottom-small">
+                        <?php if (!$this->print) : ?>
+                            <?php if ($canEdit || $this->article->params->get('show_print_icon') || $this->article->params->get('show_email_icon')) :  ?>
+                                <?php echo LayoutHelper::render('joomla.content.icons', array('params' => $this->article->params, 'item' => $this->article, 'print' => false)); ?>
+                            <?php endif; ?>
+                        <?php else : ?>
+                            <?php if ($useDefList) : ?>
+                                <div id="pop-print" class="btn hidden-print">
+                                    <?php echo HTMLHelper::_('icon.print_screen', $this->article, $this->article->params); ?>
+                                </div>
+                            <?php endif; ?>
                         <?php endif; ?>
-                    <?php else : ?>
-                        <?php if ($useDefList) : ?>
-                            <div id="pop-print" class="btn hidden-print">
-                                <?php echo JHtml::_('icon.print_screen', $this->article, $this->article->params); ?>
-                            </div>
-                        <?php endif; ?>
-                    <?php endif; ?>
-                    <?php echo $this->article->text; ?>
-                </div>
-                <div class="uk-animation-slide-bottom-small jollyany-course-table">
-                    <?php
-                    $opened_flag    =   false;
-                    $modal_content  =   '';
-                    $table_content  =   '';
-                    $index          =   0;
-                    $section        =   0;
-                    foreach ($lessons as $key => $lesson) {
-                        if ($lesson['jollyany_lesson_type'] == 'section') {
-                            $section++;
-                            if ($opened_flag) $table_content    .=  '</tbody></table>';
-                            $table_content  .=  '<h4 class="lesson-section-title">'.$lesson['lesson_section_title'].'</h4>';
-                            $table_content  .=  '<table class="table table-hover lesson-table"><tbody>';
-                            $opened_flag    =    true;
-                            $index          =   0;
-                        } else {
-                            $index++;
-                            if (!$opened_flag) {
+                        <?php echo $this->article->text; ?>
+                    </div>
+                    <div class="uk-animation-slide-bottom-small jollyany-course-table">
+                        <?php
+                        $opened_flag    =   false;
+                        $modal_content  =   '';
+                        $table_content  =   '';
+                        $index          =   0;
+                        $section        =   0;
+                        foreach ($lessons as $key => $lesson) {
+                            if ($lesson['jollyany_lesson_type'] == 'section') {
+                                $section++;
+                                if ($opened_flag) $table_content    .=  '</tbody></table>';
+                                $table_content  .=  '<h4 class="lesson-section-title">'.$lesson['lesson_section_title'].'</h4>';
                                 $table_content  .=  '<table class="table table-hover lesson-table"><tbody>';
-                                $opened_flag    =   true;
-                            }
-                            $modal_content  .=  '<div id="jollyany-course-modal-'.$key.'" class="uk-modal-full jollyany-course-detail" data-token="'.\JSession::getFormToken().'" data-id="'.$key.'" data-cid="'.$this->article->id.'" uk-modal><div class="uk-modal-dialog"><button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>';
-                            $modal_content  .=  '<div class="uk-grid-collapse" uk-height-match uk-grid>';
-
-                            $modal_content  .=  '<div class="jollyany-course-lesson-detail uk-padding-large uk-width-2-3@m uk-width-3-5@l uk-flex-last@m" uk-height-viewport></div>';
-                            $modal_content  .=  '<div class="jollyany-course-table-content uk-padding-large uk-background-muted uk-width-1-3@m uk-width-2-5@l"></div>';
-
-                            $modal_content  .=  '</div>';
-                            $modal_content  .=  '</div></div>';
-                            $downloadslider     =   isset($lesson['lesson_content_download_link']) && $lesson['lesson_content_download_link'] ? '<div><a href="'.JUri::root().'images/'.$lesson['lesson_content_download_link'].'" title="'.$lesson['lesson_content_title'].'" target="_blank"><span class="uk-badge"><i class="fas fa-download"></i></span></a></div>' : '';
-//                            echo '<tr><td width="45"><span uk-icon="play-circle"></span></td><td class="lesson-title"><a href="'.$lesson['lesson_content_video_url'].'" title="'.$lesson['lesson_content_title'].'" data-fancybox>'.$lesson['lesson_content_title'].'</a></td><td class="lesson-option">'.$lesson['lesson_content_duration'].'<span>'.$downloadslider.'</td></tr>';
-                            $table_content  .=  '<tr><td class="lesson-icon" width="45"><span uk-icon="file-text"></span></td><td class="lesson-index uk-visible@m" width="110">'.JText::_('JOLLYANY_COURSE_LECTURE').' '.$section.'.'.$index.'</td><td class="lesson-title"><a href="#jollyany-course-modal-'.$key.'" uk-toggle>'.$lesson['lesson_content_title'].'</a></td><td class="lesson-option uk-width-small uk-text-meta"><div class="uk-grid-small uk-flex-middle uk-flex-right" uk-grid><div>'.$lesson['lesson_content_duration'].'</div>'.$downloadslider.'</div></td></tr>';
-                        }
-                    }
-                    $table_content  .=  '</tbody></table>';
-                    echo $table_content;
-                    $table_modal    =   preg_replace('/<a href="#jollyany-course-modal-(.*?)" uk-toggle>(.*?)<\/a>/i', '<a href="#" class="jollyany-course-modal-detail" data-id="$1" data-cid="'.$this->article->id.'">$2</a>', $table_content);
-                    $table_modal    =   preg_replace('/<td class="lesson-icon" width="45">/i', '<td class="lesson-icon uk-visible@l">', $table_modal);
-                    $table_modal    =   preg_replace('/<td class="lesson-index uk-visible@m" width="110">/i', '<td class="lesson-index uk-visible@xl" width="110">', $table_modal);
-                    echo '<script id="jollyany-course-table-content-template" type="text/template">'.$table_modal.'</script>'
-                    ?>
-                </div>
-                <div class="uk-animation-slide-bottom-small">
-                    <?php
-                    $contact_course_info    =   $this->categoryParams->get('course_category_contact_info','');
-                    if (!$contact_course_info) {
-                        $contact_course_info = $this->template->params->get('course_contact_info','');
-                    }
-                    echo '<div class="course-contact-info">'.$contact_course_info.'</div>';
-                    ?>
-                    <form class="jollyany-course-contact-form">
-                        <div class="uk-child-width-1-2@m uk-margin uk-grid-small" uk-grid>
-                            <div>
-                                <input class="uk-input" name="from_name" type="text" required="required" placeholder="<?php echo JText::_('COM_CONTACT_CONTACT_EMAIL_NAME_DESC'); ?>">
-                            </div>
-                            <div>
-                                <input class="uk-input" name="from_email" type="text" required="required" placeholder="<?php echo JText::_('COM_CONTACT_CONTACT_ENTER_VALID_EMAIL'); ?>">
-                            </div>
-                        </div>
-                        <div class="uk-child-width-1-2@m uk-margin uk-grid-small" uk-grid>
-                            <div>
-                                <input class="uk-input" name="phone" type="text" placeholder="<?php echo JText::_('JOLLYANY_COURSE_CONTACT_TELEPHONE'); ?>">
-                            </div>
-                            <div>
-                                <input class="uk-input" name="subject" type="text" required="required" placeholder="<?php echo JText::_('COM_CONTACT_CONTACT_MESSAGE_SUBJECT_DESC'); ?>">
-                            </div>
-                        </div>
-                        <div class="uk-margin">
-                            <textarea class="uk-textarea" name="message" rows="5" required="required" placeholder="<?php echo JText::_('COM_CONTACT_CONTACT_ENTER_MESSAGE_DESC'); ?>"></textarea>
-                        </div>
-                        <div class="uk-margin">
-                            <label><input class="uk-checkbox" name="agreement" type="checkbox"><?php echo ' '.$this->template->params->get('course_contact_agreement','I agree with the <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a> and I declare that I have read the information that is required in accordance with <a href="http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.L_.2016.119.01.0001.01.ENG&amp;toc=OJ:L:2016:119:TOC" target="_blank">Article 13 of GDPR.</a>'); ?></label>
-                        </div>
-                        <?php if ($this->template->params->get('course_contact_recaptcha',0)) : ?>
-                        <div class="uk-margin">
-                            <?php
-                            if ($this->template->params->get('course_contact_recaptcha_type','recaptcha')) {
-                                JPluginHelper::importPlugin('captcha', 'recaptcha');
-                                $dispatcher = JDispatcher::getInstance();
-                                $dispatcher->trigger('onInit', 'jollyany_course_contact_recaptcha');
-                                $recaptcha = $dispatcher->trigger('onDisplay', array(null, 'jollyany_course_contact_recaptcha' , 'jollyany-course-contact-recaptcha'));
-                                echo (isset($recaptcha[0])) ? $recaptcha[0] : '<p class="uk-alert-danger">' . JText::_('JOLLYANY_RECAPTCHA_NOT_INSTALLED') . '</p>';
+                                $opened_flag    =    true;
+                                $index          =   0;
                             } else {
-                                JPluginHelper::importPlugin('captcha', 'recaptcha_invisible');
-                                $dispatcher = JDispatcher::getInstance();
-                                $dispatcher->trigger('onInit', 'jollyany_course_contact_invisible_recaptcha');
-                                $recaptcha = $dispatcher->trigger('onDisplay', array(null, 'jollyany_course_contact_invisible_recaptcha' , 'jollyany-course-contact-invisible-recaptcha'));
-                                echo (isset($recaptcha[0])) ? $recaptcha[0] : '<p class="uk-alert-danger">' . JText::_('JOLLYANY_RECAPTCHA_NOT_INSTALLED') . '</p>';
+                                $index++;
+                                if (!$opened_flag) {
+                                    $table_content  .=  '<table class="table table-hover lesson-table"><tbody>';
+                                    $opened_flag    =   true;
+                                }
+                                $modal_content  .=  '<div id="jollyany-course-modal-'.$key.'" class="uk-modal-full jollyany-course-detail" data-token="'.\JSession::getFormToken().'" data-id="'.$key.'" data-cid="'.$this->article->id.'" uk-modal><div class="uk-modal-dialog"><button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>';
+                                $modal_content  .=  '<div class="uk-grid-collapse" uk-height-match uk-grid>';
+
+                                $modal_content  .=  '<div class="jollyany-course-lesson-detail uk-padding-large uk-width-2-3@m uk-width-3-5@l uk-flex-last@m" uk-height-viewport></div>';
+                                $modal_content  .=  '<div class="jollyany-course-table-content uk-padding-large uk-background-muted uk-width-1-3@m uk-width-2-5@l"></div>';
+
+                                $modal_content  .=  '</div>';
+                                $modal_content  .=  '</div></div>';
+                                $downloadslider     =   isset($lesson['lesson_content_download_link']) && $lesson['lesson_content_download_link'] ? '<div><a href="'.JUri::root().'images/'.$lesson['lesson_content_download_link'].'" title="'.$lesson['lesson_content_title'].'" target="_blank"><span class="uk-badge"><i class="fas fa-download"></i></span></a></div>' : '';
+//                            echo '<tr><td width="45"><span uk-icon="play-circle"></span></td><td class="lesson-title"><a href="'.$lesson['lesson_content_video_url'].'" title="'.$lesson['lesson_content_title'].'" data-fancybox>'.$lesson['lesson_content_title'].'</a></td><td class="lesson-option">'.$lesson['lesson_content_duration'].'<span>'.$downloadslider.'</td></tr>';
+                                $table_content  .=  '<tr><td class="lesson-icon" width="45"><span uk-icon="file-text"></span></td><td class="lesson-index uk-visible@m" width="110">'.JText::_('JOLLYANY_COURSE_LECTURE').' '.$section.'.'.$index.'</td><td class="lesson-title"><a href="#jollyany-course-modal-'.$key.'" uk-toggle>'.$lesson['lesson_content_title'].'</a></td><td class="lesson-option uk-width-small uk-text-meta"><div class="uk-grid-small uk-flex-middle uk-flex-right" uk-grid><div>'.$lesson['lesson_content_duration'].'</div>'.$downloadslider.'</div></td></tr>';
                             }
-                            ?>
-                            <input type="hidden" name="captcha_type" value="<?php echo $this->template->params->get('course_contact_recaptcha_type','recaptcha'); ?>">
-                        </div>
-                        <?php endif; ?>
-                        <input type="hidden" class="token" name="<?php echo \JSession::getFormToken(); ?>" value="1">
-                        <div class="uk-margin">
-                            <button type="submit" class="uk-button uk-button-primary uk-border-rounded"><?php echo JText::_('COM_CONTACT_CONTACT_SEND'); ?></button>
-                        </div>
-                        <div class="jollyany-ajax-contact-status uk-margin"></div>
-                    </form>
+                        }
+                        $table_content  .=  '</tbody></table>';
+                        echo $table_content;
+                        $table_modal    =   preg_replace('/<a href="#jollyany-course-modal-(.*?)" uk-toggle>(.*?)<\/a>/i', '<a href="#" class="jollyany-course-modal-detail" data-id="$1" data-cid="'.$this->article->id.'">$2</a>', $table_content);
+                        $table_modal    =   preg_replace('/<td class="lesson-icon" width="45">/i', '<td class="lesson-icon uk-visible@l">', $table_modal);
+                        $table_modal    =   preg_replace('/<td class="lesson-index uk-visible@m" width="110">/i', '<td class="lesson-index uk-visible@xl" width="110">', $table_modal);
+                        echo '<script id="jollyany-course-table-content-template" type="text/template">'.$table_modal.'</script>'
+                        ?>
+                    </div>
+                    <div class="uk-animation-slide-bottom-small">
+                        <?php
+                        $contact_course_info    =   $this->categoryParams->get('course_category_contact_info','');
+                        if (!$contact_course_info) {
+                            $contact_course_info = $this->template->params->get('course_contact_info','');
+                        }
+                        echo '<div class="course-contact-info">'.$contact_course_info.'</div>';
+                        ?>
+                        <form class="jollyany-course-contact-form">
+                            <div class="uk-child-width-1-2@m uk-margin uk-grid-small" uk-grid>
+                                <div>
+                                    <input class="uk-input" name="from_name" type="text" required="required" placeholder="<?php echo JText::_('JOLLYANY_COURSE_CONTACT_NAME'); ?>">
+                                </div>
+                                <div>
+                                    <input class="uk-input" name="from_email" type="text" required="required" placeholder="<?php echo JText::_('JOLLYANY_COURSE_CONTACT_EMAIL'); ?>">
+                                </div>
+                            </div>
+                            <div class="uk-child-width-1-2@m uk-margin uk-grid-small" uk-grid>
+                                <div>
+                                    <input class="uk-input" name="phone" type="text" placeholder="<?php echo JText::_('JOLLYANY_COURSE_CONTACT_TELEPHONE'); ?>">
+                                </div>
+                                <div>
+                                    <input class="uk-input" name="subject" type="text" required="required" placeholder="<?php echo JText::_('JOLLYANY_COURSE_CONTACT_MESSAGE_SUBJECT_DESC'); ?>">
+                                </div>
+                            </div>
+                            <div class="uk-margin">
+                                <textarea class="uk-textarea" name="message" rows="5" required="required" placeholder="<?php echo JText::_('JOLLYANY_COURSE_CONTACT_ENTER_MESSAGE_DESC'); ?>"></textarea>
+                            </div>
+                            <div class="uk-margin">
+                                <label><input class="uk-checkbox" name="agreement" type="checkbox"><?php echo ' '.$this->template->params->get('course_contact_agreement','I agree with the <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a> and I declare that I have read the information that is required in accordance with <a href="http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.L_.2016.119.01.0001.01.ENG&amp;toc=OJ:L:2016:119:TOC" target="_blank">Article 13 of GDPR.</a>'); ?></label>
+                            </div>
+                            <?php if ($this->template->params->get('course_contact_recaptcha',0)) : ?>
+                                <div class="uk-margin">
+                                    <?php
+                                    if ($this->template->params->get('course_contact_recaptcha_type','recaptcha')) {
+                                        PluginHelper::importPlugin('captcha', 'recaptcha');
+//                                        $dispatcher = Dispatcher::getInstance();
+//                                        $dispatcher->trigger('onInit', 'jollyany_course_contact_recaptcha');
+                                        $recaptcha = Factory::getApplication()->triggerEvent('onDisplay', array(null, 'jollyany_course_contact_recaptcha' , 'jollyany-course-contact-recaptcha'));
+                                        echo (isset($recaptcha[0])) ? $recaptcha[0] : '<p class="uk-alert-danger">' . JText::_('JOLLYANY_RECAPTCHA_NOT_INSTALLED') . '</p>';
+                                    } else {
+                                        PluginHelper::importPlugin('captcha', 'recaptcha_invisible');
+//                                        $dispatcher = Dispatcher::getInstance();
+//                                        $dispatcher->trigger('onInit', 'jollyany_course_contact_invisible_recaptcha');
+                                        $recaptcha = Factory::getApplication()->triggerEvent('onDisplay', array(null, 'jollyany_course_contact_invisible_recaptcha' , 'jollyany-course-contact-invisible-recaptcha'));
+                                        echo (isset($recaptcha[0])) ? $recaptcha[0] : '<p class="uk-alert-danger">' . JText::_('JOLLYANY_RECAPTCHA_NOT_INSTALLED') . '</p>';
+                                    }
+                                    ?>
+                                    <input type="hidden" name="captcha_type" value="<?php echo $this->template->params->get('course_contact_recaptcha_type','recaptcha'); ?>">
+                                </div>
+                            <?php endif; ?>
+                            <input type="hidden" class="token" name="<?php echo \JSession::getFormToken(); ?>" value="1">
+                            <div class="uk-margin">
+                                <button type="submit" class="uk-button uk-button-primary uk-border-rounded"><?php echo JText::_('JOLLYANY_COURSE_CONTACT_SENT_TEXT'); ?></button>
+                            </div>
+                            <div class="jollyany-ajax-contact-status uk-margin"></div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-        <?php echo $modal_content; ?>
+            <?php echo $modal_content; ?>
         <?php else: ?>
             <?php echo $this->article->text; ?>
         <?php endif;
@@ -281,7 +293,7 @@ class JollyanyFrameworkArticle extends AstroidFrameworkArticle {
     {
         $params = new JRegistry();
         if (!empty($this->article->catid)) {
-            $db = \JFactory::getDbo();
+            $db = JFactory::getDbo();
             $query = "SELECT `params` FROM `#__categories` WHERE `id`=" . $this->article->catid;
             $db->setQuery($query);
             $result = $db->loadObject();

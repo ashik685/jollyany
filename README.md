@@ -8,6 +8,10 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.7.3**
+
+    [fixbug] Fix error 500 with Course Data. Joomla 4 Compatible
+
 **Version 1.7.2**
 
     [fixbug] Move all assets to Media. Joomla 4 Compatible
