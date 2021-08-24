@@ -11,10 +11,6 @@ defined ('_JEXEC') or die ('restricted aceess');
 class SppagebuilderAddonSocial_follow extends SppagebuilderAddons {
 
 	public function render() {
-
-		$getUri 					= JFactory::getURI();
-		$doc 						= JFactory::getDocument();
-
 		// Options
 		$class 	 					= (isset($this->addon->settings->class) && $this->addon->settings->class) ? ' ' . $this->addon->settings->class : '';
 		$class 						.= (isset($this->addon->settings->social_style) && $this->addon->settings->social_style) ? ' sppb-social-share-style-' 	. str_replace('_', '-', $this->addon->settings->social_style) : '';
@@ -27,8 +23,6 @@ class SppagebuilderAddonSocial_follow extends SppagebuilderAddons {
 		$pinterest 	                = (isset($this->addon->settings->pinterest) && $this->addon->settings->pinterest) ? $this->addon->settings->pinterest : '';
 		$tumblr 	                = (isset($this->addon->settings->tumblr) && $this->addon->settings->tumblr) ? $this->addon->settings->tumblr : '';
 
-//		$doc = JFactory::getDocument();
-//		$doc->addStyleDeclaration($this->css());
 		$icons_col = 'sppb-col-sm-12';
 
 		$output  = '';
