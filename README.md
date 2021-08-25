@@ -8,6 +8,11 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.7.4**
+
+    [fixbug] Change JFile::read to file_get_contents. Joomla 4 Compatible
+    [fixbug] Fix issue getPackageContent with PHP8.
+
 **Version 1.7.3**
 
     [fixbug] Fix error 500 with Course Data. Joomla 4 Compatible

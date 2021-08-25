@@ -65,11 +65,6 @@ class JollyanyFrameworkDataImport {
                     'code'      =>  'tz_extensions',
                     'ext_code'  =>  'sp-page-builder',
                 ),
-                array(
-                    'name'      =>  'Acymailing',
-                    'type'      =>  'url',
-                    'url'       =>  'http://www.acyba.com/component/updateme/downloadxml/component-acymailing/level-starter/version-5/download.zip',
-                ),
             ),
         ),
         'tz_alita'      =>  array(
@@ -179,11 +174,6 @@ class JollyanyFrameworkDataImport {
                     'type'      =>  'url',
                     'url'       =>  'https://github.com/templaza/tz_portfolio_plus/archive/master.zip',
                 ),
-                array(
-                    'name'      =>  'Acymailing',
-                    'type'      =>  'url',
-                    'url'       =>  'http://www.acyba.com/component/updateme/downloadxml/component-acymailing/level-starter/version-5/download.zip',
-                ),
             ),
         ),
         'tz_pethub'      =>  array(
@@ -288,11 +278,6 @@ class JollyanyFrameworkDataImport {
                     'type'      =>  'url',
                     'url'       =>  'https://github.com/templaza/tz_portfolio_plus/archive/master.zip',
                 ),
-                array(
-                    'name'      =>  'Acymailing',
-                    'type'      =>  'url',
-                    'url'       =>  'http://www.acyba.com/component/updateme/downloadxml/component-acymailing/level-starter/version-5/download.zip',
-                ),
             ),
         ),
         'tz_profiler'      =>  array(
@@ -325,11 +310,6 @@ class JollyanyFrameworkDataImport {
                     'name'      =>  'TZ Portfolio',
                     'type'      =>  'url',
                     'url'       =>  'https://github.com/templaza/tz_portfolio_plus/archive/master.zip',
-                ),
-                array(
-                    'name'      =>  'Acymailing',
-                    'type'      =>  'url',
-                    'url'       =>  'http://www.acyba.com/component/updateme/downloadxml/component-acymailing/level-starter/version-5/download.zip',
                 ),
             ),
         ),
@@ -408,27 +388,6 @@ class JollyanyFrameworkDataImport {
 					'type'      =>  'url',
 					'url'       =>  'https://github.com/templaza/tz_portfolio_plus/archive/master.zip',
 				),
-				array(
-					'name'      =>  'Hikashop',
-					'type'      =>  'url',
-					'url'       =>  'https://www.hikashop.com/component/updateme/downloadxml/component-hikashop/level-starter/download.zip',
-				),
-				array(
-					'name'      =>  'Unite Slider',
-					'type'      =>  'included',
-					'code'      =>  'tz_extensions',
-					'ext_code'  =>  'unite-slider',
-				),
-				array(
-					'name'      =>  'Acymailing',
-					'type'      =>  'url',
-					'url'       =>  'http://www.acyba.com/component/updateme/downloadxml/component-acymailing/level-starter/version-5/download.zip',
-				),
-				array(
-					'name'      =>  'Kunena',
-					'type'      =>  'url',
-					'url'       =>  'https://update.kunena.org/updater/pkg_kunena_v5.1.15_2019-10-27.zip',
-				),
 			),
 		),
         'tz_everline_joomla'      =>  array(
@@ -472,11 +431,6 @@ class JollyanyFrameworkDataImport {
                     'type'      =>  'included',
                     'code'      =>  'tz_extensions',
                     'ext_code'  =>  'unite-slider',
-                ),
-                array(
-                    'name'      =>  'Acymailing',
-                    'type'      =>  'url',
-                    'url'       =>  'http://www.acyba.com/component/updateme/downloadxml/component-acymailing/level-starter/version-5/download.zip',
                 ),
             ),
         ),
@@ -687,11 +641,6 @@ class JollyanyFrameworkDataImport {
 					'ext_code'  =>  'unite-slider',
 				),
 				array(
-					'name'      =>  'Acymailing',
-					'type'      =>  'url',
-					'url'       =>  'http://www.acyba.com/component/updateme/downloadxml/component-acymailing/level-starter/version-5/download.zip',
-				),
-				array(
 					'name'      =>  'Kunena',
 					'type'      =>  'url',
 					'url'       =>  'https://update.kunena.org/updater/pkg_kunena_v5.1.15_2019-10-27.zip',
@@ -739,16 +688,6 @@ class JollyanyFrameworkDataImport {
 					'type'      =>  'included',
 					'code'      =>  'tz_extensions',
 					'ext_code'  =>  'unite-slider',
-				),
-				array(
-					'name'      =>  'Acymailing',
-					'type'      =>  'url',
-					'url'       =>  'http://www.acyba.com/component/updateme/downloadxml/component-acymailing/level-starter/version-5/download.zip',
-				),
-				array(
-					'name'      =>  'Kunena',
-					'type'      =>  'url',
-					'url'       =>  'https://update.kunena.org/updater/pkg_kunena_v5.1.15_2019-10-27.zip',
 				),
 			),
 		),

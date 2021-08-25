@@ -271,7 +271,7 @@ class JollyanyFrameworkHelper extends AstroidFrameworkHelper {
 		if (JFolder::exists(JPATH_ROOT.DIRECTORY_SEPARATOR.'media'.DIRECTORY_SEPARATOR.'jollyanykey')) {
 			$key    =   JFolder::files(JPATH_ROOT.DIRECTORY_SEPARATOR.'media'.DIRECTORY_SEPARATOR.'jollyanykey', '.txt', false, true);
 			if (count($key)) {
-				$lictext    =   JFile::read($key[0]);
+				$lictext    =   file_get_contents($key[0]);
 			}
 		}
 		if (!$lictext) {

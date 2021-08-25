@@ -257,7 +257,7 @@ class plgSystemJollyany extends JPlugin {
 							if ($package['extractdir']== null){
 								throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR_PACKAGE_NOT_FOUND'));
 							} else {
-								if (!$raw_data       = JFile::read(JPATH_ROOT.DIRECTORY_SEPARATOR.'installation'.DIRECTORY_SEPARATOR.'sql'.DIRECTORY_SEPARATOR.'databases.json')) {
+								if (!$raw_data       = file_get_contents(JPATH_ROOT.DIRECTORY_SEPARATOR.'installation'.DIRECTORY_SEPARATOR.'sql'.DIRECTORY_SEPARATOR.'databases.json')) {
 									throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR_QUICKSTART_CAN_NOT_FOUND'));
 								}
 								$packagedb          = json_decode($raw_data, true);
@@ -851,15 +851,19 @@ class plgSystemJollyany extends JPlugin {
 		$tmp_part   =   $config->get('tmp_path');
 		if($response -> code == 200) {
 			$header     = $response -> headers;
-			$filePartCount  = isset($header['Files-Part-Count'])?$header['Files-Part-Count']:0;
-			$f_name = isset($header['Content-Disposition']) && $header['Content-Disposition'] ?
-				rawurldecode(preg_replace(
-					'/(^[^=]+=)|(;$)/',
-					'',
-					$header['Content-Disposition']
-				)) : null;
+			$filePartCount  = isset($header['Files-Part-Count']) ? $header['Files-Part-Count'] : 0;
+			if (isset($header['Content-Disposition']) && $header['Content-Disposition']) {
+			    $f_name =   preg_replace('/(^[^=]+=)|(;$)/', '', $header['Content-Disposition']);
+			    if ( is_array($f_name) && isset($f_name[0]) ) {
+			        $f_name =   $f_name[0];
+                } elseif ( !is_string($f_name) ) {
+			        $f_name =   null;
+                }
+            } else {
+			    $f_name = null;
+            }
 			if (!$f_name) return false;
-
+			$filePartCount = is_array($filePartCount) && isset($filePartCount[0]) ? $filePartCount[0] : $filePartCount;
 			if($filePartCount && $step <= $filePartCount){
 				JFile::append($tmp_part.'/'.$f_name,$response -> body, true);
 				if ($step == $filePartCount) {
