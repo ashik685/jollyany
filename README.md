@@ -8,6 +8,10 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.7.5**
+
+    [improve] Update Joomla Compatible version for templates
+
 **Version 1.7.4**
 
     [fixbug] Change JFile::read to file_get_contents. Joomla 4 Compatible

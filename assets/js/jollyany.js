@@ -30,7 +30,7 @@
                 textStatus.html('<i class="far fa-compass fa-spin"></i> Downloading Package...');
             },
             success: function (response) {
-                if (response.status == 'success') {
+                if (response.status === 'success') {
                     progressbar.attr('aria-valuenow',(request['step']*100)/response.pathcount).css('width', (request['step']*100)/response.pathcount+'%');
                     if (response.pathcount <= request['step']) {
                         textStatus.text('Package download completed!');
@@ -59,7 +59,7 @@
                 textStatus.html('<i class="far fa-compass fa-spin"></i> Unzip Package...');
             },
             success: function (response) {
-                if (response.status == 'success') {
+                if (response.status === 'success') {
                     textStatus.text('Package unzip completed!');
                     request['package']      = response.package;
                     textStatus.html('<i class="far fa-compass fa-spin"></i> Redirect to install page...');
@@ -82,7 +82,7 @@
                 dialogPopup.find('.extensions-container').html('<i class="far fa-compass fa-spin"></i> Get package data...');
             },
             success: function (response) {
-                if (response.status == 'success') {
+                if (response.status === 'success') {
                     var $data       =   $.parseJSON(response.data),
                         $exts       =   dialogPopup.find('.extensions-container');
                     $exts.empty();
@@ -117,7 +117,7 @@
                 textStatus.html('<i class="far fa-compass fa-spin"></i> Get package data...');
             },
             success: function (response) {
-                if (response.status == 'success') {
+                if (response.status === 'success') {
                     request['jollyany']     =   'install_package';
                     actionInstallPackage(request, button, dialogPopup, 0, $.parseJSON(response.data));
                 } else {
@@ -140,7 +140,7 @@
                     textStatus.html('<i class="far fa-compass fa-spin"></i> Installing: '+extension.name+'...');
                 },
                 success: function (response) {
-                    if (response.status == 'success') {
+                    if (response.status === 'success') {
                         progressbar.attr('aria-valuenow',((index+1)*100)/data.length).css('width', ((index+1)*100)/data.length+'%');
                         textStatus.html('<i class="far fa-smile"></i> '+extension.name+' installed!');
                         actionInstallPackage(request, button, dialogPopup, index+1, data);
@@ -244,7 +244,7 @@
                     },
                     success: function (response) {
                         $this.find('i').removeClass('fa-spin');
-                        if (response.status == 'success') {
+                        if (response.status === 'success') {
                             window.location.reload();
                         } else {
                             $this.appendText(JSON.stringify(response));
@@ -341,7 +341,7 @@
             $('.intall-package').on('click', function (e) {
                 e.preventDefault();
                 var thisLink    =   $(this);
-                if (thisLink.data('status') == 0) {
+                if (thisLink.data('status') === 0) {
                     alert('Your license is invalid or expired! You need buy or renew your license to use this premium feature!');
                 } else {
                     dialogPopup.html(dialogTemplate.html());

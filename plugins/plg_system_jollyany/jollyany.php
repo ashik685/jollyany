@@ -174,6 +174,14 @@ class plgSystemJollyany extends JPlugin {
 							$step                  =   $this->app->input->post->get('step', 1);
 							$file_name             =   $this->app->input->post->get('file_name', '', 'RAW');
 
+                            $templates             =   JollyanyFrameworkDataImport::getData();
+                            if (is_array($templates) && isset($templates[$install_code])) {
+                                $template          =   $templates[$install_code];
+                                if (!$this->compareJoomlaVersion($template['joomla_version'])) {
+                                    throw new \Exception(\JText::_('JOLLYANY_AJAX_NOT_COMPATIBLE_JOOMLA_VERSION'));
+                                }
+                            }
+
 							if (!$demo_data_package) throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR_NO_FILE_INSTALL'));
 							$config         =   \JFactory::getConfig();
 							$tmp_part       =   $config->get('tmp_path') ;
@@ -197,15 +205,19 @@ class plgSystemJollyany extends JPlugin {
 							if($response -> code == 200) {
 								$header     = $response -> headers;
 								$filePartCount  = isset($header['Files-Part-Count'])?$header['Files-Part-Count']:0;
-								$f_name = isset($header['Content-Disposition']) && $header['Content-Disposition'] ?
-									rawurldecode(preg_replace(
-										'/(^[^=]+=)|(;$)/',
-										'',
-										$header['Content-Disposition']
-									)) : null;
+                                if (isset($header['Content-Disposition']) && $header['Content-Disposition']) {
+                                    $f_name =   preg_replace('/(^[^=]+=)|(;$)/', '', $header['Content-Disposition']);
+                                    if ( is_array($f_name) && isset($f_name[0]) ) {
+                                        $f_name =   $f_name[0];
+                                    } elseif ( !is_string($f_name) ) {
+                                        $f_name =   null;
+                                    }
+                                } else {
+                                    $f_name = null;
+                                }
 								if (!$f_name) throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR_CAN_NOT_DOWNLOAD_PACKAGE'));
 								$file_name  =   $file_name.'.'.JFile::getExt($f_name);
-
+                                $filePartCount = is_array($filePartCount) && isset($filePartCount[0]) ? $filePartCount[0] : $filePartCount;
 								if($filePartCount && $step <= $filePartCount){
 									JFile::append($tmp_part.'/'.$file_name,$response -> body, true);
 									$return["pathcount"]    =   $filePartCount;
@@ -343,7 +355,10 @@ class plgSystemJollyany extends JPlugin {
 								$template          =   $templates[$install_code];
 								$arr_extensions    =   array();
 								if ($template_package) {
-									$arr_extensions[]   =   $template['template'];
+                                    if (!$this->compareJoomlaVersion($template['joomla_version'])) {
+                                        throw new \Exception(\JText::_('JOLLYANY_AJAX_NOT_COMPATIBLE_JOOMLA_VERSION'));
+                                    }
+                                    $arr_extensions[]   =   $template['template'];
 								}
 								if (!empty($extension_package)) {
 									$extension  =   array();
@@ -1019,5 +1034,12 @@ class plgSystemJollyany extends JPlugin {
         }
 
         return false;
+    }
+
+    protected function compareJoomlaVersion($template_joomla_version) {
+        $joomla_current_version = new \JVersion;
+        $joomla_current_version = $joomla_current_version->getShortVersion();
+        $joomla_current_version = substr($joomla_current_version, 0, 1);
+        return in_array($joomla_current_version, $template_joomla_version);
     }
 }
