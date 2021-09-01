@@ -19,8 +19,8 @@ class SppagebuilderAddonVideo_Button extends SppagebuilderAddons {
 		$heading_selector = (isset($settings->heading_selector) && $settings->heading_selector) ? $settings->heading_selector : 'h3';
 		$addon_id = '#sppb-addon-' . $this->addon->id;
 		$doc = JFactory::getDocument();
-		$doc->addStyleSheet('libraries/jollyany/framework/assets/js/vendor/jquery.fancybox.min.css');
-		$doc->addScript('libraries/jollyany/framework/assets/js/vendor/jquery.fancybox.min.js');
+		$doc->addStyleSheet('media/jollyany/assets/js/vendor/jquery.fancybox.min.css');
+		$doc->addScript('media/jollyany/assets/js/vendor/jquery.fancybox.min.js');
 
 		$output  = '<div class="sppb-addon sppb-addon-video-button ' . $alignment . ' ' . $class . '">';
 

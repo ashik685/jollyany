@@ -48,8 +48,8 @@ class SppagebuilderAddonTinyslider extends SppagebuilderAddons {
                 $video = parse_url($value->btn_url);
                 if (isset($video['host']) && in_array($video['host'], ['youtu.be','www.youtube.com','youtube.com','vimeo.com','www.vimeo.com'])) {
                     $doc = JFactory::getDocument();
-                    $doc->addStyleSheet('libraries/jollyany/framework/assets/js/vendor/jquery.fancybox.min.css');
-                    $doc->addScript('libraries/jollyany/framework/assets/js/vendor/jquery.fancybox.min.js');
+                    $doc->addStyleSheet('media/jollyany/assets/js/vendor/jquery.fancybox.min.css');
+                    $doc->addScript('media/jollyany/assets/js/vendor/jquery.fancybox.min.js');
                     $attribs .= ' data-fancybox=""';
                 } else {
                     $attribs .= (isset($value->btn_target) && $value->btn_target) ? ' target="' . $value->btn_target . '"' : '';

@@ -8,6 +8,10 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.7.6**
+
+    [fixbug] Fix issue load js of Video Button and TinySlider Addon
+
 **Version 1.7.5**
 
     [improve] Update Joomla Compatible version for templates
