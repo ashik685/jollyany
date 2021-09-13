@@ -83,7 +83,7 @@ class JollyanyFrameworkDataImport {
             'demo_url'    => 'https://alita.jollyany.co/',
             'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/alita',
 
-            'joomla_version'     => array(3),
+            'joomla_version'     => array(3,4),
 
             'template'      => array(
                 'name'      =>  'Alita Template',
