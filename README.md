@@ -8,6 +8,10 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.7.7**
+
+    [improve] Alita Joomla Template compatible with Joomla 4
+
 **Version 1.7.6**
 
     [fixbug] Fix issue load js of Video Button and TinySlider Addon
