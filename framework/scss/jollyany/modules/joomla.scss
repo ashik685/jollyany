@@ -182,3 +182,12 @@ a.jollyany-login-icon {
 .lesson-index {
   font-size: 0.9em;
 }
+div.mod-languages ul li{
+  margin: 0;
+  &.lang-active {
+    background-color: transparent;
+    a {
+      font-weight: bold;
+    }
+  }
+}

@@ -53,7 +53,7 @@ class JollyanyFrameworkDataImport {
             'demo_url'    => 'https://krypton.jollyany.co/',
             'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/krypton',
 
-            'joomla_version'     => array(3),
+            'joomla_version'     => array(3,4),
 
             'template'      => array(
                 'name'      =>  'Krypton Template',
