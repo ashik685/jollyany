@@ -163,7 +163,7 @@ class JollyanyFrameworkDataImport {
             'demo_url'    => 'https://logistics.jollyany.co/',
             'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/logistics',
 
-            'joomla_version'     => array(3),
+            'joomla_version'     => array(3,4),
 
             'template'      => array(
                 'name'      =>  'Logistics Template',

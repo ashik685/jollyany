@@ -8,6 +8,11 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.7.8**
+
+    [improve] Krypton Joomla Template compatible with Joomla 4
+    [improve] Logistics Joomla Template compatible with Joomla 4
+
 **Version 1.7.7**
 
     [improve] Alita Joomla Template compatible with Joomla 4
