@@ -325,41 +325,44 @@ class JollyanyFrameworkArticle extends AstroidFrameworkArticle {
         return $content;
     }
 
-    public static function getCourseData($params, $row) {
+    public static function getEventData($params, $row) {
         if (!$params) return '';
         $content = '';
-        $content .= '<div class="ui-article-event uk-text-meta uk-margin">';
-        if ($params->get('jollyany_show_event_duration',0) && ($row->get('jollyany_event_start','') || $row->get('jollyany_event_end',''))) {
-            $content .= '<div class="uk-grid-small" uk-grid>';
-            $event_duration =   array();
-            if ($row->get('jollyany_event_start','')) {
-                $event_duration[]   =   date('F d, Y H:i', strtotime($row->get('jollyany_event_start','')));
+        if ($params->get('jollyany_show_event_duration',0) || $params->get('jollyany_show_event_location',0) || $params->get('jollyany_show_event_seats',0) || $params->get('jollyany_show_event_phone',0)) {
+            $content .= '<div class="ui-article-event uk-text-meta uk-margin">';
+            if ($params->get('jollyany_show_event_duration',0) && ($row->get('jollyany_event_start','') || $row->get('jollyany_event_end',''))) {
+                $content .= '<div class="uk-grid-small" uk-grid>';
+                $event_duration =   array();
+                if ($row->get('jollyany_event_start','')) {
+                    $event_duration[]   =   date('F d, Y H:i', strtotime($row->get('jollyany_event_start','')));
+                }
+                if ($row->get('jollyany_event_end','')) {
+                    $event_duration[]   =   date('F d, Y H:i', strtotime($row->get('jollyany_event_end','')));
+                }
+                $content .= '<div class="uk-width-auto"><span uk-icon="icon: clock; ratio: 0.8"></span></div><div class="uk-width-expand">'. implode('<span uk-icon="icon: arrow-right"></span>', $event_duration).'</div>';
+                $content .= '</div>';
             }
-            if ($row->get('jollyany_event_end','')) {
-                $event_duration[]   =   date('F d, Y H:i', strtotime($row->get('jollyany_event_end','')));
+
+            if ($params->get('jollyany_show_event_location',0) && $row->get('jollyany_event_location','')) {
+                $content .= '<div class="uk-grid-small" uk-grid>';
+                $content .= '<div class="uk-width-auto"><span uk-icon="icon: location; ratio: 0.8"></span></div><div class="uk-width-expand">'.$row->get('jollyany_event_location','').'</div>';
+                $content .= '</div>';
             }
-            $content .= '<div class="uk-width-auto"><span uk-icon="icon: clock; ratio: 0.8"></span></div><div class="uk-width-expand">'. implode('<span uk-icon="icon: arrow-right"></span>', $event_duration).'</div>';
+
+            if ($params->get('jollyany_show_event_seats',0) && $row->get('jollyany_event_spot','')) {
+                $content .= '<div class="uk-grid-small" uk-grid>';
+                $content .= '<div class="uk-width-auto"><span uk-icon="icon: users; ratio: 0.8"></span></div><div class="uk-width-expand">'.JText::sprintf('JOLLYANY_EVENT_SPOT_TEXT', $row->get('jollyany_event_spot','')).'</div>';
+                $content .= '</div>';
+            }
+
+            if ($params->get('jollyany_show_event_phone',0) && $row->get('jollyany_event_phone','')) {
+                $content .= '<div class="uk-grid-small" uk-grid>';
+                $content .= '<div class="uk-width-auto"><span uk-icon="icon: receiver; ratio: 0.8"></span></div><div class="uk-width-expand">'.$row->get('jollyany_event_phone','').'</div>';
+                $content .= '</div>';
+            }
             $content .= '</div>';
         }
 
-        if ($params->get('jollyany_show_event_location',0) && $row->get('jollyany_event_location','')) {
-            $content .= '<div class="uk-grid-small" uk-grid>';
-            $content .= '<div class="uk-width-auto"><span uk-icon="icon: location; ratio: 0.8"></span></div><div class="uk-width-expand">'.$row->get('jollyany_event_location','').'</div>';
-            $content .= '</div>';
-        }
-
-        if ($params->get('jollyany_show_event_seats',0) && $row->get('jollyany_event_spot','')) {
-            $content .= '<div class="uk-grid-small" uk-grid>';
-            $content .= '<div class="uk-width-auto"><span uk-icon="icon: users; ratio: 0.8"></span></div><div class="uk-width-expand">'.JText::sprintf('JOLLYANY_EVENT_SPOT_TEXT', $row->get('jollyany_event_spot','')).'</div>';
-            $content .= '</div>';
-        }
-
-        if ($params->get('jollyany_show_event_phone',0) && $row->get('jollyany_event_phone','')) {
-            $content .= '<div class="uk-grid-small" uk-grid>';
-            $content .= '<div class="uk-width-auto"><span uk-icon="icon: receiver; ratio: 0.8"></span></div><div class="uk-width-expand">'.$row->get('jollyany_event_phone','').'</div>';
-            $content .= '</div>';
-        }
-        $content .= '</div>';
         return $content;
     }
 }

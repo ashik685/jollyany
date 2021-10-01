@@ -55,6 +55,7 @@ if (!empty($sidebar_logo)) {
 // Color option
 $styles = [];
 $body_heading_color = $params->get('body_heading_color', '');
+$body_meta_color = $params->get('body_meta_color', '');
 $header_heading_color = $params->get('header_heading_color', '');
 $header_link_color = $params->get('header_link_color', '');
 $header_link_hover_color = $params->get('header_link_hover_color', '');
@@ -77,6 +78,9 @@ if (!empty($background_image)) {
 }
 if (!empty($body_heading_color)) {
     $styles[] = 'h1,h2,h3,h4,h5,h6{ color: ' . $body_heading_color . ';}';
+}
+if (!empty($body_meta_color)) {
+    $styles[] = '.uk-text-meta, .uk-article-meta { color: ' . $body_meta_color . ';}';
 }
 if (!empty($header_heading_color)) {
     $styles[] = 'header h1,header h2,header h3,header h4,header h5,header h6{ color: ' . $header_heading_color . ';}';

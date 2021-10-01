@@ -1029,7 +1029,7 @@ class plgSystemJollyany extends JPlugin {
             }
             // Convert parameter fields to objects.
             $row_params = new Registry($row->attribs);
-            $content .= JollyanyFrameworkArticle::getCourseData($params, $row_params);
+            $content .= JollyanyFrameworkArticle::getEventData($params, $row_params);
             return $content;
         }
 

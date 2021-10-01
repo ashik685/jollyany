@@ -5,6 +5,8 @@
 			<field type="astroidgroup" name="footer_group" title="TPL_JOLLYANY_FOOTER_LABEL" description="TPL_JOLLYANY_FOOTER_COLOR_DESC"/>
 			<field astroidgroup="body" name="body_heading_color" type="astroidcolor" large="true" label="TPL_ASTROID_HEADING_COLOR_LABEL" description="TPL_ASTROID_HEADING_COLOR_DESC">
 			</field>
+			<field astroidgroup="body" name="body_meta_color" type="astroidcolor" large="true" label="TPL_ASTROID_META_COLOR_LABEL" description="TPL_ASTROID_META_COLOR_DESC">
+			</field>
 			<field astroidgroup="body" description="TPL_JOLLYANY_BACKGROUND_IMAGE_DESC" name="body_background_image" type="astroidmedia" label="TPL_JOLLYANY_BACKGROUND_IMAGE_LABEL">
 			</field>
 			<field astroidgroup="header_colors" name="header_heading_color" type="astroidcolor" large="true" label="TPL_ASTROID_HEADING_COLOR_LABEL" description="TPL_ASTROID_HEADING_COLOR_DESC">
