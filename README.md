@@ -8,6 +8,14 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.7.9**
+
+    [improve] Martha Joomla Template compatible with Joomla 4
+    [improve] GoldenA Joomla Template compatible with Joomla 4
+    [improve] Educab Joomla Template compatible with Joomla 4
+    [improve] PetHub Joomla Template compatible with Joomla 4
+    [improve] Profiler Joomla Template compatible with Joomla 4
+
 **Version 1.7.8**
 
     [improve] Krypton Joomla Template compatible with Joomla 4
