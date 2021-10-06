@@ -8,6 +8,12 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.8.0**
+
+    [improve] Charity Joomla Template compatible with Joomla 4
+    [improve] Eventory Joomla Template compatible with Joomla 4
+    [improve] Justice Joomla Template compatible with Joomla 4
+
 **Version 1.7.9**
 
     [improve] Martha Joomla Template compatible with Joomla 4

@@ -470,7 +470,7 @@ class JollyanyFrameworkDataImport {
 			'demo_url'    => 'https://eventory.jollyany.co/',
 			'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/eventory',
 
-            'joomla_version'     => array(3),
+            'joomla_version'     => array(3,4),
 
 			'template'      => array(
 				'name'      =>  'Eventory Template',
@@ -495,12 +495,6 @@ class JollyanyFrameworkDataImport {
 					'name'      =>  'Hikashop',
 					'type'      =>  'url',
 					'url'       =>  'https://www.hikashop.com/component/updateme/downloadxml/component-hikashop/level-starter/download.zip',
-				),
-				array(
-					'name'      =>  'Unite Slider',
-					'type'      =>  'included',
-					'code'      =>  'tz_extensions',
-					'ext_code'  =>  'unite-slider',
 				),
 			),
 		),
@@ -693,7 +687,7 @@ class JollyanyFrameworkDataImport {
 			'demo_url'    => 'https://justice.jollyany.co/',
 			'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/lawyer-justice',
 
-            'joomla_version'     => array(3),
+            'joomla_version'     => array(3,4),
 
 			'template'    => array(
 				'name'      =>  'Lawyer Justice Template',
@@ -719,12 +713,6 @@ class JollyanyFrameworkDataImport {
 					'type'      =>  'url',
 					'url'       =>  'https://www.hikashop.com/component/updateme/downloadxml/component-hikashop/level-starter/download.zip',
 				),
-				array(
-					'name'      =>  'Unite Slider',
-					'type'      =>  'included',
-					'code'      =>  'tz_extensions',
-					'ext_code'  =>  'unite-slider',
-				),
 			),
 		),
 		'tz_charity_joomla'    =>  array(
@@ -739,7 +727,7 @@ class JollyanyFrameworkDataImport {
 			'demo_url'    => 'https://charity.jollyany.co/',
 			'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/charity',
 
-            'joomla_version'     => array(3),
+            'joomla_version'     => array(3,4),
 
 			'template'      => array(
 				'name'      =>  'Charity Template',
@@ -764,12 +752,6 @@ class JollyanyFrameworkDataImport {
 					'name'      =>  'Hikashop',
 					'type'      =>  'url',
 					'url'       =>  'https://www.hikashop.com/component/updateme/downloadxml/component-hikashop/level-starter/download.zip',
-				),
-				array(
-					'name'      =>  'Unite Slider',
-					'type'      =>  'included',
-					'code'      =>  'tz_extensions',
-					'ext_code'  =>  'unite-slider',
 				),
 				array(
 					'name'      =>  'Acymailing',
