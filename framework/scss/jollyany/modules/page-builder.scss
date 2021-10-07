@@ -678,3 +678,29 @@
     }
   }
 }
+.sppb-addon-tzevents-wrapper {
+  .event-title {
+    margin: 0;
+  }
+  .tzevents-movement {
+    border-top: 1px solid #cccccc;
+    padding: 2rem 0;
+  }
+  .event-header {
+    > .sppb-row {
+      align-items: center;
+      display: flex;
+    }
+  }
+  .sppb-countdown-timer {
+    margin-bottom: 4rem;
+  }
+  .event-description {
+    margin-top: 1rem;
+  }
+  .metainfo {
+    >span+span {
+      margin-left: 5px;
+    }
+  }
+}

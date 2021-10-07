@@ -343,7 +343,7 @@ class JollyanyFrameworkDataImport {
             'demo_url'    => 'https://musika.jollyany.co/',
             'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/musika',
 
-            'joomla_version'     => array(3),
+            'joomla_version'     => array(3,4),
 
             'template'      => array(
                 'name'      =>  'Musika Template',
@@ -424,7 +424,7 @@ class JollyanyFrameworkDataImport {
             'demo_url'    => 'https://everline.jollyany.co/',
             'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/everline',
 
-            'joomla_version'     => array(3),
+            'joomla_version'     => array(3,4),
 
             'template'      => array(
                 'name'      =>  'Everline Template',
