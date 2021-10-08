@@ -510,7 +510,7 @@ class JollyanyFrameworkDataImport {
 			'demo_url'    => 'https://meetup.jollyany.co/',
 			'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/meetup',
 
-            'joomla_version'     => array(3),
+            'joomla_version'     => array(3,4),
 
 			'template'      => array(
 				'name'      =>  'Meetup Template',
@@ -556,7 +556,7 @@ class JollyanyFrameworkDataImport {
 			'demo_url'    => 'https://newage.jollyany.co/',
 			'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/new-age',
 
-            'joomla_version'     => array(3),
+            'joomla_version'     => array(3,4),
 
 			'template'      => array(
 				'name'      =>  'New Age Template',
@@ -636,7 +636,7 @@ class JollyanyFrameworkDataImport {
 			'demo_url'    => 'https://fashion.jollyany.co/',
 			'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/fashion',
 
-            'joomla_version'     => array(3),
+            'joomla_version'     => array(3,4),
 
 			'template'      => array(
 				'name'      =>  'Fashion Template',
