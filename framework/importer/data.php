@@ -510,7 +510,7 @@ class JollyanyFrameworkDataImport {
 			'demo_url'    => 'https://meetup.jollyany.co/',
 			'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/meetup',
 
-            'joomla_version'     => array(3,4),
+            'joomla_version'     => array(3),
 
 			'template'      => array(
 				'name'      =>  'Meetup Template',

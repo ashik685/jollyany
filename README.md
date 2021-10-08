@@ -8,6 +8,13 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.8.1**
+
+    [improve] Fashion Joomla Template compatible with Joomla 4
+    [improve] New Age Joomla Template compatible with Joomla 4
+    [improve] Everline Joomla Template compatible with Joomla 4
+    [improve] Musika Joomla Template compatible with Joomla 4
+
 **Version 1.8.0**
 
     [improve] Charity Joomla Template compatible with Joomla 4
