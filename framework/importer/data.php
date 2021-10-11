@@ -821,6 +821,52 @@ class JollyanyFrameworkDataImport {
 				),
 			),
 		),
+        'tz_construction'      =>  array(
+            // Pack Info
+            'name'        => 'Construction',
+            'desc'        => 'Building, Construction & Architect',
+
+            // Pack Data
+            'thumb'       => '/media/tz_portfolio/article/cache/construction-building-architect-joomla-template-756_S.jpg',
+            'category'    => 'joomla',
+
+            'demo_url'    => 'https://construction.jollyany.co/',
+            'doc_url'     => 'https://www.templaza.com/docs/construction/',
+
+            'joomla_version'     => array(3,4),
+
+            'template'      => array(
+                'name'      =>  'Construction Template',
+                'type'      =>  'included',
+                'code'      =>  'tz_construction',
+                'ext_code'  =>  'tz-construction-api',
+            ),
+
+            'extensions'  => array(
+                array(
+                    'name'      =>  'SP Page Builder Pro',
+                    'type'      =>  'included',
+                    'code'      =>  'tz_extensions',
+                    'ext_code'  =>  'sp-page-builder',
+                ),
+                array(
+                    'name'      =>  'TZ Portfolio',
+                    'type'      =>  'url',
+                    'url'       =>  'https://github.com/templaza/tz_portfolio_plus/archive/master.zip',
+                ),
+                array(
+                    'name'      =>  'Hikashop',
+                    'type'      =>  'url',
+                    'url'       =>  'https://www.hikashop.com/component/updateme/downloadxml/component-hikashop/level-starter/download.zip',
+                ),
+                array(
+                    'name'      =>  'Unite Slider',
+                    'type'      =>  'included',
+                    'code'      =>  'tz_extensions',
+                    'ext_code'  =>  'unite-slider',
+                ),
+            ),
+        ),
 		'tz_oraz'      =>  array(
 			// Pack Info
 			'name'        => 'Oraz',
@@ -1010,52 +1056,6 @@ class JollyanyFrameworkDataImport {
 					'name'      =>  'Acymailing',
 					'type'      =>  'url',
 					'url'       =>  'http://www.acyba.com/component/updateme/downloadxml/component-acymailing/level-starter/version-5/download.zip',
-				),
-			),
-		),
-		'tz_construction'      =>  array(
-			// Pack Info
-			'name'        => 'Construction',
-			'desc'        => 'Building, Construction & Architect',
-
-			// Pack Data
-			'thumb'       => '/media/tz_portfolio/article/cache/construction-building-architect-joomla-template-756_S.jpg',
-			'category'    => 'joomla',
-
-			'demo_url'    => 'https://construction.jollyany.co/',
-			'doc_url'     => 'https://www.templaza.com/docs/construction/',
-
-            'joomla_version'     => array(3),
-
-			'template'      => array(
-				'name'      =>  'Construction Template',
-				'type'      =>  'included',
-				'code'      =>  'tz_construction',
-				'ext_code'  =>  'tz-construction-api',
-			),
-
-			'extensions'  => array(
-				array(
-					'name'      =>  'SP Page Builder Pro',
-					'type'      =>  'included',
-					'code'      =>  'tz_extensions',
-					'ext_code'  =>  'sp-page-builder',
-				),
-				array(
-					'name'      =>  'TZ Portfolio',
-					'type'      =>  'url',
-					'url'       =>  'https://github.com/templaza/tz_portfolio_plus/archive/master.zip',
-				),
-				array(
-					'name'      =>  'Hikashop',
-					'type'      =>  'url',
-					'url'       =>  'https://www.hikashop.com/component/updateme/downloadxml/component-hikashop/level-starter/download.zip',
-				),
-				array(
-					'name'      =>  'Unite Slider',
-					'type'      =>  'included',
-					'code'      =>  'tz_extensions',
-					'ext_code'  =>  'unite-slider',
 				),
 			),
 		),
