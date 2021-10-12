@@ -369,12 +369,6 @@ class JollyanyFrameworkDataImport {
                     'type'      =>  'url',
                     'url'       =>  'https://www.hikashop.com/component/updateme/downloadxml/component-hikashop/level-starter/download.zip',
                 ),
-                array(
-                    'name'      =>  'Unite Slider',
-                    'type'      =>  'included',
-                    'code'      =>  'tz_extensions',
-                    'ext_code'  =>  'unite-slider',
-                ),
             ),
         ),
 		'tz_jollyany'   =>  array(
@@ -449,12 +443,6 @@ class JollyanyFrameworkDataImport {
                     'name'      =>  'Hikashop',
                     'type'      =>  'url',
                     'url'       =>  'https://www.hikashop.com/component/updateme/downloadxml/component-hikashop/level-starter/download.zip',
-                ),
-                array(
-                    'name'      =>  'Unite Slider',
-                    'type'      =>  'included',
-                    'code'      =>  'tz_extensions',
-                    'ext_code'  =>  'unite-slider',
                 ),
             ),
         ),
@@ -536,12 +524,6 @@ class JollyanyFrameworkDataImport {
 					'type'      =>  'url',
 					'url'       =>  'https://www.hikashop.com/component/updateme/downloadxml/component-hikashop/level-starter/download.zip',
 				),
-				array(
-					'name'      =>  'Unite Slider',
-					'type'      =>  'included',
-					'code'      =>  'tz_extensions',
-					'ext_code'  =>  'unite-slider',
-				),
 			),
 		),
 		'tz_new_age'      =>  array(
@@ -581,12 +563,6 @@ class JollyanyFrameworkDataImport {
 					'name'      =>  'Hikashop',
 					'type'      =>  'url',
 					'url'       =>  'https://www.hikashop.com/component/updateme/downloadxml/component-hikashop/level-starter/download.zip',
-				),
-				array(
-					'name'      =>  'Unite Slider',
-					'type'      =>  'included',
-					'code'      =>  'tz_extensions',
-					'ext_code'  =>  'unite-slider',
 				),
 			),
 		),
@@ -661,12 +637,6 @@ class JollyanyFrameworkDataImport {
 					'name'      =>  'Hikashop',
 					'type'      =>  'url',
 					'url'       =>  'https://www.hikashop.com/component/updateme/downloadxml/component-hikashop/level-starter/download.zip',
-				),
-				array(
-					'name'      =>  'Unite Slider',
-					'type'      =>  'included',
-					'code'      =>  'tz_extensions',
-					'ext_code'  =>  'unite-slider',
 				),
 				array(
 					'name'      =>  'Kunena',
@@ -804,12 +774,6 @@ class JollyanyFrameworkDataImport {
 					'url'       =>  'https://www.hikashop.com/component/updateme/downloadxml/component-hikashop/level-starter/download.zip',
 				),
 				array(
-					'name'      =>  'Unite Slider',
-					'type'      =>  'included',
-					'code'      =>  'tz_extensions',
-					'ext_code'  =>  'unite-slider',
-				),
-				array(
 					'name'      =>  'Acymailing',
 					'type'      =>  'url',
 					'url'       =>  'http://www.acyba.com/component/updateme/downloadxml/component-acymailing/level-starter/version-5/download.zip',
@@ -859,12 +823,6 @@ class JollyanyFrameworkDataImport {
                     'type'      =>  'url',
                     'url'       =>  'https://www.hikashop.com/component/updateme/downloadxml/component-hikashop/level-starter/download.zip',
                 ),
-                array(
-                    'name'      =>  'Unite Slider',
-                    'type'      =>  'included',
-                    'code'      =>  'tz_extensions',
-                    'ext_code'  =>  'unite-slider',
-                ),
             ),
         ),
 		'tz_oraz'      =>  array(
@@ -904,12 +862,6 @@ class JollyanyFrameworkDataImport {
 					'name'      =>  'Hikashop',
 					'type'      =>  'url',
 					'url'       =>  'https://www.hikashop.com/component/updateme/downloadxml/component-hikashop/level-starter/download.zip',
-				),
-				array(
-					'name'      =>  'Unite Slider',
-					'type'      =>  'included',
-					'code'      =>  'tz_extensions',
-					'ext_code'  =>  'unite-slider',
 				),
 				array(
 					'name'      =>  'Acymailing',
@@ -955,12 +907,6 @@ class JollyanyFrameworkDataImport {
 					'name'      =>  'Hikashop',
 					'type'      =>  'url',
 					'url'       =>  'https://www.hikashop.com/component/updateme/downloadxml/component-hikashop/level-starter/download.zip',
-				),
-				array(
-					'name'      =>  'Unite Slider',
-					'type'      =>  'included',
-					'code'      =>  'tz_extensions',
-					'ext_code'  =>  'unite-slider',
 				),
 				array(
 					'name'      =>  'Acymailing',
@@ -1045,12 +991,6 @@ class JollyanyFrameworkDataImport {
 					'name'      =>  'Hikashop',
 					'type'      =>  'url',
 					'url'       =>  'https://www.hikashop.com/component/updateme/downloadxml/component-hikashop/level-starter/download.zip',
-				),
-				array(
-					'name'      =>  'Unite Slider',
-					'type'      =>  'included',
-					'code'      =>  'tz_extensions',
-					'ext_code'  =>  'unite-slider',
 				),
 				array(
 					'name'      =>  'Acymailing',
