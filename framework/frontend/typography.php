@@ -18,6 +18,22 @@ $template = Framework::getTemplate();
 $params = $template->getParams();
 $document = Framework::getDocument();
 
+// Logo Font Styles
+$bodyType = $params->get('logo_typography');
+if (trim($bodyType) == 'custom') {
+    $typography     = $params->get('logo_typography_options');
+    $selector       = '.astroid-logo-text > a.site-title';
+    Helper\Style::renderTypography($selector, $typography);
+}
+
+// Logo Tag Line Font Styles
+$bodyType = $params->get('logo_tag_line_typography');
+if (trim($bodyType) == 'custom') {
+    $typography     = $params->get('logo_tag_line_typography_options');
+    $selector       = '.astroid-logo-text > p.site-tagline';
+    Helper\Style::renderTypography($selector, $typography);
+}
+
 // Body Font Styles
 $bodyType = $params->get('body_typography');
 if (trim($bodyType) == 'custom') {

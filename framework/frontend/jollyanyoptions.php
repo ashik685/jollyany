@@ -110,10 +110,10 @@ if (!empty($body_link_hover_color)) {
     $styles[] = '.tpp-bootstrap a:hover, a.uk-link-heading:hover, .uk-link-heading a:hover, .uk-link-toggle:hover .uk-link-heading, .uk-link-toggle:focus .uk-link-heading{ color: ' . $body_link_hover_color . ';}';
 }
 if (!empty($social_icon_color) && $social_profiles_style == 1) {
-    $styles[] = '.astroid-social-icons > li a{ color: ' . $social_icon_color . ' !important;}';
+    $styles[] = '.astroid-social-icons a{ color: ' . $social_icon_color . ' !important;}';
 }
 if (!empty($social_icon_color_hover) && $social_profiles_style == 1) {
-    $styles[] = '.astroid-social-icons > li a:hover{ color: ' . $social_icon_color_hover . ' !important;}';
+    $styles[] = '.astroid-social-icons a:hover{ color: ' . $social_icon_color_hover . ' !important;}';
 }
 if (!empty($login_icon_color)) {
     $styles[] = '.jollyany-login-icon > i{ color: ' . $login_icon_color . ' !important;}';

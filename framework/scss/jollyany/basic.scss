@@ -25,7 +25,7 @@ $global-link-color: $colorMain !default;
   }
 }
 .visually-hidden {
-  display: none;
+  display: none !important;
 }
 .uk-button-rounded {
   border-radius: 5px;

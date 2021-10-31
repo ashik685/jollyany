@@ -1,20 +1,26 @@
 @import "header";
 @import "layouts";
-@media (min-width: 1430px){
-  .container, .sppb-row-container {
-    max-width: 1480px;
+.container, .sppb-row-container, .astroid-layout.astroid-layout-boxed .astroid-wrapper {
+  @media (min-width: 1300px){
+    max-width: 1280px;
   }
-  .astroid-layout.astroid-layout-boxed .astroid-wrapper {
+  @media (min-width: 1500px){
     max-width: 1480px;
   }
 }
+
 @media (min-width: 960px) {
   .container, .sppb-row-container {
     padding-left: 40px;
     padding-right: 40px;
   }
 }
-
+.astroid-logo-text > a {
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
+}
 #astroid-preloader {
   flex-direction: column;
   justify-content: center;

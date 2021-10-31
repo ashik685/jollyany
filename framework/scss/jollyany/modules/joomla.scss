@@ -191,3 +191,29 @@ div.mod-languages ul li{
     }
   }
 }
+body.com-finder>*+*, body.com-finder__results>*+* {
+  margin: 0;
+}
+.uk-modal-full {
+  .uk-search-input {
+    border: none;
+    box-shadow: none;
+    &:focus {
+      outline: none;
+      box-shadow: none;
+      border-bottom: 1px solid $border-color;
+    }
+  }
+}
+.result__item+.result__item {
+  border-color: $border-color;
+}
+.result__title-url, .result__taxonomy {
+  font-size: 0.875rem;
+}
+.result__title-link {
+  margin-bottom: 15px;
+}
+.result__description {
+  margin-bottom: 10px;
+}

@@ -195,6 +195,17 @@
       margin-right: 6px;
     }
   }
+  .uk-article-meta {
+    >span{
+      line-height: 1.7;
+      &+span {
+        &:before {
+          content: '-';
+          margin: 0 8px;
+        }
+      }
+    }
+  }
   h3 {
     font-size: 18px;
     line-height: 1.2;
@@ -319,7 +330,7 @@
         >a {
           &:before {
             content: 'View Demo';
-            background-color: fade_out($dark, 30%);
+            background-color: #555555;
           }
         }
       }
@@ -701,6 +712,27 @@
   .metainfo {
     >span+span {
       margin-left: 5px;
+    }
+  }
+}
+.ui-social {
+  &.magazine {
+    .ui-item > a {
+      display: block;
+      background-color: #f5f5f5;
+      text-decoration: none;
+      &:hover {
+        text-decoration: none;
+      }
+      span {
+        padding: 12px;
+      }
+      .uk-icon {
+        background-color: rgba(0,0,0,0.1);
+      }
+      .ui-social-title {
+        padding: 12px 18px;
+      }
     }
   }
 }
