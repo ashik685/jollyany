@@ -420,6 +420,16 @@ SpAddonsConfig::addonConfig(
 					),
 					'std' => '',
 				),
+                'thumbnail' => array(
+                    'type' => 'checkbox',
+                    'title' => JText::_('Thumbnail'),
+                    'desc' => JText::_('Display content in overlay background'),
+                    'values' => array(
+                        1 => JText::_('JYES'),
+                        0 => JText::_('JNO'),
+                    ),
+                    'std' => 0,
+                ),
 				'grid_divider' => array(
 					'type' => 'checkbox',
 					'title' => JText::_('Show dividers'),

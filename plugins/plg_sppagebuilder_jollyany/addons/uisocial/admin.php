@@ -155,6 +155,12 @@ SpAddonsConfig::addonConfig(
 							),
 							'std' => 'github',
 						),
+                        'title' => array(
+                            'type' => 'text',
+                            'title' => JText::_('COM_SPPAGEBUILDER_ADDON_TITLE'),
+                            'desc' => JText::_('COM_SPPAGEBUILDER_ADDON_TITLE_DESC'),
+                            'std' =>  '',
+                        ),
 						'link' => array(
 							'type' => 'media',
 							'format' => 'attachment',
@@ -163,12 +169,41 @@ SpAddonsConfig::addonConfig(
 							'placeholder' => 'http://',
 							'hide_preview' => true,
 						),
+                        'color' => array(
+                            'type' => 'color',
+                            'title' => JText::_('Color'),
+                            'std' => '#3d3d3d',
+                        ),
+                        'background' => array(
+                            'type' => 'color',
+                            'title' => JText::_('Background'),
+                            'std' => '#f5f5f5',
+                        ),
+                        'color_hover' => array(
+                            'type' => 'color',
+                            'title' => JText::_('Hover Color'),
+                            'std' => '#3d3d3d',
+                        ),
+                        'background_hover' => array(
+                            'type' => 'color',
+                            'title' => JText::_('Hover Background'),
+                            'std' => '#f5f5f5',
+                        ),
 					),
 				),
 				'separator_subnav_options' => array(
 					'type' => 'separator',
 					'title' => JText::_('Social Icons'),
 				),
+                'social_style' => array(
+                    'type' => 'select',
+                    'title' => JText::_('Social Style'),
+                    'values' => array(
+                        '' => JText::_('Default'),
+                        'magazine' => JText::_('Magazine'),
+                    ),
+                    'std' => '',
+                ),
 				'target' => array(
 					'type' => 'select',
 					'title' => JText::_('COM_SPPAGEBUILDER_GLOBAL_LINK_NEWTAB'),
@@ -180,7 +215,7 @@ SpAddonsConfig::addonConfig(
 				),
 				'link_style' => array(
 					'type' => 'select',
-					'title' => JText::_('Style'),
+					'title' => JText::_('Link Style'),
 					'values' => array(
 						'' => JText::_('Default'),
 						'link' => JText::_('Link'),
@@ -189,6 +224,9 @@ SpAddonsConfig::addonConfig(
 						'link-reset' => JText::_('Link Reset'),
 					),
 					'std' => '',
+                    'depends' => array(
+                        array('social_style', '!=', 'magazine')
+                    )
 				),
 				'icons_button' => array(
 					'type' => 'checkbox',
@@ -198,6 +236,9 @@ SpAddonsConfig::addonConfig(
 						0 => JText::_('JNO'),
 					),
 					'std' => 1,
+                    'depends' => array(
+                        array('social_style', '!=', 'magazine')
+                    )
 				),
 				'icon_size'=>array(
 					'type'=>'slider',
@@ -209,6 +250,81 @@ SpAddonsConfig::addonConfig(
 						array('icons_button', '=', 0)
 					)
 				),
+                'columns_large_desktop' => array(
+                    'type' => 'select',
+                    'title' => JText::_('Columns Large Desktop'),
+                    'desc' => JText::_('Set the grid gutter width.'),
+                    'values' => array(
+                        'auto' => JText::_('Auto'),
+                        '1-1' => JText::_('1 Column'),
+                        '1-2' => JText::_('2 Columns'),
+                        '1-3' => JText::_('3 Columns'),
+                        '1-4' => JText::_('4 Columns'),
+                        '1-5' => JText::_('5 Columns'),
+                        '1-6' => JText::_('6 Columns'),
+                    ),
+                    'std' => 'auto',
+                ),
+                'columns_desktop' => array(
+                    'type' => 'select',
+                    'title' => JText::_('Columns Desktop'),
+                    'desc' => JText::_('Set the grid gutter width.'),
+                    'values' => array(
+                        'auto' => JText::_('Auto'),
+                        '1-1' => JText::_('1 Column'),
+                        '1-2' => JText::_('2 Columns'),
+                        '1-3' => JText::_('3 Columns'),
+                        '1-4' => JText::_('4 Columns'),
+                        '1-5' => JText::_('5 Columns'),
+                        '1-6' => JText::_('6 Columns'),
+                    ),
+                    'std' => 'auto',
+                ),
+                'columns_laptop' => array(
+                    'type' => 'select',
+                    'title' => JText::_('Columns Laptop'),
+                    'desc' => JText::_('Set the grid gutter width.'),
+                    'values' => array(
+                        'auto' => JText::_('Auto'),
+                        '1-1' => JText::_('1 Column'),
+                        '1-2' => JText::_('2 Columns'),
+                        '1-3' => JText::_('3 Columns'),
+                        '1-4' => JText::_('4 Columns'),
+                        '1-5' => JText::_('5 Columns'),
+                        '1-6' => JText::_('6 Columns'),
+                    ),
+                    'std' => 'auto',
+                ),
+                'columns_tablet' => array(
+                    'type' => 'select',
+                    'title' => JText::_('Columns Tablet'),
+                    'desc' => JText::_('Set the grid gutter width.'),
+                    'values' => array(
+                        'auto' => JText::_('Auto'),
+                        '1-1' => JText::_('1 Column'),
+                        '1-2' => JText::_('2 Columns'),
+                        '1-3' => JText::_('3 Columns'),
+                        '1-4' => JText::_('4 Columns'),
+                        '1-5' => JText::_('5 Columns'),
+                        '1-6' => JText::_('6 Columns'),
+                    ),
+                    'std' => 'auto',
+                ),
+                'columns_mobile' => array(
+                    'type' => 'select',
+                    'title' => JText::_('Columns Mobile'),
+                    'desc' => JText::_('Set the grid gutter width.'),
+                    'values' => array(
+                        'auto' => JText::_('Auto'),
+                        '1-1' => JText::_('1 Column'),
+                        '1-2' => JText::_('2 Columns'),
+                        '1-3' => JText::_('3 Columns'),
+                        '1-4' => JText::_('4 Columns'),
+                        '1-5' => JText::_('5 Columns'),
+                        '1-6' => JText::_('6 Columns'),
+                    ),
+                    'std' => 'auto',
+                ),
 				'gutter' => array(
 					'type' => 'select',
 					'title' => JText::_('Gutter'),

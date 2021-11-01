@@ -354,21 +354,6 @@ array(
 				'std'=>'3'
 			),
 
-			'show_intro'=>array(
-				'type'=>'checkbox',
-				'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_ARTICLES_SHOW_INTRO'),
-				'desc'=>JText::_('COM_SPPAGEBUILDER_ADDON_ARTICLES_SHOW_INTRO_DESC'),
-				'std'=>1,
-			),
-
-			'intro_limit'=>array(
-				'type'=>'number',
-				'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_ARTICLES_INTRO_LIMIT'),
-				'desc'=>JText::_('COM_SPPAGEBUILDER_ADDON_ARTICLES_INTRO_LIMIT_DESC'),
-				'std'=>'200',
-				'depends'=>array('show_intro'=>'1')
-			),
-
 			'link_articles'=>array(
 				'type'=>'checkbox',
 				'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_ARTICLES_ALL_ARTICLES_BUTTON'),
@@ -603,7 +588,135 @@ array(
                 'depends'=>array('hide_thumbnail'=>'0')
             ),
 
-			'card_size'=>array(
+            'image_position'=>array(
+                'type'=>'select',
+                'title'=>JText::_('Image Position'),
+                'values'=>array(
+                    'top'=>JText::_('Top'),
+                    'left'=>JText::_('Left'),
+                    'right'=>JText::_('Right'),
+                    'bottom'=>JText::_('Bottom'),
+                ),
+                'std'=>'top'
+            ),
+
+            'image_width_xl' => array(
+                'title' => JText::_( 'Image Width Large Desktop' ),
+                'type' => 'select',
+                'values'       => array(
+                    '1-1'    => JText::_('1-1'),
+                    '1-2'    => JText::_('1-2'),
+                    '1-3'    => JText::_('1-3'),
+                    '2-3'    => JText::_('2-3'),
+                    '1-4'    => JText::_('1-4'),
+                    '3-4'    => JText::_('3-4'),
+                    '1-5'    => JText::_('1-5'),
+                    '2-5'    => JText::_('2-5'),
+                    '4-5'    => JText::_('4-5'),
+                    '1-6'    => JText::_('1-6'),
+                    '5-6'    => JText::_('5-6'),
+                ),
+                'std'   => '1-2',
+                'depends'=>array(
+                    array('image_position', '!=', 'top'),
+                    array('image_position', '!=', 'bottom'),
+                )
+            ),
+            'image_width_l' => array(
+                'title' => JText::_( 'Image Width Desktop' ),
+                'type' => 'select',
+                'values'       => array(
+                    '1-1'    => JText::_('1-1'),
+                    '1-2'    => JText::_('1-2'),
+                    '1-3'    => JText::_('1-3'),
+                    '2-3'    => JText::_('2-3'),
+                    '1-4'    => JText::_('1-4'),
+                    '3-4'    => JText::_('3-4'),
+                    '1-5'    => JText::_('1-5'),
+                    '2-5'    => JText::_('2-5'),
+                    '4-5'    => JText::_('4-5'),
+                    '1-6'    => JText::_('1-6'),
+                    '5-6'    => JText::_('5-6'),
+                ),
+                'std'   => '1-2',
+                'depends'=>array(
+                    array('image_position', '!=', 'top'),
+                    array('image_position', '!=', 'bottom'),
+                )
+            ),
+            'image_width_m' => array(
+                'title' => JText::_( 'Image Width Laptop' ),
+                'type' => 'select',
+                'values'       => array(
+                    '1-1'    => JText::_('1-1'),
+                    '1-2'    => JText::_('1-2'),
+                    '1-3'    => JText::_('1-3'),
+                    '2-3'    => JText::_('2-3'),
+                    '1-4'    => JText::_('1-4'),
+                    '3-4'    => JText::_('3-4'),
+                    '1-5'    => JText::_('1-5'),
+                    '2-5'    => JText::_('2-5'),
+                    '4-5'    => JText::_('4-5'),
+                    '1-6'    => JText::_('1-6'),
+                    '5-6'    => JText::_('5-6'),
+                ),
+                'std'   => '1-2',
+                'depends'=>array(
+                    array('image_position', '!=', 'top'),
+                    array('image_position', '!=', 'bottom'),
+                )
+            ),
+            'image_width_s' => array(
+                'title' => JText::_( 'Image Width Tablet' ),
+                'type' => 'select',
+                'values'       => array(
+                    '1-1'    => JText::_('1-1'),
+                    '1-2'    => JText::_('1-2'),
+                    '1-3'    => JText::_('1-3'),
+                    '2-3'    => JText::_('2-3'),
+                    '1-4'    => JText::_('1-4'),
+                    '3-4'    => JText::_('3-4'),
+                    '1-5'    => JText::_('1-5'),
+                    '2-5'    => JText::_('2-5'),
+                    '4-5'    => JText::_('4-5'),
+                    '1-6'    => JText::_('1-6'),
+                    '5-6'    => JText::_('5-6'),
+                ),
+                'std'   => '1-2',
+                'depends'=>array(
+                    array('image_position', '!=', 'top'),
+                    array('image_position', '!=', 'bottom'),
+                )
+            ),
+            'image_width' => array(
+                'title' => JText::_( 'Image Width Mobile' ),
+                'type' => 'select',
+                'values'       => array(
+                    '1-1'    => JText::_('1-1'),
+                    '1-2'    => JText::_('1-2'),
+                    '1-3'    => JText::_('1-3'),
+                    '2-3'    => JText::_('2-3'),
+                    '1-4'    => JText::_('1-4'),
+                    '3-4'    => JText::_('3-4'),
+                    '1-5'    => JText::_('1-5'),
+                    '2-5'    => JText::_('2-5'),
+                    '4-5'    => JText::_('4-5'),
+                    '1-6'    => JText::_('1-6'),
+                    '5-6'    => JText::_('5-6'),
+                ),
+                'std'   => '1-2',
+                'depends'=>array(
+                    array('image_position', '!=', 'top'),
+                    array('image_position', '!=', 'bottom'),
+                )
+            ),
+
+            'card_separator_options'=>array(
+                'type'=>'separator',
+                'title'=>JText::_('CARD OPTIONS')
+            ),
+
+            'card_size'=>array(
                 'type'=>'select',
                 'title'=>JText::_('Card Size'),
                 'values'=>array(
@@ -613,6 +726,39 @@ array(
                     'large'=>JText::_('Large'),
                 ),
                 'std'=>''
+            ),
+
+            'card_gutter'=>array(
+                'type'=>'select',
+                'title'=>JText::_('Card Gutter'),
+                'values'=>array(
+                    ''=>JText::_('Default'),
+                    'small'=>JText::_('Small'),
+                    'medium'=>JText::_('Medium'),
+                    'large'=>JText::_('Large'),
+                    'collapse'=>JText::_('Collapse'),
+                ),
+                'std'=>''
+            ),
+
+            'content_separator_options'=>array(
+                'type'=>'separator',
+                'title'=>JText::_('CONTENT OPTIONS')
+            ),
+
+            'show_intro'=>array(
+                'type'=>'checkbox',
+                'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_ARTICLES_SHOW_INTRO'),
+                'desc'=>JText::_('COM_SPPAGEBUILDER_ADDON_ARTICLES_SHOW_INTRO_DESC'),
+                'std'=>1,
+            ),
+
+            'intro_limit'=>array(
+                'type'=>'number',
+                'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_ARTICLES_INTRO_LIMIT'),
+                'desc'=>JText::_('COM_SPPAGEBUILDER_ADDON_ARTICLES_INTRO_LIMIT_DESC'),
+                'std'=>'200',
+                'depends'=>array('show_intro'=>'1')
             ),
 
 			'show_author'=>array(

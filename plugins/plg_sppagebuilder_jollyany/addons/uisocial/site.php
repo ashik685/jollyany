@@ -72,12 +72,6 @@ class SppagebuilderAddonUiSocial extends SppagebuilderAddons {
 		$flex_alignment_fallback   = ( $flex_alignment && $flex_alignment_breakpoint ) ? ( ( isset( $settings->alignment_fallback ) && $settings->alignment_fallback ) ? ' uk-flex-' . $settings->alignment_fallback : '' ) : '';
 		$flex_alignment           .= $flex_alignment_breakpoint . $flex_alignment_fallback;
 
-		$target = ( isset( $settings->target ) && $settings->target ) ? ' target="' . $settings->target . '"' : '';
-
-		$style = ( isset( $settings->link_style ) && $settings->link_style ) ? 'uk-' . $settings->link_style : 'uk-icon-link';
-
-		$gutter = ( isset( $settings->gutter ) && $settings->gutter ) ? ' uk-grid-column-' . $settings->gutter : '';
-
 		// Parallax Animation.
 		$horizontal_start = ( isset( $settings->horizontal_start ) && $settings->horizontal_start ) ? $settings->horizontal_start : '0';
 		$horizontal_end   = ( isset( $settings->horizontal_end ) && $settings->horizontal_end ) ? $settings->horizontal_end : '0';
@@ -118,8 +112,19 @@ class SppagebuilderAddonUiSocial extends SppagebuilderAddons {
 		$parallax_zindex = ( isset( $settings->parallax_zindex ) && $settings->parallax_zindex ) ? $settings->parallax_zindex : false;
 		$zindex_cls      = ( $parallax_zindex && $animation == 'parallax' ) ? ' uk-position-z-index uk-position-relative' : '';
 
-		$animation_repeat = ( $animation ) ? ( ( isset( $settings->animation_repeat ) && $settings->animation_repeat ) ? ' repeat: true;' : '' ) : '';
-		$icons_button     = ( isset( $settings->icons_button ) && $settings->icons_button ) ? 1 : 0;
+		$animation_repeat   = ( $animation ) ? ( ( isset( $settings->animation_repeat ) && $settings->animation_repeat ) ? ' repeat: true;' : '' ) : '';
+        $social_style       = ( isset( $settings->social_style ) && $settings->social_style ) ? $settings->social_style : '';
+        $columns_large_desktop              = ( isset( $settings->columns_large_desktop ) && $settings->columns_large_desktop ) ? $settings->columns_large_desktop.'@xl' : 'auto@xl';
+        $columns_desktop                    = ( isset( $settings->columns_desktop ) && $settings->columns_desktop ) ? $settings->columns_desktop.'@l' : 'auto@l';
+        $columns_laptop                     = ( isset( $settings->columns_laptop ) && $settings->columns_laptop ) ? $settings->columns_laptop.'@m' : 'auto@m';
+        $columns_tablet                     = ( isset( $settings->columns_tablet ) && $settings->columns_tablet ) ? $settings->columns_tablet.'@s' : 'auto@s';
+        $columns_mobile                     = ( isset( $settings->columns_mobile ) && $settings->columns_mobile ) ? $settings->columns_mobile : 'auto';
+		$icons_button       = ( isset( $settings->icons_button ) && $settings->icons_button && $social_style == '' ) ? 1 : 0;
+        $target = ( isset( $settings->target ) && $settings->target ) ? ' target="' . $settings->target . '"' : '';
+
+        $style = ( isset( $settings->link_style ) && $settings->link_style  && $social_style == '' ) ? 'uk-' . $settings->link_style : 'uk-icon-link';
+
+        $gutter = ( isset( $settings->gutter ) && $settings->gutter ) ? ' uk-grid-' . $settings->gutter : '';
 
 		$icons_button_cls = ( $icons_button ) ? ' uk-icon-button' : '';
 
@@ -132,7 +137,7 @@ class SppagebuilderAddonUiSocial extends SppagebuilderAddons {
 
 		$output = '';
 
-		$output .= '<div class="ui-social' . $zindex_cls . $general . $max_width_cfg . '"' . $animation . '>';
+		$output .= '<div class="ui-social' . ($social_style != '' ? ' '. $social_style : '') . $zindex_cls . $general . $max_width_cfg . '"' . $animation . '>';
 		if ( $title_addon ) {
 			$output .= '<' . $title_heading_selector . ' class="tz-title' . $title_style . $title_heading_decoration . '">';
 
@@ -145,15 +150,16 @@ class SppagebuilderAddonUiSocial extends SppagebuilderAddons {
 			$output .= '</' . $title_heading_selector . '>';
 		}
 
-		$output .= '<div class="uk-child-width-auto' . $gutter . $flex_alignment . '" uk-grid>';
+		$output .= '<div class="uk-child-width-'. $columns_large_desktop . ' uk-child-width-'. $columns_desktop . ' uk-child-width-'. $columns_laptop . ' uk-child-width-'. $columns_tablet . '  uk-child-width-'. $columns_mobile . $gutter . $flex_alignment . '" uk-grid>';
 
 		if ( isset( $settings->ui_subnav_items ) && count( (array) $settings->ui_subnav_items ) ) {
 			foreach ( $settings->ui_subnav_items as $key => $item ) {
 				$link    = isset( $item->link ) ? $item->link : '';
 				$brand   = isset( $item->brand_name ) ? $item->brand_name : '';
-				$output .= '<div class="ui-item">';
+				$output .= '<div class="ui-item ui-item-'.$key.'">';
 				$output .= ( $link ) ? '<a class="' . $style . $icons_button_cls . '" href="' . $link . '"' . $target . '>' : '';
-				$output .= '<span uk-icon="icon: ' . $brand . ( $icons_button ? '' : $icon_size ) . '"></span>';
+				$output .= '<span data-uk-icon="icon: ' . $brand . ( $icons_button ? '' : $icon_size ) . '"></span>';
+				$output .= $social_style == 'magazine' ? '<span class="ui-social-title">'.$item->title.'</span>' : '';
 				$output .= ( $link ) ? '</a>' : '';
 				$output .= '</div>';
 			}
@@ -165,4 +171,34 @@ class SppagebuilderAddonUiSocial extends SppagebuilderAddons {
 
 		return $output;
 	}
+
+    public function css() {
+        $settings  = $this->addon->settings;
+        $addon_id  = '#sppb-addon-' . $this->addon->id;
+
+        $css = '';
+        if ( isset( $settings->ui_subnav_items ) && count( (array) $settings->ui_subnav_items ) ) {
+            foreach ( $settings->ui_subnav_items as $key => $item ) {
+                $icon_color    = isset( $item->color ) && $item -> color ? $item->color : '';
+                $icon_background    = isset( $item->background ) && $item -> background ? $item->background : '';
+                if ( $icon_color ) {
+                    $css .= $addon_id . ' .ui-social .ui-item-'.$key.' > a {color:' . $icon_color . ';}';
+                }
+                if ( $icon_background ) {
+                    $css .= $addon_id . ' .ui-social .ui-item-'.$key.' > a {background-color:' . $icon_background . ';}';
+                }
+
+                $icon_color_hover         = isset( $item->color_hover ) && $item -> color_hover ? $item->color_hover : '';
+                $icon_background_hover    = isset( $item->background_hover ) && $item -> background_hover ? $item->background_hover : '';
+                if ( $icon_color_hover ) {
+                    $css .= $addon_id . ' .ui-social .ui-item-'.$key.' > a:hover {color:' . $icon_color_hover . ';}';
+                }
+                if ( $icon_background_hover ) {
+                    $css .= $addon_id . ' .ui-social .ui-item-'.$key.' > a:hover {background-color:' . $icon_background_hover . ';}';
+                }
+            }
+        }
+
+        return $css;
+    }
 }

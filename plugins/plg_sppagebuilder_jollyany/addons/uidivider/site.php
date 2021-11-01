@@ -114,9 +114,9 @@ class SppagebuilderAddonUiDivider extends SppagebuilderAddons {
 
 		$output = '';
 		if ( $html_selector == 'div' ) {
-			$output .= '<div class="' . $divider_type . $zindex_cls . $general . '"' . $animation . '></div>';
+			$output .= '<div class="uk-margin-remove-bottom ' . $divider_type . $zindex_cls . $general . '"' . $animation . '></div>';
 		} else {
-			$output .= '<hr class="' . $divider_type . $zindex_cls . $general . '"' . $animation . '>';
+			$output .= '<hr class="uk-margin-remove-bottom ' . $divider_type . $zindex_cls . $general . '"' . $animation . '>';
 		}
 
 		return $output;

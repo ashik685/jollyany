@@ -270,7 +270,7 @@ SpAddonsConfig::addonConfig(
 					'placeholder'=>20,
 					'std'=>'20',
 					'max'=> 400,
-				),			
+				),
 				'icon_color'=>array(
 					'type'=>'color',
 					'title'=>JText::_('Color'),

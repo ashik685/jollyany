@@ -91,14 +91,8 @@
         -o-transition: all .2s;
         transition: all .2s;
         &:hover {
-          margin-left: 15px;
-          margin-right: 15px;
-        }
-      }
-      &.nav-item-active {
-        a {
-          margin-left: 15px;
-          margin-right: 15px;
+          margin-left: 5px;
+          margin-right: 5px;
         }
       }
     }

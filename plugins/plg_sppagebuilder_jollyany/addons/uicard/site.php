@@ -145,6 +145,7 @@ class SppagebuilderAddonUiCard extends SppagebuilderAddons {
 
 		// Icon
         $icon_type = ( isset( $settings->icon_type ) && $settings->icon_type ) ? $settings->icon_type : 'fontawesome';
+        if (isset($settings->icon_size->md)) $settings->icon_size = $settings->icon_size->md;
         $icon_size = ( isset( $settings->icon_size ) && $settings->icon_size ) ? $settings->icon_size : '36';
         if ($icon_type == 'fontawesome') {
             $icon_class = (isset($settings->fontawesome_icon) && $settings->fontawesome_icon) ? $settings->fontawesome_icon : '';
@@ -613,6 +614,7 @@ class SppagebuilderAddonUiCard extends SppagebuilderAddons {
 		$button_background  = ( isset( $settings->button_background ) && $settings->button_background ) ? 'background-color: ' . $settings->button_background . ';' : '';
 		$button_color       = ( isset( $settings->button_color ) && $settings->button_color ) ? 'color: ' . $settings->button_color . ';' : '';
 		$icon_color         = ( isset( $settings->icon_color ) && $settings->icon_color ) ? 'color: ' . $settings->icon_color . ';' : '';
+        if (isset($settings->icon_size->md)) $settings->icon_size = $settings->icon_size->md;
         $icon_size          = ( isset( $settings->icon_size ) && $settings->icon_size ) ? $settings->icon_size : '36';
         $icon_size          = 'font-size: '.$icon_size.'px;';
 

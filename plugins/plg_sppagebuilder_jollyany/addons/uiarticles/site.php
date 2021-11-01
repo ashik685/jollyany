@@ -36,6 +36,17 @@ class SppagebuilderAddonUIArticles extends SppagebuilderAddons{
 		$show_intro 	= (isset($settings->show_intro)) ? $settings->show_intro : 1;
 		$intro_limit 	= (isset($settings->intro_limit) && $settings->intro_limit) ? $settings->intro_limit : 200;
 		$hide_thumbnail = (isset($settings->hide_thumbnail)) ? $settings->hide_thumbnail : 0;
+		$image_position = (isset($settings->image_position) && $settings->image_position) ? $settings->image_position : 'top';
+		$image_width    = (isset($settings->image_width) && $settings->image_width) ? ' uk-width-'.$settings->image_width : ' uk-width-1-2';
+		$image_width_xl = (isset($settings->image_width_xl) && $settings->image_width_xl) ? ' uk-width-'.$settings->image_width_xl.'@xl' : ' uk-width-1-2@xl';
+		$image_width_l  = (isset($settings->image_width_l) && $settings->image_width_l) ? ' uk-width-'.$settings->image_width_l.'@l' : ' uk-width-1-2@l';
+		$image_width_m  = (isset($settings->image_width_m) && $settings->image_width_m) ? ' uk-width-'.$settings->image_width_m.'@m' : ' uk-width-1-2@m';
+		$image_width_s  = (isset($settings->image_width_s) && $settings->image_width_s) ? ' uk-width-'.$settings->image_width_s.'@s' : ' uk-width-1-2@s';
+		$expand_width   = $image_width_xl == ' uk-width-1-1@xl' ? ' uk-width-1-1@xl' : ' uk-width-expand@xl';
+		$expand_width   .=$image_width_l == ' uk-width-1-1@l' ? ' uk-width-1-1@l' : ' uk-width-expand@l';
+		$expand_width   .=$image_width_m == ' uk-width-1-1@m' ? ' uk-width-1-1@m' : ' uk-width-expand@m';
+		$expand_width   .=$image_width_s == ' uk-width-1-1@s' ? ' uk-width-1-1@s' : ' uk-width-expand@s';
+		$expand_width   .=$image_width == ' uk-width-1-1' ? ' uk-width-1-1' : ' uk-width-expand';
 		$show_author 	= (isset($settings->show_author)) ? $settings->show_author : 1;
 		$show_category 	= (isset($settings->show_category)) ? $settings->show_category : 1;
 		$show_date 		= (isset($settings->show_date)) ? $settings->show_date : 1;
@@ -59,6 +70,7 @@ class SppagebuilderAddonUIArticles extends SppagebuilderAddons{
         $enable_dotnav  = (isset($settings->enable_dotnav)) ? $settings->enable_dotnav : 1;
         $center_slider 	= (isset($settings->center_slider)) ? $settings->center_slider : 0;
         $card_size 		= (isset($settings->card_size) && $settings->card_size) ? $settings->card_size : '';
+        $card_gutter 	= (isset($settings->card_gutter) && $settings->card_gutter) ? ' uk-grid-'. $settings->card_gutter : '';
         $card_size_cls  = $card_size ? ' uk-card-'.$card_size : '';
         $uk_card_body   = $card_size != 'none' ? ' uk-card-body' : '';
 
@@ -137,12 +149,12 @@ class SppagebuilderAddonUIArticles extends SppagebuilderAddons{
                 $output .= '<div class="uk-position-relative">';
                 $output .= '<div class="uk-slider-container">';
             }
-			$output	.= '<div class="uk-child-width-1-'.$responsive_width.'@l uk-child-width-1-'.$responsive_width_sm.'@m uk-child-width-1-'.$responsive_width_xs.'@s'.($use_slider ? ' uk-slider-items': '').'" uk-grid>';
+			$output	.= '<div class="uk-child-width-1-'.$responsive_width.'@l uk-child-width-1-'.$responsive_width_sm.'@m uk-child-width-1-'.$responsive_width_xs.'@s'.$card_gutter.($use_slider ? ' uk-slider-items': '').'" uk-grid>';
 
 			foreach ($items as $key => $item) {
 			    $params = json_decode($item->attribs, true);
 				$output .= '<div>';
-				$output .= '<div class="sppb-addon-article uk-article uk-card'.$card_size_cls.'">';
+				$output .= '<div class="sppb-addon-article uk-article uk-card'.$card_size_cls.(!$hide_thumbnail && ($image_position == 'left' || $image_position == 'right') ? ' uk-grid-collapse' : '').'"'.(!$hide_thumbnail && ($image_position == 'left' || $image_position == 'right') ? ' data-uk-grid' : '').'>';
 				if(!$hide_thumbnail) {
 					$image = '';
 					if ($resource == 'k2') {
@@ -237,15 +249,22 @@ class SppagebuilderAddonUIArticles extends SppagebuilderAddons{
 							} else {
 								$img_alt_text = $item->title;
 							}
-
-							$output .= '<a class="sppb-article-img-wrap uk-card-media-top" href="'. $item->link .'" itemprop="url"><img class="sppb-img-responsive'.($default_placeholder && $page_view_name != 'form' ? ' sppb-element-lazy' : '').'" src="' . ($default_placeholder && $page_view_name != 'form' ? $default_placeholder : $image) . '" alt="'. $img_alt_text .'" itemprop="thumbnailUrl" '.($default_placeholder && $page_view_name != 'form' ? 'data-large="'.$image.'"' : '').' loading="lazy"></a>';
+                            if ($image_position == 'left' || $image_position == 'right') {
+                                $output .=  '<div class="uk-card-media-'.$image_position.' uk-cover-container'.($image_position == 'right' ? ' uk-flex-last@l' : '').$image_width_xl.$image_width_l.$image_width_m.$image_width_s.$image_width.'">';
+                            }
+							$output .= '<a class="sppb-article-img-wrap uk-card-media-top" href="'. $item->link .'" itemprop="url"><img class="sppb-img-responsive'.($default_placeholder && $page_view_name != 'form' ? ' sppb-element-lazy' : '').'" src="' . ($default_placeholder && $page_view_name != 'form' ? $default_placeholder : $image) . '" alt="'. $img_alt_text .'" itemprop="thumbnailUrl" '.($default_placeholder && $page_view_name != 'form' ? 'data-large="'.$image.'"' : '').' loading="lazy"'.($image_position == 'left' || $image_position == 'right' ? 'data-uk-cover' : '').'></a>';
+                            if ($image_position == 'left' || $image_position == 'right') {
+                                $output .=  '<canvas width="600" height="400"></canvas>';
+                                $output .=  '</div>';
+                            }
 						}
 					}
 				}
                 if ($layout == 'thumbnail') {
                     $output .= '<div class="uk-position-cover uk-overlay uk-overlay-primary"></div>';
                 }
-				$output .= '<div class="sppb-article-info-wrap'.$uk_card_body.($layout == 'thumbnail' ? ' uk-position-bottom uk-light' : '').'">';
+				$output .= '<div class="sppb-article-info-wrap'.($layout == 'thumbnail' ? ' uk-position-bottom uk-light' : '').(!$hide_thumbnail && ($image_position == 'left' || $image_position == 'right') ? $expand_width : '').'">';
+                $output .= '<div class="'.$uk_card_body.'">';
                     if ($show_event && $show_event_date && isset($params['jollyany_event_start']) && $params['jollyany_event_start']) {
                         $output .= '<span class="uk-badge uk-margin">' . Jhtml::_('date', strtotime($params['jollyany_event_start']), 'DATE_FORMAT_LC1') . '</span>';
                     }
@@ -265,10 +284,10 @@ class SppagebuilderAddonUIArticles extends SppagebuilderAddons{
                             }
                         }
                     }
-					$output .= '<'.$heading_selector.' class="ui-title uk-article-title uk-margin-remove-top"><a href="'. $item->link .'" itemprop="url">' . $item->title . '</a></'.$heading_selector.'>';
+					$output .= '<'.$heading_selector.' class="ui-title uk-article-title"><a href="'. $item->link .'" itemprop="url">' . $item->title . '</a></'.$heading_selector.'>';
 
 					if($show_author || $show_category || $show_date) {
-						$output .= '<div class="uk-article-meta uk-grid-small uk-margin" uk-grid>';
+						$output .= '<div class="uk-article-meta">';
 
 						if($show_date) {
 							$output .= '<span class="sppb-meta-date" itemprop="datePublished">' . Jhtml::_('date', $item->publish_up, 'DATE_FORMAT_LC3') . '</span>';
@@ -285,14 +304,14 @@ class SppagebuilderAddonUIArticles extends SppagebuilderAddons{
 
 						if($show_author) {
 							$author = ( $item->created_by_alias ?  $item->created_by_alias :  $item->username);
-							$output .= '<span class="sppb-meta-author" itemprop="name">' . $author . '</span>';
+							$output .= '<span class="sppb-meta-author" itemprop="name">' . JText::sprintf('JOLLYANY_BY_AUTHOR', $author) . '</span>';
 						}
 
 						$output .= '</div>';
 					}
 
 					if($show_intro) {
-						$output .= '<div class="sppb-article-introtext">'. mb_substr(strip_tags($item->introtext), 0, $intro_limit, 'UTF-8') .'...</div>';
+						$output .= '<div class="sppb-article-introtext uk-margin">'. mb_substr(strip_tags($item->introtext), 0, $intro_limit, 'UTF-8') .'...</div>';
 					}
 
 					if ($show_event) {
@@ -337,6 +356,7 @@ class SppagebuilderAddonUIArticles extends SppagebuilderAddons{
                         }
 						$output .= '<a class="btn-readmore-'. $this->addon->id .' sppb-readmore ' . $button_class . '" href="'. $item->link .'" itemprop="url">'. $button_text .'</a>';
 					}
+				$output .= '</div>';
 				$output .= '</div>'; //.sppb-article-info-wrap
 
 				$output .= '</div>';

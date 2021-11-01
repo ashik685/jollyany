@@ -108,6 +108,7 @@ class SppagebuilderAddonUiInfoBox extends SppagebuilderAddons {
 		$grid_row_gap    = ( isset( $settings->grid_row_gap ) && $settings->grid_row_gap ) ? $settings->grid_row_gap : '';
 
 		$divider = ( $grid_column_gap != 'collapse' && $grid_row_gap != 'collapse' ) ? ( isset( $settings->grid_divider ) && $settings->grid_divider ) ? 1 : 0 : '';
+        $thumbnail        = ( isset( $settings->thumbnail ) && $settings->thumbnail ) ? 1 : 0 ;
 
 		$phone_portrait   = ( isset( $settings->phone_portrait ) && $settings->phone_portrait ) ? $settings->phone_portrait : '';
 		$phone_landscape  = ( isset( $settings->phone_landscape ) && $settings->phone_landscape ) ? $settings->phone_landscape : '';
@@ -525,7 +526,10 @@ class SppagebuilderAddonUiInfoBox extends SppagebuilderAddons {
 
 					$output .= ( $image_padding ) ? '<div class="uk-card-body uk-margin-remove-first-child">' : '';
 					$output .= ( $card_content_padding ) ? '<div class="' . $card_content_padding . 'uk-margin-remove-first-child">' : '';
-
+                    if ($thumbnail) {
+                        $output .= '<div class="uk-overlay-primary uk-position-cover"></div>';
+                        $output .= '<div class="uk-overlay uk-position-center uk-light">';
+                    }
 					$output .= ( $label_text ) ? '<div class="uk-card-badge uk-label ' . $label_styles . '">' . $label_text . '</div>' : '';
 
 					if ( $title_align == 'left' ) {
@@ -623,7 +627,9 @@ class SppagebuilderAddonUiInfoBox extends SppagebuilderAddons {
 						$output .= '</div>';
 						$output .= '</div>';
 					}
-
+                    if ($thumbnail) {
+                        $output .= '</div>';
+                    }
 					$output .= ( $image_padding ) ? '</div>' : '';
 					$output .= ( $card_content_padding ) ? '</div>' : '';
 
