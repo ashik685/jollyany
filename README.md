@@ -8,6 +8,18 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.8.3**
+
+    [new topic] Magazine - Blog, Newspaper Joomla 4 Template
+    [update] UI Article Addon
+    [update] UI Card Addon
+    [update] UI Divider Addon
+    [update] UI Infobox Addon
+    [update] UI Social Addon
+    [added] Image position of Blog page
+    [added] Typography for Text Logo
+    [improve] Improve default style
+
 **Version 1.8.2**
 
     [improve] Construction Joomla Template compatible with Joomla 4
