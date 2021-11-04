@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @package   Astroid Framework
- * @author    JoomDev https://www.joomdev.com
- * @copyright Copyright (C) 2009 - 2019 JoomDev.
+ * @package   Jollyany Framework
+ * @author    TemPlaza https://www.templaza.com
+ * @copyright Copyright (C) 2011 - 2021 TemPlaza.
  * @license https://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or Later
  * 	DO NOT MODIFY THIS FILE DIRECTLY AS IT WILL BE OVERWRITTEN IN THE NEXT UPDATE
  *  You can easily override all files under /frontend/ folder.
@@ -108,12 +108,6 @@ if (!empty($body_link_color)) {
 }
 if (!empty($body_link_hover_color)) {
     $styles[] = '.tpp-bootstrap a:hover, a.uk-link-heading:hover, .uk-link-heading a:hover, .uk-link-toggle:hover .uk-link-heading, .uk-link-toggle:focus .uk-link-heading{ color: ' . $body_link_hover_color . ';}';
-}
-if (!empty($social_icon_color) && $social_profiles_style == 1) {
-    $styles[] = '.astroid-social-icons a{ color: ' . $social_icon_color . ' !important;}';
-}
-if (!empty($social_icon_color_hover) && $social_profiles_style == 1) {
-    $styles[] = '.astroid-social-icons a:hover{ color: ' . $social_icon_color_hover . ' !important;}';
 }
 if (!empty($login_icon_color)) {
     $styles[] = '.jollyany-login-icon > i{ color: ' . $login_icon_color . ' !important;}';
