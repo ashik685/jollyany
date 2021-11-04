@@ -11,6 +11,7 @@ Astroid Framework: https://astroidframework.com/
 **Version 1.8.4**
 
     [update] Add notice update when detect Astroid version < 2.5.5
+    [improve] Move Social option to Astroid Framework.
 
 **Version 1.8.3**
 
