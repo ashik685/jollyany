@@ -8,6 +8,10 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.8.4**
+
+    [update] Add notice update when detect Astroid version < 2.5.5
+
 **Version 1.8.3**
 
     [new topic] Magazine - Blog, Newspaper Joomla 4 Template
