@@ -2,27 +2,11 @@
 <form>
    <fields name="params">
       <fieldset icon="fa fa-font" label="ASTROID_OPTIONS_TYPOGRAPHY" name="astroid_typography" addfieldpath="/libraries/astroid/framework/fields" order="5">
-         <field type="astroidgroup" name="logo_typography_group" title="TPL_ASTROID_TYPOGRAPHY_LOGO" description="TPL_ASTROID_TYPOGRAPHY_LOGO_DESC" />
          <field type="astroidgroup" name="header_typography_group" title="TPL_JOLLYANY_TYPOGRAPHY_HEADER" description="TPL_JOLLYANY_TYPOGRAPHY_HEADER_DESC" />
          <field type="astroidgroup" name="article_typography_group" title="TPL_JOLLYANY_TYPOGRAPHY_ARTICLE" description="TPL_JOLLYANY_TYPOGRAPHY_ARTICLE_DESC" />
          <field type="astroidgroup" name="top_bar_typography_group" title="TPL_ASTROID_TYPOGRAPHY_TOP_BAR" description="TPL_ASTROID_TYPOGRAPHY_TOP_BAR_DESC" />
          <field type="astroidgroup" name="footer_typography_group" title="TPL_JOLLYANY_TYPOGRAPHY_FOOTER" description="TPL_JOLLYANY_TYPOGRAPHY_FOOTER_DESC" />
          <field type="astroidgroup" name="button_typography_group" title="TPL_JOLLYANY_TYPOGRAPHY_BUTTON" description="TPL_JOLLYANY_TYPOGRAPHY_BUTTON_DESC" />
-
-         <!-- Logo Typography Options -->
-         <field astroidgroup="logo_typography_group" description="TPL_ASTROID_TYPOGRAPHY_OPTION_DESC" name="logo_typography" type="astroidradio" default="inherit" label="TPL_ASTROID_TYPOGRAPHY_LOGO">
-            <option value="inherit">JGLOBAL_INHERIT</option>
-            <option value="custom">TPL_ASTROID_OPTIONS_CUSTOM</option>
-         </field>
-
-         <field astroidgroup="logo_typography_group" ngShow="logo_typography=='custom'" name="logo_typography_options" type="astroidtypography" font-style-picker="false" font-face="Arial, Helvetica, sans-serif" alt-font-face="Arial, Helvetica, sans-serif" font-color="#000" font-size="3" font-unit="rem" letter-spacing="0" line-height="1" font-weight="700" text-transform="none" />
-
-         <field astroidgroup="logo_typography_group" description="TPL_ASTROID_TYPOGRAPHY_OPTION_DESC" name="logo_tag_line_typography" type="astroidradio" default="inherit" label="TPL_ASTROID_TYPOGRAPHY_LOGO_TAG_LINE">
-            <option value="inherit">JGLOBAL_INHERIT</option>
-            <option value="custom">TPL_ASTROID_OPTIONS_CUSTOM</option>
-         </field>
-
-         <field astroidgroup="logo_typography_group" ngShow="logo_tag_line_typography=='custom'" name="logo_tag_line_typography_options" type="astroidtypography" font-style-picker="false" font-face="Arial, Helvetica, sans-serif" alt-font-face="Arial, Helvetica, sans-serif" font-color="#000" font-size="1" font-unit="rem" letter-spacing="0" line-height="1" font-weight="400" text-transform="none" />
 
          <!-- Article Typography Options -->
          <field astroidgroup="article_typography_group" description="TPL_ASTROID_TYPOGRAPHY_OPTION_DESC" name="article_typography" type="astroidradio" default="inherit" label="TPL_ASTROID_TYPOGRAPHY_OPTIONS_LABEL">
