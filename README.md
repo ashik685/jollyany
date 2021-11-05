@@ -8,6 +8,11 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.8.5**
+
+    [improve] Move Logo Text typography from Jollyany to Astroid
+    [improve] Improve style for Login Menu form
+
 **Version 1.8.4**
 
     [update] Add notice update when detect Astroid version < 2.5.5
