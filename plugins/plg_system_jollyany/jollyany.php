@@ -948,16 +948,10 @@ class plgSystemJollyany extends JPlugin {
         }
 	}
 
-	// Astroid Admin Events
-	public function onBeforeAstroidFormLoad(&$template, &$form) {
-		$form_dir = JPATH_LIBRARIES . '/' . 'jollyany' . '/' . 'framework' . '/' . 'options';
-		$forms = array_filter(glob($form_dir . '/' . '*.xml'), 'is_file');
-		JForm::addFormPath($form_dir);
-		foreach ($forms as $fname) {
-			$fname = pathinfo($fname)['filename'];
-			$form->loadFile($fname, false);
-		}
-	}
+    // Astroid Admin Events
+    public function onBeforeAstroidTemplateFormLoad(&$template, &$form) {
+        $form->loadOptions(JPATH_LIBRARIES . '/jollyany/framework/options');
+    }
 
     public function onContentPrepareForm($form, $data) {
         $pluginParams = Helper::getPluginParams();
