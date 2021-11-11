@@ -4,10 +4,10 @@
    <libraryname>jollyany</libraryname>
    <author>TemPlaza</author>
    <creationDate>November 2021</creationDate>
-   <version>1.8.5</version>
+   <version>1.8.6</version>
    <url>https://www.templaza.com</url>
    <copyright>Copyright (C) 2021 TemPlaza, Jsc. All rights reserved.</copyright>
-   <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+   <license>GNU General Public License version 3 or later; see LICENSE.txt</license>
    <authorEmail>info@templaza.com</authorEmail>
    <authorUrl>https://www.templaza.com</authorUrl>
    <description>Jollyany Template Framework by TemPlaza</description>

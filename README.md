@@ -8,6 +8,11 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.8.6**
+
+    [improve] Improve Megamenu style
+    [update] Update import file
+
 **Version 1.8.5**
 
     [improve] Move Logo Text typography from Jollyany to Astroid
