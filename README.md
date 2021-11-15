@@ -8,6 +8,11 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.8.7**
+
+    [fixbug] Fix error "BLOB, TEXT, GEOMETRY or JSON column 'data' can't have a default value"
+    [update] Language updated
+
 **Version 1.8.6**
 
     [improve] Improve Megamenu style

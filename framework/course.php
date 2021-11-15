@@ -2,7 +2,7 @@
 /**
  * @package   Jollyany Framework
  * @author    TemPlaza https://www.templaza.com
- * @copyright Copyright (C) 2009 - 2021 TemPlaza.
+ * @copyright Copyright (C) 2011 - 2021 TemPlaza.
  * @license https://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or Later
  */
 defined('_JEXEC') or die;
@@ -19,15 +19,25 @@ abstract class JollyanyFrameworkCourse {
 
     public static function save($table) {
         if (self::checkCourseDB()) {
-            $db     =   \JFactory::getDbo();
-            $data   =   json_encode($table->jollyany_course_data);
-            $db->setQuery('SELECT * FROM #__jollyany_course_data WHERE cid='.$table->id);
-            if ($db->loadResult()) {
-                $db->setQuery('UPDATE #__jollyany_course_data SET `data`='.$db->quote($data).' WHERE cid='.$table->id);
-            } else {
-                $db->setQuery('INSERT INTO #__jollyany_course_data(`cid`,`data`) VALUES ('.$table->id.','.$db->quote($data).')');
+            try {
+                $db     =   \JFactory::getDbo();
+                $data   =   json_encode($table->jollyany_course_data);
+                $db->setQuery('SELECT * FROM #__jollyany_course_data WHERE cid='.$table->id);
+                if ($db->loadResult()) {
+                    $db->setQuery('UPDATE #__jollyany_course_data SET `data`='.$db->quote($data).' WHERE cid='.$table->id);
+                } else {
+                    $db->setQuery('INSERT INTO #__jollyany_course_data(`cid`,`data`) VALUES ('.$table->id.','.$db->quote($data).')');
+                }
+                $db->execute();
+            } catch (\InvalidArgumentException $e) {
+                // $e->getMessage(); // Exception message already set in the method we try to use...
+                // do some code using the $e->getMessage(), but do not return it...
+                \JFactory::getApplication()->enqueueMessage($e->getMessage(), 'error'); // for example
+                // or log it: Log::add($e->getMessage(), Log::WARNING, 'jerror');
+                // or you can ignore the Exception
+                return false;
             }
-            if ($db->execute()) return true;
+            return true;
         }
         return false;
     }
@@ -44,13 +54,24 @@ abstract class JollyanyFrameworkCourse {
     }
 
     public static function createCourseDB () {
-        $db     =   \JFactory::getDbo();
-        $db->setQuery('CREATE TABLE IF NOT EXISTS `#__jollyany_course_data` (
+        try {
+            $db     =   \JFactory::getDbo();
+            $db->setQuery('CREATE TABLE IF NOT EXISTS `#__jollyany_course_data` (
                                       `id` int(11) NOT NULL AUTO_INCREMENT,
                                       `cid` int(11) NOT NULL,
-                                      `data` longtext NOT NULL DEFAULT \'\',
+                                      `data` longtext NOT NULL,
                                       PRIMARY KEY (`id`)
                                     ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;');
-        return $db->execute();
+            $db->execute();
+        }
+        catch (\InvalidArgumentException $e) {
+            // $e->getMessage(); // Exception message already set in the method we try to use...
+            // do some code using the $e->getMessage(), but do not return it...
+            \JFactory::getApplication()->enqueueMessage($e->getMessage(), 'error'); // for example
+            // or log it: Log::add($e->getMessage(), Log::WARNING, 'jerror');
+            // or you can ignore the Exception
+            return false;
+        }
+        return true;
     }
 }
