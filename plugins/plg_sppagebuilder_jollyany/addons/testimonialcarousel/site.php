@@ -282,6 +282,7 @@ class SppagebuilderAddonTestimonialcarousel extends SppagebuilderAddons {
         }
 
         //Height of Slider
+        if (isset($settings->height->md)) $settings->height = $settings->height->md;
         $height = (isset($settings->height)) ? $settings->height : '530';
         $css .= $addon_id . ' .sppb-carousel-list {height:'.$height.'px;}';
 
