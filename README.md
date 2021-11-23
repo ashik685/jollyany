@@ -8,6 +8,12 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.8.8**
+
+    [fixbug] Fix error in Testimonial Carousel Addon on Front-end Editing
+    [fixbug] Fix issue wrong compare Astroid version
+    [update] Update UI article style
+
 **Version 1.8.7**
 
     [fixbug] Fix error "BLOB, TEXT, GEOMETRY or JSON column 'data' can't have a default value"
