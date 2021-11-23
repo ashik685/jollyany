@@ -41,7 +41,7 @@ class plgSystemJollyany extends JPlugin {
         $astroid    = $this->app->input->get('astroid', '');
 		if(!Framework::isAdmin() && $jollyany!='activation' && $jollyany!='course_contact_form'  && $jollyany!='course_get_data') return false;
 
-        if (Helper\Constants::$astroid_version < '2.5.5') {
+        if (version_compare(Helper\Constants::$astroid_version, "2.5.5")<1) {
             JFactory::getApplication()->enqueueMessage( 'Your Astroid version is '.Helper\Constants::$astroid_version.'. Jollyany required Astroid v2.5.5+. Please download and update <a target="_blank" href="https://github.com/templaza/astroid-framework/releases/latest">latest Astroid version</a>' );
         }
 		if ($option == 'com_ajax') {
