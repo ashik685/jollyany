@@ -182,7 +182,7 @@ class SppagebuilderAddonUiHeading extends SppagebuilderAddons {
 		}
 
 		if ( $title ) {
-			$output .= '<' . $heading_selector . ' class="tz-title ui-heading' . $heading_style . $zindex_cls . $font_weight . $heading_decoration . '"' . $animation . '>';
+			$output .= '<' . $heading_selector . ' class="tz-title ui-heading uk-margin-remove' . $heading_style . $zindex_cls . $font_weight . $heading_decoration . '"' . $animation . '>';
 			$output .= ( $title_link ) ? '<a class="uk-link-heading" href="' . $title_link . '" ' . $link_target . '>' : '';
 			if ( $heading_decoration == ' uk-heading-line' ) {
 				$output .= '<span>';

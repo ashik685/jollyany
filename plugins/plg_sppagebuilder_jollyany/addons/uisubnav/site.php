@@ -159,4 +159,39 @@ class SppagebuilderAddonUiSubnav extends SppagebuilderAddons {
 
 		return $output;
 	}
+
+    public function css() {
+        $addon_id = '#sppb-addon-' .$this->addon->id;
+        $settings = $this->addon->settings;
+        $css        =   '';
+
+        //Title style
+        $menu_style = '';
+        $menu_style .= (isset($settings->menu_text_color) && $settings->menu_text_color) ? 'color:'.$settings->menu_text_color . ';' : '';
+        if (isset($settings->menu_fontsize->md)) $settings->menu_fontsize = $settings->menu_fontsize->md;
+        $menu_style .= (isset($settings->menu_fontsize) && $settings->menu_fontsize) ? 'font-size:'.$settings->menu_fontsize . 'px;' : '';
+        if (isset($settings->menu_lineheight->md)) $settings->menu_lineheight = $settings->menu_lineheight->md;
+        $menu_style .= (isset($settings->menu_lineheight) && $settings->menu_lineheight) ? 'line-height:'.$settings->menu_lineheight . 'px;' : '';
+        $menu_style .= (isset($settings->menu_letterspace) && $settings->menu_letterspace) ? 'letter-spacing:'.$settings->menu_letterspace . ';' : '';
+        $menu_font_style = (isset($settings->menu_font_style) && $settings->menu_font_style) ? $settings->menu_font_style : '';
+        if(isset($menu_font_style->underline) && $menu_font_style->underline){
+            $menu_style .= 'text-decoration:underline;';
+        }
+        if(isset($menu_font_style->italic) && $menu_font_style->italic){
+            $menu_style .= 'font-style:italic;';
+        }
+        if(isset($menu_font_style->uppercase) && $menu_font_style->uppercase){
+            $menu_style .= 'text-transform:uppercase;';
+        }
+        if(isset($menu_font_style->weight) && $menu_font_style->weight){
+            $menu_style .= 'font-weight:'.$menu_font_style->weight.';';
+        }
+        if($menu_style){
+            $css .= '#sppb-addon-' . $this->addon->id . ' .ui-item > a{';
+            $css .= $menu_style;
+            $css .= '}';
+        }
+
+        return $css;
+    }
 }
