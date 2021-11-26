@@ -33,6 +33,10 @@ class plgSystemJollyany extends JPlugin {
         $document->addScript('media/jollyany/assets/js/frontend.min.js', 'body');
     }
 	public function onAfterInitialise() {
+        define('JOLLYANY_PACKAGE', 'https://www.templaza.com/joomla-templates.html');
+        define('JOLLYANY_SUPPORT', 'https://www.templaza.com/forums.html');
+        define('JOLLYANY_DOCUMENT', 'https://jollyany.co/support/documentation');
+        define('JOLLYANY_PURCHASE', 'https://1.envato.market/jollyany-joomla-package');
 		// load jollyany language
 		$lang = JFactory::getLanguage();
 		$lang->load("jollyany", JPATH_SITE);
@@ -40,7 +44,6 @@ class plgSystemJollyany extends JPlugin {
         $jollyany   = $this->app->input->get('jollyany', '');
         $astroid    = $this->app->input->get('astroid', '');
 		if(!Framework::isAdmin() && $jollyany!='activation' && $jollyany!='course_contact_form'  && $jollyany!='course_get_data') return false;
-
         if (version_compare(Helper\Constants::$astroid_version, "2.5.5")<1) {
             JFactory::getApplication()->enqueueMessage( 'Your Astroid version is '.Helper\Constants::$astroid_version.'. Jollyany required Astroid v2.5.5+. Please download and update <a target="_blank" href="https://github.com/templaza/astroid-framework/releases/latest">latest Astroid version</a>' );
         }
