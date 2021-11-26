@@ -11,6 +11,36 @@ class JollyanyFrameworkDataImport {
 	protected static $api  =   'https://www.templaza.com';
 	public static $cache   =    array('thumb' => array());
 	protected static $data = array(
+        'tz_newspaper'      =>  array(
+            // Pack Info
+            'name'        => 'Newspaper',
+            'desc'        => 'Magazine, Blog Joomla Template',
+
+            // Pack Data
+            'thumb'       => '/images/stories/newspaper/thumbnail.jpg',
+            'category'    => 'joomla',
+
+            'demo_url'    => 'https://newspaper.jollyany.co/',
+            'doc_url'     => 'https://jollyany.co/support/documentation/extra-templates/newspaper',
+
+            'joomla_version'     => array(3,4),
+
+            'template'      => array(
+                'name'      =>  'Newspaper Template',
+                'type'      =>  'included',
+                'code'      =>  'tz_newspaper',
+                'ext_code'  =>  'tz-newspaper-api',
+            ),
+
+            'extensions'  => array(
+                array(
+                    'name'      =>  'SP Page Builder Pro',
+                    'type'      =>  'included',
+                    'code'      =>  'tz_extensions',
+                    'ext_code'  =>  'sp-page-builder',
+                ),
+            ),
+        ),
         'tz_magazine'      =>  array(
             // Pack Info
             'name'        => 'Magazine',

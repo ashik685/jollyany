@@ -166,6 +166,75 @@ SpAddonsConfig::addonConfig(
 					'std' => '',
 				),
 
+                'menu_font_family'=>array(
+                    'type'=>'fonts',
+                    'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_TITLE_FONT_FAMILY'),
+                    'desc'=>JText::_('COM_SPPAGEBUILDER_ADDON_TITLE_FONT_FAMILY_DESC'),
+
+                    'selector'=> array(
+                        'type'=>'font',
+                        'font'=>'{{ VALUE }}',
+                        'css'=>'.ui-item { font-family: "{{ VALUE }}"; }'
+                    )
+                ),
+
+                'menu_fontsize'=>array(
+                    'type'=>'slider',
+                    'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_TITLE_FONT_SIZE'),
+                    'desc'=>JText::_('COM_SPPAGEBUILDER_ADDON_TITLE_FONT_SIZE_DESC'),
+                    'std'=>'',
+                    'max'=> 400,
+                ),
+
+                'menu_lineheight'=>array(
+                    'type'=>'slider',
+                    'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_TITLE_LINE_HEIGHT'),
+                    'std'=>'',
+                    'max'=> 400,
+                ),
+
+                'menu_font_style'=>array(
+                    'type'=>'fontstyle',
+                    'title'=> JText::_('COM_SPPAGEBUILDER_ADDON_TITLE_FONT_STYLE'),
+
+                ),
+
+                'menu_letterspace'=>array(
+                    'type'=>'select',
+                    'title'=>JText::_('COM_SPPAGEBUILDER_GLOBAL_LETTER_SPACING'),
+                    'values'=>array(
+                        '-10px'=> '-10px',
+                        '-9px'=> '-9px',
+                        '-8px'=> '-8px',
+                        '-7px'=> '-7px',
+                        '-6px'=> '-6px',
+                        '-5px'=> '-5px',
+                        '-4px'=> '-4px',
+                        '-3px'=> '-3px',
+                        '-2px'=> '-2px',
+                        '-1px'=> '-1px',
+                        '0px'=> 'Default',
+                        '1px'=> '1px',
+                        '2px'=> '2px',
+                        '3px'=> '3px',
+                        '4px'=> '4px',
+                        '5px'=> '5px',
+                        '6px'=>	'6px',
+                        '7px'=>	'7px',
+                        '8px'=>	'8px',
+                        '9px'=>	'9px',
+                        '10px'=> '10px'
+                    ),
+                    'std'=>'0',
+                ),
+
+                'menu_text_color'=>array(
+                    'type'=>'color',
+                    'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_TITLE_TEXT_COLOR'),
+                    'desc'=>JText::_('COM_SPPAGEBUILDER_ADDON_TITLE_TEXT_COLOR_DESC'),
+
+                ),
+
 				'separator_general_options' => array(
 					'type' => 'separator',
 					'title' => JText::_('General'),
