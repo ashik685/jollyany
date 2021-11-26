@@ -8,6 +8,11 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.8.9**
+
+    [new topic] Newspaper - Magazine, Blog Joomla 4 Template
+    [update] Update UI Article, UI Heading & UI Subnav
+
 **Version 1.8.8**
 
     [fixbug] Fix error in Testimonial Carousel Addon on Front-end Editing
