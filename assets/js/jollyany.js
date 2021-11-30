@@ -156,6 +156,22 @@
             button.removeAttr('disabled','');
             progressbar.removeClass('progress-bar-animated').removeClass('progress-bar-striped');
             textStatus.html('<i class="far fa-smile"></i> All extensions has installed!');
+            var req = {};
+            req[dialogPopup.find('.install-action').data('token')]      =   1;
+            req['type']     =   'extension';
+            req['code']     =   dialogPopup.find('.install-action').data('file');
+            req['jollyany'] =   'get_version';
+            req['option']   =   'com_ajax';
+            $.ajax({
+                url    : 'index.php?t='+Math.random().toString(36).substring(7),
+                type   : 'POST',
+                data   : req,
+                success: function (response) {
+                    if (response.status == 'success') {
+                        $('.card.sp-page-builder').find('.version').empty().text(response.data);
+                    }
+                }
+            });
         }
     };
     $(document).ready(function() {
@@ -257,6 +273,47 @@
         if ($('#astroid-form-fieldset-section-dashboard .astroid-form-fieldset-section').length) {
             var licenseContainer    =   $('#astroid-form-fieldset-section-dashboard .astroid-form-fieldset-section');
             licenseContainer.find(".form-group > .row > *[class^='col-sm-']").attr('class','col-12 col-sm-12');
+        }
+        if ($('#astroid-form-fieldset-section-jollyanyexts .astroid-form-fieldset-section').length) {
+            var extsContainer       =   $('#astroid-form-fieldset-section-jollyanyexts .astroid-form-fieldset-section'),
+                dialogExtPopup         =   $('#install-ext-dialog'),
+                dialogExtTemplate      =   $('#jollyany-dialog-extension');
+            extsContainer.find(".form-group > .row > *[class^='col-sm-']").attr('class','col-12 col-sm-12');
+
+            $('.intall-extension').on('click', function (e) {
+                e.preventDefault();
+                var thisLink    =   $(this);
+                if (thisLink.data('status') === 0) {
+                    alert('Your license is invalid or expired! You need buy or renew your license to use this premium feature!');
+                } else {
+                    dialogExtPopup.html(dialogExtTemplate.html());
+                    dialogExtPopup.find('.extension-name').text(thisLink.data('name'));
+                    dialogExtPopup.find('.install-action').attr('data-file',thisLink.data('file'));
+                    dialogExtPopup.modal('show');
+                    dialogExtPopup.find('.install-action').on('click', function (e) {
+                        var request = {},
+                            $this   = $(this);
+                        request['install_code']         =   $this.data('file');
+                        request['option']               =   'com_ajax';
+                        request[$this.data('token')]    = 1;
+                        request['file_name']            = filename;
+                        request['step']                 = 1;
+                        request['jollyany']             = 'get_extension_package';
+                        $this.attr('disabled','disabled');
+                        $this.prepend('<i class="fas fa-spinner fa-pulse"></i>');
+                        dialogExtPopup.find('.dialogDebug').html('');
+                        resetProgress();
+                        dialogExtPopup.find('.dialogDebug').append(progress).append(textStatus);
+                        textStatus.text('<i class="far fa-compass fa-spin"></i> Preparing to download package...');
+                        getDataPackage(request, $this, dialogExtPopup);
+                        return 1;
+                    });
+                }
+            });
+
+            dialogExtPopup.on('hidden.bs.modal', function (e) {
+                $(this).empty();
+            })
         }
         if ($('#astroid-form-fieldset-section-presets .astroid-form-fieldset-section').length) {
             var presetContainer    =   $('#astroid-form-fieldset-section-presets .astroid-form-fieldset-section');
@@ -412,7 +469,6 @@
                 // $(this).find('#demo-data-package').prop("checked", false);
             })
         }
-
         if (tzthumbs_cache.length) {
             var request = {};
             request[tztoken]        =   1;

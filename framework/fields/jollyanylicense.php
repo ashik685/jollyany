@@ -43,7 +43,7 @@ class JFormFieldJollyanyLicense extends JFormFieldList {
 	    $lictext    =   JollyanyFrameworkHelper::getLicense();
 	    $license    =   JollyanyFrameworkHelper::maybe_unserialize($lictext);
         $totaltemp  =   JollyanyFrameworkDataImport::getTotalTemplate();
-        $template = Astroid\Framework::getTemplate();
+        $template   =   Astroid\Framework::getTemplate();
 
         $html[]     =   '<div class="row mt-4">';
         $html[]     =   '<div class="col-12 col-xl-4 col-xxl-5 mb-4">';
@@ -77,6 +77,32 @@ class JFormFieldJollyanyLicense extends JFormFieldList {
 	        $html[]     =   '</ul>';
 	        $html[]     =   '<div class="card-body license-action-buttons"><a href="#" id="jollyany-theme-activate" class="btn btn-primary"><i class="fas fa-sync-alt"></i> '.JText::_('JOLLYANY_WELCOME_REACTIVE_PRODUCT').'</a> <button type="button" class="btn btn-danger delete-template-activation" data-token="'.JSession::getFormToken().'"><i class="fas fa-times"></i> '.JText::_('JOLLYANY_ACTIVATE_DELETE_ACTIVATION').'</button></div>';
 	        $html[]     =   '</div>';
+            $html[]     =   '<div class="row mt-4">
+  <div class="col-sm-6">
+    <div class="card h-100">
+      <div class="card-body">
+        <div class="card-img-top display-4 text-success"><i class="far fa-smile-beam"></i></div>
+        <h5 class="card-title">I am satisfied with this template</h5>
+        <p class="card-text">Thank you very much! If you love our templates please help us rate/review for Jollyany on <a href="https://themeforest.net/item/jollyany-responsive-multipurpose-joomla-template/8596818" target="_blank" rel="nofollow">Themeforest</a></p>
+        <a href="https://themeforest.net/item/jollyany-responsive-multipurpose-joomla-template/8596818" target="_blank" rel="nofollow" class="btn btn-success">Rate for Jollyany</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card h-100">
+      <div class="card-body">
+        <div class="card-img-top display-4 text-danger"><i class="far fa-tired"></i></div>
+        <h5 class="card-title">I\'m not satisfied with this stupid template</h5>
+        <p class="card-text">I am sorry for this inconvenience. You can ask a support on our <a href="https://www.templaza.com/forums.html" target="_blank" rel="nofollow">forum</a> or <a href="https://themeforest.net/refund_requests/new" target="_blank" rel="nofollow">Request a full refund</a> no hassles, no questions asked!</p>
+        <a href="https://www.templaza.com/forums.html" target="_blank" rel="nofollow" class="btn btn-info">Ask a question</a> <a href="https://themeforest.net/refund_requests/new" target="_blank" rel="nofollow" class="btn btn-danger">Request a Refund</a>
+      </div>
+    </div>
+  </div>
+</div>';
+            $html[]     =   '<blockquote class="blockquote text-center mt-4">
+  <p class="mb-0">I\'m not here to save the world. For now, your heart is enough. (^_^")</p>
+  <footer class="blockquote-footer">Sonny in <cite title="Source Title">TemPlaza.com</cite></footer>
+</blockquote>';
         } else {
             $html[]     =   '<h3>'.JText::_('JOLLYANY_OPTIONS_PACKAGE').'</h3>';
             $html[]     =   '<p>'.JText::_('JOLLYANY_WELCOME_FREE_DESC').'</p><hr />';
@@ -99,7 +125,6 @@ class JFormFieldJollyanyLicense extends JFormFieldList {
 	        $html[]     =   '<li class="list-group-item"><i class="fas fa-check"></i>&nbsp;&nbsp;40% Renewal Discount</li>';
 	        $html[]     =   '<li class="list-group-item"><i class="fas fa-check"></i>&nbsp;&nbsp;SP Page Builder Pro Included</li>';
 	        $html[]     =   '<li class="list-group-item"><i class="fas fa-check"></i>&nbsp;&nbsp;TZ Portfolio Pro Personal License</li>';
-	        $html[]     =   '<li class="list-group-item"><i class="fas fa-check"></i>&nbsp;&nbsp;Unite Slider Pro Included</li>';
 	        $html[]     =   '</ul>';
 	        $html[]     =   '<div class="card-body"><a class="btn btn-primary" href="https://1.envato.market/jollyany-multipurpose-joomla-template" target="_blank"><i class="fas fa-shopping-cart"></i> Click here to buy a License</a></div>';
 	        $html[]     =   '</div>';

@@ -319,6 +319,17 @@ class JollyanyFrameworkHelper extends AstroidFrameworkHelper {
 		return $presets;
 	}
 
+	public static function getExtVersion($element) {
+        $db = JFactory::getDbo();
+        $query = "SELECT `manifest_cache` FROM `#__extensions` WHERE `element`=" . $db->quote($element);
+        $db->setQuery($query);
+        $result = $db->loadResult();
+        if (!empty($result)) {
+            $manifest   =   new \Joomla\Registry\Registry($result);
+            return $manifest->get('version');
+        }
+    }
+
     public static function clearCache($template = '', $prefix = 'style')
     {
         $template_dir = JPATH_SITE . '/' . 'templates' . '/' . $template . '/' . 'css';

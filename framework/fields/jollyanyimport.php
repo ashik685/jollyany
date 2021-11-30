@@ -27,6 +27,14 @@ class JFormFieldJollyanyImport extends JFormFieldList {
 	 */
 	protected $type = 'JollyanyImport';
 
+    private $replacer   =   [
+        'tz_fashion_semona_joomla'  => 'tz_fashion',
+        'tz_everline_joomla'        => 'tz_everline',
+        'tz_eventory_joomla'        => 'tz_eventory',
+        'tz_charity_joomla'         => 'tz_charity',
+        'tz_foodz_joomla'           => 'tz_foodz',
+    ];
+
 	protected function getInput() {
 		$html       =   array();
 		$lictext    =   JollyanyFrameworkHelper::getLicense();
@@ -37,17 +45,21 @@ class JFormFieldJollyanyImport extends JFormFieldList {
 		if ( is_object( $license ) && isset( $license->purchase_code ) ) {
 			$activated  =   1;
 		}
-
 		$templates  =   JollyanyFrameworkDataImport::getData();
 		$html[]     =   '<div class="row mt-4">';
 		foreach ($templates as $index => $value) {
 			$status     =   $value['category'] == 'comingsoon' ? ' tabindex="-1" aria-disabled="true"' : '';
 			$clsstatus  =   $value['category'] == 'comingsoon' ? ' disabled' : '';
 			$comingsoon =   $value['category'] == 'comingsoon' ? '_COMINGSOON' : '';
+			$tpl_code   =   $index;
+            if (isset($this->replacer[$tpl_code])) {
+                $tpl_code = $this->replacer[$tpl_code];
+            }
+            $current_version    =   JollyanyFrameworkHelper::getExtVersion($tpl_code);
 			$data   =  '<div class="col-12 col-md-6 col-lg-6 col-xl-4 mb-5">';
 			$data   .=  '<div class="card">';
-			$data   .=  '<img data-src="'.$value['thumb'].'" data-width="590" data-height="555" class="card-img-top" alt="'.$value['name'].'" uk-img />';
-			$data   .=  '<div class="card-body"><h5 class="card-title">'.$value['name'].'</h5><p class="card-text">'.$value['desc'].'</p><div class="btn-group" role="group" aria-label="Install Action"><a href="#" class="btn btn-primary intall-package btn-sm'.$clsstatus.'"  data-token="'.JSession::getFormToken().'" data-name="'.$value['name'].'" data-file="'.$index.'" data-status="'.$activated.'"'.$status.'>'.JText::_('JOLLYANY_ACTION_INSTALL_PACKAGE'.$comingsoon).'</a><a href="'.$value['demo_url'].'" class="btn btn-outline-primary btn-sm'.$clsstatus.'" target="_blank"'.$status.'>'.JText::_('JOLLYANY_ACTION_DEMO_URL').'</a><a href="'.$value['doc_url'].'" class="btn btn-outline-primary btn-sm'.$clsstatus.'" target="_blank"'.$status.'>'.JText::_('JOLLYANY_ACTION_DOC_URL').'</a></div></div>';
+			$data   .=  '<img data-src="'.$value['thumb'].'" data-width="590" data-height="555" class="card-img-top" alt="'.$value['name'].'" data-uk-img />';
+			$data   .=  '<div class="card-body"><h5 class="card-title">'.$value['name'].($current_version ? ' <span class="badge badge-pill badge-primary">'.JText::_('JOLLYANY_INSTALLED_VERSION') . ': '.$current_version.'</span>' : '').'</h5><p class="card-text">'.$value['desc'].'</p><div class="btn-group" role="group" aria-label="Install Action"><a href="#" class="btn btn-primary intall-package btn-sm'.$clsstatus.'"  data-token="'.JSession::getFormToken().'" data-name="'.$value['name'].'" data-file="'.$index.'" data-status="'.$activated.'"'.$status.'>'.JText::_('JOLLYANY_ACTION_INSTALL_PACKAGE'.$comingsoon).'</a><a href="'.$value['demo_url'].'" class="btn btn-outline-primary btn-sm'.$clsstatus.'" target="_blank"'.$status.'>'.JText::_('JOLLYANY_ACTION_DEMO_URL').'</a><a href="'.$value['doc_url'].'" class="btn btn-outline-primary btn-sm'.$clsstatus.'" target="_blank"'.$status.'>'.JText::_('JOLLYANY_ACTION_DOC_URL').'</a></div></div>';
 			$data   .=  '</div>';
 			$data   .=  '</div>';
 			$html[] =   $data;
