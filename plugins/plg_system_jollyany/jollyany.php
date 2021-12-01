@@ -390,6 +390,42 @@ class plgSystemJollyany extends JPlugin {
 					echo \json_encode($return);
 					die();
 					break;
+                case 'get_extension_package':
+                    header('Content-Type: application/json');
+                    header('Access-Control-Allow-Origin: *');
+                    $return = array();
+                    try {
+                        // Check for request forgeries.
+                        if (!JSession::checkToken()) {
+                            throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR'));
+                        }
+                        jimport('jollyany.framework.helper');
+                        jimport('jollyany.framework.importer.data');
+                        $lictext    =   JollyanyFrameworkHelper::getLicense();
+                        $license    =   JollyanyFrameworkHelper::maybe_unserialize($lictext);
+                        if ( is_object( $license ) && isset( $license->purchase_code ) ) {
+                            $install_code          =   $this->app->input->post->get('install_code', '', 'RAW');
+                            if (empty($install_code)) throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR_NO_FILE_INSTALL'));
+                            $extensions            =   JollyanyFrameworkDataImport::getExtensions();
+                            if (is_array($extensions) && isset($extensions[$install_code])) {
+                                $arr_extensions    =   array($extensions[$install_code]);
+                                $return['data']    =   json_encode($arr_extensions);
+                            } else {
+                                throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR_INVALID_CODE'));
+                            }
+                            $return["status"] = "success";
+                            $return["code"] = 200;
+                        } else {
+                            throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR_NO_LICENSE'));
+                        }
+                    } catch (\Exception $e) {
+                        $return["status"] = "error";
+                        $return["code"] = $e->getCode();
+                        $return["message"] = $e->getMessage();
+                    }
+                    echo \json_encode($return);
+                    die();
+                    break;
 				case 'install_package':
 					header('Content-Type: application/json');
 					header('Access-Control-Allow-Origin: *');
@@ -575,6 +611,49 @@ class plgSystemJollyany extends JPlugin {
 					echo \json_encode($return);
 					die();
 					break;
+                case 'get_version':
+                    header('Content-Type: application/json');
+                    header('Access-Control-Allow-Origin: *');
+                    $return = array();
+                    try {
+                        // Check for request forgeries.
+                        if (!JSession::checkToken()) {
+                            throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR'));
+                        }
+                        jimport('jollyany.framework.helper');
+                        jimport('jollyany.framework.importer.data');
+                        $code          =   $this->app->input->post->get('code', '', 'RAW');
+                        $return['element']  =   $code;
+                        if (empty($code)) throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR_NO_FILE_INSTALL'));
+                        $ext_code           =   JollyanyFrameworkDataImport::getExtCode($code);
+                        if ($ext_code) {
+                            $ext_version            =   JollyanyFrameworkHelper::getExtVersion($ext_code);
+                            if (!empty($ext_version)) {
+                                $return['data']     =   JText::_('JOLLYANY_CURRENT_VERSION'). ': '. $ext_version;
+                                $return['type']     =   'extension';
+                            } else {
+                                throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR_INVALID_CODE'));
+                            }
+                        } else {
+                            $tpl_code               =   JollyanyFrameworkDataImport::getConvertCode($code);
+                            $ext_version            =   JollyanyFrameworkHelper::getExtVersion($tpl_code);
+                            if (!empty($ext_version)) {
+                                $return['data']     =    JText::_('JOLLYANY_INSTALLED_VERSION'). ': '. $ext_version;
+                                $return['type']     =   'template';
+                            } else {
+                                throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR_INVALID_CODE'));
+                            }
+                        }
+                        $return["status"] = "success";
+                        $return["code"] = 200;
+                    } catch (\Exception $e) {
+                        $return["status"] = "error";
+                        $return["code"] = $e->getCode();
+                        $return["message"] = $e->getMessage();
+                    }
+                    echo \json_encode($return);
+                    die();
+                    break;
                 case 'cache_thumb':
                     header('Content-Type: application/json');
                     header('Access-Control-Allow-Origin: *');
