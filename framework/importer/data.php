@@ -36,6 +36,13 @@ class JollyanyFrameworkDataImport {
         'hikashop' => 'com_hikashop',
     ];
 	protected static $data =    null;
+    protected static $replacer   =   [
+        'tz_fashion_semona_joomla'  => 'tz_fashion',
+        'tz_everline_joomla'        => 'tz_everline',
+        'tz_eventory_joomla'        => 'tz_eventory',
+        'tz_charity_joomla'         => 'tz_charity',
+        'tz_foodz_joomla'           => 'tz_foodz',
+    ];
 
 	public static function getThumb($src) {
         if (file_exists(JPATH_ADMINISTRATOR.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.'jollyany'.$src)) {
@@ -63,6 +70,13 @@ class JollyanyFrameworkDataImport {
             return self::$exts_convert[$key];
         }
         return false;
+    }
+
+    public static function getConvertCode($key) {
+        if (isset(self::$replacer[$key])) {
+            return self::$replacer[$key];
+        }
+        return $key;
     }
 
 	public static function getData() {

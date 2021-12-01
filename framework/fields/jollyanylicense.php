@@ -83,7 +83,7 @@ class JFormFieldJollyanyLicense extends JFormFieldList {
       <div class="card-body">
         <div class="card-img-top display-4 text-success"><i class="far fa-smile-beam"></i></div>
         <h5 class="card-title">I am satisfied with this template</h5>
-        <p class="card-text">Thank you very much! If you love our templates please help us rate/review for Jollyany on <a href="https://themeforest.net/item/jollyany-responsive-multipurpose-joomla-template/8596818" target="_blank" rel="nofollow">Themeforest</a></p>
+        <p class="card-text">Thank you very much! If you love our service please help us rate/review for Jollyany on <a href="https://themeforest.net/item/jollyany-responsive-multipurpose-joomla-template/8596818" target="_blank" rel="nofollow">Themeforest</a></p>
         <a href="https://themeforest.net/item/jollyany-responsive-multipurpose-joomla-template/8596818" target="_blank" rel="nofollow" class="btn btn-success">Rate for Jollyany</a>
       </div>
     </div>

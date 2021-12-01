@@ -34,7 +34,6 @@
                     progressbar.attr('aria-valuenow',(request['step']*100)/response.pathcount).css('width', (request['step']*100)/response.pathcount+'%');
                     if (response.pathcount <= request['step']) {
                         textStatus.text('Package download completed!');
-                        // console.log(response.package);
                         request['archive']      = response.archive;
                         request['jollyany']     = 'unzip_package';
                         actionUnzipPackage(request, button, dialogPopup);
@@ -158,7 +157,6 @@
             textStatus.html('<i class="far fa-smile"></i> All extensions has installed!');
             var req = {};
             req[dialogPopup.find('.install-action').data('token')]      =   1;
-            req['type']     =   'extension';
             req['code']     =   dialogPopup.find('.install-action').data('file');
             req['jollyany'] =   'get_version';
             req['option']   =   'com_ajax';
@@ -167,8 +165,16 @@
                 type   : 'POST',
                 data   : req,
                 success: function (response) {
-                    if (response.status == 'success') {
-                        $('.card.sp-page-builder').find('.version').empty().text(response.data);
+                    if (response.status === 'success') {
+                        if (response.type === 'extension') {
+                            $('.card.'+response.element).find('.version').empty().text(response.data);
+                        } else {
+                            if ($('.card.'+response.element).find('.card-title').find('.badge').length) {
+                                $('.card.'+response.element).find('.card-title').find('.badge').empty().text(response.data);
+                            } else {
+                                $('.card.'+response.element).find('.card-title').append(' <span class="badge badge-pill badge-primary">'+response.data+'</span>')
+                            }
+                        }
                     }
                 }
             });
@@ -355,7 +361,7 @@
                         success: function (response) {
                             $this.removeAttr('disabled','');
                             $this.find('i').remove();
-                            if (response.status == 'success') {
+                            if (response.status === 'success') {
                                 var _json = Admin.checkUploadedSettings(response.data);
                                 if (_json !== false) {
                                     Admin.saveImportedSettings(_json);
