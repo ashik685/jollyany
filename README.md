@@ -8,6 +8,13 @@ Astroid Framework: https://astroidframework.com/
 
 # Changelogs
 
+**Version 1.8.10**
+
+    [add] Add feature install/update extension in Dashboard
+    [add] Add feature get version after install/update template or extension
+    [improve] Improve UI/UX in Dashboard
+    [update] Update Language file
+
 **Version 1.8.9**
 
     [new topic] Newspaper - Magazine, Blog Joomla 4 Template
