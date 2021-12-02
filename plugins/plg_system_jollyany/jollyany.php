@@ -627,7 +627,7 @@ class plgSystemJollyany extends JPlugin {
                         if (empty($code)) throw new \Exception(\JText::_('JOLLYANY_AJAX_ERROR_NO_FILE_INSTALL'));
                         $ext_code           =   JollyanyFrameworkDataImport::getExtCode($code);
                         if ($ext_code) {
-                            $ext_version            =   JollyanyFrameworkHelper::getExtVersion($ext_code);
+                            $ext_version            =   JollyanyFrameworkHelper::getExtVersion($ext_code, 'component');
                             if (!empty($ext_version)) {
                                 $return['data']     =   JText::_('JOLLYANY_CURRENT_VERSION'). ': '. $ext_version;
                                 $return['type']     =   'extension';
@@ -636,7 +636,7 @@ class plgSystemJollyany extends JPlugin {
                             }
                         } else {
                             $tpl_code               =   JollyanyFrameworkDataImport::getConvertCode($code);
-                            $ext_version            =   JollyanyFrameworkHelper::getExtVersion($tpl_code);
+                            $ext_version            =   JollyanyFrameworkHelper::getExtVersion($tpl_code, 'template');
                             if (!empty($ext_version)) {
                                 $return['data']     =    JText::_('JOLLYANY_INSTALLED_VERSION'). ': '. $ext_version;
                                 $return['type']     =   'template';

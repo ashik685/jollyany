@@ -319,9 +319,19 @@ class JollyanyFrameworkHelper extends AstroidFrameworkHelper {
 		return $presets;
 	}
 
-	public static function getExtVersion($element) {
+	public static function getExtVersion($element, $type = '') {
         $db = JFactory::getDbo();
-        $query = "SELECT `manifest_cache` FROM `#__extensions` WHERE `element`=" . $db->quote($element);
+        $query = $db->getQuery(true)
+            ->select(
+                $db->quoteName('manifest_cache')
+            )
+            ->from($db->quoteName('#__extensions'))
+            ->where(
+                $db->quoteName('element') . ' = '.$db->quote($element)
+            );
+        if (!empty($type)) {
+            $query->where($db->quoteName('type') . ' = '.$db->quote($type));
+        }
         $db->setQuery($query);
         $result = $db->loadResult();
         if (!empty($result)) {
