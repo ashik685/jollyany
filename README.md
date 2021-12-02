@@ -6,9 +6,13 @@
 
 It's extended version of Astroid Framework
 
-Astroid Framework: https://astroidframework.com/
+Astroid Framework: https://github.com/templaza/astroid-framework
 
 # Changelogs
+
+**Version 1.8.11**
+
+    [fixbug] Fix issue display wrong version
 
 **Version 1.8.10**
 
