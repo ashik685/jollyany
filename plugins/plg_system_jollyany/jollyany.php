@@ -638,6 +638,7 @@ class plgSystemJollyany extends JPlugin {
                             $tpl_code               =   JollyanyFrameworkDataImport::getConvertCode($code);
                             $ext_version            =   JollyanyFrameworkHelper::getExtVersion($tpl_code, 'template');
                             if (!empty($ext_version)) {
+                                $return['element']  =   $tpl_code;
                                 $return['data']     =    JText::_('JOLLYANY_INSTALLED_VERSION'). ': '. $ext_version;
                                 $return['type']     =   'template';
                             } else {
