@@ -42,6 +42,7 @@ class JollyanyFrameworkDataImport {
         'tz_eventory_joomla'        => 'tz_eventory',
         'tz_charity_joomla'         => 'tz_charity',
         'tz_foodz_joomla'           => 'tz_foodz',
+        'profiler-joomla-template'  => 'tz_profiler',
     ];
 
 	public static function getThumb($src) {
@@ -340,7 +341,7 @@ class JollyanyFrameworkDataImport {
                     self::$exts['tz-portfolio'],
                 ),
             ),
-            'tz_profiler'      =>  array(
+            'profiler-joomla-template'      =>  array(
                 // Pack Info
                 'name'        => 'Profiler',
                 'desc'        => 'Personal Blog Joomla Template',
