@@ -76,17 +76,19 @@ class JFormFieldJollyanyImport extends JFormFieldList {
       </div>
       <div class="modal-body">
         <p class="text-muted">'.JText::_('JOLLYANY_ACTION_DIALOG_TITLE_DESC').'</p>
-        <div class="custom-control custom-checkbox mt-3">
-		  <input type="checkbox" class="custom-control-input" id="template-package" checked>
-		  <label class="custom-control-label" for="template-package"><h5>'.JText::_('JOLLYANY_ACTION_DIALOG_TEMPLATE_INSTALL').'</h5><small class="text-muted">'.JText::_('JOLLYANY_ACTION_DIALOG_TEMPLATE_INSTALL_DESC').'</small></label>
+        <div class="form-group form-check pl-4">
+		  <input type="checkbox" class="form-check-input" id="template-package" checked>
+		  <label class="form-check-label" for="template-package"><h5>'.JText::_('JOLLYANY_ACTION_DIALOG_TEMPLATE_INSTALL').'</h5><small class="text-muted">'.JText::_('JOLLYANY_ACTION_DIALOG_TEMPLATE_INSTALL_DESC').'</small></label>
 		</div>
 		<hr />
 		<h5>'.JText::_('JOLLYANY_ACTION_DIALOG_EXTENSION_INSTALL').'</h5><small class="text-muted">'.JText::_('JOLLYANY_ACTION_DIALOG_EXTENSION_INSTALL_DESC').'</small>
 		<div class="extensions-container"></div>
 		<hr />
-		<div class="custom-control custom-checkbox mt-3">
-		  <input type="checkbox" class="custom-control-input" id="demo-data-package">
-		  <label class="custom-control-label" for="demo-data-package"><h5>'.JText::_('JOLLYANY_ACTION_DIALOG_DATA_INSTALL').'</h5><small class="text-muted">'.JText::_('JOLLYANY_ACTION_DIALOG_DATA_INSTALL_DESC').'</small></label>
+		<h5>'.JText::_('JOLLYANY_ACTION_DIALOG_QUICKSTART_DATA_INSTALL').'</h5>
+		<p class="text-lead">'.JText::_('JOLLYANY_ACTION_DIALOG_QUICKSTART_DATA_INSTALL_DESC').'</p>
+		<div class="form-group form-check pl-4 border-0">
+		  <input type="checkbox" class="form-check-input" id="demo-data-package">
+		  <label class="form-check-label" for="demo-data-package"><h5>'.JText::_('JOLLYANY_ACTION_DIALOG_DATA_INSTALL').'</h5><p class="text-lead text-danger">'.JText::_('JOLLYANY_ACTION_DIALOG_DATA_INSTALL_DESC').'</p></label>
 		</div>
 		<div class="dialogDebug mt-3"></div>
       </div>

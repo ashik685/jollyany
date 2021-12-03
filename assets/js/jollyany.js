@@ -86,15 +86,15 @@
                         $exts       =   dialogPopup.find('.extensions-container');
                     $exts.empty();
                     for (var i = 0; i<$data.length; i ++) {
-                        var extension   =   $('<div/>', {"class": 'custom-control custom-checkbox mt-3'}),
+                        var extension   =   $('<div/>', {"class": 'form-group form-check pl-4'}),
                             checkbox    =   $('<input/>', {
-                                "class" :   'custom-control-input extension-item',
+                                "class" :   'form-check-input extension-item',
                                 "type"  :   'checkbox',
                                 "id"    :   'extension-'+i,
                                 "value" :   i
                             }),
                             label       =   $('<label/>', {
-                                "class" :   'custom-control-label',
+                                "class" :   'form-check-label',
                                 "for"   :   'extension-'+i
                             });
                         label.append('<h6>'+$data[i].name+'</h6>');
