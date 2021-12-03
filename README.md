@@ -10,6 +10,11 @@ Astroid Framework: https://github.com/templaza/astroid-framework
 
 # Changelogs
 
+**Version 1.8.12**
+
+    [update] Update UI for Install Dialog
+    [fixbug] Fix issue verticle margin in UI Heading
+
 **Version 1.8.11**
 
     [fixbug] Fix issue display wrong version
