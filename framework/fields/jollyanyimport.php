@@ -27,14 +27,6 @@ class JFormFieldJollyanyImport extends JFormFieldList {
 	 */
 	protected $type = 'JollyanyImport';
 
-    private $replacer   =   [
-        'tz_fashion_semona_joomla'  => 'tz_fashion',
-        'tz_everline_joomla'        => 'tz_everline',
-        'tz_eventory_joomla'        => 'tz_eventory',
-        'tz_charity_joomla'         => 'tz_charity',
-        'tz_foodz_joomla'           => 'tz_foodz',
-    ];
-
 	protected function getInput() {
 		$html       =   array();
 		$lictext    =   JollyanyFrameworkHelper::getLicense();
@@ -51,10 +43,7 @@ class JFormFieldJollyanyImport extends JFormFieldList {
 			$status     =   $value['category'] == 'comingsoon' ? ' tabindex="-1" aria-disabled="true"' : '';
 			$clsstatus  =   $value['category'] == 'comingsoon' ? ' disabled' : '';
 			$comingsoon =   $value['category'] == 'comingsoon' ? '_COMINGSOON' : '';
-			$tpl_code   =   $index;
-            if (isset($this->replacer[$tpl_code])) {
-                $tpl_code = $this->replacer[$tpl_code];
-            }
+			$tpl_code   =   JollyanyFrameworkDataImport::getConvertCode($index);
             $current_version    =   JollyanyFrameworkHelper::getExtVersion($tpl_code);
 			$data   =  '<div class="col-12 col-md-6 col-lg-6 col-xl-4 mb-5">';
 			$data   .=  '<div class="card '.$tpl_code.'">';

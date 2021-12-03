@@ -33,6 +33,7 @@ class JFormFieldJollyanyExts extends JFormFieldList {
             'tz_eventory'  => 'tz_eventory_joomla',
             'tz_charity'   => 'tz_charity_joomla',
             'tz_foodz'     => 'tz_foodz_joomla',
+            'tz_profiler'  => 'profiler-joomla-template',
         ];
     private $exts       =   [
         'sp-page-builder' => 'com_sppagebuilder',
