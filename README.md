@@ -10,6 +10,14 @@ Astroid Framework: https://github.com/templaza/astroid-framework
 
 # Changelogs
 
+**Version 1.9.0**
+
+    [update] Update UI Kit 3.9.4
+    [update] Update Language for Event addon
+    [fixbug] Fix issue warning $css of UI Article
+    [fixbug] Fix issue can't update license info
+    [fixbug] Fix issue install Profiler quickstart
+
 **Version 1.8.12**
 
     [update] Update UI for Install Dialog

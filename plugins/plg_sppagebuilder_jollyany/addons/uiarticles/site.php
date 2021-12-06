@@ -536,6 +536,7 @@ class SppagebuilderAddonUIArticles extends SppagebuilderAddons{
         }
         $addon_id = '#sppb-addon-' . $this->addon->id . $article_class;
         $settings = $this->addon->settings;
+        $css      = '';
         //Readmore button
         $show_readmore 	= (isset($settings->{$pre_val.'show_readmore'})) ? $settings->{$pre_val.'show_readmore'} : 1;
         if ($show_readmore) {
