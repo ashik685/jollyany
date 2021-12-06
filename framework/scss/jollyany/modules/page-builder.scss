@@ -7,6 +7,10 @@
     padding-left: calc(var(--bs-gutter-x) * .5);
   }
 }
+.sppb-no-gutter {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+}
 .sppb-addon-header, .sppb-addon-text-block {
   .sppb-addon-title{
     >span {
