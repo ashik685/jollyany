@@ -1,3 +1,12 @@
+.sp-pagebuilder-row, .sppb-row {
+  --bs-gutter-x: #{$grid-gutter-width};
+  margin-right: calc(-.5 * var(--bs-gutter-x));
+  margin-left: calc(-.5 * var(--bs-gutter-x));
+  > * {
+    padding-right: calc(var(--bs-gutter-x) * .5);
+    padding-left: calc(var(--bs-gutter-x) * .5);
+  }
+}
 .sppb-addon-header, .sppb-addon-text-block {
   .sppb-addon-title{
     >span {
