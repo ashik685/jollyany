@@ -7,11 +7,15 @@
  */
 defined('_JEXEC') or die;
 
-JLoader::registerNamespace('Astroid', JPATH_LIBRARIES . '/astroid/framework/library/astroid', false, false, 'psr4');
+if (file_exists(JPATH_LIBRARIES . '/astroid/framework/library/astroid')) {
+    JLoader::registerNamespace('Astroid', JPATH_LIBRARIES . '/astroid/framework/library/astroid', false, false, 'psr4');
+}
 use Astroid\Framework;
 use Astroid\Helper;
 use Joomla\Registry\Registry;
-jimport('jollyany.framework.course');
+if (file_exists(JPATH_LIBRARIES . '/jollyany/framework')) {
+    jimport('jollyany.framework.course');
+}
 
 /**
  * Jollyany system plugin
@@ -23,16 +27,25 @@ class plgSystemJollyany extends JPlugin {
 	protected $app;
     public function onAfterDispatch()
     {
+        if (!file_exists(JPATH_LIBRARIES . '/astroid/framework/library/astroid')) {
+            return false;
+        }
         Astroid\Framework::getDocument()->addLayoutPath(JPATH_LIBRARIES . '/jollyany/framework/frontend/');
     }
     public function onBeforeRender()
     {
+        if (!file_exists(JPATH_LIBRARIES . '/astroid/framework/library/astroid') || !file_exists(JPATH_LIBRARIES . '/jollyany/framework')) {
+            return false;
+        }
         $document = Astroid\Framework::getDocument(); // Astroid Document
         $document->addScript('media/jollyany/assets/js/uikit.min.js', 'body');
         $document->addScript('media/jollyany/assets/js/uikit-icons.min.js', 'body');
         $document->addScript('media/jollyany/assets/js/frontend.min.js', 'body');
     }
 	public function onAfterInitialise() {
+        if (!file_exists(JPATH_LIBRARIES . '/astroid/framework/library/astroid') || !file_exists(JPATH_LIBRARIES . '/jollyany/framework')) {
+            return false;
+        }
         define('JOLLYANY_PACKAGE', 'https://www.templaza.com/joomla-templates.html');
         define('JOLLYANY_SUPPORT', 'https://www.templaza.com/forums.html');
         define('JOLLYANY_DOCUMENT', 'https://jollyany.co/support/documentation');
@@ -982,6 +995,9 @@ class plgSystemJollyany extends JPlugin {
 
 	// Astroid Admin Events
 	public function onBeforeAstroidAdminRender(&$template) {
+        if (!file_exists(JPATH_LIBRARIES . '/jollyany/framework')) {
+            return false;
+        }
         $document = Framework::getDocument();
 //		$document->addStyleSheet(); // to add css link
         $document->addStyleDeclaration('
@@ -1033,10 +1049,16 @@ class plgSystemJollyany extends JPlugin {
 
     // Astroid Admin Events
     public function onBeforeAstroidTemplateFormLoad(&$template, &$form) {
+        if (!file_exists(JPATH_LIBRARIES . '/jollyany/framework')) {
+            return false;
+        }
         $form->loadOptions(JPATH_LIBRARIES . '/jollyany/framework/options');
     }
 
     public function onContentPrepareForm($form, $data) {
+        if (!file_exists(JPATH_LIBRARIES . '/astroid/framework/library/astroid') || !file_exists(JPATH_LIBRARIES . '/jollyany/framework')) {
+            return false;
+        }
         $pluginParams = Helper::getPluginParams();
         $lib_dir = 'libraries/jollyany';
         Helper::loadLanguage('jollyany');
@@ -1061,6 +1083,9 @@ class plgSystemJollyany extends JPlugin {
     }
 
     public function onContentBeforeSave($context, $table, $isNew) {
+        if (!file_exists(JPATH_LIBRARIES . '/jollyany/framework')) {
+            return false;
+        }
         // Check we are handling the frontend edit form.
         if ($context == 'com_content.article' && JollyanyFrameworkCourse::checkCourseDB())
         {
@@ -1073,6 +1098,9 @@ class plgSystemJollyany extends JPlugin {
     }
 
     public function onContentAfterSave($context, $table, $isNew) {
+        if (!file_exists(JPATH_LIBRARIES . '/jollyany/framework')) {
+            return false;
+        }
         if ($context == 'com_content.article') {
             return JollyanyFrameworkCourse::save($table);
         }
@@ -1080,6 +1108,9 @@ class plgSystemJollyany extends JPlugin {
 
     public function onContentPrepareData($context, $data)
     {
+        if (!file_exists(JPATH_LIBRARIES . '/jollyany/framework')) {
+            return false;
+        }
         if ($context == 'com_content.article' && $data->id) {
             $course =   JollyanyFrameworkCourse::getData($data->id);
             if ($course) {
@@ -1090,6 +1121,9 @@ class plgSystemJollyany extends JPlugin {
     }
 
     public function onContentPrepare($context, &$row, &$params, $page = 0) {
+        if (!file_exists(JPATH_LIBRARIES . '/jollyany/framework')) {
+            return false;
+        }
         if ($context == 'com_content.article') {
             $course =   JollyanyFrameworkCourse::getData($row->id);
             if ($course) {
@@ -1101,6 +1135,9 @@ class plgSystemJollyany extends JPlugin {
 
     public function onContentBeforeDisplay($context, &$row, &$params, $page = 0)
     {
+        if (!file_exists(JPATH_LIBRARIES . '/jollyany/framework')) {
+            return false;
+        }
         if ($context == 'com_content.category') {
             jimport('jollyany.framework.article');
             $content = '';
