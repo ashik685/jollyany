@@ -60,6 +60,9 @@ jQuery(function($){
             $(".jollyany-hikacart-icon").on("click", function(e){
                 e.preventDefault();
             });
+            $(".jollyany-hikashop-atc").on('click', function (e){
+                UIkit.modal('#jollyany-hikacart-content').show();
+            });
             updateHikashopCart();
         }
         if ($(".hikashop_listing_img_hover_slider").length) {
