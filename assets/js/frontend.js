@@ -62,6 +62,14 @@ jQuery(function($){
             });
             updateHikashopCart();
         }
+        if ($(".hikashop_listing_img_hover_slider").length) {
+            $(".hikashop_listing_img_hover_slider").hover( function() {
+                UIkit.slideshow($(this).find(".uk-slideshow")).startAutoplay();
+            });
+            $(".hikashop_listing_img_hover_slider").mouseleave( function() {
+                UIkit.slideshow($(this).find(".uk-slideshow")).stopAutoplay();
+            });
+        }
         if ($(".jollyany-login").length){
             $(".jollyany-login-icon").on("click", function(e){
                 e.preventDefault();
