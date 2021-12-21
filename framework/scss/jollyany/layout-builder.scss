@@ -75,3 +75,11 @@
     }
   }
 }
+.rtl {
+  .top-bar .astroid-module-position {
+    > div+div {
+      margin-left: 0;
+      margin-right: 1.1rem;
+    }
+  }
+}
