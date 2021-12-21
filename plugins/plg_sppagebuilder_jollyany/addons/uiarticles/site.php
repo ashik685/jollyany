@@ -227,6 +227,8 @@ class SppagebuilderAddonUIArticles extends SppagebuilderAddons{
         }
 
         $enable_navigation      = (isset($settings->{$pre_val.'enable_navigation'})) ? $settings->{$pre_val.'enable_navigation'} : 1;
+        $enable_slider_autoplay = (isset($settings->{$pre_val.'enable_slider_autoplay'})) ? $settings->{$pre_val.'enable_slider_autoplay'} : 1;
+        $slider_autoplay_interval = (isset($settings->{$pre_val.'slider_autoplay_interval'}) && $settings->{$pre_val.'slider_autoplay_interval'}) ? $settings->{$pre_val.'slider_autoplay_interval'} : '7000';
         $navigation_position    = (isset($settings->{$pre_val.'navigation_position'})) ? $settings->{$pre_val.'navigation_position'} : '';
         $enable_dotnav          = (isset($settings->{$pre_val.'enable_dotnav'})) ? $settings->{$pre_val.'enable_dotnav'} : 1;
 
@@ -262,7 +264,7 @@ class SppagebuilderAddonUIArticles extends SppagebuilderAddons{
 	    $output = '';
         $output .= '<div class="sppb-addon-content'.$style.'">';
         if ($use_slider) {
-            $output .= '<div uk-slider="'.($center_slider ? 'center: true' : '').'">';
+            $output .= '<div data-uk-slider="'.($center_slider ? 'center: true;' : '').($enable_slider_autoplay ? 'autoplay: true;autoplay-interval: '.$slider_autoplay_interval.';' : '').'">';
             $output .= '<div class="uk-position-relative">';
             $output .= '<div class="uk-slider-container">';
         }
@@ -378,7 +380,7 @@ class SppagebuilderAddonUIArticles extends SppagebuilderAddons{
                 }
             }
             if ($layout == 'thumbnail') {
-                $output .= '<div class="uk-position-cover uk-overlay uk-overlay-primary"></div>';
+                $output .= '<a href="'. $item->link .'" itemprop="url"><div class="uk-position-cover uk-overlay uk-overlay-primary"></div></a>';
             }
             $output .= '<div class="sppb-article-info-wrap'.($layout == 'thumbnail' ? ' uk-position-bottom uk-light' : '').(!$hide_thumbnail && ($image_position == 'left' || $image_position == 'right') ? $expand_width : '').'">';
             $output .= '<div class="'.$uk_card_body.'">';

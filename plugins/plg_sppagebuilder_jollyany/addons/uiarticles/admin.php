@@ -1044,6 +1044,26 @@ array(
                 'std'=>0,
             ),
 
+            'lead_enable_slider_autoplay'=>array(
+                'type'=>'checkbox',
+                'title'=>JText::_('Auto Play'),
+                'desc'=>JText::_('Enable Auto Play'),
+                'values'=>array(
+                    1=>JText::_('COM_SPPAGEBUILDER_YES'),
+                    0=>JText::_('COM_SPPAGEBUILDER_NO'),
+                ),
+                'std'=>1,
+                'depends'=>array('lead_use_slider'=>'1')
+            ),
+
+            'lead_slider_autoplay_interval'=>array(
+                'type'=>'number',
+                'title'=>JText::_('Auto Play Interval'),
+                'desc'=>JText::_('The delay between switching slides in autoplay mode.'),
+                'std'=>'7000',
+                'depends'=>array('lead_enable_slider_autoplay'=>'1')
+            ),
+
             'lead_enable_navigation'=>array(
                 'type'=>'checkbox',
                 'title'=>JText::_('Navigation'),
@@ -2145,6 +2165,26 @@ array(
                     0=>JText::_('COM_SPPAGEBUILDER_NO'),
                 ),
                 'std'=>0,
+            ),
+
+            'enable_slider_autoplay'=>array(
+                'type'=>'checkbox',
+                'title'=>JText::_('Auto Play'),
+                'desc'=>JText::_('Enable Auto Play'),
+                'values'=>array(
+                    1=>JText::_('COM_SPPAGEBUILDER_YES'),
+                    0=>JText::_('COM_SPPAGEBUILDER_NO'),
+                ),
+                'std'=>1,
+                'depends'=>array('use_slider'=>'1')
+            ),
+
+            'slider_autoplay_interval'=>array(
+                'type'=>'number',
+                'title'=>JText::_('Auto Play Interval'),
+                'desc'=>JText::_('The delay between switching slides in autoplay mode.'),
+                'std'=>'7000',
+                'depends'=>array('enable_slider_autoplay'=>'1')
             ),
 
             'enable_navigation'=>array(
