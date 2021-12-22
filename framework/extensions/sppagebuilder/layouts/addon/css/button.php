@@ -54,6 +54,7 @@ $custom_style .= (isset($options->button_padding) && trim($options->button_paddi
 $custom_style_sm .= (isset($options->button_padding_sm) && trim($options->button_padding_sm)) ? ' padding: ' . $options->button_padding_sm . ';' : '';
 $custom_style_xs .= (isset($options->button_padding_xs) && trim($options->button_padding_xs)) ? ' padding: ' . $options->button_padding_xs . ';' : '';
 
+if (isset($options->fontsize->md)) $options->fontsize = $options->fontsize->md;
 $custom_style .= (isset($options->fontsize) && $options->fontsize) ? ' font-size: ' . $options->fontsize . 'px;' : '';
 $custom_style_sm .= (isset($options->fontsize_sm) && $options->fontsize_sm) ? ' font-size: ' . $options->fontsize_sm . 'px;' : '';
 $custom_style_xs .= (isset($options->fontsize_xs) && $options->fontsize_xs) ? ' font-size: ' . $options->fontsize_xs . 'px;' : '';
