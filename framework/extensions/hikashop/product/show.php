@@ -109,7 +109,7 @@ if($this->productlayout != 'show_tabular') {
 			echo hikashop_getLayout('vote', 'listing', $this->params, $js);
 ?>
 		</div>
-		<div id="hikashop_vote_form" data-votetype="product" class="hikashop_product_vote_form">
+		<div id="hikashop_vote_form" data-votetype="product" class="hikashop_product_vote_form uk-margin-medium-top">
 <?php
 			$js = '';
 			if(isset($this->element->main)) {

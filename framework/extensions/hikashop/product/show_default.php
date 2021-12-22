@@ -12,10 +12,9 @@ defined('_JEXEC') or die('Restricted access');
 	if(!$this->config->get('ajax_add_to_cart', 1)) {
 		$form = ',\'hikashop_product_form\'';
 	}
-$css_button = $this->config->get('css_button', 'hikabtn'). ' uk-button uk-button-default';
 ?>
 <div class="uk-child-width-1-2@m" data-uk-grid>
-	<div id="hikashop_product_left_part">
+	<div id="hikashop_product_left_part"<?php if (isset($reserved) && $reserved) echo 'class="uk-flex-last"'; ?>>
 <!-- LEFT BEGIN EXTRA DATA -->
 <?php if(!empty($this->element->extraData->leftBegin)) { echo implode("\r\n",$this->element->extraData->leftBegin); } ?>
 <!-- EO LEFT BEGIN EXTRA DATA -->

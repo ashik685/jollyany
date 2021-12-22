@@ -140,22 +140,6 @@ a.hikacart {
     padding: 0;
   }
 }
-.hikashop_comment_form {
-  margin: 20px 0;
-  .hikashop_comment_form_name {
-    margin-bottom: 10px;
-  }
-  #pseudo_comment {
-    border: 1px solid $border-color;
-    width: 100%;
-    padding: 5px 10px;
-  }
-}
-.hikashop_comment_textarea {
-  border: 1px solid $border-color;
-  padding: 15px 20px;
-  margin-bottom: 30px;
-}
 .hikashop_vote_form {
   .button {
     background-color: $colorMain;
@@ -166,6 +150,15 @@ a.hikacart {
       border-color: $colorBlack;
     }
   }
+}
+.hika-comment-helpful {
+  > * {
+    content: '';
+    min-width: 30px;
+  }
+}
+.hikashop_product_page div.hikashop_small_image_div a, .hikashop_product_page div.hikashop_small_image_div a.hikashop_active_thumbnail {
+  border-width: 1px;
 }
 .ui-slider-horizontal{
   background: $light;
