@@ -138,7 +138,6 @@ defined('_JEXEC') or die('Restricted access');
                 $this->setLayout('option');
                 echo $this->loadTemplate();
                 ?></div>
-            <br />
             <?php
             $form = ',\'hikashop_product_form\'';
             if($this->config->get('redirect_url_after_add_cart', 'stay_if_cart') == 'ask_user') {

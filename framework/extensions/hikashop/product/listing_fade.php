@@ -81,17 +81,10 @@ if($this->config->get('thumbnail', 1)) {
 	<!-- EO PRODUCT NAME -->
 
 	<!-- PRODUCT CODE -->
-		<span class='hikashop_product_code_list uk-text-meta'>
-<?php if ($this->config->get('show_code')) { ?>
-<?php if($haveLink) { ?>
-			<a href="<?php echo $link;?>">
-<?php } ?>
-				<?php echo $this->row->product_code; ?>
-<?php if($haveLink) { ?>
-			</a>
-<?php } ?>
-<?php } ?>
-		</span>
+        <?php
+        $this->setLayout('listing_product_code');
+        echo $this->loadTemplate();
+        ?>
 	<!-- EO PRODUCT CODE -->
 
 	<!-- PRODUCT CUSTOM FIELDS -->

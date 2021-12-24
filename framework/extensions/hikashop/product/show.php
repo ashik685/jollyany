@@ -243,7 +243,7 @@ if(empty($this->element->variants) || $this->params->get('characteristic_display
 	<div id="hikashop_product_contact_<?php echo $variant_name; ?>" style="display:none;"><?php
 		if(hikashop_level(1) && ($contact == 2 || ($contact == 1 && !empty ($this->element->main->product_contact)))) {
 ?>
-			<a href="<?php echo hikashop_completeLink('product&task=contact&cid=' . (int)$variant->product_id . $this->url_itemid); ?>" class="<?php echo $css_button; ?>"><?php
+			<a href="<?php echo hikashop_completeLink('product&task=contact&cid=' . (int)$variant->product_id . $this->url_itemid); ?>" class="uk-button uk-button-default uk-button-large uk-width-1-1 <?php echo $css_button; ?>"><?php
 				echo JText::_('CONTACT_US_FOR_INFO');
 			?></a>
 <?php
@@ -262,8 +262,8 @@ if(empty($this->element->variants) || $this->params->get('characteristic_display
 			if(!empty($variant->product_weight) && bccomp($variant->product_weight, 0, 3)) {
 ?>
 		<div id="hikashop_product_weight_<?php echo $variant_name; ?>" style="display:none;"><?php
-			echo JText::_('PRODUCT_WEIGHT').': '.rtrim(rtrim($variant->product_weight,'0'),',.').' '.JText::_($variant->product_weight_unit);
-		?><br /></div>
+			echo '<div class="uk-width-expand" data-uk-leader>'.JText::_('PRODUCT_WEIGHT').'</div><div>'.rtrim(rtrim($variant->product_weight,'0'),',.').' '.JText::_($variant->product_weight_unit).'</div>';
+		?></div>
 <?php
 			}
 		}
@@ -272,24 +272,24 @@ if(empty($this->element->variants) || $this->params->get('characteristic_display
 			if(!empty ($variant->product_width) && bccomp($variant->product_width, 0, 3)) {
 ?>
 		<div id="hikashop_product_width_<?php echo $variant_name; ?>" style="display:none;"><?php
-			echo JText::_('PRODUCT_WIDTH').': '.rtrim(rtrim($variant->product_width, '0'), ',.').' '.JText::_($variant->product_dimension_unit);
-		?><br /></div>
+			echo '<div class="uk-width-expand" data-uk-leader>'.JText::_('PRODUCT_WIDTH').'</div><div>'.rtrim(rtrim($variant->product_width, '0'), ',.').' '.JText::_($variant->product_dimension_unit).'</div>';
+		?></div>
 <?php
 			}
 
 			if(!empty($variant->product_length) && bccomp($variant->product_length, 0, 3)) {
 ?>
 		<div id="hikashop_product_length_<?php echo $variant_name; ?>" style="display:none;"><?php
-			echo JText::_('PRODUCT_LENGTH').': '.rtrim(rtrim($variant->product_length, '0'), ',.').' '.JText::_($variant->product_dimension_unit);
-		?><br /></div>
+			echo '<div class="uk-width-expand" data-uk-leader>'.JText::_('PRODUCT_LENGTH').'</div><div>'.rtrim(rtrim($variant->product_length, '0'), ',.').' '.JText::_($variant->product_dimension_unit).'</div>';
+		?></div>
 <?php
 			}
 
 			if(!empty($variant->product_height) && bccomp($variant->product_height, 0, 3)) {
 ?>
 		<div id="hikashop_product_height_<?php echo $variant_name; ?>" style="display:none;"><?php
-			echo JText::_('PRODUCT_HEIGHT').': '.rtrim(rtrim($variant->product_height, '0'), ',.').' '.JText::_($variant->product_dimension_unit);
-		?><br /></div>
+			echo '<div class="uk-width-expand" data-uk-leader>'.JText::_('PRODUCT_HEIGHT').'</div><div>'.rtrim(rtrim($variant->product_height, '0'), ',.').' '.JText::_($variant->product_dimension_unit).'</div>';
+		?></div>
 <?php
 			}
 		}

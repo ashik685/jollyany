@@ -8,7 +8,6 @@
  */
 defined('_JEXEC') or die('Restricted access');
 ?><?php
-
 $enable_cart = !$this->config->get('catalogue', false) && $this->params->get('add_to_cart');
 $user = JFactory::getUser();
 $enable_wishlist = (hikashop_level(1) && $this->config->get('enable_wishlist', 1) && $this->params->get('add_to_wishlist', 0) && (!$this->config->get('hide_wishlist_guest', 1) || empty($user->guest)));
@@ -80,20 +79,22 @@ if($start_date > 0 && $start_date > $now) {
 <!-- EO SALE START MESSAGE -->
 <!-- STOCK MESSAGE -->
 <?php
-	if(!empty($this->row->product_stock_message)) {
-        echo '<span class="hikashop_product_stock_count">';
-        echo JText::sprintf($this->row->product_stock_message, $this->row->product_quantity);
-        echo '</span>';
-	}
-	elseif($this->row->product_quantity > 0) {
-        echo '<span class="hikashop_product_stock_count">';
-        echo (($this->row->product_quantity == 1 && JText::_('X_ITEM_IN_STOCK') != 'X_ITEM_IN_STOCK') ? JText::sprintf('X_ITEM_IN_STOCK', $this->row->product_quantity) : JText::sprintf('X_ITEMS_IN_STOCK', $this->row->product_quantity));
-        echo '</span>';
-	}
-	elseif(!$in_stock) {
-        echo '<span class="hikashop_product_stock_count">';
-        echo JText::_('NO_STOCK');
-        echo '</span>';
+    if ($this->params->get('jollyany_hikashop_show_product_stock_count', 1)) {
+        if(!empty($this->row->product_stock_message)) {
+            echo '<div class="hikashop_product_stock_count uk-text-meta">';
+            echo JText::sprintf($this->row->product_stock_message, $this->row->product_quantity);
+            echo '</div>';
+        }
+        elseif($this->row->product_quantity > 0) {
+            echo '<div class="hikashop_product_stock_count uk-text-meta">';
+            echo (($this->row->product_quantity == 1 && JText::_('X_ITEM_IN_STOCK') != 'X_ITEM_IN_STOCK') ? JText::sprintf('X_ITEM_IN_STOCK', $this->row->product_quantity) : JText::sprintf('X_ITEMS_IN_STOCK', $this->row->product_quantity));
+            echo '</div>';
+        }
+        elseif(!$in_stock) {
+            echo '<div class="hikashop_product_stock_count uk-text-meta">';
+            echo JText::_('NO_STOCK');
+            echo '</div>';
+        }
     }
 ?>
 <!-- EO STOCK MESSAGE -->

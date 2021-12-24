@@ -2,7 +2,7 @@
 /**
  * @package   Jollyany Framework
  * @author    TemPlaza https://www.templaza.com
- * @copyright Copyright (C) 2009 - 2020 TemPlaza.
+ * @copyright Copyright (C) 2011 - 2021 TemPlaza.
  * @license https://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or Later
  */
 defined('_JEXEC') or die;
@@ -1076,9 +1076,11 @@ class plgSystemJollyany extends JPlugin {
         if ($form->getName() == 'com_menus.item' && (isset($data->request['option']) && $data->request['option'] == 'com_content') && (isset($data->request['view']) && $data->request['view'] == 'featured') && ((Framework::isSite() && $frontendVisibility) || Framework::isAdmin())) {
             $form->loadFile('article_menu', false);
         }
-
         if ($form->getName() == 'com_categories.categorycom_content' && ((Framework::isSite() && $frontendVisibility) || Framework::isAdmin())) {
             $form->loadFile('category', false);
+        }
+        if ($form->getName() == 'com_menus.item' && (isset($data->request['option']) && $data->request['option'] == 'com_hikashop') && (isset($data->request['view']) && $data->request['view'] == 'product') && (isset($data->request['layout']) && $data->request['layout'] == 'listing') && ((Framework::isSite() && $frontendVisibility) || Framework::isAdmin())) {
+            $form->loadFile('hikashop', false);
         }
     }
 

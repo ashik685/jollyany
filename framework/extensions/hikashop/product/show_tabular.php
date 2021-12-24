@@ -341,7 +341,6 @@ if(!empty($this->fields)){
 		if(empty($selected)) $selected = 'hikashop_show_tabular_comment';
 		 ?>
             <li id="hikashop_show_tabular_comment_li" class="hikashop-tabs-li"><a href="#"><?php echo JText::_('PRODUCT_COMMENT');?><?php if($comments_count>0) echo ' ('.$comments_count.')'; ?></a></li>
-			<li id="hikashop_show_tabular_new_comment_li" class="hikashop-tabs-li"><a href="#"><?php echo JText::_('PRODUCT_NEW_COMMENT');?></a></li>
 <?php } ?>
 <!-- EO VOTE TAB TITLE -->
 		</ul>
@@ -386,9 +385,7 @@ if(!empty($this->fields)){
                     <div id="hikashop_vote_listing" data-votetype="product" class="hikashop_product_vote_listing"><?php
                         echo $layout_vote_listing;
                         ?></div>
-                </li>
-                <li class="hikashop-tabs-content uk-animation-slide-bottom-small" id="hikashop_show_tabular_new_comment">
-                    <div id="hikashop_vote_form" data-votetype="product" class="hikashop_product_vote_form"><?php
+                    <div id="hikashop_vote_form" data-votetype="product" class="hikashop_product_vote_form uk-margin-medium-top"><?php
                         echo $layout_vote_form;
                         ?></div>
                 </li>

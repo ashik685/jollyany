@@ -138,16 +138,10 @@ if(!empty($this->row->extraData->top)) { echo implode("\r\n",$this->row->extraDa
     <!-- EO PRODUCT NAME -->
 
     <!-- PRODUCT CODE -->
-    <span class='hikashop_product_code_list uk-text-meta'>
-<?php if ($this->config->get('show_code')) { ?>
-    <?php if($haveLink) { ?>
-        <a href="<?php echo $link;?>">
-    <?php } ?>
-    <?php echo $this->row->product_code; ?>
-    <?php if($haveLink) { ?>
-        </a>
-    <?php } ?>
-<?php } ?>
+    <?php
+    $this->setLayout('listing_product_code');
+    echo $this->loadTemplate();
+    ?>
 		</span>
     <!-- EO PRODUCT CODE -->
 

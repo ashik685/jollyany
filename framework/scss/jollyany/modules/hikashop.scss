@@ -13,11 +13,53 @@
 .hk-rate-star {
   background-image: url(../../../media/jollyany/assets/images/star.png) !important;
 }
+.hikashop_filter_title {
+  font-weight: bold;
+  margin-bottom: 6px;
+  display: inline-block;
+}
+.hikashop_filter_collapsable_title_always , .hikashop_filter_collapsable_title_mobile {
+  & + .hikashop_filter_main_div {
+    border-width: 0;
+    margin: 0;
+    padding: 0;
+  }
+}
+.noUi-horizontal {
+  width: 100% !important;
+  height: 6px;
+  margin: 20px 0 !important;
+  padding: 0 5px;
+  .noUi-handle {
+    width: 18px;
+    height: 18px;
+    background-color: $colorMain;
+    border-radius: 50%;
+    border: none;
+    box-shadow: none;
+    top: -7px;
+    left: -8px;
+    &:before, &:after {
+      display: none;
+    }
+  }
+}
+html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
+  right: -11px;
+}
+.noUi-connect {
+  background: $colorMain;
+}
+.hikashop_filter_checkbox {
+  label {
+    margin-left: 6px;
+  }
+}
 .hikashop_product_quantity_change_div_plus_default, .hikashop_product_quantity_change_div_minus_default {
   background-color: #f7f7f7;
 }
 .hikashop_product_quantity_field_change {
-  color: $colorWhite;
+  color: #ffffff;
   padding: 0 5px;
   vertical-align: middle;
 }
@@ -27,7 +69,7 @@ a.hikacart {
   align-items: center;
   background-color: $colorMain;
   border-color: $colorMain;
-  color: $colorWhite;
+  color: #ffffff;
   &:hover {
     background-color: $colorBlack;
     border-color: $colorBlack;
@@ -53,19 +95,9 @@ a.hikacart {
     float: left;
   }
 }
-//.hikashop_product_quantity_main {
-//  display: flex;
-//  align-content: stretch;
-//  flex-wrap: wrap;
-//  margin-bottom: 1.5rem;
-//}
 .hikashop_product_no_stock {
   font-size: 1.5rem;
 }
-//.hikashop_product_stock_count {
-//  display: inline-flex;
-//  align-items: center;
-//}
 .hikashop_global_image_div {
   .hikashop_small_image_div {
     display: flex;
@@ -149,6 +181,11 @@ a.hikacart {
       background-color: $colorBlack;
       border-color: $colorBlack;
     }
+  }
+}
+#hikashop_tabs_div {
+  .uk-tab > .uk-active > a {
+    border-color: $colorMain;
   }
 }
 .hika-comment-helpful {
